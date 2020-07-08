@@ -8,6 +8,7 @@ import {I18nextProvider} from "react-i18next";
 import i18next from "i18next";
 import common_de from "vis/translations_de.json";
 import common_en from "vis/translations_en.json";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 {/* Initializies the language*/}
     i18next.init({
