@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Nav, Navbar, Form, FormControl } from 'react-bootstrap';
+import { Nav, Form, FormControl } from 'react-bootstrap';
 import styled from 'styled-components';
-import { useTranslation } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 
 
 
@@ -10,7 +10,7 @@ NavigationBar = () => {
 
   const [collapsed, setCollapsed] = useState(true);
   const toggleNavbar = () => setCollapsed(!collapsed);
-  const { t, i18n } = useTranslation('common');
+  const { t, i18n } = withTranslation('common');
 
   function causes() {
 
