@@ -1,9 +1,8 @@
 {
-  "name": "yisaq",
+  "name": "visaq-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^4.3.1",
@@ -22,7 +21,7 @@
     "styled-components": "^4.3.2",
     "typescript": "^3.9.6",
     "universal-cookie": "^4.0.3"
-
+    
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,6 +29,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  
+  "proxy": "http://localhost:8080",
+  
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -44,5 +46,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+    
+  },
+  "devDependencies": {
+    "install-peers": "^1.0.3"
+  },
+  "peerDependencies": {
+    "@react-native": "1.x",
+    "@typescript": ">=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta"
+
   }
 }
