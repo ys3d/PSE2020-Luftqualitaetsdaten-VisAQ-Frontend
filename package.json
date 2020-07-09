@@ -21,6 +21,7 @@
     "styled-components": "^4.3.2",
     "typescript": "^3.9.6",
     "universal-cookie": "^4.0.3"
+    
   },
   "scripts": {
     "start": "react-scripts start",
@@ -28,7 +29,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-
+  
   "proxy": "http://localhost:8080",
   
   "eslintConfig": {
@@ -45,6 +46,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+    
   },
   "devDependencies": {
     "install-peers": "^1.0.3"
@@ -52,5 +54,6 @@
   "peerDependencies": {
     "@react-native": "1.x",
     "@typescript": ">=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta"
+
   }
 }
