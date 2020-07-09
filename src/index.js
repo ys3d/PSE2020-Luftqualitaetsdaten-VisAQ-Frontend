@@ -27,9 +27,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 class Main extends React.Component {
     render() {
       return (
-        <ThemeContext.Provider value="dark">
-        <Navbar></Navbar>
-      </ThemeContext.Provider>
+          <Navbar>
+          </Navbar>
       );
     }
   }

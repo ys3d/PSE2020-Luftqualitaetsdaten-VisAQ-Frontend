@@ -1,9 +1,8 @@
 {
-  "name": "vis",
+  "name": "visaq-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^4.3.1",
@@ -26,9 +25,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+
+  "proxy": "http://localhost:8080",
+  
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -45,8 +47,7 @@
     ]
   },
   "devDependencies": {
-    "install-peers": "^1.0.3",
-    "jest": "^26.1.0"
+    "install-peers": "^1.0.3"
   },
   "peerDependencies": {
     "@react-native": "1.x",
