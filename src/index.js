@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import {Navbar}  from 'src/de/visaq/view/elements/navbar';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
 import {I18nextProvider} from "react-i18next";
 import i18next from "i18next";
 import common_de from "vis/translations_de.json";
@@ -43,6 +42,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-serviceWorker.unregister();
-  
