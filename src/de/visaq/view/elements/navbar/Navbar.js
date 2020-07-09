@@ -49,4 +49,5 @@ NavigationBar = () => {
 }
 
 export default Navbar;
+
 ReactDOM.render(<Navbar />, document.querySelector('navbar'));
