@@ -2,14 +2,16 @@ import L from 'leaflet';
 import { render } from 'react-dom'
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 
-const position = [51.505, -0.09]
-const map = (
-  <Map center={position} zoom={13}>
-    <TileLayer
-      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-    />
-  </Map>
-)
 
-render(map, document.getElementById('map-container'))
+
+
+var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+
+L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'your.mapbox.access.token'
+}).addTo(mymap);
