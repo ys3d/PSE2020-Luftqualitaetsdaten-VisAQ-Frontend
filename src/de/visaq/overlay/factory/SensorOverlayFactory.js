@@ -4,10 +4,8 @@ import L from 'leaflet';
 import { render } from 'react-dom'
 import { Map, MapLayer, Popup, TileLayer } from 'react-leaflet'
 
-//@flow
-type SensorOverlayFactory = {
 
-}
+export default class SensorOverlayFactory{
     
     //Saves the coordinates
     state = {

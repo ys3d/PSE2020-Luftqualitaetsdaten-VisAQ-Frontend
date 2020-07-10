@@ -1,272 +1,88 @@
-## Mac
-.DS_Store
+# Created by https://www.toptal.com/developers/gitignore/api/yarn,react,visualstudiocode,windows,linux
+# Edit at https://www.toptal.com/developers/gitignore?templates=yarn,react,visualstudiocode,windows,linux
 
-###### Windows ######
-Thumbs.db
+### Linux ###
+*~
 
-### LaTeX ###
-# https://github.com/github/gitignore/blob/master/TeX.gitignore #
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
 
-*.pdf
+# KDE directory preferences
+.directory
 
-## Core latex/pdflatex auxiliary files:
-*.aux
-*.lof
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+
+### react ###
+.DS_*
 *.log
-*.lot
-*.fls
-*.out
-*.toc
-*.fmt
-*.fot
-*.cb
-*.cb2
+logs
+**/*.backup.*
+**/*.back.*
 
-## Intermediate documents:
-*.dvi
-*.xdv
-*-converted-to.*
-# these rules might exclude image files for figures etc.
-# *.ps
-# *.eps
-# *.pdf
+node_modules
+bower_components
 
-## Generated if empty string is given at "Please type another file name for output:"
-.pdf
+*.sublime*
 
-## Bibliography auxiliary files (bibtex/biblatex/biber):
-*.bbl
-*.bcf
-*.blg
-*-blx.aux
-*-blx.bib
-*.run.xml
+psd
+thumb
+sketch
 
-## Build tool auxiliary files:
-*.fdb_latexmk
-*.synctex
-*.synctex(busy)
-*.synctex.gz
-*.synctex.gz(busy)
-*.pdfsync
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
 
-## Auxiliary and intermediate files from other packages:
-*.alg
-*.loa
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
 
-# achemso
-acs-*.bib
+### Windows ###
+# Windows thumbnail cache files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
 
-# amsthm
-*.thm
+# Dump file
+*.stackdump
 
-# beamer
-*.nav
-*.pre
-*.snm
-*.vrb
+# Folder config file
+[Dd]esktop.ini
 
-# changes
-*.soc
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
 
-# cprotect
-*.cpt
+# Windows Installer files
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
 
-# elsarticle (documentclass of Elsevier journals)
-*.spl
+# Windows shortcuts
+*.lnk
 
-# endnotes
-*.ent
+### yarn ###
+# https://yarnpkg.com/advanced/qa#which-files-should-be-gitignored
 
-# fixme
-*.lox
+# .yarn/unplugged and .yarn/build-state.yml should likely always be ignored since
+# they typically hold machine-specific build artifacts. Ignoring them might however
+# prevent Zero-Installs from working (to prevent this, set enableScripts to false).
+.yarn/unplugged
+.yarn/build-state.yml
 
-# feynmf/feynmp
-*.mf
-*.mp
-*.t[1-9]
-*.t[1-9][0-9]
-*.tfm
+# .yarn/cache and .pnp.* may be safely ignored, but you'll need to run yarn install
+# to regenerate them between each branch switch.
+# Uncomment the following lines if you're not using Zero-Installs:
+# .yarn/cache
+# .pnp.*
 
-#(r)(e)ledmac/(r)(e)ledpar
-*.end
-*.?end
-*.[1-9]
-*.[1-9][0-9]
-*.[1-9][0-9][0-9]
-*.[1-9]R
-*.[1-9][0-9]R
-*.[1-9][0-9][0-9]R
-*.eledsec[1-9]
-*.eledsec[1-9]R
-*.eledsec[1-9][0-9]
-*.eledsec[1-9][0-9]R
-*.eledsec[1-9][0-9][0-9]
-*.eledsec[1-9][0-9][0-9]R
-
-# glossaries
-*.acn
-*.acr
-*.glg
-*.glo
-*.gls
-*.glsdefs
-
-# gnuplottex
-*-gnuplottex-*
-
-# gregoriotex
-*.gaux
-*.gtex
-
-# hyperref
-*.brf
-
-# knitr
-*-concordance.tex
-# TODO Comment the next line if you want to keep your tikz graphics files
-*.tikz
-*-tikzDictionary
-
-# listings
-*.lol
-
-# makeidx
-*.idx
-*.ilg
-*.ind
-*.ist
-
-# minitoc
-*.maf
-*.mlf
-*.mlt
-*.mtc[0-9]*
-*.slf[0-9]*
-*.slt[0-9]*
-*.stc[0-9]*
-
-# minted
-_minted*
-*.pyg
-
-# morewrites
-*.mw
-
-# nomencl
-*.nlo
-
-# pax
-*.pax
-
-# pdfpcnotes
-*.pdfpc
-
-# sagetex
-*.sagetex.sage
-*.sagetex.py
-*.sagetex.scmd
-
-# scrwfile
-*.wrt
-
-# sympy
-*.sout
-*.sympy
-sympy-plots-for-*.tex/
-
-# pdfcomment
-*.upa
-*.upb
-
-# pythontex
-*.pytxcode
-pythontex-files-*/
-
-# thmtools
-*.loe
-
-# TikZ & PGF
-*.dpth
-*.md5
-*.auxlock
-
-# todonotes
-*.tdo
-
-# easy-todo
-*.lod
-
-# xindy
-*.xdy
-
-# xypic precompiled matrices
-*.xyc
-
-# endfloat
-*.ttt
-*.fff
-
-# Latexian
-TSWLatexianTemp*
-
-## Editors:
-# WinEdt
-*.bak
-*.sav
-
-# Texpad
-.texpadtmp
-
-# Kile
-*.backup
-
-# KBibTeX
-*~[0-9]*
-
-# auto folder when using emacs and auctex
-/auto/*
-
-# expex forward references with \gathertags
-*-tags.tex
-
-# unimportant visual studio(code) folders
-.vs/
-.vscode/
-
-.metadata/
-.recommenders/
-.checkstyle
-.classpath
-.project
-.settings
-.checkstyle
-bin/
-target/
-.idea/
-
-# ObjectAID
-*.ucls
-
-.jsweet/
-.generated/
-.js/
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# End of https://www.toptal.com/developers/gitignore/api/yarn,react,visualstudiocode,windows,linux

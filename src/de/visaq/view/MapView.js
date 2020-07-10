@@ -9,7 +9,7 @@ export default class MapView extends Component {
   
   //Coordinates of the beginning state
   state = {
-      lat: 48.3705449,
+      lat:  48.3705449,
       lng: 10.89779,
       zoom: 13,
   }
@@ -27,7 +27,7 @@ export default class MapView extends Component {
                />
              </Map>
                //:
-               //'Data is loading...'  
+              //'Data is loading...'  
         )
    }
 }

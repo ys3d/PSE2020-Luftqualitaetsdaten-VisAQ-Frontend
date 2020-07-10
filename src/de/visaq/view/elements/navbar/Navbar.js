@@ -1,23 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, Button, NavDropdown,t } from 'react';
+import ReactDOM from 'react-dom';
 import { Nav, Form, FormControl } from 'react-bootstrap';
 import styled from 'styled-components';
-import { withTranslation } from 'react-i18next';
+//import { withTranslation } from 'react-i18next';
 
 
 
 class Navbar extends Component {
-NavigationBar = () => {
-
-  const [collapsed, setCollapsed] = useState(true);
-  const toggleNavbar = () => setCollapsed(!collapsed);
-  const { t, i18n } = withTranslation('common');
-
-  function causes() {
-
-  }
-
+  render(){
    return (
-    <div> 
   <Navbar bg="dark" variant="dark">
   <Navbar fixed="top" />
     <Navbar.Brand href="#home">Navbar</Navbar.Brand>
@@ -42,12 +33,6 @@ NavigationBar = () => {
     </Nav>
     </Navbar.Collapse>
   </Navbar>
-  </div>
 );
- 
+   }
 }
-}
-
-export default Navbar;
-
-ReactDOM.render(<Navbar />, document.querySelector('navbar'));
