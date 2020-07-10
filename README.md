@@ -12,3 +12,8 @@ To run the project local it is recommended to use [yarn](https://yarnpkg.com/). 
 yarn install
 ```
 This command will fetch all dependencies
+Now run 
+```bash
+yarn start
+```
+This will start the frontend.
