@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import MapView from './de/visaq/view/MapView'
 
-function App() {
+const App = () => {
   return new MapView();
 }
 
