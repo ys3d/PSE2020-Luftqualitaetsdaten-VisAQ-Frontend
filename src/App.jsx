@@ -1,10 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router } from "react-router-dom";
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import MapView from './de/visaq/view/MapView'
+import {Navigationbar} from './de/visaq/view/elements/navbar/Navigationbar'
+import MapView from './de/visaq/view/MapView';
 
 function App() {
-  return new MapView();
+  return (
+    <React.Fragment>
+      <Router>
+        <Navigationbar />
+        <MapView />
+      </Router>
+    </React.Fragment>
+  );
 }
 
 export default App;
