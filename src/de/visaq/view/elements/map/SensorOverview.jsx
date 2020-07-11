@@ -1,91 +1,60 @@
-
 import React from 'react';
-import { MDBIcon, MDBSideNavCat, MDBSideNavNav, MDBSideNav, MDBSideNavLink, MDBContainer, MDBRow, MDBBtn } from 'mdbreact';
-import { BrowserRouter as Router } from 'react-router-dom';
+import ReactDOM from 'react-dom';
+import style from './SensorOverview.css'
+import { OffCanvas, OffCanvasMenu, OffCanvasBody } from "react-offcanvas";
 
-class SideNavPage extends React.Component {
-  state = {
-    isOpen: false
+
+class SensorOverview extends React.Component {
+
+  componentWillMount() {
+    // sets the initial state
+    this.setState({
+      isOverviewOpen: false
+    });
   }
 
-  handleToggle = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  };
-
   render() {
-    const { isOpen } = this.state;
     return (
-      <Router>
-        <MDBContainer>
-          <MDBRow>
-            <MDBBtn onClick={this.handleToggle}><MDBIcon icon="bars" size="5x" /></MDBBtn>
-          </MDBRow>
-          <MDBSideNav
-            logo=""
-            hidden
-            triggerOpening={isOpen}
-            breakWidth={1300}
-            className="deep-purple darken-4"
-          >
+      <OffCanvas
+        width={300}
+        transitionDuration={300}
+        effect={"parallax"}
+        isMenuOpened={this.state.isOverviewOpen}
+        position={"right"}
+      >
+        <OffCanvasBody
+          className={style.bodyClass}
+          style={{ fontSize: "30px" }}
+        >
+          <p>
+            <a href="#" onClick={this.toggleOverview.bind(this)}>
+              Open
+            </a>{" "}
+          </p>
+        </OffCanvasBody>
+        <OffCanvasMenu className={style.menuClass}>
+          <p>Placeholder content.</p>
+          <ul>
+            <li>Link 1</li>
+            <li>Link 2</li>
+            <li>Link 3</li>
+            <li>Link 4</li>
+            <li>Link 5</li>
             <li>
-              <ul className="">
-                <li>
-                  <a href="#!">
-                    <MDBIcon fab icon="facebook-f" />
-                  </a>
-                </li>
-                <li>
-                  <a href="#!">
-                    <MDBIcon fab icon="pinterest" />
-                  </a>
-                </li>
-                <li>
-                  <a href="#!">
-                    <MDBIcon fab icon="google-plus-g" />
-                  </a>
-                </li>
-                <li>
-                  <a href="#!">
-                    <MDBIcon fab icon="twitter" />
-                  </a>
-                </li>
-              </ul>
+              <a href="#" onClick={this.toggleOverview.bind(this)}>
+                Toggle Menu
+              </a>
             </li>
-            <MDBSideNavNav>
-              <MDBSideNavCat
-                name="Submit blog"
-                id="submit-blog"
-                icon="chevron-right"
-              >
-                <MDBSideNavLink>Submit listing</MDBSideNavLink>
-                <MDBSideNavLink>Registration form</MDBSideNavLink>
-              </MDBSideNavCat>
-              <MDBSideNavCat
-                name="Instruction"
-                id="instruction"
-                iconRegular
-                icon="hand-pointer"
-                href="#"
-              >
-                <MDBSideNavElement>{t('humidity')}: </MDBSideNavElement>
-                <MDBSideNavLink>For authors</MDBSideNavLink>
-              </MDBSideNavCat>
-              <MDBSideNavCat name="About" id="about" icon="eye">
-                <MDBSideNavLink>Instruction</MDBSideNavLink>
-                <MDBSideNavLink>Monthly meetings</MDBSideNavLink>
-              </MDBSideNavCat>
-              <MDBSideNavCat name="Contact me" id="contact-me" iconRegular icon="envelope">
-                <MDBSideNavLink>FAQ</MDBSideNavLink>
-                <MDBSideNavLink>Write a message</MDBSideNavLink>
-              </MDBSideNavCat>
-            </MDBSideNavNav>
-          </MDBSideNav>
-        </MDBContainer>
-      </Router>
+          </ul>
+        </OffCanvasMenu>
+      </OffCanvas>
     );
+  }
+
+  toggleOverview() {
+    // toggles the menu opened state
+    this.setState({ isOverviewOpen: !this.state.isOverviewOpen });
   }
 }
 
-export default SideNavPage;
+export default SensorOverview;
