@@ -7,12 +7,12 @@ const Styles = styled.div`
   .navbar { background-color: #FFF; }
   a, .navbar-nav, .navbar-dark .nav-link {
     color: #000;
-    &:hover { color: #001; }
+    &:hover { color: black; }
   }
   .navbar-brand {
     font-size: 1.4em;
     color: #44c2d4;
-    &:hover { color: white; }
+    &:hover { color: black; }
   }
   .form-center {
     position: absolute !important;
@@ -20,21 +20,47 @@ const Styles = styled.div`
     right: 25%;
   }
 
-  .nav-item:hover .dropdown-menu{
-  display:block!important;
-  width: 100%;
+  .dropdown:hover>.dropdown-menu {
+  display: block;
 }
 `;
 /* Constructs the Navigationbar with all functions */
 
-export const Navigationbar = ({ t }) => (
-  <Styles>
-    <Navbar collapseOnSelect expand="lg" bg="light" variant="dark">
+var currentAirQuality
+
+export default class Navigationbar extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = { isOpen: false }
+  }
+
+  handleOpen = () => {
+    this.setState({ isOpen: true })
+  }
+
+  handleClose = () => {
+     this.setState({ isOpen: false })
+  }
+
+  selectOnlyThis(id) {
+      for (var i = 1;i <= 3; i++)
+      {
+          document.getElementById(i).checked = false;
+      }
+      document.getElementById(id).checked = true;
+  }
+
+  window
+  render() {
+    return (
+      <Styles>
+       <Navbar expand="lg" bg="light" variant="dark">
   <Navbar.Brand href="">
     <strong>VisAQ</strong>
   </Navbar.Brand>
-  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-  <Navbar.Collapse id="responsive-navbar-nav" >
+  <Navbar.Toggle aria-controls="basic-navbar-nav" />
+  <Navbar.Collapse id="basic-navbar-nav" >
     <Nav className="mr-auto">
     <Form inline>
       <FormControl type="text" placeholder="Search" className="search" />
@@ -52,41 +78,61 @@ export const Navigationbar = ({ t }) => (
         Temperatur
       </Nav.Link>
       <Nav.Link href="#link">
-        Link
+        Luftdruck
       </Nav.Link>
-      <DropdownButton title="Dropdown" id="collasible-nav-dropdown">
+      <dropdown-menu>
+      <NavDropdown
+          renderMenuOnMount={true}
+          onMouseEnter = { this.handleOpen }
+          onMouseLeave = { this.handleClose }
+          open={ this.state.isOpen }
+          noCaret
+          id="dropdown"
+        >
         <NavDropdown.Item href="https://www.smartaq.net/de/participate/">
           DIY-Anleitungen
         </NavDropdown.Item>
         <NavDropdown.Item href="https://www.smartaq.net/en/dashboard/#/home">
-          Another action
+          SmartAQNet
         </NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">
-          Something
+          Gründe für Feinstaub
         </NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">
-          Something
+          Folgen von Feinstaub
         </NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">
-          Something
-        </NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">
-          Something
-        </NavDropdown.Item>
-      </DropdownButton>
+        <NavDropdown.Divider />
+        <Form.Group controlId="formBasicCheckbox" inline>
+          <Form.Check type="checkbox" id="1" label="Dark-Mode"/>
+          <Form.Check type="checkbox" id="2" label="Farbblindheits-Modus"/>
+          <Form.Check type="checkbox" id="3" label="Standard"/>
+          </Form.Group>
+        </NavDropdown>
+        </dropdown-menu>
     </Nav>
     <Nav className="ml-auto">
       <Form inline>
-  <Form.Check 
-    type="switch"
-    id="custom-switch"
-    label="Hilfe"/>
+      <FormCheck 
+        id="switchEnabled"
+        type="switch"
+        //checked={}
+        //onChange={}
+        label="Hilfe"
+      />
       </Form>
       <Nav.Link href="#home">
-        Sprache
+      <img
+							src="https://picsum.photos/30/30"
+							width="30"
+							height="30"
+							className="d-inline-block align-top"
+							alt="React Bootstrap logo"
+						/>
       </Nav.Link>
     </Nav>
   </Navbar.Collapse>
 </Navbar>
-  </Styles> 
-)
+      </Styles>
+    )
+  }
+}
