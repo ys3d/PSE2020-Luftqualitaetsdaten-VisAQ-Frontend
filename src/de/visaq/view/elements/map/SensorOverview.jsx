@@ -1,80 +1,33 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { OffCanvas, OffCanvasMenu, OffCanvasBody } from "react-offcanvas";
-
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
-import L from 'leaflet';
 import closeX from '../../../../../Black_close_x.svg'
 import styles from './SensorOverview.module.css'
 import Card from 'react-bootstrap/Card'
 import Accordion from 'react-bootstrap/Accordion'
-import Button from 'react-bootstrap/Button'
-import Jumbotron from 'react-bootstrap/Jumbotron'
 import Tooltip from 'react-bootstrap/Tooltip'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Figure from 'react-bootstrap/Figure'
+import Popover from 'react-bootstrap/Popover'
 
 import testDia from '../../../../../testdiagram.png'
 
-class SensorOverview extends React.Component {
+class SensorOverview {
 
-  componentWillMount() {
-    // sets the initial state
-    this.setState({
-      isOverviewOpen: false
-    });
-  }
-
-  state = {
-    lat: 48.3705449,
-    lng: 10.89779,
-    zoom: 13,
-  }
-
-
-
-  render() {
+  showSensorOverview(position) {
     return (
-      <OffCanvas
-        width={500}
-        transitionDuration={300}
-        effect={"overlay"}
-        isMenuOpened={this.state.isOverviewOpen}
-        position={"right"}
-      >
-        <OffCanvasBody
-          className={styles.bodyClass}
-          style={{ fontSize: "30px" }}
+      <Popover id="sensorPopover" positionLeft={position}>
+        <OverlayTrigger
+          placement="left"
+          delay={{ show: 250, hide: 400 }}
+          overlay={closeToolTip}
         >
           <p>
-            <a href="#" onClick={this.toggleOverview.bind(this)}>
-              Open
-            </a>{" "}
+            <a href="#" onClick={() => document.body.click()}>
+              <img src={closeX} alt="close" width='20px' />
+            </a>
           </p>
-          <Map
-            center={[this.state.lat, this.state.lng]}
-            zoom={this.state.zoom}
-            style={{ width: '100%', height: '900px' }}
-          >
-            <TileLayer
-              attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-          </Map>
-        </OffCanvasBody>
-        <OffCanvasMenu className={styles.menuClass}>
-          <OverlayTrigger
-            placement="left"
-            delay={{ show: 250, hide: 400 }}
-            overlay={this.closeToolTip}
-          >
-            <p>
-              <a href="#" onClick={this.toggleOverview.bind(this)}>
-                <img src={closeX} alt="close" width='20px' />
-              </a>
-            </p>
-          </OverlayTrigger>
-          <h1>Sensor: [...]</h1>
+        </OverlayTrigger>
+        <Popover.Title as="h3">Sensor: [...]</Popover.Title>
+        <Popover.Content>
           <p>
             SensorTyp: [...]
           </p>
@@ -168,23 +121,18 @@ class SensorOverview extends React.Component {
               </Accordion.Collapse>
             </Card>
           </Accordion>
-        </OffCanvasMenu>
-      </OffCanvas>
+        </Popover.Content>
+      </Popover>
     );
   }
+}
 
-  toggleOverview() {
-    // toggles the menu opened state
-    this.setState({ isOverviewOpen: !this.state.isOverviewOpen });
-  }
-
-  closeToolTip(props) {
-    return (
-      <Tooltip id="button-tooltip" {...props}>
-        Hier klicken um die Detailansicht zu schließen
-      </Tooltip>
-    );
-  }
+function closeToolTip(props) {
+  return (
+    <Tooltip id="button-tooltip" {...props}>
+      Hier klicken um die Detailansicht zu schließen
+    </Tooltip>
+  );
 }
 
 export default SensorOverview;
