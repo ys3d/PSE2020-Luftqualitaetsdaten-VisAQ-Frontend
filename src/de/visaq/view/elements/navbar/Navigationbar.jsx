@@ -1,5 +1,6 @@
 import React from 'react';
-import { Nav, Navbar, Form, FormControl, NavDropdown, Button } from 'react-bootstrap';
+import { Navbar, NavDropdown, Form, FormCheck, FormControl, NavbarToggler, Collapse, Nav, NavItem,
+   NavLink, UncontrolledDropdown, Container, Row, Col, NavbarBrand, DropdownToggle, DropdownMenu, Button, ButtonGroup, DropdownButton } from 'react-bootstrap';
 import styled from 'styled-components';
 
 const Styles = styled.div`
@@ -20,16 +21,16 @@ const Styles = styled.div`
   }
 
   .nav-item:hover .dropdown-menu{
-  display:block!important
+  display:block!important;
+  width: 100%;
 }
 `;
-
 /* Constructs the Navigationbar with all functions */
 
-export const Navigationbar = () => (
+export const Navigationbar = ({ t }) => (
   <Styles>
     <Navbar collapseOnSelect expand="lg" bg="light" variant="dark">
-  <Navbar.Brand href="#home">
+  <Navbar.Brand href="">
     <strong>VisAQ</strong>
   </Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -42,18 +43,18 @@ export const Navigationbar = () => (
       </Button>
     </Form>
       <Nav.Link href="#home">
-        Home
+        Feinstaub
       </Nav.Link>
       <Nav.Link href="#link">
-        Link
+        Luftfeuchtigkeit
       </Nav.Link>
       <Nav.Link href="#home">
-        Home
+        Temperatur
       </Nav.Link>
       <Nav.Link href="#link">
         Link
       </Nav.Link>
-      <NavDropdown title="Dropdown" id="collasible-nav-dropdown" >
+      <DropdownButton title="Dropdown" id="collasible-nav-dropdown">
         <NavDropdown.Item href="https://www.smartaq.net/de/participate/">
           DIY-Anleitungen
         </NavDropdown.Item>
@@ -72,13 +73,20 @@ export const Navigationbar = () => (
         <NavDropdown.Item href="#action/3.3">
           Something
         </NavDropdown.Item>
-      </NavDropdown>
+      </DropdownButton>
     </Nav>
     <Nav className="ml-auto">
-      <Nav.Link href="#home">Home</Nav.Link>
-      <Nav.Link href="#link">Link</Nav.Link>
+      <Form inline>
+  <Form.Check 
+    type="switch"
+    id="custom-switch"
+    label="Hilfe"/>
+      </Form>
+      <Nav.Link href="#home">
+        Sprache
+      </Nav.Link>
     </Nav>
   </Navbar.Collapse>
 </Navbar>
-  </Styles>
+  </Styles> 
 )
