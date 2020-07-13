@@ -2,10 +2,10 @@ import React, { state, isOpen, setState } from 'react';
 import { Navbar, NavDropdown, Form, FormCheck, FormControl, NavbarToggler, Collapse, Nav, NavItem,
    NavLink, NavbarBrand, DropdownToggle, DropdownMenu, Button} from 'react-bootstrap';
 import styled from 'styled-components';
-import Popup from './Popup';
+import Popup, {showPopup} from './Popup';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
-import AirQualityData, {setTemperature, setHumidity, setAirPressure, setParticulateMatter } from '../airquality/AirQualityData';
+import AirQualityData, {setTemperature, setHumidity, setAirPressure, setParticulateMatter, getName } from '../airquality/AirQualityData';
 
 
 const Styles = styled.div`
@@ -69,17 +69,17 @@ const selectOnlyThis = (id) => {
         Search
       </Button>
     </Form>
-      <Nav.Link href='#home'>
-        Feinstaub
+      <Nav.Link onClick={setParticulateMatter}>
+      {t ('ParticulateMatter')}
       </Nav.Link>
-      <Nav.Link href='#link'>
+      <Nav.Link onClick={setHumidity}>
         {t ('Humidity')}
       </Nav.Link>
       <Nav.Link onClick={setTemperature}>
-        Temperatur
+      {t ('Temperature')}
       </Nav.Link>
-      <Nav.Link href='#link'>
-        Luftdruck
+      <Nav.Link onClick={setAirPressure}>
+      {t ('AirPressure')}
       </Nav.Link>
        <Nav.Link onClick={ changeLanguage('de') }>
         Lang
@@ -93,22 +93,22 @@ const selectOnlyThis = (id) => {
           label='Weitere Features'
         >
         <NavDropdown.Item href='https://www.smartaq.net/de/participate/'>
-          DIY-Anleitungen
+        {t ('diy')}
         </NavDropdown.Item>
         <NavDropdown.Item href='https://www.smartaq.net/en/dashboard/#/home'>
           SmartAQNet
         </NavDropdown.Item>
-        <NavDropdown.Item>
-          Gründe für Feinstaub
+        <NavDropdown.Item onClick={showPopup('hi', 'test')}>
+        {t ('causesPM')}
         </NavDropdown.Item>
-        <NavDropdown.Item href='#action/3.3'>
+        <NavDropdown.Item onClick={showPopup('hi', 'test')}>
           Folgen von Feinstaub
         </NavDropdown.Item>
         <NavDropdown.Divider />
         <Form.Group controlId='formBasicCheckbox' label='Experten-Einstellungen' inline>
           <Form.Check type='checkbox' id='1' label='Dark-Mode'/>
-          <Form.Check type='checkbox' id='2' label='Farbblindheits-Modus'/>
-          <Form.Check type='checkbox' id='3' label='Standard' checked/>
+          <Form.Check type='checkbox' id='2' label={t ('ColorBlind-Mode')}/>
+          <Form.Check type='checkbox' id='3' label={t ('Standard')} checked/>
           </Form.Group>
         </NavDropdown>
     </Nav>
@@ -130,7 +130,7 @@ const selectOnlyThis = (id) => {
         type='switch'
         //checked={}
         //onChange={}
-        label='Experten-Modus'
+        label={t ('Expert-Mode')}
       />
       </Form>
       <Nav.Link href='#home'>

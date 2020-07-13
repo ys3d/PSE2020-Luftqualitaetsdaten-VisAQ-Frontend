@@ -11,7 +11,6 @@ function App() {
     <React.Fragment>
       <Router>
         <Navigationbar />
-        <Popup />
         <MapView />
       </Router>
     </React.Fragment>
