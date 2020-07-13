@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { state, isOpen, setState } from 'react';
 import { Navbar, NavDropdown, Form, FormCheck, FormControl, NavbarToggler, Collapse, Nav, NavItem,
-   NavLink, UncontrolledDropdown, Container, Row, Col, NavbarBrand, DropdownToggle, DropdownMenu, Button, ButtonGroup, DropdownButton, Accordion, Card } from 'react-bootstrap';
+   NavLink, NavbarBrand, DropdownToggle, DropdownMenu, Button} from 'react-bootstrap';
 import styled from 'styled-components';
+import Popup from './Popup';
+import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
+import AirqualityData, {setTemperature, setHumidity, setAirPressure, setParticulateMatter } from '../airquality/AirqualityData';
+
 
 const Styles = styled.div`
   .navbar { background-color: #FFF; }
   a, .navbar-nav, .navbar-dark .nav-link {
     color: #000;
-    &:hover { color: black; }
+    &:hover { color: #44c2d4; }
   }
   .navbar-brand {
     font-size: 1.4em;
     color: #44c2d4;
-    &:hover { color: black; }
+    &:hover { color: #44c2d4; }
   }
   .form-center {
     position: absolute !important;
@@ -22,113 +27,126 @@ const Styles = styled.div`
 
   .dropdown:hover>.dropdown-menu {
   display: block;
-}
+  }
+
 `;
 /* Constructs the Navigationbar with all functions */
 
-var currentAirQuality
+function Navigationbar() {
+const { t, i18n } = useTranslation();
 
-export default class Navigationbar extends React.Component {
+const changeLanguage = (lng) => {
+  i18next.changeLanguage(lng);
+}
 
-  constructor(props) {
-    super(props)
-    this.state = { isOpen: false }
+const handleOpen = () => {
+    setState = true;
   }
 
-  handleOpen = () => {
-    this.setState({ isOpen: true })
+const handleClose = () => {
+     setState({ isOpen: false })
   }
 
-  handleClose = () => {
-     this.setState({ isOpen: false })
-  }
-
-  selectOnlyThis(id) {
+const selectOnlyThis = (id) => {
       for (var i = 1;i <= 3; i++)
       {
           document.getElementById(i).checked = false;
       }
       document.getElementById(id).checked = true;
   }
-
-  window
-  render() {
     return (
       <Styles>
-       <Accordion defaultActiveKey="0">
-  <Card>
-    <Accordion.Toggle as={Card.Header} eventKey="0" >
-    <Navbar expand="lg" bg="light" variant="tabs" defaultActiveKey="#home">
-    <Navbar.Brand href="">
+       <Navbar expand='lg' bg='light' variant='blue'>
+  <Navbar.Brand href=''>
     <strong>VisAQ</strong>
   </Navbar.Brand>
-    <Nav className="mr-auto" inline>
+  <Navbar.Toggle aria-controls='basic-navbar-nav' />
+  <Navbar.Collapse id='basic-navbar-nav' >
+    <Nav className='mr-auto'>
     <Form inline>
-      <FormControl type="text" placeholder="Search" className="search" />
-      <Button variant="outline-success">
+      <FormControl type='text' placeholder='Search' className='search' />
+      <Button variant='outline-success'>
         Search
       </Button>
     </Form>
-      <Nav.Link href="#home">
+      <Nav.Link href='#home'>
         Feinstaub
       </Nav.Link>
-      <Nav.Link href="#link">
-        Luftfeuchtigkeit
+      <Nav.Link href='#link'>
+        {t ('Humidity')}
       </Nav.Link>
-      <Nav.Link href="#hoe">
+      <Nav.Link onClick={setTemperature}>
         Temperatur
       </Nav.Link>
-      <Nav.Link href="#link">
+      <Nav.Link href='#link'>
         Luftdruck
       </Nav.Link>
-    </Nav>
-    <Nav className="ml-auto">
-      <Form inline>
-      <FormCheck 
-        id="switchEnabled"
-        type="switch"
-        //checked={}
-        //onChange={}
-        label="Hilfe"
-      />
-      </Form>
-      <Nav.Link href="#home">
-      <img
-							src="https://picsum.photos/30/30"
-							width="30"
-							height="30"
-							className="d-inline-block align-top"
-							alt="React Bootstrap logo"
-						/>
+       <Nav.Link onClick={ changeLanguage('de') }>
+        Lang
       </Nav.Link>
-    </Nav>
-    </Navbar>
-    </Accordion.Toggle>
-    <Accordion.Collapse eventKey="0">
-      <Card.Body>
-      <NavDropdown.Item href="https://www.smartaq.net/de/participate/">
+      <NavDropdown
+          renderMenuOnMount={true}
+         // open={ state.isOpen }
+          noCaret
+          id='dropdown'
+          name='Weitere Features'
+          label='Weitere Features'
+        >
+        <NavDropdown.Item href='https://www.smartaq.net/de/participate/'>
           DIY-Anleitungen
         </NavDropdown.Item>
-        <NavDropdown.Item href="https://www.smartaq.net/en/dashboard/#/home">
+        <NavDropdown.Item href='https://www.smartaq.net/en/dashboard/#/home'>
           SmartAQNet
         </NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">
+        <NavDropdown.Item>
           Gründe für Feinstaub
         </NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">
+        <NavDropdown.Item href='#action/3.3'>
           Folgen von Feinstaub
         </NavDropdown.Item>
         <NavDropdown.Divider />
-        <Form.Group controlId="formBasicCheckbox" inline>
-          <Form.Check type="checkbox" id="1" label="Dark-Mode"/>
-          <Form.Check type="checkbox" id="2" label="Farbblindheits-Modus"/>
-          <Form.Check type="checkbox" id="3" label="Standard" eventKey="enabled" enabled/>
+        <Form.Group controlId='formBasicCheckbox' label='Experten-Einstellungen' inline>
+          <Form.Check type='checkbox' id='1' label='Dark-Mode'/>
+          <Form.Check type='checkbox' id='2' label='Farbblindheits-Modus'/>
+          <Form.Check type='checkbox' id='3' label='Standard' checked/>
           </Form.Group>
-          </Card.Body>
-    </Accordion.Collapse>
-  </Card>
-  </Accordion>
-  </Styles>
+        </NavDropdown>
+    </Nav>
+      <NavDropdown
+      renderMenuOnMount={true}
+         //open={ this.state.isOpen }
+          noCaret
+          id='Expert dropdown'
+          disabled>
+      <Form.Group controlId='formBasicCheckbox' alignRight>
+          <Form.Check type='checkbox' id='1' label='Offizielle Sensoren'/>
+          <Form.Check type='checkbox' id='2' label='Weniger offizeille Sensoren'/>
+          </Form.Group>
+      </NavDropdown>
+    <Nav className='ml-auto'>
+      <Form inline>
+      <FormCheck 
+        id='switchEnabled'
+        type='switch'
+        //checked={}
+        //onChange={}
+        label='Experten-Modus'
+      />
+      </Form>
+      <Nav.Link href='#home'>
+      <img
+				src='https://picsum.photos/30/30'		
+      	width='30'
+				height='30'
+				className='Language-setting'
+				alt='VisAQ-Language'
+			/>	
+      </Nav.Link>
+    </Nav>
+  </Navbar.Collapse>
+</Navbar>
+      </Styles>
     )
-  }
 }
+
+export default Navigationbar;

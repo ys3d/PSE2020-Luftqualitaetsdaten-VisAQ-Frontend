@@ -1,6 +1,6 @@
-.navbar { background-color: #FFF; }
+.navbar { background-color: #FFFF; }
 a, .navbar-nav, .navbar-dark .nav-link {
-  color: #000;
+  color: #0000;
 }
 .navbar-brand {
   font-size: 1.4em;
