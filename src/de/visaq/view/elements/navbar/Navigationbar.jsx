@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Popup from './Popup';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
-import AirqualityData, {setTemperature, setHumidity, setAirPressure, setParticulateMatter } from '../airquality/AirqualityData';
+import AirQualityData, {setTemperature, setHumidity, setAirPressure, setParticulateMatter } from '../airquality/AirQualityData';
 
 
 const Styles = styled.div`

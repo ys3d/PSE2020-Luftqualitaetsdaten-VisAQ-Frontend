@@ -5,45 +5,45 @@ var secondaryColor;
 var name;
 
     export function setHumidity() {
-        this.name = 'Humidity';
+        name = 'Humidity';
         //blue
-        this.primaryColor = '#286ab4';
+        primaryColor = '#286ab4';
         //yellow
-        this.secondaryColor = '#eaa21a';
+        secondaryColor = '#eaa21a';
     }
 
     export function setTemperature() {
-        this.name = 'Temperature';
+        name = 'Temperature';
         //blue
-        this.primaryColor = '#1c99d6';
+        primaryColor = '#1c99d6';
         //red
-        this.secondaryColor = '#d20000';
+        secondaryColor = '#d20000';
     }
 
     export function setParticulateMatter() {
-        this.name = 'ParticulateMatter';
+        name = 'ParticulateMatter';
         //grün
-        this.primaryColor = '#11d61e';
+        primaryColor = '#11d61e';
         //red
-        this.secondaryColor = '#d20000';
+        secondaryColor = '#d20000';
     }
 
     export function setAirPressure() {
-        this.name = 'Airpressure';
+        name = 'Airpressure';
         //blue
-        this.primaryColor = '#286ab4';
+        primaryColor = '#286ab4';
         //yellow
-        this.secondaryColor = '#eaa21a';
+        secondaryColor = '#eaa21a';
     }
 
     export function getName() {
-        return this.name;
+        return name;
     }
 
     export function getPrimaryColor() {
-        return this.primaryColor;
+        return primaryColor;
     }
 
     export function getSecondaryColor() {
-        return this.secondaryColor;
+        return secondaryColor;
     }
