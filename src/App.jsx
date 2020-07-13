@@ -12,8 +12,9 @@ function App() {
       <Router>
         <Navigationbar />
         <MapView />
+        </Router>
     </React.Fragment>
-      </Router>
+  )
 }
 
 export default App;

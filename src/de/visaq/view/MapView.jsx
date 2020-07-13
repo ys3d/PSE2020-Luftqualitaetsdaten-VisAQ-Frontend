@@ -33,7 +33,6 @@ export default class MapView extends Component {
   }
 
   onClick(event)  {
-    alert("click");
   }
 
   

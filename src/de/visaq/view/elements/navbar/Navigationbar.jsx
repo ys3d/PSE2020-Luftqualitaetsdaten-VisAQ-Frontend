@@ -4,7 +4,7 @@ import { Navbar, NavDropdown, Form, FormCheck, FormControl, NavbarToggler, Colla
 import styled from 'styled-components';
 import Popup, {showPopup} from './Popup';
 import { useTranslation } from 'react-i18next';
-import i18next from 'i18next';
+//import i18next from 'i18next';
 import AirQualityData, {setTemperature, setHumidity, setAirPressure, setParticulateMatter, getName } from '../airquality/AirQualityData';
 
 
@@ -36,7 +36,7 @@ function Navigationbar() {
 const { t, i18n } = useTranslation();
 
 const changeLanguage = (lng) => {
-  i18next.changeLanguage(lng);
+  //i18next.changeLanguage(lng);
 }
 
 const handleOpen = () => {

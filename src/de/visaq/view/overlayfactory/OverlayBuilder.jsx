@@ -8,7 +8,7 @@ import * as ipdata from './testIPOverlay.json';
 
 const OverlayBuilder = (props) =>  {
     const bounds = props.bounds;
-  
+    
     return (
         <div>
         <Fragment>
