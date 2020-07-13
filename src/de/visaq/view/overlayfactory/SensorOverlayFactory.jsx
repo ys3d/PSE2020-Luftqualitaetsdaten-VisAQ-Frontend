@@ -15,9 +15,10 @@ const SensorOverlaysFactory = (props) =>  {
         opacity = '0'
         fillColor = 'red'
         fillOpacity = '0.5'
-        radius = {200}
-      ></Circle>
+        radius = {500}>
+        </Circle>
     ));
     return <Fragment>{markers}</Fragment>
 }
+
 export default SensorOverlaysFactory;

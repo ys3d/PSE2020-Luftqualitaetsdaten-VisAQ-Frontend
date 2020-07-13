@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import L, { bounds, } from 'leaflet';
 import { render } from 'react-dom';
 import {Circle, LatLngBounds, Map, MapLayer, Popup, Marker, LayerGroup } from 'react-leaflet';
 

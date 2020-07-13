@@ -15,6 +15,22 @@
             "air_pressure" : 0.03,
             "temperature" : 30,
             "humidity" : 4
+        },
+        {
+            "name" : "sensorname3",
+            "coordinates" : [48.283333,9.723611],
+            "particulate_matter" : 0.07,
+            "air_pressure" : 0.03,
+            "temperature" : 30,
+            "humidity" : 4
+        },
+        {
+            "name" : "sensorname4",
+            "coordinates" : [48.28,9.723611],
+            "particulate_matter" : 0.07,
+            "air_pressure" : 0.03,
+            "temperature" : 30,
+            "humidity" : 4
         }
     ]
 }   

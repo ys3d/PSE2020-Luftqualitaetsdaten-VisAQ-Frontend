@@ -1,44 +1,63 @@
-import React, { Component } from 'react';
-import { Map, TileLayer} from 'react-leaflet'
+import React,{ createRef, setState, Component } from 'react';
+import {useLeaflet, Map, TileLayer} from 'react-leaflet';
+import L from 'leaflet';
+
 import "./MapView.css";
-import OverlayBuilder from './overlayfactory/OverlayBuilder'
+import OverlayBuilder from './overlayfactory/OverlayBuilder';
 
-var bounds;
 
-export default class MapView extends React.Component {
-  constructor() {
-    super();
+export default class MapView extends Component {
+  //with props its possible to initalize the map with different map properties
+  constructor(props) {
+    super(props);
+    this.mapRef = createRef();  
     this.state = {
       lat: 48.3705449,
       lng: 10.89779,
       zoom: 13,
+      bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8))
     };
-
   }
 
   componentDidMount() {
-    console.log(this.refs.map.leafletElement.getBounds());
-    bounds = this.refs.map.leafletElement.getBounds();
+  }
+  
+  componentDidUpdate(prevState) {
+      
+  }
+  
+  onMove(event) {
+    this.setState({bounds : event.target.getBounds()})
+
   }
 
-  componentDidUpdate() {
-    
+  onClick(event)  {
+    alert("click");
   }
+
+  
 
   render() {
       return (
+        <div>
         <Map 
           center={[this.state.lat, this.state.lng]} 
           zoom={this.state.zoom} 
           style={{ width: '100%', height: '900px'}}
-          ref = 'map'
+          boundsOptions={{padding: [50, 50]}}
+          ref = {this.mapRef}
+          onMoveEnd={this.onMove.bind(this)}
+          onClick={this.onClick.bind(this)}
         >
           <TileLayer
            attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <OverlayBuilder mapbounds = {bounds}/>
+          <OverlayBuilder bounds = {this.state}
+           />
        </Map> 
+       </div>
       );
    }
 }
+
