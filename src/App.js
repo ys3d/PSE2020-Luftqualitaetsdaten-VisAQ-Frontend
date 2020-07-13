@@ -3,7 +3,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Navigationbar from './de/visaq/view/elements/navbar/Navigationbar'
-import Popup from './de/visaq/view/elements/navbar/Popup'
 import MapView from './de/visaq/view/MapView';
 
 function App() {
@@ -12,8 +11,9 @@ function App() {
       <Router>
         <Navigationbar />
         <MapView />
-    </React.Fragment>
       </Router>
+    </React.Fragment>
+  );
 }
 
 export default App;

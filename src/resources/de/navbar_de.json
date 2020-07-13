@@ -1,0 +1,14 @@
+{
+	"Suchen": "Suchen",
+	"help": "Hilfe",
+	"humidity": "Luftfeuchtigkeit",
+	"particulateMatter": "Feinstaub",
+	"temperature": "Temperatur",
+	"toolbar": {
+		"causesPM": "Gründe für Luftverschmutzung",
+		"diy": "DIY-Anleitung",
+		"historical": "Historische Werte",
+		"reasonsPM": "Folgen von Luftverschmutzung",
+		"smartAQNet": "SmartAQNet"
+	}
+}
