@@ -3,10 +3,9 @@ import { Navbar, NavDropdown, Form, FormCheck, FormControl, NavbarToggler, Colla
    NavLink, NavbarBrand, DropdownToggle, DropdownMenu, Button} from 'react-bootstrap';
 import styled from 'styled-components';
 import Popup, {showPopup} from './Popup';
-import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 import AirQualityData, {setTemperature, setHumidity, setAirPressure, setParticulateMatter, getName } from '../airquality/AirQualityData';
-
+import { useTranslation, withTranslation} from 'react-i18next';
 
 const Styles = styled.div`
   .navbar { background-color: #FFF; }
@@ -30,30 +29,38 @@ const Styles = styled.div`
   }
 
 `;
+
+//const { t, i18n } = useTranslation('common');
+
 /* Constructs the Navigationbar with all functions */
 
-function Navigationbar() {
-const { t, i18n } = useTranslation();
+class Navigationbar extends React.Component {
 
-const changeLanguage = (lng) => {
-  i18next.changeLanguage(lng);
-}
-
-const handleOpen = () => {
-    setState = true;
+  constructor(props) {
+    super(props)
+    this.state = { isOpen: false }
   }
 
-const handleClose = () => {
-     setState({ isOpen: false })
+  handleOpen = () => {
+    this.setState({ isOpen: true })
   }
 
-const selectOnlyThis = (id) => {
+  handleClose = () => {
+     this.setState({ isOpen: false })
+  }
+
+  selectOnlyThis(id) {
       for (var i = 1;i <= 3; i++)
       {
           document.getElementById(i).checked = false;
       }
       document.getElementById(id).checked = true;
   }
+
+
+  render() {
+    const { t } = this.props;
+
     return (
       <Styles>
        <Navbar expand='lg' bg='light' variant='blue'>
@@ -64,25 +71,22 @@ const selectOnlyThis = (id) => {
   <Navbar.Collapse id='basic-navbar-nav' >
     <Nav className='mr-auto'>
     <Form inline>
-      <FormControl type='text' placeholder='Search' className='search' />
+      <FormControl type='text' placeholder={t('search')} className='search' />
       <Button variant='outline-success'>
         Search
       </Button>
     </Form>
       <Nav.Link onClick={setParticulateMatter}>
-      {t ('ParticulateMatter')}
+      {t('particulateMatter')}
       </Nav.Link>
       <Nav.Link onClick={setHumidity}>
-        {t ('Humidity')}
+        {t('humidity')}
       </Nav.Link>
       <Nav.Link onClick={setTemperature}>
-      {t ('Temperature')}
+      {t('temperature')}
       </Nav.Link>
       <Nav.Link onClick={setAirPressure}>
-      {t ('AirPressure')}
-      </Nav.Link>
-       <Nav.Link onClick={ changeLanguage('de') }>
-        Lang
+      {t('airPressure')}
       </Nav.Link>
       <NavDropdown
           renderMenuOnMount={true}
@@ -93,22 +97,22 @@ const selectOnlyThis = (id) => {
           label='Weitere Features'
         >
         <NavDropdown.Item href='https://www.smartaq.net/de/participate/'>
-        {t ('diy')}
+        {t('diy')}
         </NavDropdown.Item>
         <NavDropdown.Item href='https://www.smartaq.net/en/dashboard/#/home'>
           SmartAQNet
         </NavDropdown.Item>
         <NavDropdown.Item onClick={showPopup('hi', 'test')}>
-        {t ('causesPM')}
+        {t('causesPM')}
         </NavDropdown.Item>
         <NavDropdown.Item onClick={showPopup('hi', 'test')}>
-          Folgen von Feinstaub
+        {t('reasonsPM')}
         </NavDropdown.Item>
         <NavDropdown.Divider />
         <Form.Group controlId='formBasicCheckbox' label='Experten-Einstellungen' inline>
           <Form.Check type='checkbox' id='1' label='Dark-Mode'/>
-          <Form.Check type='checkbox' id='2' label={t ('ColorBlind-Mode')}/>
-          <Form.Check type='checkbox' id='3' label={t ('Standard')} checked/>
+          <Form.Check type='checkbox' id='2' label={t('colorBlind')}/>
+          <Form.Check type='checkbox' id='3' label={t('standard')} checked/>
           </Form.Group>
         </NavDropdown>
     </Nav>
@@ -130,17 +134,14 @@ const selectOnlyThis = (id) => {
         type='switch'
         //checked={}
         //onChange={}
-        label={t ('Expert-Mode')}
+        label={t('expert-Mode')}
       />
       </Form>
-      <Nav.Link href='#home'>
-      <img
-				src='https://picsum.photos/30/30'		
-      	width='30'
-				height='30'
-				className='Language-setting'
-				alt='VisAQ-Language'
-			/>	
+      <Nav.Link onClick={ () => {i18next.changeLanguage('en')}}>
+        en
+      </Nav.Link>
+      <Nav.Link onClick={ () => {i18next.changeLanguage('de')}}>
+        de
       </Nav.Link>
     </Nav>
   </Navbar.Collapse>
@@ -148,5 +149,8 @@ const selectOnlyThis = (id) => {
       </Styles>
     )
 }
+}
 
-export default Navigationbar;
+const MyComponent = withTranslation('common')(Navigationbar)
+
+export default MyComponent

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -8,12 +8,14 @@ import MapView from './de/visaq/view/MapView';
 
 function App() {
   return (
+    <Suspense fallback='loading'>
     <React.Fragment>
       <Router>
         <Navigationbar />
         <MapView />
       </Router>
     </React.Fragment>
+    </Suspense>
   );
 }
 

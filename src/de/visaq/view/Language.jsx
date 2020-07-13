@@ -16,7 +16,9 @@ const resources = {
   };
 
 i18n
+.use(initReactI18next)
 .init({
+    lng: 'de',
     resources,
     languages: ['de','en'],
     fallbackLng: 'de',
@@ -26,11 +28,11 @@ i18n
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },
- 
+
 });
 
 i18next
-  .changeLanguage('de')
+  .changeLanguage('')
   .then((t) => {
     t('key'); // -> same as i18next.t
   });
