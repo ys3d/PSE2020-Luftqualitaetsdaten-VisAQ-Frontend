@@ -1,0 +1,14 @@
+{
+	"Suchen": "Search",
+	"help": "Help",
+	"humidity": "Humidity",
+	"particulateMatter": "Particulate Matter",
+	"temperature": "Temperature",
+	"toolbar": {
+		"causesPM": "Reasons for air pollution",
+		"diy": "DIY instructions",
+		"historical": "Historical Data",
+		"reasonsPM": "Consequences of air pollution",
+		"smartAQNet": "SmartAQNet"
+	}
+}
