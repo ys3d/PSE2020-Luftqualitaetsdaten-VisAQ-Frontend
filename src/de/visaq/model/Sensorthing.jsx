@@ -1,0 +1,4 @@
+class Sensorthing {
+    id;
+    selfLink;
+}
