@@ -1,4 +1,8 @@
 class Sensorthing {
-    id;
-    selfLink;
+    constructor(id, selfLink) {
+        this.id = id;
+        this.selfLink = selfLink;
+    }
 }
+
+export default Sensorthing;

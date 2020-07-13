@@ -1,10 +1,12 @@
-async function request(url, params, stateName, model) {
+async function request(url, params, model) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(params)
     };
-    const response = await fetch(url, requestOptions);
-    const data = await response.json();
-    this.setState({ [stateName]: Object.assign(new model(), data) });
+    return fetch(url, requestOptions).then(response => {
+        return Object.assign(new model(), response.json());
+    });
 }
+
+export default request;
