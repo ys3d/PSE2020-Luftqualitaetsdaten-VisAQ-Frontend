@@ -12,7 +12,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { showOverview: true };
+    this.state = { showOverview: false };
 
     this.handleShowClick = this.handleShowClick.bind(this);
   }
