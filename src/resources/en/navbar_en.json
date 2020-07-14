@@ -13,5 +13,8 @@
 	"furtherFunc":"More Functions",
 	"expert-Mode": "Expert-Mode",
 	"colorBlind": "Colorblind-Mode",
-	"standard": "Standart"
+	"standard": "Standard",
+	"colorScheme": "Colors",
+	"officalSensor": "Offical Sensors",
+	"nonOfficalSensor": "Homemade sensors"
 }

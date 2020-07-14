@@ -13,5 +13,8 @@
 	"furtherFunc":"Weitere Funktionen",
 	"expert-Mode": "Experten-Modus",
 	"colorBlind": "Sehschwäche-Modus",
-	"standard": "Standard"
+	"standard": "Standard",
+	"colorScheme": "Farbschema",
+	"officalSensor": "Offizielle Sensoren",
+	"nonOfficalSensor": "Homemade Sensoren"
 }

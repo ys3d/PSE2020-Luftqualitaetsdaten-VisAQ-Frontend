@@ -1,11 +1,12 @@
-import React, { state, isOpen, setState } from 'react';
+import React, { state, isOpen } from 'react';
 import { Navbar, NavDropdown, Form, FormCheck, FormControl, NavbarToggler, Collapse, Nav, NavItem,
-   NavLink, NavbarBrand, DropdownToggle, DropdownMenu, Button} from 'react-bootstrap';
+   NavLink, NavbarBrand, DropdownToggle, DropdownMenu, Button, Modal} from 'react-bootstrap';
 import styled from 'styled-components';
-import Popup, {showPopup} from './Popup';
+import PopupReasons from './PopupReasons';
+import PopupCauses from './PopupCauses';
 import i18next from 'i18next';
-import AirQualityData, {setTemperature, setHumidity, setAirPressure, setParticulateMatter, getName } from '../airquality/AirQualityData';
-import { useTranslation, withTranslation} from 'react-i18next';
+import AirQualityData, {setTemperature, setHumidity, setAirPressure, setParticulateMatter} from '../airquality/AirQualityData';
+import {withTranslation} from 'react-i18next';
 
 const Styles = styled.div`
   .navbar { background-color: #FFF; }
@@ -30,12 +31,9 @@ const Styles = styled.div`
 
 `;
 
-//const { t, i18n } = useTranslation('common');
-
 /* Constructs the Navigationbar with all functions */
-
 class Navigationbar extends React.Component {
-
+  
   constructor(props) {
     super(props)
     this.state = { isOpen: false }
@@ -60,7 +58,6 @@ class Navigationbar extends React.Component {
 
   render() {
     const { t } = this.props;
-
     return (
       <Styles>
        <Navbar expand='lg' bg='light' variant='blue'>
@@ -71,9 +68,9 @@ class Navigationbar extends React.Component {
   <Navbar.Collapse id='basic-navbar-nav' >
     <Nav className='mr-auto'>
     <Form inline>
-      <FormControl type='text' placeholder={t('search')} className='search' />
+      <FormControl type='text' placeholder= {t('search')} className='search' />
       <Button variant='outline-success'>
-        Search
+        {t('search')}
       </Button>
     </Form>
       <Nav.Link onClick={setParticulateMatter}>
@@ -102,29 +99,30 @@ class Navigationbar extends React.Component {
         <NavDropdown.Item href='https://www.smartaq.net/en/dashboard/#/home'>
           SmartAQNet
         </NavDropdown.Item>
-        <NavDropdown.Item onClick={showPopup('hi', 'test')}>
-        {t('causesPM')}
+        <NavDropdown.Item eventKey={2} href='#'>
+        <PopupReasons />
         </NavDropdown.Item>
-        <NavDropdown.Item onClick={showPopup('hi', 'test')}>
-        {t('reasonsPM')}
+        <NavDropdown.Item eventKey={1} href="#">
+        <PopupCauses />
         </NavDropdown.Item>
         <NavDropdown.Divider />
         <Form.Group controlId='formBasicCheckbox' label='Experten-Einstellungen' inline>
-          <Form.Check type='checkbox' id='1' label='Dark-Mode'/>
-          <Form.Check type='checkbox' id='2' label={t('colorBlind')}/>
-          <Form.Check type='checkbox' id='3' label={t('standard')} checked/>
+        {t('colorScheme')}
+          <Form.Check type='checkbox' id='1' label='Dark-Mode' onClick={() => this.selectOnlyThis(1)}/>
+          <Form.Check type='checkbox' id='2' label={t('colorBlind')} onClick={() => this.selectOnlyThis(2)}/>
+          <Form.Check type='checkbox' id='3' label={t('standard')} checked onClick={() => this.selectOnlyThis(3)}/>
           </Form.Group>
         </NavDropdown>
     </Nav>
       <NavDropdown
-      renderMenuOnMount={true}
-         //open={ this.state.isOpen }
+      renderMenuOnMount={false}
+          fopen={ this.state.isOpen }
           noCaret
           id='Expert dropdown'
           disabled>
       <Form.Group controlId='formBasicCheckbox' alignRight>
-          <Form.Check type='checkbox' id='1' label='Offizielle Sensoren'/>
-          <Form.Check type='checkbox' id='2' label='Weniger offizeille Sensoren'/>
+          <Form.Check type='checkbox' id='1' label={t('officalSensor')} />
+          <Form.Check type='checkbox' id='2' label={t('nonOfficalSensor')} />
           </Form.Group>
       </NavDropdown>
     <Nav className='ml-auto'>
@@ -150,7 +148,6 @@ class Navigationbar extends React.Component {
     )
 }
 }
+const dynamicNavbar = withTranslation('common')(Navigationbar)
 
-const MyComponent = withTranslation('common')(Navigationbar)
-
-export default MyComponent
+export default dynamicNavbar
