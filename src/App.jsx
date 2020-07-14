@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,Suspense } from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -26,6 +26,7 @@ class App extends Component {
 
   render() {
     return (
+      <Suspense fallback='loading'>
       <React.Fragment>
         <Router>
           <Navigationbar />
@@ -42,6 +43,7 @@ class App extends Component {
           </Container>
         </Router>
       </React.Fragment>
+      </Suspense>
     );
   }
 }

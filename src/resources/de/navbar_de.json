@@ -1,14 +1,20 @@
 {
-	"Suchen": "Suchen",
+	"search": "Suchen",
 	"help": "Hilfe",
 	"humidity": "Luftfeuchtigkeit",
 	"particulateMatter": "Feinstaub",
 	"temperature": "Temperatur",
-	"toolbar": {
-		"causesPM": "Gründe für Luftverschmutzung",
-		"diy": "DIY-Anleitung",
-		"historical": "Historische Werte",
-		"reasonsPM": "Folgen von Luftverschmutzung",
-		"smartAQNet": "SmartAQNet"
-	}
+	"airPressure":"Luftdruck",
+	"reasonsPM": "Gründe für Luftverschmutzung",
+	"diy": "DIY-Anleitung",
+	"historical": "Historische Werte",
+	"causesPM": "Folgen von Luftverschmutzung",
+	"smartAQNet": "SmartAQNet",
+	"furtherFunc":"Weitere Funktionen",
+	"expert-Mode": "Experten-Modus",
+	"colorBlind": "Sehschwäche-Modus",
+	"standard": "Standard",
+	"colorScheme": "Farbschema",
+	"officalSensor": "Offizielle Sensoren",
+	"nonOfficalSensor": "Homemade Sensoren"
 }
