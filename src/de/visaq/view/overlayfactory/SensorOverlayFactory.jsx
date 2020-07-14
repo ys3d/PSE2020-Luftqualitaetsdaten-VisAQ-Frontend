@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import L, { bounds, } from 'leaflet';
 import { render } from 'react-dom';
 import {CircleMarker, LatLngBounds, Map, MapLayer, Popup, Marker, LayerGroup } from 'react-leaflet';
+import Gradient from '../elements/theme/Gradient';
 
 //import controller from './de/visaq/controller/Controller';
 
@@ -13,11 +14,11 @@ const SensorOverlaysFactory = (props) =>  {
         key = {index}
         center = {sensor.coordinates}
         opacity = '0'
-        fillColor = 'red'
-        fillOpacity = '0.5'
-        radius = {5}
-        onClick ={onCirleClick.bind(sensor.name)}
-          >
+        fillColor = {Gradient(sensor.particulate_matter)}
+        fillOpacity = '0.8'
+        radius = {10}
+        onClick ={onCirleClick.bind(sensor)}
+        >
         </CircleMarker>
     ));
     return <Fragment>{markers}</Fragment>
@@ -26,5 +27,5 @@ const SensorOverlaysFactory = (props) =>  {
 export default SensorOverlaysFactory;
 
 function onCirleClick(props) {
-    alert(JSON.stringify(props));
+    alert(props.name);
 }

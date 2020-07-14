@@ -1,7 +1,6 @@
 import React,{ createRef, setState, Component } from 'react';
 import {useLeaflet, Map, TileLayer} from 'react-leaflet';
 import L from 'leaflet';
-import ParticulateMatter from './elements/airquality/ParticulateMatter';
 import "./MapView.css";
 import OverlayBuilder from './overlayfactory/OverlayBuilder';
 
@@ -16,7 +15,7 @@ export default class MapView extends Component {
       lng: 10.89779,
       zoom: 13,
       bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
-      AirQualityData: new ParticulateMatter()
+      AirQualityData: null
     };
   }
 

@@ -3,7 +3,7 @@
         {
             "name" : "sensorname1",
             "coordinates" : [48.3705449,10.89779],
-            "particulate_matter" : 0.07,
+            "particulate_matter" : 60,
             "air_pressure" : 0.03,
             "temperature" : 30,
             "humidity" : 4
@@ -11,23 +11,47 @@
         {
             "name" : "sensorname2",
             "coordinates" : [48.38,10.9],
-            "particulate_matter" : 0.07,
+            "particulate_matter" : 35,
             "air_pressure" : 0.03,
             "temperature" : 30,
             "humidity" : 4
         },
         {
             "name" : "sensorname3",
-            "coordinates" : [48.283333,9.723611],
-            "particulate_matter" : 0.07,
+            "coordinates" : [48.39,10.9],
+            "particulate_matter" : 50,
             "air_pressure" : 0.03,
             "temperature" : 30,
             "humidity" : 4
         },
         {
             "name" : "sensorname4",
+            "coordinates" : [48.42,10.915],
+            "particulate_matter" : 45,
+            "air_pressure" : 0.03,
+            "temperature" : 30,
+            "humidity" : 4
+        },
+        {
+            "name" : "sensorname5",
+            "coordinates" : [48.38,10.925],
+            "particulate_matter" : 77,
+            "air_pressure" : 0.03,
+            "temperature" : 35,
+            "humidity" : 4
+        },
+        {
+            "name" : "sensorname6",
+            "coordinates" : [48.283333,9.723611],
+            "particulate_matter" : 39,
+            "air_pressure" : 0.03,
+            "temperature" : 30,
+            "humidity" : 4
+        },
+        {
+            "name" : "sensorname7",
             "coordinates" : [48.28,9.723611],
-            "particulate_matter" : 0.07,
+            "particulate_matter" : 65,
             "air_pressure" : 0.03,
             "temperature" : 30,
             "humidity" : 4
