@@ -1,33 +1,18 @@
-import React from 'react';
-import closeX from '../../../../../Black_close_x.svg'
+import React, { Component } from 'react';
 import styles from './SensorOverview.module.css'
 import Card from 'react-bootstrap/Card'
 import Accordion from 'react-bootstrap/Accordion'
-import Tooltip from 'react-bootstrap/Tooltip'
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Figure from 'react-bootstrap/Figure'
-import Popover from 'react-bootstrap/Popover'
 
 import testDia from '../../../../../testdiagram.png'
 
-class SensorOverview {
+class SensorOverview extends Component{
 
-  showSensorOverview(position) {
+  render() {
     return (
-      <Popover id="sensorPopover" positionLeft={position}>
-        <OverlayTrigger
-          placement="left"
-          delay={{ show: 250, hide: 400 }}
-          overlay={closeToolTip}
-        >
-          <p>
-            <a href="#" onClick={() => document.body.click()}>
-              <img src={closeX} alt="close" width='20px' />
-            </a>
-          </p>
-        </OverlayTrigger>
-        <Popover.Title as="h3">Sensor: [...]</Popover.Title>
-        <Popover.Content>
+      <>
+        
+        <h3>Sensor: [...]</h3>
           <p>
             SensorTyp: [...]
           </p>
@@ -121,18 +106,8 @@ class SensorOverview {
               </Accordion.Collapse>
             </Card>
           </Accordion>
-        </Popover.Content>
-      </Popover>
+        </>
     );
   }
 }
-
-function closeToolTip(props) {
-  return (
-    <Tooltip id="button-tooltip" {...props}>
-      Hier klicken um die Detailansicht zu schließen
-    </Tooltip>
-  );
-}
-
 export default SensorOverview;

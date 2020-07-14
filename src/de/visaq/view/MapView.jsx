@@ -5,13 +5,6 @@ import { render } from 'react-dom'
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import "./MapView.css";
 
-import Popover from 'react-bootstrap/Popover'
-import PopoverContent from 'react-bootstrap/PopoverContent'
-import PopoverTitle from 'react-bootstrap/PopoverTitle'
-import Button from 'react-bootstrap/Button'
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-import SensorOverview from './elements/map/SensorOverview';
-
 export default class MapView extends Component {
 
   //Coordinates of the beginning state
@@ -24,14 +17,7 @@ export default class MapView extends Component {
     return (
       //this.props.incidents ?
       <div>
-        <OverlayTrigger 
-        trigger="click"
-        placement="right"
-        overlay={openOverlay()}
-        rootClose={true}
-        >
-          <Button variant="success">Click me to see</Button>
-        </OverlayTrigger>
+        
         <Map
           center={[this.state.lat, this.state.lng]}
           zoom={this.state.zoom}
@@ -51,6 +37,4 @@ export default class MapView extends Component {
   
 }
 
-function openOverlay(sensorID) {
-  return new SensorOverview().showSensorOverview()
-}
+
