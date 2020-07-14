@@ -1,6 +1,6 @@
 import React, { state, isOpen } from 'react';
 import { Navbar, NavDropdown, Form, FormCheck, FormControl, NavbarToggler, Collapse, Nav, NavItem,
-   NavLink, NavbarBrand, DropdownToggle, DropdownMenu, Button, Modal} from 'react-bootstrap';
+   NavLink, NavbarBrand, DropdownToggle, Dropdown, Button, DropdownMenu, ButtonGroup} from 'react-bootstrap';
 import styled from 'styled-components';
 import PopupReasons from './PopupReasons';
 import PopupCauses from './PopupCauses';
@@ -26,7 +26,18 @@ const Styles = styled.div`
   }
 
   .dropdown:hover>.dropdown-menu {
-  display: block;
+    display: block;
+  }
+
+  .form-switch {
+    position: relative;
+    width: 75px;
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    text-align: left;
   }
 
 `;
@@ -60,13 +71,13 @@ class Navigationbar extends React.Component {
     const { t } = this.props;
     return (
       <Styles>
-       <Navbar expand='lg' bg='light' variant='blue'>
+       <Navbar expand='lg' bg='light' >
   <Navbar.Brand href=''>
     <strong>VisAQ</strong>
   </Navbar.Brand>
   <Navbar.Toggle aria-controls='basic-navbar-nav' />
   <Navbar.Collapse id='basic-navbar-nav' >
-    <Nav className='mr-auto'>
+    <Nav className='mr-auto' justify variant='Tabs'>
     <Form inline>
       <FormControl type='text' placeholder= {t('search')} className='search' />
       <Button variant='outline-success'>
@@ -85,25 +96,25 @@ class Navigationbar extends React.Component {
       <Nav.Link onClick={setAirPressure}>
       {t('airPressure')}
       </Nav.Link>
-      <NavDropdown
-          renderMenuOnMount={true}
-         // open={ state.isOpen }
-          noCaret
-          id='dropdown'
-          name='Weitere Features'
-          label='Weitere Features'
-        >
+      </Nav>
+      <Dropdown inline >
+       Weitere Einstellungen
+      </Dropdown>
+        <NavDropdown variant="success" id="dropdown-basic">
         <NavDropdown.Item href='https://www.smartaq.net/de/participate/'>
         {t('diy')}
         </NavDropdown.Item>
         <NavDropdown.Item href='https://www.smartaq.net/en/dashboard/#/home'>
           SmartAQNet
         </NavDropdown.Item>
+        <NavDropdown.Item href='#'>
+          {t('historical')}
+        </NavDropdown.Item>
         <NavDropdown.Item eventKey={2} href='#'>
-        <PopupReasons />
+          <PopupReasons />
         </NavDropdown.Item>
         <NavDropdown.Item eventKey={1} href="#">
-        <PopupCauses />
+          <PopupCauses />
         </NavDropdown.Item>
         <NavDropdown.Divider />
         <Form.Group controlId='formBasicCheckbox' label='Experten-Einstellungen' inline>
@@ -112,29 +123,19 @@ class Navigationbar extends React.Component {
           <Form.Check type='checkbox' id='2' label={t('colorBlind')} onClick={() => this.selectOnlyThis(2)}/>
           <Form.Check type='checkbox' id='3' label={t('standard')} checked onClick={() => this.selectOnlyThis(3)}/>
           </Form.Group>
-        </NavDropdown>
-    </Nav>
-      <NavDropdown
-      renderMenuOnMount={false}
-          fopen={ this.state.isOpen }
-          noCaret
-          id='Expert dropdown'
-          disabled>
-      <Form.Group controlId='formBasicCheckbox' alignRight>
-          <Form.Check type='checkbox' id='1' label={t('officalSensor')} />
-          <Form.Check type='checkbox' id='2' label={t('nonOfficalSensor')} />
-          </Form.Group>
-      </NavDropdown>
+          </NavDropdown>
+       
+    
+    <Dropdown inline>
+      {t('expert-Mode')}
+    </Dropdown>
+    <NavDropdown variant="success" id="dropdown-basic">
+      <Form.Group controlId='form-switch' alignRight>
+        <Form.Check type='checkbox' id='1' label={t('officalSensor')} checked/>
+        <Form.Check type='checkbox' id='2' label={t('nonOfficalSensor')} checked/>
+        </Form.Group>
+    </NavDropdown>
     <Nav className='ml-auto'>
-      <Form inline>
-      <FormCheck 
-        id='switchEnabled'
-        type='switch'
-        //checked={}
-        //onChange={}
-        label={t('expert-Mode')}
-      />
-      </Form>
       <Nav.Link onClick={ () => {i18next.changeLanguage('en')}}>
         en
       </Nav.Link>
