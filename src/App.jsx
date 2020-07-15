@@ -4,6 +4,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Navigationbar from './de/visaq/view/elements/navbar/Navigationbar'
 import MapView from './de/visaq/view/MapView';
+import CookieNotice from './de/visaq/view/elements/CookieNotice'
 
 function App() {
   return (
