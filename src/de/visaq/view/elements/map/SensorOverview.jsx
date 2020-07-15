@@ -3,111 +3,103 @@ import styles from './SensorOverview.module.css'
 import Card from 'react-bootstrap/Card'
 import Accordion from 'react-bootstrap/Accordion'
 import Figure from 'react-bootstrap/Figure'
+import Diagram from '../diagram/Diagram'
+import i18next from 'i18next';
+import { withTranslation } from 'react-i18next';
 
-import testDia from '../../../../../testdiagram.png'
-
-class SensorOverview extends Component{
+/**
+ * Displays all the Information on a Specifik Sensor or Location
+ */
+class SensorOverview extends Component {
 
   render() {
+    const { t } = this.props;
     return (
       <>
-        
-        <h3>Sensor: [...]</h3>
-          <p>
-            SensorTyp: [...]
+
+        <h3>{t('sensor')} [...]</h3>
+        <p>
+          {t('sensortype')} [...]
           </p>
-          <Accordion>
-            <Card>
-              <Card.Header>
-                <Accordion.Toggle as={Card.Header} eventKey="0">
-                  Luftdruck
-                </Accordion.Toggle>
-              </Card.Header>
-              <Accordion.Collapse eventKey="0">
-                <Card.Body>
-                  <p>Aktuell: 1000hPa</p>
-                  <Figure>
-                    <Figure.Image
-                      width={400}
-                      alt="171x180"
-                      src={testDia}
-                    />
-                    <Figure.Caption>
-                      Verlauf der Messwerte
-                  </Figure.Caption>
-                  </Figure>
-                </Card.Body>
-              </Accordion.Collapse>
-            </Card>
-            <Card>
-              <Card.Header>
-                <Accordion.Toggle as={Card.Header} eventKey="1">
-                  Lufttemperatur
-                </Accordion.Toggle>
-              </Card.Header>
-              <Accordion.Collapse eventKey="1">
-                <Card.Body>
-                  <p>Aktuell: 30°C</p>
-                  <Figure>
-                    <Figure.Image
-                      width={400}
-                      alt="171x180"
-                      src={testDia}
-                    />
-                    <Figure.Caption>
-                      Verlauf der Messwerte
-                  </Figure.Caption>
-                  </Figure>
-                </Card.Body>
-              </Accordion.Collapse>
-            </Card>
-            <Card>
-              <Card.Header>
-                <Accordion.Toggle as={Card.Header} eventKey="2">
-                  Luftfeuchtigkeit
-                </Accordion.Toggle>
-              </Card.Header>
-              <Accordion.Collapse eventKey="2">
-                <Card.Body>
-                  <p>Aktuell: 17%</p>
-                  <Figure>
-                    <Figure.Image
-                      width={400}
-                      alt="171x180"
-                      src={testDia}
-                    />
-                    <Figure.Caption>
-                      Verlauf der Messwerte
-                  </Figure.Caption>
-                  </Figure>
-                </Card.Body>
-              </Accordion.Collapse>
-            </Card>
-            <Card>
-              <Card.Header>
-                <Accordion.Toggle as={Card.Header} eventKey="3">
-                  Feinstaub
-                </Accordion.Toggle>
-              </Card.Header>
-              <Accordion.Collapse eventKey="3">
-                <Card.Body>
-                  <p>Aktuell: 150ppm</p>
-                  <Figure>
-                    <Figure.Image
-                      width={400}
-                      alt="171x180"
-                      src={testDia}
-                    />
-                    <Figure.Caption>
-                      Verlauf der Messwerte
-                  </Figure.Caption>
-                  </Figure>
-                </Card.Body>
-              </Accordion.Collapse>
-            </Card>
-          </Accordion>
-        </>
+        <Accordion>
+          <Card>
+            <Card.Header>
+              <Accordion.Toggle as={Card.Header} eventKey="0">
+                {t('airPressure')}
+              </Accordion.Toggle>
+            </Card.Header>
+            <Accordion.Collapse eventKey="0">
+              <Card.Body>
+                <p>{t('currently')}: 1000hPa</p>
+                <Diagram
+                  title={t('historicalDevelopment')}
+                  dataRowLabel={"hPa"}
+                  dataLabels={['January', 'February', 'March', 'April', 'May', 'June', 'July']}
+                  data={[65, 59, 80, 81, 56, 55, 40]}
+                />
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+          <Card>
+            <Card.Header>
+              <Accordion.Toggle as={Card.Header} eventKey="1">
+                {t('airTemperature')}
+              </Accordion.Toggle>
+            </Card.Header>
+            <Accordion.Collapse eventKey="1">
+              <Card.Body>
+                <p>{t('currently')}: 30°C</p>
+                <Diagram
+                  title={t('historicalDevelopment')}
+                  dataRowLabel={"°C"}
+                  dataLabels={['January', 'February', 'March', 'April', 'May', 'June', 'July']}
+                  data={[65, 59, 80, 81, 56, 55, 40]}
+                />
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+          <Card>
+            <Card.Header>
+              <Accordion.Toggle as={Card.Header} eventKey="2">
+                {t('airHumidity')}
+              </Accordion.Toggle>
+            </Card.Header>
+            <Accordion.Collapse eventKey="2">
+              <Card.Body>
+                <p>{t('currently')}: 17%</p>
+                <Diagram
+                  title={t('historicalDevelopment')}
+                  dataRowLabel={"%"}
+                  dataLabels={['January', 'February', 'March', 'April', 'May', 'June', 'July']}
+                  data={[65, 59, 80, 81, 56, 55, 40]}
+                />
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+          <Card>
+            <Card.Header>
+              <Accordion.Toggle as={Card.Header} eventKey="3">
+                {t('particulateMatter')}
+              </Accordion.Toggle>
+            </Card.Header>
+            <Accordion.Collapse eventKey="3">
+              <Card.Body>
+                <p>{t('currently')}: 150ppm</p>
+                <Diagram
+                  title={t('historicalDevelopment')}
+                  dataRowLabel={"ppm"}
+                  dataLabels={['January', 'February', 'March', 'April', 'May', 'June', 'July']}
+                  data={[65, 59, 80, 81, 56, 55, 40]}
+                />
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+        </Accordion>
+      </>
     );
   }
 }
-export default SensorOverview;
+
+const dynamicSensorOverview = withTranslation('overview')(SensorOverview)
+
+export default dynamicSensorOverview;

@@ -1,0 +1,11 @@
+{
+    "sensor": "Sensor:",
+    "sensortype": "Sensortyp:",
+    "currently": "Aktuell",
+    "historicalDevelopment": "Historische Entwicklung",
+    "in": "in",
+    "airPressure": "Luftdruck",
+    "airTemperature": "Lufttemperatur",
+    "airHumidity": "Luftfeuchtigkeit",
+    "particulateMatter": "Feinstaub"
+}

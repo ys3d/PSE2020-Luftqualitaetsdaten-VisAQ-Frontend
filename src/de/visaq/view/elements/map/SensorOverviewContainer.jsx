@@ -6,6 +6,10 @@ import SensorOverview from './SensorOverview'
 import { Col } from "react-bootstrap";
 import { render } from '@testing-library/react';
 
+/**
+ * Container for The SensorOverview
+ * @param {*} props 
+ */
 function Overview(props) {
     if (!props.show) {
         return (
