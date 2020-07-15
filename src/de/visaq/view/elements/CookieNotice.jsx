@@ -23,7 +23,7 @@ class CookieNotice extends Component {
 
   closeModal() {
     this.setState({ showMoreModal: false,
-    showModal: truef });
+    showModal: true });
   }
 
   open() {
