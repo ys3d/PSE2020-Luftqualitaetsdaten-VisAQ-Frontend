@@ -73,6 +73,7 @@ class Navigationbar extends React.Component {
     const { t } = this.props;
     return (
       <Styles>
+      <CookieNotice />
         <Navbar expand='lg' bg='light' style={{width: '100%', height:'20%'}} >
           <Navbar.Brand href=''>
             <strong>VisAQ</strong>
