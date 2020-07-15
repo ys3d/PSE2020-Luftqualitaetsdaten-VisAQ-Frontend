@@ -3,7 +3,8 @@ import {Map, TileLayer} from 'react-leaflet';
 import L from 'leaflet';
 import "./MapView.css";
 import OverlayBuilder from './overlayfactory/OverlayBuilder';
-import Legend from './elements/map/Legend'
+import Legend from './elements/map/Legend';
+import AirQualityData, { getName } from './elements/airquality/AirQualityData'
 
 /**
  * Class that contains the MapView.
@@ -18,13 +19,13 @@ export default class MapView extends Component {
       lng: 10.89779,
       zoom: 13,
       bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
-      AirQualityData: null
+      airQualityData: ""
     };
   }
 
 
   componentWillMount() {
-
+    this.setState({airQualityData : getName()});
   }
 
   componentDidMount() {
@@ -33,11 +34,14 @@ export default class MapView extends Component {
   componentWillUnmount() {
   }
 
-  componentDidUpdate(prevState) {
-      
+  static componentDidUpdate() {
+    if(!this.state.airQualityData.localeCompare(getName())) {
+      this.setState({airQualityData : getName()});
+    }
   }
   
   onMove(event) {
+    this.setState({bounds : event.target.getBounds()});
   }
 
   onClick(event)  {

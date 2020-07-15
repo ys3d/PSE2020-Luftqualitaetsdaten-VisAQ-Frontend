@@ -6,7 +6,6 @@ import {setParticulateMatter, getAverage, getPrimaryColor, getSecondaryColor, ge
  * @param {number} measurement      The measured value of the current AirQualityData
 */
 const Gradient = (measurement) =>  {
-    setParticulateMatter();
     
     var minValue = getAverage() - getVariance();
     var maxValue = getAverage() + getVariance();
