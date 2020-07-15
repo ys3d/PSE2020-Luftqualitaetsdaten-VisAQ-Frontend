@@ -1,12 +1,15 @@
-import React,{ createRef, setState, Component } from 'react';
-import {useLeaflet, Map, TileLayer} from 'react-leaflet';
+import React,{ createRef, Component } from 'react';
+import {Map, TileLayer} from 'react-leaflet';
 import L from 'leaflet';
 import "./MapView.css";
 import OverlayBuilder from './overlayfactory/OverlayBuilder';
+import Legend from './elements/map/Legend'
 
-
+/**
+ * Class that contains the MapView.
+ */
 export default class MapView extends Component {
-  //with props its possible to initalize the map with different map properties
+  /*with props its possible to initalize the map with different map properties*/
   constructor(props) {
     super(props);
     this.mapRef = createRef();  
@@ -19,16 +22,22 @@ export default class MapView extends Component {
     };
   }
 
+
+  componentWillMount() {
+
+  }
+
   componentDidMount() {
   }
-  
+
+  componentWillUnmount() {
+  }
+
   componentDidUpdate(prevState) {
       
   }
   
   onMove(event) {
-    this.setState({bounds : event.target.getBounds()})
-
   }
 
   onClick(event)  {
@@ -42,7 +51,7 @@ export default class MapView extends Component {
         <Map 
           center={[this.state.lat, this.state.lng]} 
           zoom={this.state.zoom} 
-          style={{ width: '100%', height: '900px'}}
+          style={{ width: '100%', height: '100vh'}}
           boundsOptions={{padding: [50, 50]}}
           ref = {this.mapRef}
           onMoveEnd={this.onMove.bind(this)}
@@ -54,6 +63,7 @@ export default class MapView extends Component {
           />
           <OverlayBuilder bounds = {this.state}
            />
+          <Legend/>
        </Map> 
        </div>
       );
