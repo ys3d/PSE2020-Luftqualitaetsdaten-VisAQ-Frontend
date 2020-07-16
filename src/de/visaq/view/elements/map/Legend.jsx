@@ -1,21 +1,29 @@
-import { MapControl, withLeaflet } from "react-leaflet";
-import {getAverage, getVariance, getUnitOfMeasurement} from '../airquality/AirQualityData';
+import { MapControl } from "react-leaflet";
 import Gradient from '../theme/Gradient';
 import L from "leaflet";
 import './Legend.css';
+
+
+
 
 /**
  * The class Legend contains the Legend for the map. 
  * Its color scheme fits the Layers of the map.
  */
 class Legend extends MapControl {
-  createLeafletElement(props) {}
-
+  
+  constructor(props)  {
+    super(props);
+    this.state = ({
+      airQualityData: props
+    });
+  }
+  
   /**
    * Creates a legend.
    */
   componentDidMount() {
-
+    alert(this.state.airQualityData.getAverage());
     const legend = L.control({ position: "bottomleft" });
 
     /**
@@ -24,9 +32,9 @@ class Legend extends MapControl {
     legend.onAdd = () => {
       const div = L.DomUtil.create("div", "info legend");
       const num = 10;
-      const min = getAverage() - getVariance();
+      const min = this.state.airQualityData.getAverage() - this.state.airQualityData.getVariance();
       const grades = [];
-      const distance = (getVariance() * 2) / num;
+      const distance = (this.state.airQualityData.getVariance() * 2) / num;
       for (var i = 0; i < num; i++) {
         grades[i] = min  + i * distance;
       }
@@ -38,13 +46,13 @@ class Legend extends MapControl {
 
         labels.push(
           '<i style="background:' +
-            Gradient(pos) +
+            Gradient(pos, this.state.airQualityData) +
             '"></i> ' +
             ((i===0)?"<":"") +
             ((i===(grades.length - 1))?">":"") +
             pos +
             " " +
-            getUnitOfMeasurement()
+            this.state.airQualityData.getUnitOfMeasurement()
         );
       }
 
@@ -57,4 +65,4 @@ class Legend extends MapControl {
   }
 }
 
-export default withLeaflet(Legend);
+export default Legend;

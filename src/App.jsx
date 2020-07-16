@@ -9,12 +9,7 @@ import CookieNotice from './de/visaq/view/elements/CookieNotice'
 function App() {
   return (
     <Suspense fallback='loading'>
-    <React.Fragment>
-      <Router>
         <Navigationbar />
-        <MapView />
-        </Router>
-    </React.Fragment>
     </Suspense>
   );
 }

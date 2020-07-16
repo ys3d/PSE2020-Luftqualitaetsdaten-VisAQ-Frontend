@@ -4,7 +4,8 @@ import L from 'leaflet';
 import "./MapView.css";
 import OverlayBuilder from './overlayfactory/OverlayBuilder';
 import Legend from './elements/map/Legend';
-import AirQualityData, { getName } from './elements/airquality/AirQualityData'
+import AirQualityData from './elements/airquality/AirQualityData';
+
 
 /**
  * Class that contains the MapView.
@@ -14,41 +15,35 @@ export default class MapView extends Component {
   constructor(props) {
     super(props);
     this.mapRef = createRef();  
-    this.state = {
+    this.state = ({
       lat: 48.3705449,
       lng: 10.89779,
       zoom: 13,
       bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
-      airQualityData: ""
-    };
+      airQualityData: props
+    });
   }
 
 
   componentWillMount() {
-    this.setState({airQualityData : getName()});
-  }
 
+  }
   componentDidMount() {
   }
+
 
   componentWillUnmount() {
   }
 
-  static componentDidUpdate() {
-    if(!this.state.airQualityData.localeCompare(getName())) {
-      this.setState({airQualityData : getName()});
+  componentDidUpdate(props) {
+    if(!(props === this.state.airQualityData))  {
+      this.setState({airQualityData : props});
     }
   }
-  
   onMove(event) {
     this.setState({bounds : event.target.getBounds()});
   }
-
-  onClick(event)  {
-  }
-
-  
-
+ 
   render() {
       return (
         <div>
@@ -59,18 +54,16 @@ export default class MapView extends Component {
           boundsOptions={{padding: [50, 50]}}
           ref = {this.mapRef}
           onMoveEnd={this.onMove.bind(this)}
-          onClick={this.onClick.bind(this)}
         >
           <TileLayer
            attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <OverlayBuilder bounds = {this.state}
+          <OverlayBuilder bounds = {this.state.bounds} airQ ={this.state.airQualityData}
            />
-          <Legend/>
+           <Legend airQualityData = {this.state.airQualityData}/>
        </Map> 
        </div>
       );
    }
 }
-
