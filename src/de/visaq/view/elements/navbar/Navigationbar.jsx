@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import PopupReasons from './PopupReasons';
 import PopupCauses from './PopupCauses';
 import CookieNotice from '../CookieNotice';
-import MapView from '../../MapView';
+import MapView from '../../MapView'
 import i18next from 'i18next';
 import {withTranslation} from 'react-i18next';
 import {setTemperature, setHumidity, setAirPressure, setParticulateMatter} from '../airquality/AirQualityData';
