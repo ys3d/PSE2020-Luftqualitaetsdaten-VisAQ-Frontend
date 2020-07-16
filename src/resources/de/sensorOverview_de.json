@@ -1,11 +1,12 @@
 {
     "sensor": "Sensor:",
-    "sensortype": "Sensortyp:",
+    "description": "Beschreibung:",
     "currently": "Aktuell",
     "historicalDevelopment": "Historische Entwicklung",
     "in": "in",
     "airPressure": "Luftdruck",
     "airTemperature": "Lufttemperatur",
     "airHumidity": "Luftfeuchtigkeit",
-    "particulateMatter": "Feinstaub"
+    "particulateMatter": "Feinstaub",
+    "notFound": "Der gesuchte Sensor kann nicht in der Datenbank gefunden werden"
 }

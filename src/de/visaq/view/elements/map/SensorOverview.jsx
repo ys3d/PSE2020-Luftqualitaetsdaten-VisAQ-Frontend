@@ -13,15 +13,54 @@ import Thing from '../../../model/Thing'
  * Displays all the Information on a Specifik Sensor or Location
  */
 class SensorOverview extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      thingName: "",
+      thingDescription: ""
+    };
+  }
+
+  componentDidMount() {
+    var thing = request("/api/thing/id", true, {
+      id: this.props.thingID
+    }, Thing);
+    console.log("Load");
+    thing.then(thing => {
+      this.setState({
+        thingName: thing.name,
+        thingDescription: thing.description
+      });
+    });
+  }
+
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.thingID != this.props.thingID) {
+      var thing = request("/api/thing/id", true, {
+        id: this.props.thingID
+      }, Thing);
+      console.log("Load");
+      thing.then(thing => {
+        this.setState({
+          thingName: thing.name,
+          thingDescription: thing.description
+        });
+      });
+    }
+  }
 
   render() {
     const { t } = this.props;
+
     return (
       <>
         <p>{this.props.thingID}</p>
-        <h1>{t('sensor')} [...]</h1>
+        <h1>
+          {t('sensor')} {this.state.thingName}
+        </h1>
         <p>
-          {t('sensortype')} [...]
+          {t('description')} {this.state.thingDescription}
         </p>
 
         <Accordion>
