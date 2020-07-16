@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import styles from './SensorOverview.module.css'
 import Card from 'react-bootstrap/Card'
 import Accordion from 'react-bootstrap/Accordion'
-import Figure from 'react-bootstrap/Figure'
 import Diagram from '../diagram/Diagram'
 import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
+import request from '../../../controller/Request'
+import Thing from '../../../model/Thing'
+
 
 /**
  * Displays all the Information on a Specifik Sensor or Location
@@ -16,11 +18,12 @@ class SensorOverview extends Component {
     const { t } = this.props;
     return (
       <>
-
-        <h3>{t('sensor')} [...]</h3>
+        <p>{this.props.thingID}</p>
+        <h1>{t('sensor')} [...]</h1>
         <p>
           {t('sensortype')} [...]
-          </p>
+        </p>
+
         <Accordion>
           <Card>
             <Card.Header>

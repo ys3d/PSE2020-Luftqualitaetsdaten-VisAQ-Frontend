@@ -30,7 +30,7 @@ function Overview(props) {
                         </a>
                     </p>
                 </OverlayTrigger>
-                <SensorOverview />
+                <SensorOverview thingID={props.thingID}/>
             </Col>
         </>
     );
