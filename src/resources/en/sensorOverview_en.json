@@ -8,5 +8,6 @@
     "airTemperature": "Air temperature",
     "airHumidity": "Air humidity",
     "particulateMatter": "Particulate matter",
-    "notFound": "The requested Sensor could not be found"
+    "notFound": "The requested Sensor could not be found",
+    "location": "Location"
 }

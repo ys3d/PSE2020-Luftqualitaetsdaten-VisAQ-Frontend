@@ -14,23 +14,33 @@ class App extends Component {
     super(props);
     this.state = {
       showOverview: false,
-      thingID: "saqn:t:grimm-aerosol.com:EDM80NEPH:SN17017"
+      thingID: "saqn:t:grimm-aerosol.com:EDM80NEPH:SN17017",
+      isSensor: false
     };
 
-    this.handleShowClick = this.handleShowClick.bind(this);
+    this.handleShowSensorClick = this.handleShowSensorClick.bind(this);
     this.handleCloseClick = this.handleCloseClick.bind(this);
+    this.handleShowPointClick = this.handleShowPointClick.bind(this);
   }
 
-  handleShowClick(toSetThingID) {
+  handleShowSensorClick(toSetThingID) {
     this.setState({
       showOverview: true,
-      thingID: toSetThingID
+      thingID: toSetThingID,
+      isSensor: true
+    });
+  }
+  handleShowPointClick() {
+    this.setState({
+      showOverview: true,
+      isSensor: false
     });
   }
 
   handleCloseClick() {
     this.setState({
-      showOverview: false
+      showOverview: false,
+      isSensor: false
     });
   }
 
@@ -41,18 +51,26 @@ class App extends Component {
       <React.Fragment>
         <Router>
           <Navigationbar />
-          <a href="#" onClick={() => this.handleShowClick("saqn:t:grimm-aerosol.com:EDM80NEPH:SN17017")}>
-            <p>open</p>
+          <p>
+          <a href="#" onClick={() => this.handleShowSensorClick("saqn:t:grimm-aerosol.com:EDM80NEPH:SN17017")}>
+            open 
           </a>
-          <a href="#" onClick={() => this.handleShowClick("saqn:t:7bd2cd3")}>
-            <p>open2</p>
+          _
+          <a href="#" onClick={() => this.handleShowSensorClick("saqn:t:7bd2cd3")}>
+            open2
           </a>
+          </p>
+          <p>
+          <a href="#" onClick={() => this.handleShowPointClick()}>
+            open3
+          </a>
+          </p>
           <Container fluid>
             <Row>
               <Col id="map-content">
                 <MapView />
               </Col>
-              <Overview show={this.state.showOverview} closeHandler={this.handleCloseClick} thingID={this.state.thingID} />
+              <Overview show={this.state.showOverview} closeHandler={this.handleCloseClick} thingID={this.state.thingID} isSensor={this.state.isSensor}/>
             </Row>
           </Container>
         </Router>

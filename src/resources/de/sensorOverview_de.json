@@ -8,5 +8,6 @@
     "airTemperature": "Lufttemperatur",
     "airHumidity": "Luftfeuchtigkeit",
     "particulateMatter": "Feinstaub",
-    "notFound": "Der gesuchte Sensor kann nicht in der Datenbank gefunden werden"
+    "notFound": "Der gesuchte Sensor kann nicht in der Datenbank gefunden werden",
+    "location": "Ort"
 }
