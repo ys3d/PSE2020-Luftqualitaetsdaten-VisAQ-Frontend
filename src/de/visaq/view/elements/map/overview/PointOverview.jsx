@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import styles from './Overview.module.css'
-import Card from 'react-bootstrap/Card'
 import Accordion from 'react-bootstrap/Accordion'
-import Diagram from '../../diagram/Diagram'
 import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 import request from '../../../../controller/Request'
 import Thing from '../../../../model/Thing'
+import DataCard from './DataCard'
 
 
 /**
@@ -25,82 +24,42 @@ class PointOverview extends Component {
     return (
       <>
         <h1>
-          {t('location')} 
+          {t('location')}
         </h1>
 
         <Accordion>
-          <Card>
-            <Card.Header>
-              <Accordion.Toggle as={Card.Header} eventKey="0">
-                {t('airPressure')}
-              </Accordion.Toggle>
-            </Card.Header>
-            <Accordion.Collapse eventKey="0">
-              <Card.Body>
-                <p>{t('currently')}: 1000hPa</p>
-                <Diagram
-                  title={t('historicalDevelopment')}
-                  dataRowLabel={"hPa"}
-                  dataLabels={['January', 'February', 'March', 'April', 'May', 'June', 'July']}
-                  data={[65, 59, 80, 81, 56, 55, 40]}
-                />
-              </Card.Body>
-            </Accordion.Collapse>
-          </Card>
-          <Card>
-            <Card.Header>
-              <Accordion.Toggle as={Card.Header} eventKey="1">
-                {t('airTemperature')}
-              </Accordion.Toggle>
-            </Card.Header>
-            <Accordion.Collapse eventKey="1">
-              <Card.Body>
-                <p>{t('currently')}: 30°C</p>
-                <Diagram
-                  title={t('historicalDevelopment')}
-                  dataRowLabel={"°C"}
-                  dataLabels={['January', 'February', 'March', 'April', 'May', 'June', 'July']}
-                  data={[65, 59, 80, 81, 56, 55, 40]}
-                />
-              </Card.Body>
-            </Accordion.Collapse>
-          </Card>
-          <Card>
-            <Card.Header>
-              <Accordion.Toggle as={Card.Header} eventKey="2">
-                {t('airHumidity')}
-              </Accordion.Toggle>
-            </Card.Header>
-            <Accordion.Collapse eventKey="2">
-              <Card.Body>
-                <p>{t('currently')}: 17%</p>
-                <Diagram
-                  title={t('historicalDevelopment')}
-                  dataRowLabel={"%"}
-                  dataLabels={['January', 'February', 'March', 'April', 'May', 'June', 'July']}
-                  data={[65, 59, 80, 81, 56, 55, 40]}
-                />
-              </Card.Body>
-            </Accordion.Collapse>
-          </Card>
-          <Card>
-            <Card.Header>
-              <Accordion.Toggle as={Card.Header} eventKey="3">
-                {t('particulateMatter')}
-              </Accordion.Toggle>
-            </Card.Header>
-            <Accordion.Collapse eventKey="3">
-              <Card.Body>
-                <p>{t('currently')}: 150ppm</p>
-                <Diagram
-                  title={t('historicalDevelopment')}
-                  dataRowLabel={"ppm"}
-                  dataLabels={['January', 'February', 'March', 'April', 'May', 'June', 'July']}
-                  data={[65, 59, 80, 81, 56, 55, 40]}
-                />
-              </Card.Body>
-            </Accordion.Collapse>
-          </Card>
+          <DataCard
+            cardTitle={t('airPressure')}
+            currentValue="1000hPa"
+            dataRowLabel="hPa"
+            dataLabels={['January', 'February', 'March', 'April', 'May', 'June', 'July']}
+            data={[65, 59, 80, 81, 56, 55, 40]}
+            eventKey={1}
+          />
+          <DataCard
+            cardTitle={t('airTemperature')}
+            currentValue="30°C"
+            dataRowLabel="°C"
+            dataLabels={['January', 'February', 'March', 'April', 'May', 'June', 'July']}
+            data={[65, 59, 80, 81, 56, 55, 40]}
+            eventKey={2}
+          />
+          <DataCard
+            cardTitle={t('airHumidity')}
+            currentValue="17%"
+            dataRowLabel="%"
+            dataLabels={['January', 'February', 'March', 'April', 'May', 'June', 'July']}
+            data={[65, 59, 80, 81, 56, 55, 40]}
+            eventKey={3}
+          />
+          <DataCard
+            cardTitle={t('particulateMatter')}
+            currentValue="155ppm"
+            dataRowLabel="ppm"
+            dataLabels={['January', 'February', 'March', 'April', 'May', 'June', 'July']}
+            data={[65, 59, 80, 81, 56, 55, 40]}
+            eventKey={4}
+          />
         </Accordion>
       </>
     );
