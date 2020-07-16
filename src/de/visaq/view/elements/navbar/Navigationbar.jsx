@@ -8,7 +8,7 @@ import CookieNotice from '../CookieNotice';
 import MapView from '../../MapView';
 import i18next from 'i18next';
 import {withTranslation} from 'react-i18next';
-import AirQualityData, {setTemperature, setHumidity, setAirPressure, setParticulateMatter} from '../airquality/AirQualityData';
+import {setTemperature, setHumidity, setAirPressure, setParticulateMatter} from '../airquality/AirQualityData';
 
 
 const Styles = styled.div`

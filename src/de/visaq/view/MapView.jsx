@@ -4,7 +4,7 @@ import L from 'leaflet';
 import "./MapView.css";
 import OverlayBuilder from './overlayfactory/OverlayBuilder';
 import Legend from './elements/map/Legend';
-import AirQualityData, { getName } from './elements/airquality/AirQualityData'
+import { getName } from './elements/airquality/AirQualityData';
 
 /**
  * Class that contains the MapView.
