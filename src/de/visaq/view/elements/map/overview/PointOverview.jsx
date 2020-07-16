@@ -2,52 +2,21 @@ import React, { Component } from 'react';
 import styles from './Overview.module.css'
 import Card from 'react-bootstrap/Card'
 import Accordion from 'react-bootstrap/Accordion'
-import Diagram from '../diagram/Diagram'
+import Diagram from '../../diagram/Diagram'
 import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
-import request from '../../../controller/Request'
-import Thing from '../../../model/Thing'
+import request from '../../../../controller/Request'
+import Thing from '../../../../model/Thing'
 
 
 /**
  * Displays all the Information on a Specifik Sensor or Location
  */
-class SensorOverview extends Component {
+class PointOverview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      thingName: "",
-      thingDescription: ""
     };
-  }
-
-  componentDidMount() {
-    var thing = request("/api/thing/id", true, {
-      id: this.props.thingID
-    }, Thing);
-    console.log("Load");
-    thing.then(thing => {
-      this.setState({
-        thingName: thing.name,
-        thingDescription: thing.description
-      });
-    });
-  }
-
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.thingID != this.props.thingID) {
-      var thing = request("/api/thing/id", true, {
-        id: this.props.thingID
-      }, Thing);
-      console.log("Load");
-      thing.then(thing => {
-        this.setState({
-          thingName: thing.name,
-          thingDescription: thing.description
-        });
-      });
-    }
   }
 
   render() {
@@ -55,13 +24,9 @@ class SensorOverview extends Component {
 
     return (
       <>
-        <p>{this.props.thingID}</p>
         <h1>
-          {t('sensor')} {this.state.thingName}
+          {t('location')} 
         </h1>
-        <p>
-          {t('description')} {this.state.thingDescription}
-        </p>
 
         <Accordion>
           <Card>
@@ -142,6 +107,6 @@ class SensorOverview extends Component {
   }
 }
 
-const dynamicSensorOverview = withTranslation('overview')(SensorOverview)
+const dynamicPointOverview = withTranslation('overview')(PointOverview);
 
-export default dynamicSensorOverview;
+export default dynamicPointOverview;

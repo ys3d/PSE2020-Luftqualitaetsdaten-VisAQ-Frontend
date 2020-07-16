@@ -1,5 +1,5 @@
 import React from 'react';
-import closeX from '../../../../../Black_close_x.svg'
+import closeX from '../../../../../../Black_close_x.svg'
 import Tooltip from 'react-bootstrap/Tooltip'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import SensorOverview from './SensorOverview'

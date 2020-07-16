@@ -6,7 +6,7 @@ import Navigationbar from './de/visaq/view/elements/navbar/Navigationbar'
 import MapView from './de/visaq/view/MapView';
 import { Container, Row, Col } from "react-bootstrap";
 
-import Overview from './de/visaq/view/elements/map/SensorOverviewContainer'
+import Overview from './de/visaq/view/elements/map/overview/OverviewContainer'
 
 class App extends Component {
 
