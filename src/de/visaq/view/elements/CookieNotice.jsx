@@ -1,9 +1,7 @@
-import React, { Component, event, moment, discoveryPhase} from 'react'
+import React, { Component, event} from 'react'
 import { Button, Modal, ModalTitle, Popover, Tooltip, Nav, NavItem, Row, Col, FormGroup, FieldGroup, Checkbox } from 'react-bootstrap'
 import i18next from 'i18next';
 import {withTranslation} from 'react-i18next';
-import Cookies from 'js-cookie'
-import Language from '../Language'
 
 class CookieNotice extends Component {
   MODAL_TYPE_REASONS = 2;
@@ -12,7 +10,7 @@ class CookieNotice extends Component {
     super();
     this.render.bind(this);
     this.state = {
-      showModal: document.cookie.split(';').some((item) => item.trim().startsWith('VisAQ=')) ? false : true,
+      showModal: document.cookie.split(';').some((item) => item.trim().startsWith('Language=')) ? false : true,
       showMoreModals : false
     };
   }
@@ -37,14 +35,18 @@ class CookieNotice extends Component {
     alert(`selected ${eventKey}`);
   }
 
-  setCookie = () => {
-    document.cookie='VisAQ='+ navigator.geolocation.getCurrentPosition + ';max-age='+60*60*24*365;
-    document.cookie='language=' + Language.getLanguage + ';max-age='+60*60*24*365;
+  setCookie = () => {;
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        document.cookie = "Latitude=" + position.coords.latitude + ';max-age='+60*60*24*365;
+        document.cookie = "Longitude=" + position.coords.longitude + ';max-age='+60*60*24*365;
+      });
+    }
+    document.cookie='Language=' + i18next.language + ';max-age='+60*60*24*365;
     this.setState({ showModal: false });
   }
 
   render () {
-
     const popover = (
       <Popover id="modal-popover" title="popover">
         simple popover
@@ -108,6 +110,7 @@ function moreInfo() {
     </div>
   )
 }
+
 const dynamicModal = withTranslation('common')(CookieNotice)
 
 export default dynamicModal

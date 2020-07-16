@@ -10,13 +10,17 @@ const resources = {
         en: {
         common: navbar_en
         },
-         de: {
+        de: {
         common: navbar_de
     }
   };
 
 i18n
 .use(initReactI18next)
+.on('languageChanged', function(lng) {
+  document.cookie= document.cookie.split(';').some((item) => item.trim().startsWith('Language=')) ? 'Language=' + lng : false;
+})
+
 .init({
     lng: 'de',
     resources,
