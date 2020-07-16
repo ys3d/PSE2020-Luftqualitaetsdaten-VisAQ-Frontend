@@ -5,9 +5,10 @@ import styled from 'styled-components';
 import PopupReasons from './PopupReasons';
 import PopupCauses from './PopupCauses';
 import CookieNotice from '../CookieNotice';
+import MapView from '../../MapView';
 import i18next from 'i18next';
 import {withTranslation} from 'react-i18next';
-import AirQualityData, {setTemperature, setHumidity, setAirPressure, setParticulateMatter} from '../airquality/AirQualityData';
+import {setTemperature, setHumidity, setAirPressure, setParticulateMatter} from '../airquality/AirQualityData';
 
 
 const Styles = styled.div`
@@ -51,6 +52,9 @@ class Navigationbar extends React.Component {
     super(props)
     this.state = { isOpen: false }
   }
+  componentWillMount()  {
+    setParticulateMatter();
+  }
 
   handleOpen = () => {
     this.setState({ isOpen: true })
@@ -66,6 +70,25 @@ class Navigationbar extends React.Component {
           document.getElementById(i).checked = false;
       }
       document.getElementById(id).checked = true;
+  }
+
+  onClickParticulateMatter()  {
+    setParticulateMatter();
+    MapView.componentDidUpdate()
+  }
+
+  onClickHumidity()  {
+    setHumidity();
+    MapView.componentDidUpdate()
+  }
+  onClickTemperature()  {
+    setTemperature();
+    MapView.componentDidUpdate()
+  }
+
+  onClickAirPressure()  {
+    setAirPressure();
+    MapView.componentDidUpdate()
   }
 
 
@@ -87,16 +110,16 @@ class Navigationbar extends React.Component {
                   {t('search')}
                 </Button>
               </Form>
-              <Nav.Link onClick={setParticulateMatter}>
+              <Nav.Link onClick={() => this.onClickParticulateMatter()}>
                 {t('particulateMatter')}
               </Nav.Link>
-              <Nav.Link onClick={setHumidity}>
+              <Nav.Link onClick={() => this.onClickHumidity()}>
                 {t('humidity')}
               </Nav.Link>
-              <Nav.Link onClick={setTemperature}>
+              <Nav.Link onClick={() => this.onClickTemperature()}>
                 {t('temperature')}
               </Nav.Link>
-              <Nav.Link onClick={setAirPressure}>
+              <Nav.Link onClick={() => this.onClickAirPressure()}>
                 {t('airPressure')}
               </Nav.Link>
             </Nav>
