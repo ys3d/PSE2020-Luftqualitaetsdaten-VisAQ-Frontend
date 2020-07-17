@@ -3,7 +3,6 @@ import Gradient from '../theme/Gradient';
 import L from "leaflet";
 import './Legend.css';
 
-let param;
 var legend;
 /**
  * The class Legend contains the Legend for the map. 
@@ -11,39 +10,58 @@ var legend;
  */
 class Legend extends MapControl {
  
+  /**
+   * Sole constructor of the class Legend.
+   */
   constructor(props)  {
     super(props);
     this.state = {  
       airQualityData : props.airQ};
     this.createLeafletElement();
   }
-  createLeafletElement(){
+  /**
+   * Creates an leaflet Element.
+   */
+  createLeafletElement(){}
 
-  }
+  /**
+   * Decides whether the component should update. 
+   * Returns true if the state of AirQualityData changed in the parent component, false otherwise.
+   * 
+   * @param {Object} nextprops The properties
+   * @param {Object} nextState The new state
+   */
   shouldComponentUpdate(nextprops, nextState) {
-  console.log(nextprops.airQ);
-  if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextprops.airQ)){
-    return true;
-  } else {
-    return false;
+    if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextprops.airQ)){
+      return true;
+    } else {
+       return false;
+     }
   }
-   
-}
 
+  /**
+   * Updates the Legend's state.
+   * 
+   * @param {Object} airQ The new AirQuality Data.
+   */
   componentDidUpdate(airQ) {
     if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(airQ.airq)) {
-      console.log(airQ.airQ);
       this.setState({airQualityData : airQ.airQ});
       this.removeLegend();
       this.createLegend();
     }      
   }
+
   /**
-   * Creates a legend.
+   * Creates a legend when the component is mounted.
    */
   componentDidMount() {
     this.createLegend();
   }
+
+  /**
+   * Creates the content of the Legend component.
+   */
   createLegend()  {
     legend = L.control({ position: "bottomleft" });
     /**
@@ -84,6 +102,9 @@ class Legend extends MapControl {
     legend.addTo(map);
   }
   
+  /**
+   * Removes the legend.
+   */
   removeLegend()  {
     const {map} = this.props.leaflet;
     map.removeControl(legend); 

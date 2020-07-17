@@ -29,8 +29,8 @@
     "humidity" : 
     {
         "name" : "humidity",
-        "primaryColor" : "#286ab4",
-        "secondaryColor" : "#eaa21a",
+        "primaryColor" : "#eaa21a",
+        "secondaryColor" : "#286ab4",
         "average" : "75",
         "variance" : "25",
         "unitOfMeasurement" : "%"

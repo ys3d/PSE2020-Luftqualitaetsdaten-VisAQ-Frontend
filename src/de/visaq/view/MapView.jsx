@@ -17,7 +17,11 @@ export default class MapView extends React.Component {
   builder = createRef();
   legend = createRef();
 
-  /*with props its possible to initalize the map with different map properties*/
+  /**
+   * Sole constructor of the class. Sets the starting Viewpoint on Augsburg.
+   * 
+   * @param {Object} props The component properties
+   */
   constructor(props) {
     super(props);
     this.state = ({
@@ -28,36 +32,47 @@ export default class MapView extends React.Component {
       airQualityData: props.airQ
     });
   }
-  //legend : Legend => props
-  /*
-  componentDidMount() {
-    const map = this.mapRef.current.leafletElement;
-    const legend = Legend;
-    this.plugin.current.appendChild(legend);
-
-  }
-  */
+ 
+  /**
+   * Decides whether the component should update. 
+   * Returns true if the state of AirQualityData changed in the parent component, false otherwise.
+   * 
+   * @param {Object} nextprops The properties
+   * @param {Object} nextState The new state
+   */
  shouldComponentUpdate(nextprops, nextState) {
-  console.log(nextprops.airQ);
-  if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextprops.airQ)){
-    return true;
-  } else {
-    return false;
+  	if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextprops.airQ)){
+      return true;
+    } else {
+      return false;
+    }  
   }
-   
-}
 
+  /**
+   * Changes the airQualityData state of the component. 
+   * 
+   * @param {Object} airQ The AirQualityData
+   */
   componentDidUpdate(airQ) {
     if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(airQ.airq)) {
       console.log(airQ.airQ);
       this.setState({airQualityData : airQ.airQ});
     }      
   }
+
+  /**
+   * Changes the bounds state of the component.
+   * 
+   * @param {Object} event 
+   */
   onMove(event) {
-    //this.setState({bounds : event.target.getBounds()});
+    this.setState({bounds : event.target.getBounds()});
+    console.log(this.state.bounds);
   }
 
-
+  /**
+   * Renders the component. Adds OverlayBuilder and Legend as Children.
+   */
   render() {
       return (
         <Map 
