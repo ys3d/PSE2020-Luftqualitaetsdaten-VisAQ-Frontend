@@ -21,9 +21,6 @@ i18n
 .on('languageChanged', function(lng) {
   if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
     document.cookie= 'Language=' + lng;
-    console.log('WHY')
-  } else {
-    document.cookie= 'Language=de' 
   }
 })
 
@@ -31,9 +28,9 @@ i18n
     lng: 'de',
     resources,
     languages: ['de','en'],
-    fallbackLng: 'de',
+    fallbackLng: false,
     debug: true,
-    load: 'current',
+    //load: 'current',
 
     interpolation: {
       escapeValue: false,
