@@ -1,3 +1,4 @@
+
 import React, { createRef, Component } from 'react';
 import { Map, TileLayer } from 'react-leaflet';
 import L from 'leaflet';
@@ -6,7 +7,7 @@ import OverlayBuilder from './overlayfactory/OverlayBuilder';
 import Legend from './elements/map/Legend';
 import request from "../controller/Request";
 import Thing from "../model/Thing";
-import AirQualityData, { getName } from './elements/airquality/AirQualityData'
+import { getInitialProps } from 'react-i18next';
 
 /**
  * Class that contains the MapView.
@@ -21,26 +22,36 @@ export default class MapView extends Component {
             lng: 10.89779,
             zoom: 13,
             bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
-            airQualityData: "",
+            airQualityData: props.airQ,
             things: []
         };
     }
-
-
-    componentWillMount() {
-        this.setState({ airQualityData: getName() });
+  
+    /**
+    * Decides whether the component should update. 
+    * Returns true if the state of AirQualityData changed in the parent component, false otherwise.
+    * 
+    * @param {Object} nextprops The properties
+    * @param {Object} nextState The new state
+    */
+    shouldComponentUpdate(nextprops, nextState) {
+  	  if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextprops.airQ)){
+        return true;
+      } else {
+        return false;
+      }  
     }
 
-    componentDidMount() {
-    }
-
-    componentWillUnmount() {
-    }
-
-    static componentDidUpdate() {
-        if (!this.state.airQualityData.localeCompare(getName())) {
-            this.setState({ airQualityData: getName() });
-        }
+    /**
+     * Changes the airQualityData state of the component. 
+     * 
+     * @param {Object} airQ The AirQualityData
+     */
+    componentDidUpdate(airQ) {
+      if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(airQ.airq)) {
+        console.log(airQ.airQ);
+        this.setState({airQualityData : airQ.airQ});
+      }      
     }
 
     onMove(event) {
@@ -56,30 +67,24 @@ export default class MapView extends Component {
             });
         });
     }
-
-    onClick(event) {
-    }
-
     render() {
         return (
-            <div>
-                <Map
-                    center={[this.state.lat, this.state.lng]}
-                    zoom={this.state.zoom}
-                    style={{ width: '100%', height: '100vh' }}
-                    boundsOptions={{ padding: [50, 50] }}
-                    ref={this.mapRef}
-                    onMoveEnd={this.onMove.bind(this)}
-                    onClick={this.onClick.bind(this)}
-                >
-                    <TileLayer
-                        attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    <OverlayBuilder mapState={this.state} />
-                    <Legend />
-                </Map>
-            </div>
+          <Map 
+            center={[this.state.lat, this.state.lng]} 
+            zoom={this.state.zoom} 
+            style={{ width: '100%', height: '100vh'}}
+            boundsOptions={{padding: [50, 50]}}
+            ref = {this.mapRef}
+            onMoveEnd={this.onMove.bind(this)}
+          >
+            <TileLayer
+             attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <OverlayBuilder mapState={this.state} />
+             <Legend airQ = {this.state.airQualityData}
+             />
+         </Map>
         );
-    }
+     }
 }

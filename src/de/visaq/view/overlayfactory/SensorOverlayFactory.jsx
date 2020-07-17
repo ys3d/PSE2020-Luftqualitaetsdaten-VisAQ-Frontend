@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import L, { bounds, } from 'leaflet';
 import { render } from 'react-dom';
+
 import { CircleMarker, LatLngBounds, Map, MapLayer, Popup, Marker, LayerGroup } from 'react-leaflet';
 import Gradient from '../elements/theme/Gradient';
 
@@ -23,7 +24,7 @@ const SensorOverlayFactory = (props) => {
             key={index}
             center={[sensor.locations[0].location.y, sensor.locations[0].location.x]}
             opacity='0'
-            fillColor={Gradient(80)}
+            fillColor={Gradient(80, this.props.airQ)}
             fillOpacity='0.8'
             radius={10}
             onClick={onCircleClick.bind(sensor)}
@@ -32,6 +33,7 @@ const SensorOverlayFactory = (props) => {
     ));
     return <Fragment>{markers}</Fragment>
 }
+
 
 export default SensorOverlayFactory;
 
