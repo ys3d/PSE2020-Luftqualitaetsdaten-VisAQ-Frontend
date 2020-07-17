@@ -1,10 +1,12 @@
 import React,{ createRef} from 'react';
-import {Map, TileLayer} from 'react-leaflet';
+import {Map, TileLayer, withLeaflet, Popup} from 'react-leaflet';
 import L from 'leaflet';
 import "./MapView.css";
 import OverlayBuilder from './overlayfactory/OverlayBuilder';
 import Legend from './elements/map/Legend';
+import { ReactLeafletSearch } from "react-leaflet-search";
 import { getInitialProps } from 'react-i18next';
+
 
 
 
@@ -13,10 +15,6 @@ import { getInitialProps } from 'react-i18next';
  */
 export default class MapView extends React.Component {
   mapRef = createRef();  
-  plugin = createRef();
-  builder = createRef();
-  legend = createRef();
-
   /**
    * Sole constructor of the class. Sets the starting Viewpoint on Augsburg.
    * 
@@ -27,7 +25,7 @@ export default class MapView extends React.Component {
     this.state = ({
       lat: 48.3705449,
       lng: 10.89779,
-      zoom: 13,
+      zoom: 12,
       bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
       airQualityData: props.airQ
     });
@@ -70,11 +68,23 @@ export default class MapView extends React.Component {
     console.log(this.state.bounds);
   }
 
+  searchPopup(info) {
+    return (
+      <Popup>
+      <div>
+        <p>I am a popUp</p>
+      </div>
+    </Popup>
+
+    )
+  }  
+
   /**
    * Renders the component. Adds OverlayBuilder and Legend as Children.
    */
   render() {
-      return (
+    const ReactLeafletSearchComponent = withLeaflet(ReactLeafletSearch);
+      return ( 
         <Map 
           center={[this.state.lat, this.state.lng]} 
           zoom={this.state.zoom} 
@@ -91,6 +101,18 @@ export default class MapView extends React.Component {
            />
            <Legend airQ = {this.state.airQualityData}
            />
+           <ReactLeafletSearchComponent
+              className="custom-style"
+              position="topleft"
+              provider ="OpenStreetMap"
+              providerOptions={{region:"de"}}
+              inputPlaceholder="Search"
+              zoom={12}
+              showMarker={false}
+              showPopUp={false}
+              closeResultsOnClick={true}
+              openSearchOnLoad={true}
+          />
        </Map>
       );
    }

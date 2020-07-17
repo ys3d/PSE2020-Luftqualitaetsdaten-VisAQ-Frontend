@@ -11515,6 +11515,11 @@ react-leaflet-bounds@^0.0.0:
   dependencies:
     tslib "^1.7.1"
 
+react-leaflet-search@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-leaflet-search/-/react-leaflet-search-1.0.3.tgz#4b4b19439a0ef16d5c64d3ad431c1b9f1a96297d"
+  integrity sha512-zM8Pd08keI8CLr+QCa+Zq3tw9jcH5y5hqFBZLIJpHmoOoSGl3dW+Zhmadqb4ezMKRb+VsDaIj8w+pEWRePWYLw==
+
 react-leaflet@^2.7.0:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-2.7.0.tgz#0e0e452a4903029f0bb564771eab8cf9db8e4517"
