@@ -84,35 +84,7 @@ class Navigationbar extends React.Component {
     }
      
   }
-
-
-  onClickParticulateMatter()  {
-    var particulateMatter = new AirQualityData(data.particulateMatter);
-    if(!(JSON.stringify(particulateMatter) === JSON.stringify(this.state.airQualityData)))  {
-       this.setState({airQualityData : particulateMatter});
-    }
-  }
-
-  onClickHumidity()  {
-    var humidity = new AirQualityData(data.humidity);
-    if(!(JSON.stringify(humidity) === JSON.stringify(this.state.airQualityData)))  {
-       this.setState({airQualityData : humidity});
-    }
-  }
-  onClickTemperature()  {
-    var temperature = new AirQualityData(data.temperature);
-    if(!(JSON.stringify(temperature) === JSON.stringify(this.state.airQualityData)))  {
-       this.setState({airQualityData : temperature});
-    }
-  }
-
-  onClickAirPressure()  {
-    var airPressure = new AirQualityData(data.airPressure);
-    if(!(JSON.stringify(airPressure) === JSON.stringify(this.state.airQualityData)))  {
-       this.setState({airQualityData : airPressure});
-    }
-  }
-
+  
   render() {
     const { t } = this.props;
     return (
