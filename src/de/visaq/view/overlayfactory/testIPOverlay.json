@@ -1,0 +1,20 @@
+{   
+    "sensors" : [
+        {
+            "name" : "sensorname1",
+            "coordinates" : [48.39,10.89779],
+            "particulate_matter" : 0.07,
+            "air_pressure" : 0.03,
+            "temperature" : 30,
+            "humidity" : 4
+        },
+        {
+            "name" : "sensorname2",
+            "coordinates" : [48.38,10.96],
+            "particulate_matter" : 0.07,
+            "air_pressure" : 0.03,
+            "temperature" : 30,
+            "humidity" : 4
+        }
+    ]
+}   

@@ -1,5 +1,5 @@
 import React, { Component, event } from 'react'
-import { Button, Modal, OverlayTrigger, Popover, Tooltip, Nav, NavItem, Row, Col, FormGroup, FieldGroup, Checkbox } from 'react-bootstrap'
+import { Button, Modal, ModalTitle, Popover, Tooltip, Nav, NavItem, Row, Col, FormGroup, FieldGroup, Checkbox } from 'react-bootstrap'
 import i18next from 'i18next';
 import {withTranslation} from 'react-i18next';
 
@@ -47,7 +47,10 @@ class PopupCauses extends Component {
       <div>
         <span onClick={this.open.bind(this, this.MODAL_TYPE_CAUSES)}>{t('causesPM')}</span>
 
-        <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
+        <Modal size="lg" show={this.state.showModal} onHide={this.close.bind(this)}>
+          <ModalTitle center>
+            {t('causesPM')}
+          </ModalTitle>
           <Modal.Body>
           HALLOO
           </Modal.Body>

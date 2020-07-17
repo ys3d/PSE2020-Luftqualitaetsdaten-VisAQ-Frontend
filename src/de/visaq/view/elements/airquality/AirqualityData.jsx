@@ -1,49 +1,62 @@
-import React from 'react';
 
-var primaryColor;
-var secondaryColor;
-var name;
-
-    export function setHumidity() {
-        name = 'Humidity';
-        //blue
-        primaryColor = '#286ab4';
-        //yellow
-        secondaryColor = '#eaa21a';
+/**
+ * Contains the content of an air quality data.
+ */
+export default class AirQualityData {
+    /**
+     * Sole constructor of the class. Initializes the classes state.
+     * 
+     * @param {Object} props The class properties
+     */
+    constructor(props)  {
+        this.name = props.name;
+        this.primaryColor = props.primaryColor;
+        this.secondaryColor = props.secondaryColor;
+        this.average = parseInt(props.average);
+        this.variance = parseInt(props.variance);
+        this.unitOfMeasurement = props.unitOfMeasurement;
+    }
+    
+    /**
+     * Returns the name.
+     */
+    getName() {
+        return this.name;
+    }
+    
+    /**
+     * Returns the primary color.
+     */
+    getPrimaryColor() {
+        return this.primaryColor;
     }
 
-    export function setTemperature() {
-        name = 'Temperature';
-        //blue
-        primaryColor = '#1c99d6';
-        //red
-        secondaryColor = '#d20000';
+    /**
+     * Returns the secondary color.
+     */
+    getSecondaryColor() {
+        return this.secondaryColor;
+    }
+    
+    /**
+     * Returns the average.
+     */
+    getAverage() {
+        return this.average;
+    }
+    
+    /**
+     * Returns the variance.
+     */
+    getVariance()   {
+        return this.variance;
+    }
+    
+    /**
+     * Returns the unit of measurement.
+     */
+    getUnitOfMeasurement() {
+        return this.unitOfMeasurement;
     }
 
-    export function setParticulateMatter() {
-        name = 'ParticulateMatter';
-        //grün
-        primaryColor = '#11d61e';
-        //red
-        secondaryColor = '#d20000';
-    }
-
-    export function setAirPressure() {
-        name = 'Airpressure';
-        //blue
-        primaryColor = '#286ab4';
-        //yellow
-        secondaryColor = '#eaa21a';
-    }
-
-    export function getName() {
-        return name;
-    }
-
-    export function getPrimaryColor() {
-        return primaryColor;
-    }
-
-    export function getSecondaryColor() {
-        return secondaryColor;
-    }
+}
