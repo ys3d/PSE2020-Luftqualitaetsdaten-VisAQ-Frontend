@@ -1,11 +1,12 @@
 import React, { createRef, Component } from 'react';
-import { Map, TileLayer } from 'react-leaflet';
+import { Map, TileLayer, withLeaflet } from 'react-leaflet';
 import L from 'leaflet';
 import "./MapView.css";
 import OverlayBuilder from './overlayfactory/OverlayBuilder';
 import Legend from './elements/map/Legend';
 import request from "../controller/Request";
 import Thing from "../model/Thing";
+import { ReactLeafletSearch } from "react-leaflet-search";
 import { getInitialProps } from 'react-i18next';
 
 /**
@@ -71,6 +72,7 @@ export default class MapView extends Component {
         });
     }
     render() {
+      const ReactLeafletSearchComponent = withLeaflet(ReactLeafletSearch)
         return (
           <Map 
             center={[this.state.lat, this.state.lng]} 
