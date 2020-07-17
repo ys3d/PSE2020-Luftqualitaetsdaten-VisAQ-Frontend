@@ -8,7 +8,7 @@
     "reasonsPM": "Reasons for air pollution",
 	"diy": "DIY instructions",
 	"historical": "Historical Data",
-	"causesPM": "Consequences of air pollution",
+	"consequencesPM": "Consequences of air pollution",
 	"smartAQNet": "SmartAQNet",
 	"furtherFunc":"More Functions",
 	"expert-Mode": "Expert-Mode",
@@ -16,5 +16,7 @@
 	"standard": "Standard",
 	"colorScheme": "Colors",
 	"officalSensor": "Offical Sensors",
-	"nonOfficalSensor": "Homemade sensors"
+	"nonOfficalSensor": "Homemade sensors",
+	"reasons": "Air pollution occurs when harmful or excessive quantities of substances are introduced into Earth's atmosphere. Air pollution can have different causes. On one side there are natural causes like natural disasters. On the other side there are man-made causes of air pollution like traffic or industrial processes.",
+	"consequences": "The consequences of air pollution are manifold. The environment is encumbered with consequences like climate change. Human beings are mainly encumbered with respiratory disease."
 }

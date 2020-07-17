@@ -52,7 +52,7 @@ class PopupReasons extends Component {
             {t('reasonsPM')}
           </ModalTitle>
           <Modal.Body>
-          Ez 360 Noscope
+            {t('reasons')}
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.close.bind(this)}>Close</Button>
