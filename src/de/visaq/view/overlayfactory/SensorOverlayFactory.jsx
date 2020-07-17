@@ -24,7 +24,7 @@ const SensorOverlayFactory = (props) => {
             key={index}
             center={[sensor.locations[0].location.y, sensor.locations[0].location.x]}
             opacity='0'
-            fillColor={Gradient(80, this.props.airQ)}
+            fillColor={Gradient(80, props.airQ)}
             fillOpacity='0.8'
             radius={10}
             onClick={onCircleClick.bind(sensor)}

@@ -37,7 +37,11 @@ export default class MapView extends Component {
     shouldComponentUpdate(nextprops, nextState) {
   	  if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextprops.airQ)){
         return true;
-      } else {
+      } 
+      else if(this.state.bounds !== nextState.bounds){
+        return true;
+      }
+      else {
         return false;
       }  
     }
@@ -57,7 +61,7 @@ export default class MapView extends Component {
     onMove(event) {
         var newBounds = event.target.getBounds();
         this.setState({ bounds: newBounds }, () => {
-            request("http://localhost:8080/api/thing/all/square", false, {
+            request("http://localhost:8081/api/thing/all/square", false, {
                 "y1": newBounds.getSouthWest().lat,
                 "x1": newBounds.getSouthWest().lng,
                 "y2": newBounds.getNorthEast().lat,
