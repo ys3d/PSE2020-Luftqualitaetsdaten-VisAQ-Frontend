@@ -5,8 +5,7 @@
  * @param {number} measurement      The measured value of the current AirQualityData
 */
 const Gradient = (measurement, airQ) =>  {
-    const airQualityData = airQ.airQ;
-
+    const airQualityData = airQ;
     var minValue = airQualityData.getAverage() - airQualityData.getVariance();
     var maxValue = airQualityData.getAverage() + airQualityData.getVariance();
 

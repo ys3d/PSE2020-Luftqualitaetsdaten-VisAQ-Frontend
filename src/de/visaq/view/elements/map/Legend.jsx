@@ -1,31 +1,51 @@
-import { MapControl } from "react-leaflet";
+import { withLeaflet, MapControl } from "react-leaflet";
 import Gradient from '../theme/Gradient';
 import L from "leaflet";
 import './Legend.css';
 
-
-
-
+let param;
+var legend;
 /**
  * The class Legend contains the Legend for the map. 
  * Its color scheme fits the Layers of the map.
  */
 class Legend extends MapControl {
-  
+ 
   constructor(props)  {
     super(props);
-    this.state = ({
-      airQualityData: props
-    });
+    this.state = {  
+      airQualityData : props.airQ};
+    this.createLeafletElement();
   }
-  
+  createLeafletElement(){
+
+  }
+  shouldComponentUpdate(nextprops, nextState) {
+  console.log(nextprops.airQ);
+  if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextprops.airQ)){
+    return true;
+  } else {
+    return false;
+  }
+   
+}
+
+  componentDidUpdate(airQ) {
+    if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(airQ.airq)) {
+      console.log(airQ.airQ);
+      this.setState({airQualityData : airQ.airQ});
+      this.removeLegend();
+      this.createLegend();
+    }      
+  }
   /**
    * Creates a legend.
    */
   componentDidMount() {
-    alert(this.state.airQualityData.getAverage());
-    const legend = L.control({ position: "bottomleft" });
-
+    this.createLegend();
+  }
+  createLegend()  {
+    legend = L.control({ position: "bottomleft" });
     /**
      * Creates the Legend content.
      */
@@ -63,6 +83,10 @@ class Legend extends MapControl {
     const { map } = this.props.leaflet;
     legend.addTo(map);
   }
+  
+  removeLegend()  {
+    const {map} = this.props.leaflet;
+    map.removeControl(legend); 
+  }
 }
-
-export default Legend;
+export default withLeaflet(Legend);

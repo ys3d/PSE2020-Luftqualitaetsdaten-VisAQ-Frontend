@@ -9,7 +9,7 @@ import * as ipdata from './testIPOverlay.json';
 import AirQualityData from '../elements/airquality/AirQualityData';
 
 const OverlayBuilder = ({bounds, airQ}) =>  {
-    let airQualityData = airQ.airQ;
+    let airQualityData = airQ;
     return (
         <div>
         <Fragment>

@@ -18,7 +18,7 @@ const SensorOverlaysFactory = ({props , airQ}) =>  {
         fillColor = {Gradient(sensor.particulate_matter, airQ)}
         fillOpacity = '0.8'
         radius = {10}
-        onClick ={onCirleClick.bind(sensor)}
+        onClick ={onCirleClick.bind(this)}
         >
         </CircleMarker>
     ));
@@ -28,5 +28,5 @@ const SensorOverlaysFactory = ({props , airQ}) =>  {
 export default SensorOverlaysFactory;
 
 function onCirleClick(props) {
-    alert(props.name);
+    console.log(props);
 }

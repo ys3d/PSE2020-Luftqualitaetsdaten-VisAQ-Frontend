@@ -57,11 +57,6 @@ class Navigationbar extends React.Component {
     this.state = { isOpen: false, 
                     airQualityData : new AirQualityData(data.particulateMatter)};
   }
-  componentWillMount()  {
-    
-    //mapView = new MapView()
-    //mapView.componentWillMount(airQualityData);
-  }
 
   handleOpen = () => {
     this.setState({ isOpen: true })
@@ -79,25 +74,44 @@ class Navigationbar extends React.Component {
       document.getElementById(id).checked = true;
   }
   
+  shouldComponentUpdate(nextprops, nextState) {
+    console.log(nextprops.airQ);
+    if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextprops.airQ)){
+      console.log(nextprops.airQ);
+      return true;
+    } else {
+      return false;
+    }
+     
+  }
+
+
   onClickParticulateMatter()  {
-    //airQualityData = new AirQualityData(data.particulateMatter);
-    //mapView.componentDidUpdate(airQualityData);
+    var particulateMatter = new AirQualityData(data.particulateMatter);
+    if(!(JSON.stringify(particulateMatter) === JSON.stringify(this.state.airQualityData)))  {
+       this.setState({airQualityData : particulateMatter});
+    }
   }
 
   onClickHumidity()  {
-    //airQualityData = new AirQualityData(data.humidity);
-    //mapView.componentDidUpdate(airQualityData);
+    var humidity = new AirQualityData(data.humidity);
+    if(!(JSON.stringify(humidity) === JSON.stringify(this.state.airQualityData)))  {
+       this.setState({airQualityData : humidity});
+    }
   }
   onClickTemperature()  {
-    //airQualityData = new AirQualityData(data.temperature);
-    //mapView.componentDidUpdate(airQualityData);
+    var temperature = new AirQualityData(data.temperature);
+    if(!(JSON.stringify(temperature) === JSON.stringify(this.state.airQualityData)))  {
+       this.setState({airQualityData : temperature});
+    }
   }
 
   onClickAirPressure()  {
-    //airQualityData = new AirQualityData(data.airPressure);
-    //mapView.componentDidUpdate(airQualityData);
+    var airPressure = new AirQualityData(data.airPressure);
+    if(!(JSON.stringify(airPressure) === JSON.stringify(this.state.airQualityData)))  {
+       this.setState({airQualityData : airPressure});
+    }
   }
-
 
   render() {
     const { t } = this.props;
@@ -119,16 +133,16 @@ class Navigationbar extends React.Component {
                   {t('search')}
                 </Button>
               </Form>
-              <Nav.Link onClick={() => this.onClickParticulateMatter()}>
+              <Nav.Link onClick={() => this.setState(state => ({airQualityData : new AirQualityData(data.particulateMatter)}))}>
                 {t('particulateMatter')}
               </Nav.Link>
-              <Nav.Link onClick={() => this.onClickHumidity()}>
+              <Nav.Link onClick={() => this.setState(state => ({airQualityData : new AirQualityData(data.humidity)}))}>
                 {t('humidity')}
               </Nav.Link>
-              <Nav.Link onClick={() => this.onClickTemperature()}>
+              <Nav.Link onClick={() => this.setState(state => ({airQualityData : new AirQualityData(data.temperature)}))}>
                 {t('temperature')}
               </Nav.Link>
-              <Nav.Link onClick={() => this.onClickAirPressure()}>
+              <Nav.Link onClick={() => this.setState(state => ({airQualityData : new AirQualityData(data.airPressure)}))}>
                 {t('airPressure')}
               </Nav.Link>
             </Nav>

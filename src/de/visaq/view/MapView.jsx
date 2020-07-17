@@ -1,52 +1,65 @@
-import React,{ createRef, Component } from 'react';
+import React,{ createRef} from 'react';
 import {Map, TileLayer} from 'react-leaflet';
 import L from 'leaflet';
 import "./MapView.css";
 import OverlayBuilder from './overlayfactory/OverlayBuilder';
 import Legend from './elements/map/Legend';
-import AirQualityData from './elements/airquality/AirQualityData';
+import { getInitialProps } from 'react-i18next';
+
 
 
 /**
  * Class that contains the MapView.
  */
-export default class MapView extends Component {
+export default class MapView extends React.Component {
+  mapRef = createRef();  
+  plugin = createRef();
+  builder = createRef();
+  legend = createRef();
+
   /*with props its possible to initalize the map with different map properties*/
   constructor(props) {
     super(props);
-    this.mapRef = createRef();  
     this.state = ({
       lat: 48.3705449,
       lng: 10.89779,
       zoom: 13,
       bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
-      airQualityData: props
+      airQualityData: props.airQ
     });
   }
-
-
-  componentWillMount() {
-
-  }
+  //legend : Legend => props
+  /*
   componentDidMount() {
+    const map = this.mapRef.current.leafletElement;
+    const legend = Legend;
+    this.plugin.current.appendChild(legend);
+
   }
-
-
-  componentWillUnmount() {
+  */
+ shouldComponentUpdate(nextprops, nextState) {
+  console.log(nextprops.airQ);
+  if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextprops.airQ)){
+    return true;
+  } else {
+    return false;
   }
+   
+}
 
-  componentDidUpdate(props) {
-    if(!(props === this.state.airQualityData))  {
-      this.setState({airQualityData : props});
-    }
+  componentDidUpdate(airQ) {
+    if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(airQ.airq)) {
+      console.log(airQ.airQ);
+      this.setState({airQualityData : airQ.airQ});
+    }      
   }
   onMove(event) {
-    this.setState({bounds : event.target.getBounds()});
+    //this.setState({bounds : event.target.getBounds()});
   }
- 
+
+
   render() {
       return (
-        <div>
         <Map 
           center={[this.state.lat, this.state.lng]} 
           zoom={this.state.zoom} 
@@ -61,9 +74,9 @@ export default class MapView extends Component {
           />
           <OverlayBuilder bounds = {this.state.bounds} airQ ={this.state.airQualityData}
            />
-           <Legend airQualityData = {this.state.airQualityData}/>
-       </Map> 
-       </div>
+           <Legend airQ = {this.state.airQualityData}
+           />
+       </Map>
       );
    }
 }
