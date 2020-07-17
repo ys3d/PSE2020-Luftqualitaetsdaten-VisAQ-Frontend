@@ -1,0 +1,38 @@
+ {
+    "particulateMatter" : 
+    {
+        "name" : "particulate matter",
+        "primaryColor" : "#25992c",
+        "secondaryColor" : "#d20000",
+        "average" : "40",
+        "variance" : "10",
+        "unitOfMeasurement" : "µg/m³"
+    },
+    "airPressure" : 
+    {
+        "name" : "air pressure",
+        "primaryColor" : "#286ab4",
+        "secondaryColor" : "#eaa21a",
+        "average" : "1013.25",
+        "variance" : "40",
+        "unitOfMeasurement" : "hPA"
+    },
+    "temperature" : 
+    {
+        "name" : "temperature",
+        "primaryColor" : "#1c99d6",
+        "secondaryColor" : "#d20000",
+        "average" : "16.8",
+        "variance" : "30",
+        "unitOfMeasurement" : "°C"
+    },
+    "humidity" : 
+    {
+        "name" : "humidity",
+        "primaryColor" : "#eaa21a",
+        "secondaryColor" : "#286ab4",
+        "average" : "75",
+        "variance" : "25",
+        "unitOfMeasurement" : "%"
+    }
+ }

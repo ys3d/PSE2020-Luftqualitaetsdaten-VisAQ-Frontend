@@ -1,15 +1,14 @@
-import {setParticulateMatter, getAverage, getPrimaryColor, getSecondaryColor, getVariance} from '../airquality/AirQualityData';
 
 /**
  * Gradient calculates the Color that is shown on the map.
  * 
  * @param {number} measurement      The measured value of the current AirQualityData
 */
-const Gradient = (measurement) =>  {
-    
-    var minValue = getAverage() - getVariance();
-    var maxValue = getAverage() + getVariance();
-    
+const Gradient = (measurement, airQ) =>  {
+    const airQualityData = airQ;
+    var minValue = airQualityData.getAverage() - airQualityData.getVariance();
+    var maxValue = airQualityData.getAverage() + airQualityData.getVariance();
+
     var at;
     if (measurement > maxValue) {
         at = 1;
@@ -22,8 +21,8 @@ const Gradient = (measurement) =>  {
     }
     
     
-    var min = rgbToHsl(hexToRgb(getPrimaryColor()));
-    var max = rgbToHsl(hexToRgb(getSecondaryColor()));
+    var min = rgbToHsl(hexToRgb(airQualityData.getPrimaryColor()));
+    var max = rgbToHsl(hexToRgb(airQualityData.getSecondaryColor()));
 
     var linearInterpolated = [];
 
@@ -31,7 +30,6 @@ const Gradient = (measurement) =>  {
     for (var i = 0; i < 3; i++) {
         linearInterpolated[i] = at * max[i] + (1.000 - at) * min[i];
     }
-
     return rgbToHex(hslToRgb(linearInterpolated));
 }
 

@@ -3,12 +3,14 @@ import { Navbar, NavDropdown, Form, FormCheck, FormControl, NavbarToggler, Colla
    NavLink, NavbarBrand, DropdownToggle, Dropdown, Button, DropdownMenu, ButtonGroup} from 'react-bootstrap';
 import styled from 'styled-components';
 import PopupReasons from './PopupReasons';
+import { BrowserRouter as Router } from "react-router-dom";
 import PopupCauses from './PopupCauses';
 import CookieNotice from '../CookieNotice';
 import MapView from '../../MapView';
 import i18next from 'i18next';
 import {withTranslation} from 'react-i18next';
-import {setTemperature, setHumidity, setAirPressure, setParticulateMatter} from '../airquality/AirQualityData';
+import AirQualityData from '../airquality/AirQualityData';
+import * as data from '../../../../../resources/AirQualityData.json'
 
 
 const Styles = styled.div`
@@ -45,15 +47,15 @@ const Styles = styled.div`
 
 `;
 
+
+
 /* Constructs the Navigationbar with all functions */
 class Navigationbar extends React.Component {
   
   constructor(props) {
     super(props)
-    this.state = { isOpen: false }
-  }
-  componentWillMount()  {
-    setParticulateMatter();
+    this.state = { isOpen: false, 
+                    airQualityData : new AirQualityData(data.particulateMatter)};
   }
 
   handleOpen = () => {
@@ -71,30 +73,51 @@ class Navigationbar extends React.Component {
       }
       document.getElementById(id).checked = true;
   }
+  
+  shouldComponentUpdate(nextprops, nextState) {
+    console.log(nextprops.airQ);
+    if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextprops.airQ)){
+      console.log(nextprops.airQ);
+      return true;
+    } else {
+      return false;
+    }
+     
+  }
+
 
   onClickParticulateMatter()  {
-    setParticulateMatter();
-    MapView.componentDidUpdate()
+    var particulateMatter = new AirQualityData(data.particulateMatter);
+    if(!(JSON.stringify(particulateMatter) === JSON.stringify(this.state.airQualityData)))  {
+       this.setState({airQualityData : particulateMatter});
+    }
   }
 
   onClickHumidity()  {
-    setHumidity();
-    MapView.componentDidUpdate()
+    var humidity = new AirQualityData(data.humidity);
+    if(!(JSON.stringify(humidity) === JSON.stringify(this.state.airQualityData)))  {
+       this.setState({airQualityData : humidity});
+    }
   }
   onClickTemperature()  {
-    setTemperature();
-    MapView.componentDidUpdate()
+    var temperature = new AirQualityData(data.temperature);
+    if(!(JSON.stringify(temperature) === JSON.stringify(this.state.airQualityData)))  {
+       this.setState({airQualityData : temperature});
+    }
   }
 
   onClickAirPressure()  {
-    setAirPressure();
-    MapView.componentDidUpdate()
+    var airPressure = new AirQualityData(data.airPressure);
+    if(!(JSON.stringify(airPressure) === JSON.stringify(this.state.airQualityData)))  {
+       this.setState({airQualityData : airPressure});
+    }
   }
-
 
   render() {
     const { t } = this.props;
     return (
+      <React.Fragment>
+      <Router>
       <Styles>
       <CookieNotice />
         <Navbar expand='lg' bg='light' style={{width: '100%', height:'20%'}} >
@@ -110,16 +133,16 @@ class Navigationbar extends React.Component {
                   {t('search')}
                 </Button>
               </Form>
-              <Nav.Link onClick={() => this.onClickParticulateMatter()}>
+              <Nav.Link onClick={() => this.setState(state => ({airQualityData : new AirQualityData(data.particulateMatter)}))}>
                 {t('particulateMatter')}
               </Nav.Link>
-              <Nav.Link onClick={() => this.onClickHumidity()}>
+              <Nav.Link onClick={() => this.setState(state => ({airQualityData : new AirQualityData(data.humidity)}))}>
                 {t('humidity')}
               </Nav.Link>
-              <Nav.Link onClick={() => this.onClickTemperature()}>
+              <Nav.Link onClick={() => this.setState(state => ({airQualityData : new AirQualityData(data.temperature)}))}>
                 {t('temperature')}
               </Nav.Link>
-              <Nav.Link onClick={() => this.onClickAirPressure()}>
+              <Nav.Link onClick={() => this.setState(state => ({airQualityData : new AirQualityData(data.airPressure)}))}>
                 {t('airPressure')}
               </Nav.Link>
             </Nav>
@@ -170,6 +193,10 @@ class Navigationbar extends React.Component {
           </Navbar.Collapse>
         </Navbar>
       </Styles>
+     <MapView airQ = {this.state.airQualityData}
+     />
+     </Router>
+    </React.Fragment>
     )
   }
 }
