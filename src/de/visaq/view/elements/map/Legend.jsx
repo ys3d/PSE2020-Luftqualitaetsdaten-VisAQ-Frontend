@@ -2,8 +2,9 @@ import { withLeaflet, MapControl } from "react-leaflet";
 import Gradient from '../theme/Gradient';
 import L from "leaflet";
 import './Legend.css';
-
+  
 var legend;
+
 /**
  * The class Legend contains the Legend for the map. 
  * Its color scheme fits the Layers of the map.
@@ -110,4 +111,5 @@ class Legend extends MapControl {
     map.removeControl(legend); 
   }
 }
+
 export default withLeaflet(Legend);

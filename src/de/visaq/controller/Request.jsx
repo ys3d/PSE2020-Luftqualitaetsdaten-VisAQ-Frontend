@@ -10,6 +10,15 @@ export default function request(url, relative, params, model) {
     return fetch(url, requestOptions).then(response => {
         return response.json();
     }).then(data => {
+        if (Array.isArray(data)) {
+            var models = new Array(data.length);
+
+            data.forEach((entry, index) => {
+                models[index] = new model(entry);
+            });
+
+            return models;
+        }
         return new model(data);
     });
 };

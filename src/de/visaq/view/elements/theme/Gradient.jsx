@@ -8,7 +8,6 @@ const Gradient = (measurement, airQ) =>  {
     const airQualityData = airQ;
     var minValue = airQualityData.getAverage() - airQualityData.getVariance();
     var maxValue = airQualityData.getAverage() + airQualityData.getVariance();
-
     var at;
     if (measurement > maxValue) {
         at = 1;
@@ -30,6 +29,7 @@ const Gradient = (measurement, airQ) =>  {
     for (var i = 0; i < 3; i++) {
         linearInterpolated[i] = at * max[i] + (1.000 - at) * min[i];
     }
+
     return rgbToHex(hslToRgb(linearInterpolated));
 }
 

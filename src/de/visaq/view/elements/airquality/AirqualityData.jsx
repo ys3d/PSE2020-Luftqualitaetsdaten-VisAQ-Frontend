@@ -1,4 +1,3 @@
-
 /**
  * Contains the content of an air quality data.
  */
@@ -58,5 +57,4 @@ export default class AirQualityData {
     getUnitOfMeasurement() {
         return this.unitOfMeasurement;
     }
-
 }
