@@ -1,0 +1,20 @@
+{
+	"Suchen": "Search",
+	"help": "Help",
+	"humidity": "Humidity",
+	"particulateMatter": "Particulate Matter",
+	"temperature": "Temperature",
+	"airPressure": "Air Pressure",
+    "reasonsPM": "Reasons for air pollution",
+	"diy": "DIY instructions",
+	"historical": "Historical Data",
+	"causesPM": "Consequences of air pollution",
+	"smartAQNet": "SmartAQNet",
+	"furtherFunc":"More Functions",
+	"expert-Mode": "Expert-Mode",
+	"colorBlind": "Colorblind-Mode",
+	"standard": "Standard",
+	"colorScheme": "Colors",
+	"officalSensor": "Offical Sensors",
+	"nonOfficalSensor": "Homemade sensors"
+}

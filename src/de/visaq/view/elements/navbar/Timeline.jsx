@@ -1,22 +1,13 @@
 import React, { Component } from 'react';
-import { RangeInput } from '@bit/grommet.grommet.range-input';
+import { Nav, Navbar, Form, FormControl, NavDropdown, Button } from 'react-bootstrap';
 
 export default class extends Component {
-    state = { value: 5 }
-
     render() {
-        const { value } = this.state;
-        return (
-            <div>
-                <Timeline fixed="bottom" />
-                <RangeInput
-                    value={value}
-                    min={0}
-                    max={10}
-                    step={1}
-                    onChange={event => this.setState({ value: event.target.value })}
-                />
-            </div>
-        );
+        <Form>
+            <Form.Group controlId="formBasicRange">
+                <Form.Label>Range</Form.Label>
+                <Form.Control type="range" />
+            </Form.Group>
+        </Form>
     }
 }

@@ -1,0 +1,18 @@
+.navbar { background-color: #FFFF; }
+a, .navbar-nav, .navbar-dark .nav-link {
+  color: #0000;
+}
+.navbar-brand {
+  font-size: 1.4em;
+  color: #44c2d4;
+}
+.form-center {
+  position: absolute !important;
+  left: 25%;
+  right: 25%;
+}
+
+.nav-item:hover .dropdown-menu{
+display:block!important;
+width: 100%;
+}
