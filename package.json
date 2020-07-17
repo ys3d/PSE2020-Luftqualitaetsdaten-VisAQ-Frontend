@@ -6,7 +6,8 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "bootstrap": "^4.3.1",
+    "bootstrap": "^4.5.0",
+    "chart.js": "^2.9.3",
     "core-js": "^3.6.5",
     "expo-linear-gradient": "^8.2.1",
     "i18next": "^19.5.4",
@@ -18,7 +19,8 @@
     "popper.js": "1.16.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
-    "react-bootstrap": "^1.0.0-beta.14",
+    "react-bootstrap": "^1.2.1",
+    "react-chartjs-2": "^2.9.0",
     "react-cookie": "*",
     "react-dom": "^16.13.1",
     "react-i18next": "*",
@@ -26,6 +28,9 @@
     "react-leaflet-bounds": "^0.0.0",
     "react-leaflet-search": "^1.0.3",
     "react-native": "^0.62.2",
+    "react-offcanvas": "^0.4.0",
+    "react-overlays": "^4.0.0",
+    "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.4.1",
     "styled-components": "^4.3.2",
@@ -52,5 +57,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {}
 }

@@ -1,0 +1,13 @@
+{
+    "sensor": "Sensor:",
+    "description": "Description:",
+    "currently": "Current",
+    "historicalDevelopment": "Historical development",
+    "in": "in",
+    "airPressure": "Atmospheric pressure",
+    "airTemperature": "Air temperature",
+    "airHumidity": "Air humidity",
+    "particulateMatter": "Particulate matter",
+    "notFound": "The requested Sensor could not be found",
+    "location": "Location"
+}
