@@ -47,8 +47,6 @@ const Styles = styled.div`
 
 `;
 
-
-
 /* Constructs the Navigationbar with all functions */
 class Navigationbar extends React.Component {
   

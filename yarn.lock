@@ -5288,7 +5288,7 @@ defined@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/defined/-/defined-1.0.0.tgz#c98d9bcef75674188e110969151199e39b1fa693"
   integrity sha1-yY2bzvdWdBiOEQlpFRGZ45sfppM=
-
+  
 del@3.0.0, del@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/del/-/del-3.0.0.tgz#53ecf699ffcbcb39637691ab13baf160819766e5"
@@ -8886,6 +8886,14 @@ loud-rejection@^1.6.0:
     currently-unhandled "^0.4.1"
     signal-exit "^3.0.0"
 
+loud-rejection@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/loud-rejection/-/loud-rejection-1.6.0.tgz#5b46f80147edee578870f086d04821cf998e551f"
+  integrity sha1-W0b4AUft7leIcPCG0Eghz5mOVR8=
+  dependencies:
+    currently-unhandled "^0.4.1"
+    signal-exit "^3.0.0"
+
 lower-case@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/lower-case/-/lower-case-2.0.1.tgz#39eeb36e396115cc05e29422eaea9e692c9408c7"
@@ -9402,7 +9410,7 @@ minimalistic-crypto-utils@^1.0.0, minimalistic-crypto-utils@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/minimalistic-crypto-utils/-/minimalistic-crypto-utils-1.0.1.tgz#f6c00c1c0b082246e5c4d99dfb8c7c083b2b582a"
   integrity sha1-9sAMHAsIIkblxNmd+4x8CDsrWCo=
-
+  
 "minimatch@2 || 3", minimatch@3.0.4, minimatch@^3.0.0, minimatch@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
@@ -11557,6 +11565,7 @@ react-chartjs-2@^2.9.0:
   dependencies:
     lodash "^4.17.4"
     prop-types "^15.5.8"
+
 react-cookie@*:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/react-cookie/-/react-cookie-4.0.3.tgz#ba8e5ea0047c916516e1181a3ad394c9b7580b56"
@@ -11945,7 +11954,7 @@ recast@^0.11.17:
     esprima "~3.1.0"
     private "~0.1.5"
     source-map "~0.5.0"
-
+    
 recursive-copy@2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/recursive-copy/-/recursive-copy-2.0.6.tgz#d590f9eb5f165b96a1b80bc8f9cbcb5c6f9c89e9"
@@ -12845,7 +12854,7 @@ source-map-url@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/source-map-url/-/source-map-url-0.4.0.tgz#3e935d7ddd73631b97659956d55128e87b5084a3"
   integrity sha1-PpNdfd1zYxuXZZlW1VEo6HtQhKM=
-
+  
 source-map@0.5.7, source-map@^0.5.0, source-map@^0.5.6, source-map@~0.5.0:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
