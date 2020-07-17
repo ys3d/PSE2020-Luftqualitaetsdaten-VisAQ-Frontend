@@ -4,12 +4,12 @@ import { Navbar, NavDropdown, Form, FormCheck, FormControl, NavbarToggler, Colla
 import styled from 'styled-components';
 import PopupReasons from './PopupReasons';
 import PopupCauses from './PopupCauses';
+import Imprint from './Imprint';
 import CookieNotice from '../CookieNotice';
 import MapView from '../../MapView'
 import i18next from 'i18next';
 import {withTranslation} from 'react-i18next';
 import {setTemperature, setHumidity, setAirPressure, setParticulateMatter} from '../airquality/AirQualityData';
-
 
 const Styles = styled.div`
   .navbar { background-color: #FFF; }
@@ -31,18 +31,6 @@ const Styles = styled.div`
   .dropdown:hover>.dropdown-menu {
     display: block;
   }
-
-  .form-switch {
-    position: relative;
-    width: 75px;
-    display: inline-block;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    text-align: left;
-  }
-
 `;
 
 /* Constructs the Navigationbar with all functions */
@@ -52,6 +40,7 @@ class Navigationbar extends React.Component {
     super(props)
     this.state = { isOpen: false }
   }
+
   componentWillMount()  {
     setParticulateMatter();
   }
@@ -143,12 +132,16 @@ class Navigationbar extends React.Component {
                 <PopupCauses />
               </NavDropdown.Item>
                 <NavDropdown.Divider />
-                  <Form.Group controlId='formBasicCheckbox' label='Experten-Einstellungen' inline>
-                    {t('colorScheme')}
-                    <Form.Check type='checkbox' id='1' label='Dark-Mode' onClick={() => this.selectOnlyThis(1)}/>
-                    <Form.Check type='checkbox' id='2' label={t('colorBlind')} onClick={() => this.selectOnlyThis(2)}/>
-                    <Form.Check type='checkbox' id='3' label={t('standard')} checked onClick={() => this.selectOnlyThis(3)}/>
-                  </Form.Group>
+                <Form.Group controlId='formBasicCheckbox' label='Experten-Einstellungen' inline>
+                  {t('colorScheme')}
+                  <Form.Check type='checkbox' id='1' label='Dark-Mode' onClick={() => this.selectOnlyThis(1)}/>
+                  <Form.Check type='checkbox' id='2' label={t('colorBlind')} onClick={() => this.selectOnlyThis(2)}/>
+                  <Form.Check type='checkbox' id='3' label={t('standard')} checked onClick={() => this.selectOnlyThis(3)}/>
+                </Form.Group>
+                <NavDropdown.Divider />
+                <NavDropdown.Item eventKey={3} href='#'>
+                <Imprint />
+              </NavDropdown.Item>
             </NavDropdown>
             <Dropdown inline>
               {t('expert-Mode')}

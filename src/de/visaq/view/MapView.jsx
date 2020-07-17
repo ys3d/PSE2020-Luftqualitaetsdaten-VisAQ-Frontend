@@ -4,7 +4,9 @@ import L from 'leaflet';
 import "./MapView.css";
 import OverlayBuilder from './overlayfactory/OverlayBuilder';
 import Legend from './elements/map/Legend';
+import {getLongitude, getLatitude} from '../view/elements/CookieNotice'
 import AirQualityData, { getName } from './elements/airquality/AirQualityData'
+import cookieNotice from './elements/CookieNotice'
 
 /**
  * Class that contains the MapView.
@@ -21,11 +23,25 @@ export default class MapView extends Component {
       bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
       airQualityData: ""
     };
+    this.setlat();
   }
 
+  setlat() {
+    if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
+      navigator.geolocation.watchPosition((position) => {
+        this.setState({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      }, (error) => {
+      this.setState({ lat: 48.3705449, lng: 10.89779})
+    })
+    }
+  }
 
   componentWillMount() {
     this.setState({airQualityData : getName()});
+    this.setlat();
   }
 
   componentDidMount() {
@@ -39,15 +55,13 @@ export default class MapView extends Component {
       this.setState({airQualityData : getName()});
     }
   }
-  
+
   onMove(event) {
     this.setState({bounds : event.target.getBounds()});
   }
 
   onClick(event)  {
   }
-
-  
 
   render() {
       return (

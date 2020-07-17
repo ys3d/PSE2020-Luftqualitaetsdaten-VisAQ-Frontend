@@ -17,8 +17,14 @@ const resources = {
 
 i18n
 .use(initReactI18next)
+
 .on('languageChanged', function(lng) {
-  document.cookie= document.cookie.split(';').some((item) => item.trim().startsWith('Language=')) ? 'Language=' + lng : false;
+  if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
+    document.cookie= 'Language=' + lng;
+    console.log('WHY')
+  } else {
+    document.cookie= 'Language=de' 
+  }
 })
 
 .init({
@@ -30,7 +36,7 @@ i18n
     load: 'current',
 
     interpolation: {
-      escapeValue: false, // not needed for react as it escapes by default
+      escapeValue: false,
     },
 
 });
@@ -40,5 +46,4 @@ i18next
   .then((t) => {
     t('key'); // -> same as i18next.t
   });
-
 export default i18n;
