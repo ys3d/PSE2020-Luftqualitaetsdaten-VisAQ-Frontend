@@ -6,6 +6,7 @@ import { withTranslation } from 'react-i18next';
 import request from '../../../../controller/Request'
 import Thing from '../../../../model/Thing'
 import DataCard from './DataCard'
+import ShareField from './ShareField'
 
 
 /**
@@ -61,6 +62,8 @@ class SensorOverview extends Component {
         <p>
           {t('description')} {this.state.thingDescription}
         </p>
+        <ShareField shareURL="visaq.de" subject="subject" body="body"/>
+        <div className="Demo__some-network__share-count">&nbsp;</div>
 
         <Accordion>
           <DataCard
