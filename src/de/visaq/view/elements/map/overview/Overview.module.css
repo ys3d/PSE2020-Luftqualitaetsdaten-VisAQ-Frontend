@@ -1,0 +1,19 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --border-color: black;
+}
+
+p {
+    margin-top: 0px;
+}
+
+.sensorname {
+    font-size: 50px;
+}
+
+h1 {
+    font-size: 20px;
+}

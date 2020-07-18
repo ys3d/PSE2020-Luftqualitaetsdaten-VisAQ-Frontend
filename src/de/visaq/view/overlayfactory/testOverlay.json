@@ -75,7 +75,7 @@
         {
             "name" : "sensorname7",
             "coordinates" : [48.3705449,10.95],
-            "particulate_matter" : 10,
+            "particulate_matter" : -10,
             "air_pressure" : 0.03,
             "temperature" : 30,
             "humidity" : 4
