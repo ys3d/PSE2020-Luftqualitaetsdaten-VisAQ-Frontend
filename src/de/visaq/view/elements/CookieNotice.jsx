@@ -3,6 +3,7 @@ import { Button, Modal, ModalTitle, Popover, Tooltip, Nav, NavItem, Row, Col, Fo
 import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 import CookieNoticeInformation from './CookieNoticeInformation'
+import './CookieNotice.css'
 
 class CookieNotice extends Component {
   MODAL_TYPE_REASONS = 2;
@@ -20,7 +21,7 @@ class CookieNotice extends Component {
       var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
       if (match) {
         console.log(match[2]);
-        return 'en';
+        return match[2];
       }
       else {
         console.log('--something went wrong---');
@@ -33,6 +34,7 @@ class CookieNotice extends Component {
   componentWillMount() {
     if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
       i18next.changeLanguage(this.getLanguage('Language'));
+      console.log(this.getLanguage('Language'));
     }
   }
 
@@ -44,14 +46,8 @@ class CookieNotice extends Component {
     event.preventDefault();
     alert(`selected ${eventKey}`);
   }
-
+  // Saves the Language in the Cookie
   setCookie = () => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.watchPosition(function (position) {
-        document.cookie = "Latitude=" + position.coords.latitude + ';max-age=' + 60 * 60 * 24 * 365;
-        document.cookie = "Longitude=" + position.coords.longitude + ';max-age=' + 60 * 60 * 24 * 365;
-      });
-    }
     document.cookie = 'Language=' + i18next.language + ';max-age=' + 60 * 60 * 24 * 365;
     this.setState({ showModal: false });
   }
@@ -71,19 +67,25 @@ class CookieNotice extends Component {
     const { t } = this.props;
     return (
       <div>
-        <Modal size="lg" show={this.state.showModal} onHide={this.close.bind(this)}>
-          <ModalTitle center>
-            Cookies
+        <Modal size="lg" show={this.state.showModal} onHide={this.close.bind(this)}  backdrop="static">
+          <ModalTitle center className={'title'}>
+           Cookies
           </ModalTitle>
-          <Modal.Body>
-            Wir verwenden auf dieser Website Cookies um ein besseres Nutzererlebnis zu garantieren.
-            <Button eventKey={1}>
+          <Modal.Body className={'text'}>
+            {t('cookieNotice')}
+            <br />
+            <br />
+            <Button eventKey={1} className={'buttonLink'} variant="link">
               <CookieNoticeInformation />
             </Button>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.close.bind(this)}>{t('decline')}</Button>
-            <Button onClick={this.setCookie}>{t('accept')}</Button>
+            <Button onClick={this.close.bind(this)} className={'button'}>
+            {t('decline')}
+            </Button>
+            <Button onClick={this.setCookie} className={'button'}>
+            {t('accept')}
+            </Button>
           </Modal.Footer>
         </Modal>
       </div>

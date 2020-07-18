@@ -1,55 +1,61 @@
 import React, { state, isOpen } from 'react';
 import { Navbar, NavDropdown, Form, FormCheck, FormControl, NavbarToggler, Collapse, Nav, NavItem,
    NavLink, NavbarBrand, DropdownToggle, Dropdown, Button, DropdownMenu, ButtonGroup} from 'react-bootstrap';
-import styled from 'styled-components';
 import PopupReasons from './PopupReasons';
 import { BrowserRouter as Router } from "react-router-dom";
 import PopupCauses from './PopupCauses';
-import Imprint from './Imprint';
 import CookieNotice from '../CookieNotice';
-import MapView from '../../MapView'
+import MapView from '../../MapView';
 import i18next from 'i18next';
 import {withTranslation} from 'react-i18next';
 import AirQualityData from '../airquality/AirQualityData';
 import * as data from '../../../../../resources/AirQualityData.json'
+import Timeline from './Timeline'
+import './Navigationbar.css'
+import styled from 'styled-components';
 
 const Styles = styled.div`
-  .navbar { background-color: #FFF; }
-  a, .navbar-nav, .navbar-dark .nav-link {
-    color: #000;
-    &:hover { color: #44c2d4; }
-  }
-  .navbar-brand {
-    font-size: 1.4em;
-    color: #44c2d4;
-    &:hover { color: #44c2d4; }
-  }
-  .form-center {
-    position: absolute !important;
-    left: 25%;
-    right: 25%;
-  }
+.navbar { background-color: #FFF; }
+a, .navbar-nav, .navbar-dark .nav-link {
+  color: #000;
+  &:hover { color: #44c2d4; }
+}
+.navbar-brand {
+  font-size: 1.4em;
+  color: #44c2d4;
+  &:hover { color: #44c2d4; }
+}
+.form-center {
+  position: absolute !important;
+  left: 25%;
+  right: 25%;
+}
 
-  .dropdown:hover>.dropdown-menu {
-    display: block;
+.search{
+  background-color: #44c2d4;
+  color: white;
+  border: none;
+}
+
+.form-switch {
+    position: relative;
+    width: 75px;
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    text-align: left;
   }
 `;
 
 /* Constructs the Navigationbar with all functions */
 class Navigationbar extends React.Component {
-  
+
   constructor(props) {
     super(props)
-<<<<<<< HEAD
-    this.state = { isOpen: false }
-  }
-
-  componentWillMount()  {
-    setParticulateMatter();
-=======
     this.state = { isOpen: false, 
-                    airQualityData : new AirQualityData(data.particulateMatter)};
->>>>>>> info-messages
+      airQualityData : new AirQualityData(data.particulateMatter)};
   }
 
   handleOpen = () => {
@@ -82,24 +88,24 @@ class Navigationbar extends React.Component {
   render() {
     const { t } = this.props;
     return (
+      <Styles>
       <React.Fragment>
       <Router>
-      <Styles>
       <CookieNotice />
         <Navbar expand='lg' bg='light' style={{width: '100%', height:'20%'}} >
-          <Navbar.Brand href=''>
+          <Navbar.Brand href='' className='visaq'>
             <strong>VisAQ</strong>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav' >
             <Nav className='mr-auto' justify variant='Tabs'>
               <Form inline>
-                <FormControl type='text' placeholder= {t('search')} className='search' />
-                <Button variant='outline-success'>
+                <FormControl type='text' placeholder= {t('search')} />
+                <Button variant='outline-success' className='search' >
                   {t('search')}
                 </Button>
               </Form>
-              <Nav.Link onClick={() => this.setState(state => ({airQualityData : new AirQualityData(data.particulateMatter)}))}>
+              <Nav.Link onClick={() => this.setState(state => ({airQualityData : new AirQualityData(data.particulateMatter)}))} id='buttonNav'>
                 {t('particulateMatter')}
               </Nav.Link>
               <Nav.Link onClick={() => this.setState(state => ({airQualityData : new AirQualityData(data.humidity)}))}>
@@ -111,9 +117,9 @@ class Navigationbar extends React.Component {
               <Nav.Link onClick={() => this.setState(state => ({airQualityData : new AirQualityData(data.airPressure)}))}>
                 {t('airPressure')}
               </Nav.Link>
-            </Nav>
+              </Nav>
             <Dropdown inline >
-              Weitere Einstellungen
+             {t('furtherFunc')}
             </Dropdown>
             <NavDropdown variant="success" id="dropdown-basic">
               <NavDropdown.Item href='https://www.smartaq.net/de/participate/'>
@@ -138,10 +144,6 @@ class Navigationbar extends React.Component {
                   <Form.Check type='checkbox' id='2' label={t('colorBlind')} onClick={() => this.selectOnlyThis(2)}/>
                   <Form.Check type='checkbox' id='3' label={t('standard')} checked onClick={() => this.selectOnlyThis(3)}/>
                 </Form.Group>
-                <NavDropdown.Divider />
-                <NavDropdown.Item eventKey={3} href='#'>
-                <Imprint />
-              </NavDropdown.Item>
             </NavDropdown>
             <Dropdown inline>
               {t('expert-Mode')}
@@ -162,11 +164,11 @@ class Navigationbar extends React.Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-      </Styles>
      <MapView airQ = {this.state.airQualityData}
      />
      </Router>
     </React.Fragment>
+    </Styles>
     )
   }
 }
