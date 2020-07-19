@@ -23,7 +23,9 @@ export default class MapView extends Component {
             zoom: 13,
             bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
             airQualityData: props.airQ,
-            things: []
+            things: [],
+            time: new Date().toLocaleString,
+            historical: false
         };
     }
   

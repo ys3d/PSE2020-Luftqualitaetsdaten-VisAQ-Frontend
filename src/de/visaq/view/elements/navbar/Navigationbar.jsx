@@ -10,8 +10,8 @@ import MapView from '../../MapView';
 import i18next from 'i18next';
 import {withTranslation} from 'react-i18next';
 import AirQualityData from '../airquality/AirQualityData';
-import * as data from '../../../../../resources/AirQualityData.json'
-
+import * as data from '../../../../../resources/AirQualityData.json';
+import Timeline from './Timeline'
 
 const Styles = styled.div`
   .navbar { background-color: #FFF; }
@@ -52,8 +52,11 @@ class Navigationbar extends React.Component {
   
   constructor(props) {
     super(props)
-    this.state = { isOpen: false, 
-                    airQualityData : new AirQualityData(data.particulateMatter)};
+    this.state = { 
+      isOpen: false,
+      historical : false,  
+      airQualityData : new AirQualityData(data.particulateMatter)}
+         
   }
 
   handleOpen = () => {
@@ -126,7 +129,7 @@ class Navigationbar extends React.Component {
               <NavDropdown.Item href='https://www.smartaq.net/en/dashboard/#/home'>
                 SmartAQNet
               </NavDropdown.Item>
-              <NavDropdown.Item href='#'>
+              <NavDropdown.Item href='#' onClick={() => this.setState(state => ({historical :true}))} >
                 {t('historical')}
               </NavDropdown.Item>
               <NavDropdown.Item eventKey={2} href='#'>
@@ -163,6 +166,7 @@ class Navigationbar extends React.Component {
           </Navbar.Collapse>
         </Navbar>
       </Styles>
+      <Timeline show = {this.state.historical}/>
      <MapView airQ = {this.state.airQualityData}
      />
      </Router>

@@ -6,8 +6,6 @@ import Cookies from 'js-cookie'
 import Language from '../Language'
 
 class CookieNotice extends Component {
-  MODAL_TYPE_REASONS = 2;
-
   constructor() {
     super();
     this.render.bind(this);
