@@ -4,21 +4,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Navigationbar from './de/visaq/view/elements/navbar/Navigationbar'
 import MapView from './de/visaq/view/MapView';
-<<<<<<< HEAD
 
-function App() {
-  return (
-    <Suspense fallback='loading'>
-    <React.Fragment>
-      <Router>
-        <Navigationbar />
-        <MapView />
-      </Router>
-    </React.Fragment>
-    </Suspense>
-  );
-}
-=======
 import CookieNotice from './de/visaq/view/elements/CookieNotice'
 import { Container, Row, Col } from "react-bootstrap";
 
@@ -38,7 +24,6 @@ class App extends Component {
     this.handleCloseClick = this.handleCloseClick.bind(this);
     this.handleShowPointClick = this.handleShowPointClick.bind(this);
   }
->>>>>>> info-messages
 
   handleShowSensorClick(toSetThingID) {
     this.setState({
