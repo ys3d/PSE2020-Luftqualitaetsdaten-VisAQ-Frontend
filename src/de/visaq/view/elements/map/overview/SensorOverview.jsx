@@ -62,7 +62,7 @@ class SensorOverview extends Component {
         <p>
           {t('description')} {this.state.thingDescription}
         </p>
-        <ShareField shareURL="visaq.de" subject="subject" body="body"/>
+        <ShareField subject={t('shareTitle')} body={t('shareBody')}/>
         <div className="Demo__some-network__share-count">&nbsp;</div>
 
         <Accordion>
