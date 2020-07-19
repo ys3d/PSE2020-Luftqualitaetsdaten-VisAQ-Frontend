@@ -15,7 +15,7 @@ const SensorOverlayFactory = (props) => {
     }
 
     const markers = sensors.filter((sensor, index) => {
-        if (sensor.locations == undefined) {
+        if (sensor.locations === undefined) {
             return false;
         }
         return true;

@@ -81,6 +81,7 @@ export default class MapView extends Component {
             boundsOptions={{padding: [50, 50]}}
             ref = {this.mapRef}
             onMoveEnd={this.onMove.bind(this)}
+            zoomControl = {false}
           >
             <TileLayer
              attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -105,3 +106,5 @@ export default class MapView extends Component {
       );
    }
 }
+
+
