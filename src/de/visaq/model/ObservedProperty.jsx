@@ -24,4 +24,17 @@ export default class ObservedProperty extends Sensorthing {
     get properties() {
         return this.json.properties;
     }
+
+    toJSON() {
+        return {
+            id: this.id,
+            selfUrl: this.selfUrl,
+            description: this.description,
+            name: this.name,
+            definition: this.definition,
+            datastreamsLink: this.datastreamsLink,
+            properties: this.properties,
+            "@type": "ObservedProperty"
+        };
+    }
 };

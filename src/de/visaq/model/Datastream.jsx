@@ -41,4 +41,22 @@ export default class Datastream extends Sensorthing {
     get properties() {
         return this.json.properties;
     }
+
+
+    toJSON() {
+        return {
+            id: this.id,
+            selfUrl: this.selfUrl,
+            description: this.description,
+            name: this.name,
+            unitOfMeasurement: this.unitOfMeasurement,
+            observationTypeLink: this.observationTypeLink,
+            observationsLink: this.observationsLink,
+            sensorLink: this.sensorLink,
+            thingLink: this.thingLink,
+            observedPropertyLink: this.observedPropertyLink,
+            properties: this.properties,
+            "@type": "Datastream"
+        };
+    }
 };
