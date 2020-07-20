@@ -9,5 +9,7 @@
     "airHumidity": "Luftfeuchtigkeit",
     "particulateMatter": "Feinstaub",
     "notFound": "Der gesuchte Sensor kann nicht in der Datenbank gefunden werden",
-    "location": "Ort"
+    "location": "Ort",
+    "shareTitle": "Schau dir die aktuellen Werte der Luftqualität an!",
+    "shareBody": "Hey, ich habe interessante Daten gefunden!"
 }

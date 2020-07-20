@@ -9,5 +9,7 @@
     "airHumidity": "Air humidity",
     "particulateMatter": "Particulate matter",
     "notFound": "The requested Sensor could not be found",
-    "location": "Location"
+    "location": "Location",
+    "shareTitle": "Take a look at the interesting website!",
+    "shareBody": "Hello there, I found interesting data about air-quality"
 }
