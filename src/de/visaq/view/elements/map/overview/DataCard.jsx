@@ -12,26 +12,34 @@ class DataCard extends Component {
     }
     render() {
         const { t } = this.props;
-        return (
-            <Card>
-                <Card.Header>
-                    <Accordion.Toggle as={Card.Header} eventKey={this.props.eventKey}>
-                        {this.props.cardTitle}
-                    </Accordion.Toggle>
-                </Card.Header>
-                <Accordion.Collapse eventKey={this.props.eventKey}>
-                    <Card.Body>
-                        <p>{t('currently')}: {this.props.currentValue}</p>
-                        <Diagram
-                            title={t('historicalDevelopment')}
-                            dataRowLabel={this.props.dataRowLabel}
-                            dataLabels={this.props.dataLabels}
-                            data={this.props.data}
-                        />
-                    </Card.Body>
-                </Accordion.Collapse>
-            </Card>
-        );
+        if (this.props.show) {
+            return (
+                <Card>
+                    <Card.Header>
+                        <Accordion.Toggle as={Card.Header} eventKey={this.props.eventKey}>
+                            {this.props.cardTitle}
+                        </Accordion.Toggle>
+                    </Card.Header>
+                    <Accordion.Collapse eventKey={this.props.eventKey}>
+                        <Card.Body>
+                            <p>{t('currently')}: {this.props.currentValue} {this.props.dataRowLabel}</p>
+                            <Diagram
+                                title={t('historicalDevelopment')}
+                                dataRowLabel={this.props.dataRowLabel}
+                                dataLabels={this.props.dataLabels}
+                                data={this.props.data}
+                            />
+                        </Card.Body>
+                    </Accordion.Collapse>
+                </Card>
+            );
+        }
+        else {
+            return (
+                <>
+                </>
+            );
+        }
     }
 }
 
