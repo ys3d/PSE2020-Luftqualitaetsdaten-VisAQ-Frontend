@@ -10,7 +10,7 @@
     "particulateMatter": "Particulate matter",
     "notFound": "The requested Sensor could not be found",
     "location": "Location",
-    "consequences": "Consequences: ",
+    "consequences": "Consequences",
     "overpressure": "The region is currently under high pressure",
     "underpressure": "The region is currently under low pressure",
     "normalPressure": "The pressure in this region is normal",

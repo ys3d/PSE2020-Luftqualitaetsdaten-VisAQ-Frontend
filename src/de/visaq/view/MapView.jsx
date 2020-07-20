@@ -25,7 +25,6 @@ export default class MapView extends Component {
             airQualityData: props.airQ,
             things: [],
             time: new Date().toLocaleString,
-            historical: false
         };
     }
   
