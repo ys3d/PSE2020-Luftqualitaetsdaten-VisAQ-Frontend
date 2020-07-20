@@ -1,12 +1,12 @@
 import React, { createRef, Component } from 'react';
 import { Map, TileLayer, withLeaflet } from 'react-leaflet';
 import L from 'leaflet';
-import "./MapView.css";
+import "./MapView.module.css";
 import OverlayBuilder from './overlayfactory/OverlayBuilder';
 import Legend from './elements/map/Legend';
 import request from "../controller/Request";
 import Thing from "../model/Thing";
-import { ReactLeafletSearch } from "react-leaflet-search";
+import { ReactLeafletSearch } from 'react-leaflet-search';
 import { getInitialProps } from 'react-i18next';
 
 /**
