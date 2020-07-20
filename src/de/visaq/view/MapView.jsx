@@ -8,25 +8,44 @@ import request from "../controller/Request";
 import Thing from "../model/Thing";
 import { ReactLeafletSearch } from 'react-leaflet-search';
 import { getInitialProps } from 'react-i18next';
+import cookieNotice from './elements/CookieNotice';
 
 /**
  * Class that contains the MapView.
  */
 export default class MapView extends Component {
-    /*with props its possible to initalize the map with different map properties*/
-    constructor(props) {
-        super(props);
-        this.mapRef = createRef();
-        this.state = {
-            lat: 48.3705449,
-            lng: 10.89779,
-            zoom: 13,
-            bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
-            airQualityData: props.airQ,
-            things: []
-        };
+  /*with props its possible to initalize the map with different map properties*/
+  constructor(props) {
+    super(props);
+    this.mapRef = createRef();
+    this.state = {
+        lat: 48.3705449,
+        lng: 10.89779,
+        zoom: 13,
+        bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
+        airQualityData: props.airQ,
+        things: []
+    };
+    this.setPosition();
+  }
+
+  setPosition() {
+    if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
+      navigator.geolocation.watchPosition((position) => {
+        this.setState({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      }, (error) => {
+      this.setState({ lat: 48.3705449, lng: 10.89779})
+    })
     }
-  
+  }
+
+  componentWillMount() {
+    this.setPosition();
+  }
+
     /**
     * Decides whether the component should update. 
     * Returns true if the state of AirQualityData changed in the parent component, false otherwise.
@@ -34,29 +53,32 @@ export default class MapView extends Component {
     * @param {Object} nextprops The properties
     * @param {Object} nextState The new state
     */
-    shouldComponentUpdate(nextprops, nextState) {
-  	  if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextprops.airQ)){
-        return true;
-      } 
-      else if(this.state.bounds !== nextState.bounds){
-        return true;
-      }
-      else {
-        return false;
-      }  
+   shouldComponentUpdate(nextprops, nextState) {
+    if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextprops.airQ)){
+      return true;
+    } 
+    else if(this.state.bounds !== nextState.bounds){
+      return true;
     }
+    else {
+      return false;
+    }  
+  }
 
-    /**
-     * Changes the airQualityData state of the component. 
-     * 
-     * @param {Object} airQ The AirQualityData
-     */
-    componentDidUpdate(airQ) {
-      if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(airQ.airq)) {
-        console.log(airQ.airQ);
-        this.setState({airQualityData : airQ.airQ});
-      }      
-    }
+  /**
+   * Changes the airQualityData state of the component. 
+   * 
+   * @param {Object} airQ The AirQualityData
+   */
+  componentDidUpdate(airQ) {
+    if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(airQ.airq)) {
+      console.log(airQ.airQ);
+      this.setState({airQualityData : airQ.airQ});
+      if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
+        document.cookie = 'AirQuality=' + JSON.stringify(this.state.airQualityData);
+      }
+    }      
+  }
 
     onMove(event) {
         var newBounds = event.target.getBounds();
@@ -106,5 +128,3 @@ export default class MapView extends Component {
       );
    }
 }
-
-

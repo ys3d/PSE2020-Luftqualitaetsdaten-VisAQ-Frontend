@@ -111,7 +111,7 @@ class Navigationbar extends React.Component {
               </Nav.Link>
             </Nav>
             <Dropdown inline >
-              Weitere Einstellungen
+              {t('furtherFunc')}
             </Dropdown>
             <NavDropdown variant="success" id="dropdown-basic">
               <NavDropdown.Item href='https://www.smartaq.net/de/participate/'>
