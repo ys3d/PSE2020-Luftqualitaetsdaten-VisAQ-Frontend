@@ -24,4 +24,16 @@ export default class Observation extends Sensorthing {
     get featureOfInterestLink() {
         return this.json.featureOfInterestLink;
     }
+
+    toJSON() {
+        return {
+            id: this.id,
+            selfUrl: this.selfUrl,
+            phenomenonTime: this.phenomenonTime,
+            result: this.result,
+            resultTime: this.resultTime,
+            featureOfInterestLink: this.featureOfInterestLink,
+            "@type": "Observation"
+        };
+    }
 };
