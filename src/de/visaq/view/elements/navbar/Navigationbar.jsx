@@ -129,8 +129,8 @@ class Navigationbar extends React.Component {
               <NavDropdown.Item href='https://www.smartaq.net/en/dashboard/#/home'>
                 SmartAQNet
               </NavDropdown.Item>
-              <NavDropdown.Item href='#' onClick={() => this.setState(state => ({historical :true}))} >
-                {t('historical')}
+              <NavDropdown.Item eventKey={3} href='#' >
+                <Timeline />
               </NavDropdown.Item>
               <NavDropdown.Item eventKey={2} href='#'>
                 <PopupReasons />
@@ -166,7 +166,6 @@ class Navigationbar extends React.Component {
           </Navbar.Collapse>
         </Navbar>
       </Styles>
-      <Timeline show = {this.state.historical}/>
      <MapView airQ = {this.state.airQualityData}
      />
      </Router>

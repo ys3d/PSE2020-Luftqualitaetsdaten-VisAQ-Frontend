@@ -1,71 +1,69 @@
-import React, { Component, event } from 'react';
-import { Nav, Navbar, Form, FormControl, NavDropdown, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import './Timeline.css'
-import RangeSlider from 'react-bootstrap-range-slider';
+import React from 'react';
+import { Button, Modal, ModalTitle, Popover, Tooltip, Nav, NavItem, Row, Col, FormGroup, FieldGroup, Checkbox } from 'react-bootstrap'
+import i18next from 'i18next';
+import {withTranslation} from 'react-i18next';
+import DatePicker from 'react-datepicker'
 
-export default class Timeline extends Component {
+class Timeline extends React.Component {
+  
     constructor() {
         super();
         this.render.bind(this);
         this.state = {
-            show: false,
-            time: new Date().toLocaleString,
-            max: new Date().toLocaleString,
-            min: '01.01.2000'
-        };
+          showModal: false
+        }
       }
 
+   onSave = (date, time) => {
+    this.setState({date: date, time: time}, () => {
+        console.log({date, time});
+    })
+ }
     close() {
-      this.setState({ show: false });
+      this.setState({ showModal: false });
     }
-
-
-     /**
-    * Decides whether the component should update. 
-    * Returns true if the state of show changed in the parent component, false otherwise.
-    * 
-    * @param {Object} nextprops The properties
-    * @param {Object} nextState The new state
-    */
-   shouldComponentUpdate(nextprops, nextState) {
-        if(JSON.stringify(this.state.show) !== JSON.stringify(nextprops.show)){
-            return true;
-        } 
-        else {
-            return false;
-        }  
+  
+    open(modalType) {
+      this.setState({ 
+        showModal: true,
+        modalType: modalType
+      });
     }
-
-    /**
-     * Changes the show state of the component. 
-     * 
-     * @param {Object} show Whether the timeline is shown or not
-     */
-    componentDidUpdate(show) {
-        if(JSON.stringify(this.state.show) !== JSON.stringify(show.show)) {
-            this.setState({show : show.show});
-          }      
+  
+    handleSelect(eventKey) {
+      event.preventDefault();
+      alert(`selected ${eventKey}`);
     }
-
-    render() {
-        return( 
+  
+    render () {
+      const { t } = this.props;
+      return (
         <div>
-            <Form show={this.state.show} onHide={this.close.bind(this)}>
-                <Form.Group controlId="formBasicRange">
-                <OverlayTrigger
-                        placement='bottom'
-                        overlay={
-                            <Tooltip id={'tooltip'}>
-                            Tooltip
-                            </Tooltip>
-                        }
-                        className='tooltip'
-                    >
-                        <Form.Control type="range" className='timeline' value={this.state.time}/>
-                </OverlayTrigger>
-                </Form.Group>
-            </Form>    
-      </div>
-        )
+          <span onClick={this.open.bind(this)}>{t('causesPM')}</span>
+          <Modal size="lg" show={this.state.showModal} onHide={this.close.bind(this)}>
+            <ModalTitle center>
+              {t('causesPM')}
+            </ModalTitle>
+            <Modal.Body>
+                <DatePicker 
+                    selected={new Date()}
+                //  onchange={date => this.setState(this.currentDate: date)}/>
+                    showTimeSelect
+                    timeFormat="HH:mm"
+                    timeIntervals={30}
+                    timeCaption="time"
+                    dateFormat='MMMM d, yyyy h:mm aa'
+                />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={this.close.bind(this)}>{t('close')}</Button>
+            </Modal.Footer>
+          </Modal>
+        </div>
+      )
     }
-}
+  }
+  
+  const dynamicTimeline = withTranslation('common')(Timeline)
+  
+  export default dynamicTimeline
