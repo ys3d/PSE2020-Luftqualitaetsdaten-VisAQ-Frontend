@@ -67,10 +67,6 @@ export default class MapView extends Component {
             return false;
         }
     }
-    else {
-      return false;
-    }  
-  }
 
   /**
    * Changes the airQualityData state of the component. 
