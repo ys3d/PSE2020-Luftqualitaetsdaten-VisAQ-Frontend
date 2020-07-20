@@ -2,7 +2,8 @@ import React, { Component, event } from 'react'
 import { Button, Modal, ModalTitle, Popover, Tooltip, Nav, NavItem, Row, Col, FormGroup, FieldGroup, Checkbox } from 'react-bootstrap'
 import i18next from 'i18next';
 import {withTranslation} from 'react-i18next';
-import Picker from 'react-datetime-slider-picker'
+import DatePicker from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css";
 
 class Timeline extends Component {
   MODAL_TYPE_REASONS = 2;
@@ -11,7 +12,8 @@ class Timeline extends Component {
     super();
     this.render.bind(this);
     this.state = {
-      showModal: false
+      showModal: false,
+      currentDate: new Date()
     }
   }
 
@@ -22,7 +24,6 @@ class Timeline extends Component {
   open(modalType) {
     this.setState({ 
       showModal: true,
-      modalType: modalType
     });
   }
 
@@ -31,12 +32,11 @@ class Timeline extends Component {
     alert(`selected ${eventKey}`);
   }
 
-  onSave = (date, time) => {
-    this.setState({date: date, time: time}, () => {
-        console.log({date, time});
+  handleChange = date => {
+    this.setState({
+      startDate: date
     });
-    this.close()
-  }
+  };
 
   render () {
     const popover = (
@@ -53,18 +53,30 @@ class Timeline extends Component {
     const { t } = this.props;
     return (
       <div>
-        <span onClick={this.open.bind(this, this.MODAL_TYPE_REASONS)}>{t('historical')}</span>
-
-        <Modal size="lg" show={this.state.showModal} onHide={this.close.bind(this)}>
-          <Modal.Body >
-          <Picker onSave={(date, time) => this.onSave(date,time)} language='en' />
-          </Modal.Body>
-        </Modal>
+         <DatePicker 
+         selected={this.state.currentDate}
+         onChange={this.handleChange}
+         locale="de-De"
+         showTimeInput
+         fixedHeight
+         popperPlacement="top-end"
+         popperModifiers={{
+           offset: {
+             enabled: true,
+             offset: "5px, 10px"
+           },
+           preventOverflow: {
+             enabled: true,
+             escapeWithReference: false,
+             boundariesElement: "viewport"
+           }
+         }}
+         />
       </div>
     )
   }
 }
 
-const dynamicModal = withTranslation('common')(Timeline)
+const timeline = withTranslation('common')(Timeline)
 
-export default dynamicModal
+export default timeline

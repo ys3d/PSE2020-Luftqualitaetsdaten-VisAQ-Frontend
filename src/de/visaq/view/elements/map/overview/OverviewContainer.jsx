@@ -64,7 +64,7 @@ render(<Overview />);
 
 function closeToolTip(props) {
     return (
-        <Tooltip id="button-tooltip" {...props}>
+        <Tooltip id="button-tooltip" {...props} className='tooltip'>
             Hier klicken um die Detailansicht zu schließen
         </Tooltip>
     );
