@@ -58,3 +58,4 @@ export default class AirQualityData {
         return this.unitOfMeasurement;
     }
 }
+

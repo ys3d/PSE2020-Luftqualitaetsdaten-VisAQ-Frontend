@@ -6,6 +6,7 @@ import { withTranslation } from 'react-i18next';
 import request from '../../../../controller/Request'
 import Thing from '../../../../model/Thing'
 import DataCard from './DataCard'
+import ShareField from './ShareField'
 
 
 /**
@@ -26,7 +27,8 @@ class PointOverview extends Component {
         <h1>
           {t('location')}
         </h1>
-
+        <ShareField subject={t('shareTitle')} body={t('shareBody')}/>
+        <div className="Demo__some-network__share-count">&nbsp;</div>
         <Accordion>
           <DataCard
             cardTitle={t('airPressure')}

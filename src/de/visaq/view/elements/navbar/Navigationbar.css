@@ -1,8 +1,8 @@
 .navbar { background-color: #FFFF; }
-a, .navbar-nav, .navbar-dark .nav-link {
-  color: #0000;
+a, .navbar-nav, .navbar-dark, .nav-link, .visaq, .search, .basic-navbar-nav {
+  color: #44c2d4;
 }
-.navbar-brand {
+.navbarbrand {
   font-size: 1.4em;
   color: #44c2d4;
 }
@@ -12,7 +12,15 @@ a, .navbar-nav, .navbar-dark .nav-link {
   right: 25%;
 }
 
+.dropdown-basic{
+  width: 40%;
+}
 .nav-item:hover .dropdown-menu{
 display:block!important;
 width: 100%;
 }
+
+button:active{
+  color: #44c2d4;
+}
+

@@ -3,7 +3,7 @@ import { Button, Modal, ModalTitle, Popover, Tooltip, Nav, NavItem, Row, Col, Fo
 import i18next from 'i18next';
 import {withTranslation} from 'react-i18next';
 
-class PopupReasons extends Component {
+class Imprint extends Component {
   MODAL_TYPE_REASONS = 2;
 
   constructor() {
@@ -45,14 +45,14 @@ class PopupReasons extends Component {
     const { t } = this.props;
     return (
       <div>
-        <span onClick={this.open.bind(this, this.MODAL_TYPE_REASONS)}>{t('reasonsPM')}</span>
+        <span onClick={this.open.bind(this, this.MODAL_TYPE_REASONS)}>{t('imprint')}</span>
 
         <Modal size="lg" show={this.state.showModal} onHide={this.close.bind(this)}>
           <ModalTitle center>
-            {t('reasonsPM')}
+            {t('imprint')}
           </ModalTitle>
           <Modal.Body>
-            {t('reasons')}
+            Impressum
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.close.bind(this)}>Close</Button>
@@ -63,6 +63,6 @@ class PopupReasons extends Component {
   }
 }
 
-const dynamicModal = withTranslation('common')(PopupReasons)
+const dynamicModal = withTranslation('common')(Imprint)
 
 export default dynamicModal

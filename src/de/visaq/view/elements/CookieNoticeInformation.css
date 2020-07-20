@@ -1,0 +1,13 @@
+.infoTitle{
+    text-align:  center;
+    color: rgb(103, 191, 218);
+}
+
+.text{
+    text-align:  center;
+}
+
+.button {
+    background-color: #44c2d4;
+    border: none;
+}

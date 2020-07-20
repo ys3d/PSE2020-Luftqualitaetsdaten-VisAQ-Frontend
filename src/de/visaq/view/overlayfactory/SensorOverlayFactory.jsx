@@ -15,7 +15,7 @@ const SensorOverlayFactory = (props) => {
     if (!Array.isArray(things) || !Array.isArray(observations)) {
         return <Fragment></Fragment>
     }
-
+    
     const data = [];
 
     things.forEach((thing, index) => {
