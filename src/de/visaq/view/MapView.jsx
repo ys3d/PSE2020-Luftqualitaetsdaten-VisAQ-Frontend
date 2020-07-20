@@ -1,13 +1,14 @@
-  import React, { createRef, Component } from 'react';
-  import { Map, TileLayer } from 'react-leaflet';
-  import L from 'leaflet';
-  import "./MapView.css";
-  import OverlayBuilder from './overlayfactory/OverlayBuilder';
-  import Legend from './elements/map/Legend';
-  import request from "../controller/Request";
-  import Thing from "../model/Thing";
-  import { getInitialProps } from 'react-i18next';
-  import cookieNotice from './elements/CookieNotice'
+import React, { createRef, Component } from 'react';
+import { Map, TileLayer, withLeaflet } from 'react-leaflet';
+import L from 'leaflet';
+import "./MapView.module.css";
+import OverlayBuilder from './overlayfactory/OverlayBuilder';
+import Legend from './elements/map/Legend';
+import request from "../controller/Request";
+import Thing from "../model/Thing";
+import { ReactLeafletSearch } from 'react-leaflet-search';
+import { getInitialProps } from 'react-i18next';
+import cookieNotice from './elements/CookieNotice';
 
 /**
  * Class that contains the MapView.
@@ -79,36 +80,50 @@ export default class MapView extends Component {
     }      
   }
 
-  onMove(event) {
-      var newBounds = event.target.getBounds();
-      this.setState({ bounds: newBounds }, () => {
-          request("http://localhost:8081/api/thing/all/square", false, {
-              "y1": newBounds.getSouthWest().lat,
-              "x1": newBounds.getSouthWest().lng,
-              "y2": newBounds.getNorthEast().lat,
-              "x2": newBounds.getNorthEast().lng
-          }, Thing).then(things => {
-              this.setState({ things: things });
-          });
-      });
-  }
-  render() {
-      return (
-        <Map 
-          center={[this.state.lat, this.state.lng]} 
-          zoom={this.state.zoom} 
-          style={{ width: '100%', height: '100vh'}}
-          boundsOptions={{padding: [50, 50]}}
-          ref = {this.mapRef}
-          onMoveEnd={this.onMove.bind(this)}
-        >
-          <TileLayer
-           attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    onMove(event) {
+        var newBounds = event.target.getBounds();
+        this.setState({ bounds: newBounds }, () => {
+            request("http://localhost:8081/api/thing/all/square", false, {
+                "y1": newBounds.getSouthWest().lat,
+                "x1": newBounds.getSouthWest().lng,
+                "y2": newBounds.getNorthEast().lat,
+                "x2": newBounds.getNorthEast().lng
+            }, Thing).then(things => {
+                this.setState({ things: things });
+            });
+        });
+    }
+    render() {
+      const ReactLeafletSearchComponent = withLeaflet(ReactLeafletSearch)
+        return (
+          <Map 
+            center={[this.state.lat, this.state.lng]} 
+            zoom={this.state.zoom} 
+            style={{ width: '100%', height: '100vh'}}
+            boundsOptions={{padding: [50, 50]}}
+            ref = {this.mapRef}
+            onMoveEnd={this.onMove.bind(this)}
+            zoomControl = {false}
+          >
+            <TileLayer
+             attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <OverlayBuilder mapState={this.state} />
+             <Legend airQ = {this.state.airQualityData}
+             />
+           <ReactLeafletSearchComponent
+              className="custom-style"
+              position="topleft"
+              provider ="OpenStreetMap"
+              providerOptions={{region:"de"}}
+              inputPlaceholder="Search"
+              zoom={12}
+              showMarker={false}
+              showPopUp={false}
+              closeResultsOnClick={true}
+              openSearchOnLoad={true}
           />
-          <OverlayBuilder mapState={this.state} />
-           <Legend airQ = {this.state.airQualityData}
-           />
        </Map>
       );
    }

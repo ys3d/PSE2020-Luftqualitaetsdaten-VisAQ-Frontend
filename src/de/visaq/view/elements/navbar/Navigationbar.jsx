@@ -97,12 +97,6 @@ class Navigationbar extends React.Component {
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav' >
             <Nav className='mr-auto' justify variant='Tabs'>
-              <Form inline>
-                <FormControl type='text' placeholder= {t('search')} className='search' />
-                <Button variant='outline-success'>
-                  {t('search')}
-                </Button>
-              </Form>
               <Nav.Link onClick={() => this.setState(state => ({airQualityData : new AirQualityData(data.particulateMatter)}))}>
                 {t('particulateMatter')}
               </Nav.Link>
