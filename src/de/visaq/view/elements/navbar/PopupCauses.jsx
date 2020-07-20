@@ -45,14 +45,14 @@ class PopupCauses extends Component {
     const { t } = this.props;
     return (
       <div>
-        <span onClick={this.open.bind(this, this.MODAL_TYPE_CAUSES)}>{t('causesPM')}</span>
+        <span onClick={this.open.bind(this, this.MODAL_TYPE_CAUSES)}>{t('consequencesPM')}</span>
 
         <Modal size="lg" show={this.state.showModal} onHide={this.close.bind(this)}>
           <ModalTitle center>
-            {t('causesPM')}
+            {t('consequencesPM')}
           </ModalTitle>
           <Modal.Body>
-          HALLOO
+            {t('consequences')}
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.close.bind(this)}>{t('close')}</Button>

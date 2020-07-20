@@ -8,7 +8,7 @@
 	"reasonsPM": "Gründe für Luftverschmutzung",
 	"diy": "DIY-Anleitung",
 	"historical": "Historische Werte",
-	"causesPM": "Folgen von Luftverschmutzung",
+	"consequencesPM": "Folgen von Luftverschmutzung",
 	"smartAQNet": "SmartAQNet",
 	"furtherFunc":"Weitere Funktionen",
 	"expert-Mode": "Experten-Modus",
@@ -16,5 +16,7 @@
 	"standard": "Standard",
 	"colorScheme": "Farbschema",
 	"officalSensor": "Offizielle Sensoren",
-	"nonOfficalSensor": "Homemade Sensoren"
+	"nonOfficalSensor": "Homemade Sensoren",
+	"reasons": "Als Luftverschmutzung wird die Freisetzung umwelt- und gesundheitsschädlicher Schadstoffe in die Luft bezeichnet. Luftverschmutzung hat sowohl natürliche als auch menschengemachte Uhrsachen. Menschengemachte Quellen für Luftverschmutzung sind zum Beispiel die Verbrennung fossiler Brennstoffe, industrielle Prozesse, oder Abfallverwertung. Natürliche Ursachen sind beispielsweise Naturkatastrophen oder natürliche Prozesse wie die Zersetzung von Pflanzenresten.",
+	"consequences": "Die Folgen von Luftverschmutzung sind vielfältig. Luftverschmutzung wirkt sich negativ auf die Umwelt aus, sowohl Planzenwachstum als auch das Klima werden von der Verunreinigung beeinflusst. Weitere negative Auswirkungen beziehen sich auf die Gesundheit. Vor allem Atemwegserkrankungen werden durch die Luftverschmutzung begünstigt."
 }
