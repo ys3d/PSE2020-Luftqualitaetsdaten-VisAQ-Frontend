@@ -16,145 +16,147 @@ import cookieNotice from './elements/CookieNotice';
  * Class that contains the MapView.
  */
 export default class MapView extends Component {
-  /*with props its possible to initalize the map with different map properties*/
-  constructor(props) {
-    super(props);
-    this.mapRef = createRef();
-    this.state = {
-        lat: 48.3705449,
-        lng: 10.89779,
-        zoom: 13,
-        bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
-        airQualityData: props.airQ,
-        things: [],
-        observations: []
-    };
-    this.setPosition();
-  }
-
-  setPosition() {
-    if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
-      navigator.geolocation.watchPosition((position) => {
-        this.setState({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
-      }, (error) => {
-      this.setState({ lat: 48.3705449, lng: 10.89779})
-    })
+    /*with props its possible to initalize the map with different map properties*/
+    constructor(props) {
+        super(props);
+        this.mapRef = createRef();
+        this.state = {
+            lat: 48.3705449,
+            lng: 10.89779,
+            zoom: 13,
+            bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
+            airQualityData: props.airQ,
+            cells: {}
+        };
+        this.gridSize = 0.15;
     }
-  }
 
-  componentWillMount() {
-    this.setPosition();
-  }
+    setPosition() {
+        if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
+            navigator.geolocation.watchPosition((position) => {
+                this.setState({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                }, () => {
+                    this.onBoundsUpdate(this.state.bounds);
+                });
+            }, (error) => {
+                this.setState({ lat: 48.3705449, lng: 10.89779 }, () => {
+                    this.onBoundsUpdate(this.state.bounds);
+                })
+            })
+        }
+    }
+
+    componentWillMount() {
+        this.setPosition();
+    }
 
     /**
-    * Decides whether the component should update.
-    * Returns true if the state of AirQualityData changed in the parent component, false otherwise.
-    *
-    * @param {Object} nextprops The properties
-    * @param {Object} nextState The new state
-    */
-    shouldComponentUpdate(nextprops, nextState) {
-        if (JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextprops.airQ)) {
-            return true;
+     * Changes the airQualityData state of the component.
+     *
+     * @param {Object} airQ The AirQualityData
+     */
+    componentDidUpdate(airQ) {
+        if (this.state.airQualityData == null && airQ.airQ == null) {
+            return
         }
-        else if (this.state.bounds !== nextState.bounds) {
-            return true;
+        if (this.state.airQualityData.name === airQ.airQ.name) {
+            return;
         }
-        else {
-            return false;
+
+        this.setState({ airQualityData: airQ.airQ });
+        if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
+            document.cookie = 'AirQuality=' + JSON.stringify(this.state.airQualityData);
         }
     }
 
-  /**
-   * Changes the airQualityData state of the component. 
-   * 
-   * @param {Object} airQ The AirQualityData
-   */
-  componentDidUpdate(airQ) {
-    if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(airQ.airq)) {
-      console.log(airQ.airQ);
-      this.setState({airQualityData : airQ.airQ});
-      if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
-        document.cookie = 'AirQuality=' + JSON.stringify(this.state.airQualityData);
-      }
-    }      
-  }
+    requestCell(lat, lng) {
+        if (this.state.cells.hasOwnProperty(`${lat}|${lng}`) || this.state.cells[`${lat}|${lng}`] != undefined) {
+            return;
+        }
 
-    onMove(event) {
-        var observedProperty = new ObservedProperty(JSON.parse(`
-            {
-                "name" : "PM10 Mass Concentration",
-                "description" : "Mass concentration of Particulate Matter with a diameter of equal or less than 10 micrometers in air.",
-                "properties" : {},
-                "definition" : "http://cfconventions.org/Data/cf-standard-names/63/build/cf-standard-name-table.html#mass_concentration_of_pm10_ambient_aerosol_particles_in_air",
-                "id" : "saqn:op:mcpm10",
-                "selfLink" : {
-                    "url" : "https://api.smartaq.net/v1.0/ObservedProperties('saqn%3Aop%3Amcpm10')",
-                    "relative" : "false",
-                    "@type" : "SingleLocalLink"
+        request("http://localhost:8080/api/thing/all/square", false, {
+            "y1": lat,
+            "x1": lng,
+            "y2": lat + this.gridSize,
+            "x2": lng + this.gridSize
+        }, Thing).then(things => {
+            request("http://localhost:8080/api/observation/all/things/timeframed", false, {
+                "things": things,
+                "millis": Date.now(),
+                "range": "PT12H",
+                "observedProperty": this.state.airQualityData.observedProperty
+            }, Observation).then(observations => {
+                this.setState({ cells: { ...this.state.cells, [`${lat}|${lng}`]: { things: things, observations: observations } } });
+            }, error => {
+                this.setState({ cells: { ...this.state.cells, [`${lat}|${lng}`]: undefined } });
+            });
+        }, error => {
+            delete this.state.cells[`${lat}|${lng}`];
+        });
+        this.state.cells[`${lat}|${lng}`] = null;
+    }
+
+    onBoundsUpdate(newBounds) {
+        this.setState({ bounds: newBounds }, () => {
+            var southWest = newBounds.getSouthWest();
+            var southCell = Math.floor(southWest.lat/this.gridSize);
+            var westCell = Math.floor(southWest.lng/this.gridSize);
+
+            var northEast = newBounds.getNorthEast();
+            var northCell = Math.floor(northEast.lat/this.gridSize);
+            var eastCell = Math.floor(northEast.lng/this.gridSize);
+
+            var xCells = eastCell - westCell;
+            var yCells = northCell - southCell;
+
+            if (yCells < 5 && xCells < 5) {
+                for (var y = 0; y <= yCells; y++) {
+                    for (var x = 0; x <= xCells; x++) {
+                        this.requestCell((southCell + y) * this.gridSize, (westCell + x) * this.gridSize);
+                    }
                 }
             }
-        `));
-
-        var newBounds = event.target.getBounds();
-        this.setState({ bounds: newBounds }, () => {
-            request("http://localhost:8081/api/thing/all/square", false, {
-                "y1": newBounds.getSouthWest().lat,
-                "x1": newBounds.getSouthWest().lng,
-                "y2": newBounds.getNorthEast().lat,
-                "x2": newBounds.getNorthEast().lng
-            }, Thing).then(things => {
-                this.setState({ things: things }, () => {
-                    request("http://localhost:8080/api/observation/all/things/timeframed", false, {
-                        "things": things,
-                        "millis": Date.now(),
-                        "range": "PT12H",
-                        "observedProperty": observedProperty
-                    }, Observation).then(observations => {
-                        //Still same things in case of long request where things might have changed
-                        if (this.state.things == things) {
-                            this.setState({ observations: observations });
-                        }
-                    });
-                });
-            });
         });
     }
+
+    onMove(event) {
+        this.onBoundsUpdate(event.target.getBounds());
+    }
+
     render() {
-      const ReactLeafletSearchComponent = withLeaflet(ReactLeafletSearch)
+        const ReactLeafletSearchComponent = withLeaflet(ReactLeafletSearch)
         return (
-          <Map 
-            center={[this.state.lat, this.state.lng]} 
-            zoom={this.state.zoom} 
-            style={{ width: '100%', height: '100vh'}}
-            boundsOptions={{padding: [50, 50]}}
-            ref = {this.mapRef}
-            onMoveEnd={this.onMove.bind(this)}
-            zoomControl = {false}
-          >
-            <TileLayer
-             attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <OverlayBuilder mapState={this.state} />
-             <Legend airQ = {this.state.airQualityData}
-             />
-           <ReactLeafletSearchComponent
-              className="custom-style"
-              position="topleft"
-              provider ="OpenStreetMap"
-              providerOptions={{region:"de"}}
-              inputPlaceholder="Search"
-              zoom={12}
-              showMarker={false}
-              showPopUp={false}
-              closeResultsOnClick={true}
-              openSearchOnLoad={true}
-          />
-       </Map>
-      );
-   }
+            <Map
+                center={[this.state.lat, this.state.lng]}
+                zoom={this.state.zoom}
+                style={{ width: '100%', height: '100vh' }}
+                boundsOptions={{ padding: [50, 50] }}
+                ref={this.mapRef}
+                onMoveEnd={this.onMove.bind(this)}
+                zoomControl={false}
+            >
+                <TileLayer
+                    attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <OverlayBuilder mapState={this.state} gridSize={this.gridSize} />
+                <Legend airQ={this.state.airQualityData}
+                />
+                <ReactLeafletSearchComponent
+                    className="custom-style"
+                    position="topleft"
+                    provider="OpenStreetMap"
+                    providerOptions={{ region: "de" }}
+                    inputPlaceholder="Search"
+                    zoom={12}
+                    showMarker={false}
+                    showPopUp={false}
+                    closeResultsOnClick={true}
+                    openSearchOnLoad={true}
+                />
+            </Map>
+        );
+    }
 }

@@ -1,5 +1,5 @@
  {
-    "particulateMatter" : 
+    "particulateMatter" :
     {
         "name" : "particulate matter",
         "primaryColor" : "#25992c",
@@ -20,7 +20,7 @@
             }
         }
     },
-    "airPressure" : 
+    "airPressure" :
     {
         "name" : "air pressure",
         "primaryColor" : "#286ab4",
@@ -41,7 +41,7 @@
             }
         }
     },
-    "temperature" : 
+    "temperature" :
     {
         "name" : "temperature",
         "primaryColor" : "#1c99d6",
@@ -62,7 +62,7 @@
             }
         }
     },
-    "humidity" : 
+    "humidity" :
     {
         "name" : "humidity",
         "primaryColor" : "#eaa21a",
