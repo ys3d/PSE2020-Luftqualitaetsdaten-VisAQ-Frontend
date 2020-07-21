@@ -18,8 +18,7 @@ export default class OverlayBuilder extends Component {
         return (
             <div>
                 <Fragment>
-                    <SensorOverlayFactory sensors={this.props.mapState.things} airQ = {this.props.mapState.airQualityData} />
-                    <InterpolationOverlayFactory sensors={this.props.mapState.things} />
+                    <SensorOverlayFactory things={this.props.mapState.things} observations={this.props.mapState.observations} airQ = {this.props.mapState.airQualityData} />
                 </Fragment>
             </div>
         );

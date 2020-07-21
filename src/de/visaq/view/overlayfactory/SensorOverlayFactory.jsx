@@ -9,25 +9,35 @@ import Gradient from '../elements/theme/Gradient';
 
 //normally data should be given instead of props
 const SensorOverlayFactory = (props) => {
-    const {sensors} = props;
-    if (!Array.isArray(sensors)) {
+    const things = props.things;
+    const observations = props.observations;
+
+    if (!Array.isArray(things) || !Array.isArray(observations)) {
         return <Fragment></Fragment>
     }
+    
+    const data = [];
 
-    const markers = sensors.filter((sensor, index) => {
-        if (sensor.locations == undefined) {
+    things.forEach((thing, index) => {
+        data[index] = { thing: thing, observation: observations[index] };
+    });
+
+    const markers = data.filter((datum) => {
+        if (datum.thing.locations === undefined) {
+            return false;
+        } else if (datum.observation == null) {
             return false;
         }
         return true;
-    }).map((sensor, index) => (
+    }).map((datum, index) => (
         <CircleMarker
             key={index}
-            center={[sensor.locations[0].location.y, sensor.locations[0].location.x]}
+            center={[datum.thing.locations[0].location.y, datum.thing.locations[0].location.x]}
             opacity='0'
-            fillColor={Gradient(80, props.airQ)}
+            fillColor={Gradient(datum.observation.result, props.airQ)}
             fillOpacity='0.8'
             radius={10}
-            onClick={onCircleClick.bind(sensor)}
+            onClick={onCircleClick.bind(datum.thing)}
         >
         </CircleMarker>
     ));
