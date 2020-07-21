@@ -36,10 +36,10 @@ class SensorOverview extends Component {
         particulateMatter: ""
       },
       unit: {
-        airHumidity: "",
-        airPressure: "",
-        airTemperature: "",
-        particulateMatter: ""
+        airHumidity: airQualityData.humidity.unitOfMeasurement,
+        airPressure: airQualityData.airPressure.unitOfMeasurement,
+        airTemperature: airQualityData.temperature.unitOfMeasurement,
+        particulateMatter: airQualityData.particulateMatter.unitOfMeasurement
       },
       diagram: {
         label: {
@@ -99,14 +99,18 @@ class SensorOverview extends Component {
             show: {
               ...show,
               airHumidity: true,
-            }
+            },
           }));
+          
           var newestObservations = request("/api/observation/all/newest", true, {
             "datastreamId": datastream.id,
             "topNumber": 20
           }, Observation);
           newestObservations.then(newest => {
-            console.log(newest);
+            newest.map((element, index) => {
+              console.log(element);
+              console.log(index);
+            });
           })
         }
       });
@@ -192,12 +196,6 @@ class SensorOverview extends Component {
           airPressure: "3",
           airTemperature: "1",
           particulateMatter: "8"
-        },
-        unit: {
-          airHumidity: "%",
-          airPressure: "hPa",
-          airTemperature: "°C",
-          particulateMatter: "ppm"
         },
         diagram: {
           label: {
