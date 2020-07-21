@@ -20,5 +20,7 @@ export default function request(url, relative, params, model) {
             return models;
         }
         return new model(data);
+    }, () => {
+        return null;
     });
 };
