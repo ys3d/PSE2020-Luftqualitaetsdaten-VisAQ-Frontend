@@ -1,14 +1,26 @@
  {
-    "particulateMatter" : 
+    "particulateMatter" :
     {
         "name" : "particulate matter",
         "primaryColor" : "#25992c",
         "secondaryColor" : "#d20000",
         "average" : "40",
         "variance" : "10",
-        "unitOfMeasurement" : "µg/m³"
+        "unitOfMeasurement" : "µg/m³",
+        "observedProperty" : {
+            "name" : "PM10 Mass Concentration",
+            "description" : "Mass concentration of Particulate Matter with a diameter of equal or less than 10 micrometers in air.",
+            "properties" : {},
+            "definition" : "http://cfconventions.org/Data/cf-standard-names/63/build/cf-standard-name-table.html#mass_concentration_of_pm10_ambient_aerosol_particles_in_air",
+            "id" : "saqn:op:mcpm10",
+            "selfLink" : {
+                "url" : "https://api.smartaq.net/v1.0/ObservedProperties('saqn%3Aop%3Amcpm10')",
+                "relative" : "false",
+                "@type" : "SingleLocalLink"
+            }
+        }
     },
-    "airPressure" : 
+    "airPressure" :
     {
         "name" : "air pressure",
         "primaryColor" : "#286ab4",
@@ -17,7 +29,7 @@
         "variance" : "40",
         "unitOfMeasurement" : "hPA"
     },
-    "temperature" : 
+    "temperature" :
     {
         "name" : "temperature",
         "primaryColor" : "#1c99d6",
@@ -26,7 +38,7 @@
         "variance" : "30",
         "unitOfMeasurement" : "°C"
     },
-    "humidity" : 
+    "humidity" :
     {
         "name" : "humidity",
         "primaryColor" : "#eaa21a",
