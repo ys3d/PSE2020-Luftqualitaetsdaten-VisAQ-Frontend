@@ -7,6 +7,11 @@ import request from '../../../../controller/Request'
 import Thing from '../../../../model/Thing'
 import DataCard from './DataCard'
 import ShareField from './ShareField'
+import Datastream from '../../../../model/Datastream'
+import ObservedProperty from '../../../../model/ObservedProperty';
+import * as observedPropertiesId from '../../../../../../resources/observedPropertyId.json'
+import * as airQualityData from '../../../../../../resources/AirQualityData.json'
+import Observation from '../../../../model/Observation';
 
 
 /**
@@ -77,14 +82,110 @@ class SensorOverview extends Component {
       id: this.props.thingID
     }, Thing);
     console.log("Load");
-    thing.then(gotthing => {
+    thing.then(thing => {
       this.setState({
-        thingName: gotthing.name,
-        thingDescription: gotthing.description
+        thingName: thing.name,
+        thingDescription: thing.description
       });
-      var datastreams = request("http://localhost:8081/api/datastream/all/thing", false, {
-        thing: gotthing
-      }, Thing);
+
+      /* Humidity Datastream ####################################################################################### */
+      var datastreams = request("/api/datastream/thing/observedProperty", true, {
+        "thing": thing,
+        "observedProperty": new ObservedProperty(airQualityData.humidity.observedProperty)
+      }, Datastream);
+      datastreams.then(datastream => {
+        if (datastream != null) {
+          this.setState(({ show }) => ({
+            show: {
+              ...show,
+              airHumidity: true,
+            }
+          }));
+          var newestObservations = request("/api/observation/all/newest", true, {
+            "datastreamId": datastream.id,
+            "topNumber": 20
+          }, Observation);
+          newestObservations.then(newest => {
+            console.log(newest);
+          })
+        }
+      });
+
+      /* Temperature Datastream ####################################################################################### */
+      var datastreams = request("/api/datastream/thing/observedProperty", true, {
+        "thing": thing,
+        "observedProperty": new ObservedProperty(airQualityData.temperature.observedProperty)
+      }, Datastream);
+      datastreams.then(datastream => {
+        if (datastream != null) {
+          this.setState(({ show }) => ({
+            show: {
+              ...show,
+              airTemperature: true,
+            }
+          }));
+          var newestObservations = request("/api/observation/all/newest", true, {
+            "datastreamId": datastream.id,
+            "topNumber": 20
+          }, Observation);
+          newestObservations.then(newest => {
+            console.log(newest);
+          })
+        }
+      });
+
+      /* Air Pressure Datastream ####################################################################################### */
+      var datastreams = request("/api/datastream/thing/observedProperty", true, {
+        "thing": thing,
+        "observedProperty": new ObservedProperty(airQualityData.airPressure.observedProperty)
+      }, Datastream);
+      datastreams.then(datastream => {
+        if (datastream != null) {
+          this.setState(({ show }) => ({
+            show: {
+              ...show,
+              airPressure: true,
+            }
+          }));
+          var newestObservations = request("/api/observation/all/newest", true, {
+            "datastreamId": datastream.id,
+            "topNumber": 20
+          }, Observation);
+          newestObservations.then(newest => {
+            console.log(newest);
+          })
+        }
+      });
+
+      /* Particulate Matter Datastream ####################################################################################### */
+      var datastreams = request("/api/datastream/thing/observedProperty", true, {
+        "thing": thing,
+        "observedProperty": new ObservedProperty(airQualityData.particulateMatter.observedProperty)
+      }, Datastream);
+      datastreams.then(datastream => {
+        if (datastream != null) {
+          this.setState(({ show }) => ({
+            show: {
+              ...show,
+              particulateMatter: true,
+            }
+          }));
+          var newestObservations = request("/api/observation/all/newest", true, {
+            "datastreamId": datastream.id,
+            "topNumber": 20
+          }, Observation);
+          newestObservations.then(newest => {
+            console.log(newest);
+          })
+        }
+      });
+
+
+
+
+
+
+
       this.setState({
         value: {
           airHumidity: "5",
@@ -112,12 +213,6 @@ class SensorOverview extends Component {
             particulateMatter: [65, 59, 80, 81, 56, 55, 40]
           }
         },
-        show: {
-          airHumidity: true,
-          airPressure: true,
-          airTemperature: true,
-          particulateMatter: true
-        }
       });
     });
   }
@@ -134,7 +229,7 @@ class SensorOverview extends Component {
         <p>
           {t('description')} {this.state.thingDescription}
         </p>
-        <ShareField subject={t('shareTitle')} body={t('shareBody')}/>
+        <ShareField subject={t('shareTitle')} body={t('shareBody')} />
         <div className="Demo__some-network__share-count">&nbsp;</div>
 
         <Accordion>

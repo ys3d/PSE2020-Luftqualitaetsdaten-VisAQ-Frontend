@@ -56,12 +56,16 @@ class App extends Component {
               <Row>
                 <Col id="map-content">
                   <p>
-                    <a href="#" onClick={() => this.handleShowSensorClick("saqn:t:82c620f")}>
+                    <a href="#" onClick={() => this.handleShowSensorClick("saqn:t:umweltbundesamt.de:station_augsburg_koenigsplatz:deby006")}>
                       open
                     </a>
                     _
                     <a href="#" onClick={() => this.handleShowSensorClick("saqn:t:7bd2cd3")}>
                       open2
+                    </a>
+                    _
+                    <a href="#" onClick={() => this.handleShowSensorClick("saqn:t:803206c")}>
+                      open3
                     </a>
                   </p>
                   <p>

@@ -1,9 +1,0 @@
-{
-    "identifier" :
-    {
-        "airTemperature" : "",
-        "airPressure": "",
-        "humidity": "",
-        "particulateMatter": ""
-    }
-}
