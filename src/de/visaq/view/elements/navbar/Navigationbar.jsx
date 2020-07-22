@@ -160,7 +160,7 @@ class Navigationbar extends React.Component {
                             </Navbar.Collapse>
                         </Navbar>
                     </Styles>
-                    <MapView airQ={this.state.airQualityData} />
+                    <MapView airQ={this.state.airQualityData} openHandler={(e) => this.props.openHandler(e)}/>
                 </Router>
             </React.Fragment>
         )

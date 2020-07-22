@@ -141,7 +141,7 @@ export default class MapView extends Component {
                     attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <OverlayBuilder mapState={this.state} gridSize={this.gridSize} />
+                <OverlayBuilder mapState={this.state} gridSize={this.gridSize} openHandler={(e) => this.props.openHandler(e)}/>
                 <Legend airQ={this.state.airQualityData}
                 />
                 <ReactLeafletSearchComponent
