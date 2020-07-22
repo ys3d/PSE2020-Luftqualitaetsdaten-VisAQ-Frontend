@@ -101,25 +101,6 @@ class SensorOverview extends Component {
               airHumidity: true,
             },
           }));
-          
-          /*var newestObservations = request("/api/observation/all/newest", true, {
-            "datastreamId": datastream.id,
-            "topNumber": 20
-          }, Observation);
-          newestObservations.then(newest => {
-            newest.map((element, index) => {
-              console.log(element);
-              console.log(index);
-              if (index < 1) {
-                this.setState(({ value }) => ({
-                  value: {
-                    ...value,
-                    airHumidity: element.value,
-                  },
-                }));
-              }
-            });
-          })*/
         }
       });
 
@@ -136,13 +117,6 @@ class SensorOverview extends Component {
               airTemperature: true,
             }
           }));
-          /*var newestObservations = request("/api/observation/all/newest", true, {
-            "datastreamId": datastream.id,
-            "topNumber": 20
-          }, Observation);
-          newestObservations.then(newest => {
-            console.log(newest);
-          })*/
         }
       });
 
@@ -159,13 +133,6 @@ class SensorOverview extends Component {
               airPressure: true,
             }
           }));
-          /*var newestObservations = request("/api/observation/all/newest", true, {
-            "datastreamId": datastream.id,
-            "topNumber": 20
-          }, Observation);
-          newestObservations.then(newest => {
-            console.log(newest);
-          })*/
         }
       });
 
@@ -182,13 +149,6 @@ class SensorOverview extends Component {
               particulateMatter: true,
             }
           }));
-          /*var newestObservations = request("/api/observation/all/newest", true, {
-            "datastreamId": datastream.id,
-            "topNumber": 20
-          }, Observation);
-          newestObservations.then(newest => {
-            console.log(newest);
-          })*/
         }
       });
 
