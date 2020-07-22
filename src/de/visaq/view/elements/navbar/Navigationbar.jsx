@@ -1,6 +1,8 @@
 import React, { state, isOpen } from 'react';
-import { Navbar, NavDropdown, Form, FormCheck, FormControl, NavbarToggler, Collapse, Nav, NavItem,
-   NavLink, NavbarBrand, DropdownToggle, Dropdown, Button, DropdownMenu, ButtonGroup} from 'react-bootstrap';
+import {
+    Navbar, NavDropdown, Form, FormCheck, FormControl, NavbarToggler, Collapse, Nav, NavItem,
+    NavLink, NavbarBrand, DropdownToggle, Dropdown, Button, DropdownMenu, ButtonGroup
+} from 'react-bootstrap';
 import styled from 'styled-components';
 import PopupReasons from './PopupReasons';
 import { BrowserRouter as Router } from "react-router-dom";
@@ -8,7 +10,7 @@ import PopupCauses from './PopupCauses';
 import CookieNotice from '../CookieNotice';
 import MapView from '../../MapView';
 import i18next from 'i18next';
-import {withTranslation} from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import AirQualityData from '../airquality/AirQualityData';
 import * as data from '../../../../../resources/AirQualityData.json';
 import Timeline from './Timeline'
@@ -49,39 +51,21 @@ const Styles = styled.div`
 
 /* Constructs the Navigationbar with all functions */
 class Navigationbar extends React.Component {
-  
-  constructor(props) {
-    super(props)
-    this.state = { 
-      isOpen: false,
-      historical : false,  
-      airQualityData : new AirQualityData(data.particulateMatter)}
-         
-  }
 
-  handleOpen = () => {
-    this.setState({ isOpen: true })
-  }
+    constructor(props) {
+        super(props)
+        this.state = {
+            isOpen: false,
+            airQualityData: new AirQualityData(data.particulateMatter)
+        };
+    }
 
-  handleClose = () => {
-     this.setState({ isOpen: false })
-  }
+    handleOpen = () => {
+        this.setState({ isOpen: true })
+    }
 
-  selectOnlyThis(id) {
-      for (var i = 1;i <= 3; i++)
-      {
-          document.getElementById(i).checked = false;
-      }
-      document.getElementById(id).checked = true;
-  }
-  
-  shouldComponentUpdate(nextprops, nextState) {
-    console.log(nextprops.airQ);
-    if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextprops.airQ)){
-      console.log(nextprops.airQ);
-      return true;
-    } else {
-      return false;
+    handleClose = () => {
+        this.setState({ isOpen: false })
     }
      
   }

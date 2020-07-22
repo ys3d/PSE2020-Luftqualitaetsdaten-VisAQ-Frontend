@@ -80,7 +80,7 @@ class Legend extends MapControl {
       let labels = [];
       let pos;
 
-      for (let i = 0; i < grades.length; i++) {
+      for (let i = grades.length -1; i >= 0; i--) {
         pos = grades[i];
 
         labels.push(

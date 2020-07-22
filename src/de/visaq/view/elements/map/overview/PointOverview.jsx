@@ -6,6 +6,7 @@ import { withTranslation } from 'react-i18next';
 import request from '../../../../controller/Request'
 import Thing from '../../../../model/Thing'
 import DataCard from './DataCard'
+import ShareField from './ShareField'
 
 
 /**
@@ -62,9 +63,11 @@ class PointOverview extends Component {
         <h1>
           {t('location')}
         </h1>
-
+        <ShareField subject={t('shareTitle')} body={t('shareBody')}/>
+        <div className="Demo__some-network__share-count">&nbsp;</div>
         <Accordion>
           <DataCard
+            show={true}
             cardTitle={t('airPressure')}
             currentValue="1000hPa"
             consequences = {t(this.getConsequencesAirQuality(this.currentValue))}
@@ -74,6 +77,7 @@ class PointOverview extends Component {
             eventKey={1}
           />
           <DataCard
+            show={true}
             cardTitle={t('airTemperature')}
             currentValue="30°C"
             consequences = {t(this.getConsequencesTemperature(this.currentValue))}
@@ -83,6 +87,7 @@ class PointOverview extends Component {
             eventKey={2}
           />
           <DataCard
+            show={true}
             cardTitle={t('airHumidity')}
             currentValue="17%"
             consequences = {t(this.getConsequencesHumidity(this.currentValue))}
@@ -92,6 +97,7 @@ class PointOverview extends Component {
             eventKey={3}
           />
           <DataCard
+            show={true}
             cardTitle={t('particulateMatter')}
             currentValue="155ppm"
             consequences = {t(this.getConsequencesPM(this.currentValue))}

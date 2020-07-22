@@ -14,11 +14,13 @@ export default function request(url, relative, params, model) {
             var models = new Array(data.length);
 
             data.forEach((entry, index) => {
-                models[index] = new model(entry);
+                models[index] = entry == null ? null : new model(entry);
             });
 
             return models;
         }
         return new model(data);
+    }, () => {
+        return null;
     });
 };

@@ -41,4 +41,17 @@ export default class Thing extends Sensorthing {
 
         return locations;
     }
+
+    toJSON() {
+        return {
+            id: this.id,
+            selfUrl: this.selfUrl,
+            description: this.description,
+            name: this.name,
+            datastreamsLink: this.datastreamsLink,
+            historicalLocationsLink: this.historicalLocationsLink,
+            locationsLink: this.locationsLink,
+            "@type": "Thing"
+        };
+    }
 };

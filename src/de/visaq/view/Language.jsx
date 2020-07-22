@@ -7,7 +7,7 @@ import navbar_de from '../../../resources/de/navbar_de.json';
 import navbar_en from '../../../resources/en/navbar_en.json';
 import sensorOverview_de from '../../../resources/de/sensorOverview_de.json'
 import sensorOverview_en from '../../../resources/en/sensorOverview_en.json'
-
+ 
 const resources = {
         en: {
         common: navbar_en,
@@ -19,20 +19,28 @@ const resources = {
     }
   };
 
+ 
 i18n
 .use(initReactI18next)
+
+.on('languageChanged', function(lng) {
+  if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
+    document.cookie= 'Language=' + lng;
+  }
+})
+
 .init({
-    lng: 'de',
+    lng: document.cookie.split(';').some((item) => item.trim().startsWith('Language=en')) ? 'en' : 'de',
     resources,
     languages: ['de','en'],
     fallbackLng: 'de',
     debug: true,
     load: 'current',
-
+    
     interpolation: {
-      escapeValue: false, // not needed for react as it escapes by default
+      escapeValue: false,
     },
-
+    
 });
 
 i18next
@@ -40,5 +48,4 @@ i18next
   .then((t) => {
     t('key'); // -> same as i18next.t
   });
-
 export default i18n;

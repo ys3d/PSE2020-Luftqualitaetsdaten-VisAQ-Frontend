@@ -7,7 +7,7 @@ export default class Sensorthing {
         return this.json.id;
     }
 
-    get selfLink() {
-        return this.json.selfLink;
+    get selfUrl() {
+        return this.json.selfUrl;
     }
 };

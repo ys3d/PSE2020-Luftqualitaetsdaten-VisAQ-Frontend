@@ -16,4 +16,15 @@ export default class HistoricalLocation extends Sensorthing {
     get locationsLink() {
         return this.json.locationsLink;
     }
+
+    toJSON() {
+        return {
+            id: this.id,
+            selfUrl: this.selfUrl,
+            time: this.time,
+            thingLink: this.thingLink,
+            locationsLink: this.locationsLink,
+            "@type": "HistoricalLocation"
+        };
+    }
 };

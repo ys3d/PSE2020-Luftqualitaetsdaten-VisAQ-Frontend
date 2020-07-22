@@ -20,4 +20,16 @@ export default class FeatureOfInterest extends Sensorthing {
     get features() {
         return this.json.features;
     }
+
+    toJSON() {
+        return {
+            id: this.id,
+            selfUrl: this.selfUrl,
+            description: this.description,
+            name: this.name,
+            observationsLink: this.observationsLink,
+            features: this.features,
+            "@type": "FeatureOfInterest"
+        };
+    }
 };
