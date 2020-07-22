@@ -76,13 +76,13 @@ export default class MapView extends Component {
             return;
         }
 
-        request("http://localhost:8080/api/thing/all/square", false, {
+        request("/api/thing/all/square", true, {
             "y1": lat,
             "x1": lng,
             "y2": lat + this.gridSize,
             "x2": lng + this.gridSize
         }, Thing).then(things => {
-            request("http://localhost:8080/api/observation/all/things/timeframed", false, {
+            request("/api/observation/all/things/timeframed", true, {
                 "things": things,
                 "millis": Date.now(),
                 "range": "PT12H",
@@ -141,7 +141,7 @@ export default class MapView extends Component {
                     attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <OverlayBuilder mapState={this.state} gridSize={this.gridSize} />
+                <OverlayBuilder mapState={this.state} gridSize={this.gridSize} openHandler={(e) => this.props.openHandler(e)}/>
                 <Legend airQ={this.state.airQualityData}
                 />
                 <ReactLeafletSearchComponent

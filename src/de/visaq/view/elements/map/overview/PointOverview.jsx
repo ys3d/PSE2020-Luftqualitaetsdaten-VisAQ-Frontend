@@ -31,6 +31,7 @@ class PointOverview extends Component {
         <div className="Demo__some-network__share-count">&nbsp;</div>
         <Accordion>
           <DataCard
+            show={true}
             cardTitle={t('airPressure')}
             currentValue="1000hPa"
             dataRowLabel="hPa"
@@ -39,6 +40,7 @@ class PointOverview extends Component {
             eventKey={1}
           />
           <DataCard
+            show={true}
             cardTitle={t('airTemperature')}
             currentValue="30°C"
             dataRowLabel="°C"
@@ -47,6 +49,7 @@ class PointOverview extends Component {
             eventKey={2}
           />
           <DataCard
+            show={true}
             cardTitle={t('airHumidity')}
             currentValue="17%"
             dataRowLabel="%"
@@ -55,6 +58,7 @@ class PointOverview extends Component {
             eventKey={3}
           />
           <DataCard
+            show={true}
             cardTitle={t('particulateMatter')}
             currentValue="155ppm"
             dataRowLabel="ppm"

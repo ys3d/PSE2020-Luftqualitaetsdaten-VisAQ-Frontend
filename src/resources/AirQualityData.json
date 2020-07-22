@@ -27,7 +27,19 @@
         "secondaryColor" : "#eaa21a",
         "average" : "1013.25",
         "variance" : "40",
-        "unitOfMeasurement" : "hPA"
+        "unitOfMeasurement" : "hPA",
+        "observedProperty" : {
+            "name" : "Air Pressure",
+            "description" : "Air pressure is the force per unit area which would be exerted when the moving gas molecules of which the air is composed strike a theoretical surface of any orientation.",
+            "properties" : {},
+            "definition" : "http://cfconventions.org/Data/cf-standard-names/63/build/cf-standard-name-table.html#air_pressure",
+            "id" : "saqn:op:plev",
+            "selfLink" : {
+                "url" : "https://api.smartaq.net/v1.0/ObservedProperties('saqn%3Aop%3Aplev')",
+                "relative" : "false",
+                "@type" : "SingleLocalLink"
+            }
+        }
     },
     "temperature" :
     {
@@ -36,7 +48,19 @@
         "secondaryColor" : "#d20000",
         "average" : "16.8",
         "variance" : "30",
-        "unitOfMeasurement" : "°C"
+        "unitOfMeasurement" : "°C",
+        "observedProperty" : {
+            "name" : "Air Temperature",
+            "description" : "Air temperature is the bulk temperature of the air, not the surface (skin) temperature.",
+            "properties" : {},
+            "definition" : "http://cfconventions.org/Data/cf-standard-names/63/build/cf-standard-name-table.html#air_temperature",
+            "id" : "saqn:op:ta",
+            "selfLink" : {
+                "url" : "https://api.smartaq.net/v1.0/ObservedProperties('saqn%3Aop%3Ata')",
+                "relative" : "false",
+                "@type" : "SingleLocalLink"
+            }
+        }
     },
     "humidity" :
     {
@@ -45,6 +69,18 @@
         "secondaryColor" : "#286ab4",
         "average" : "75",
         "variance" : "25",
-        "unitOfMeasurement" : "%"
+        "unitOfMeasurement" : "%",
+        "observedProperty" : {
+            "name" : "Relative Humidity",
+            "description" : "Relative humidity is the ratio of the partial pressure of water vapor to the equilibrium vapor pressure of water at a given temperature.",
+            "properties" : {},
+            "definition" : "http://cfconventions.org/Data/cf-standard-names/63/build/cf-standard-name-table.html#relative_humidity",
+            "id" : "saqn:op:hur",
+            "selfLink" : {
+                "url" : "https://api.smartaq.net/v1.0/ObservedProperties('saqn%3Aop%3Ahur')",
+                "relative" : "false",
+                "@type" : "SingleLocalLink"
+            }
+        }
     }
  }

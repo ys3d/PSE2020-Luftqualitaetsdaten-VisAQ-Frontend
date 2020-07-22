@@ -55,21 +55,8 @@ class App extends Component {
             <Container fluid>
               <Row>
                 <Col id="map-content">
-                  <Navigationbar />
-                  <p>
-                    <a href="#" onClick={() => this.handleShowSensorClick("saqn:t:grimm-aerosol.com:EDM80NEPH:SN17017")}>
-                      open
-                    </a>
-                    _
-                    <a href="#" onClick={() => this.handleShowSensorClick("saqn:t:7bd2cd3")}>
-                      open2
-                    </a>
-                  </p>
-                  <p>
-                    <a href="#" onClick={() => this.handleShowPointClick()}>
-                      open3
-                    </a>
-                  </p>
+                  
+                  <Navigationbar openHandler={(e) => this.handleShowSensorClick(e)}/>
                 </Col>
                 <Overview show={this.state.showOverview} closeHandler={this.handleCloseClick} thingID={this.state.thingID} isSensor={this.state.isSensor} />
               </Row>
