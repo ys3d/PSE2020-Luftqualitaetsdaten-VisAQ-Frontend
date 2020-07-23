@@ -1,8 +1,8 @@
-.navbar { background-color: #FFFF; }
-a, .navbar-nav, .navbar-dark, .nav-link, .visaq, .search, .basic-navbar-nav {
-  color: #44c2d4;
+.navbar { background-color: #FFF; }
+a, .navbar-nav, .navbar-dark .nav-link {
+  color: #000;
 }
-.navbarbrand {
+.navbar-brand {
   font-size: 1.4em;
   color: #44c2d4;
 }
@@ -12,15 +12,46 @@ a, .navbar-nav, .navbar-dark, .nav-link, .visaq, .search, .basic-navbar-nav {
   right: 25%;
 }
 
-.dropdown-basic{
-  width: 40%;
-}
-.nav-item:hover .dropdown-menu{
-display:block!important;
-width: 100%;
+.dropdown:hover>.dropdown-menu {
+  display: block;
 }
 
-button:active{
+#title {
   color: #44c2d4;
 }
 
+#nav-link:hover {
+  color: #44c2d4;
+}
+
+#nav-link::selection {
+  color: #44c2d4;
+}
+
+#nav-link:focus {
+  color: #44c2d4;
+}
+
+#nav-link-lng:hover {
+  color: #44c2d4;
+}
+
+#nav-link-lng::selection {
+  color: #44c2d4;
+}
+
+#nav-link-lng:focus {
+  color: #44c2d4;
+}
+
+#link {
+  color: #787878;;
+}
+
+#dropdown-basic {
+  color: #787878;
+}
+
+#dropdown-basic:hover {
+  color: #44c2d4;
+}

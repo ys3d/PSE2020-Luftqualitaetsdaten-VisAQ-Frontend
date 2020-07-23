@@ -6,6 +6,7 @@ import SensorOverview from './SensorOverview'
 import PointOverview from './PointOverview'
 import { Col } from "react-bootstrap";
 import { render } from '@testing-library/react';
+import './OverviewContainer.css'
 
 /**
  * Container for The SensorOverview
@@ -28,9 +29,9 @@ function Overview(props) {
                             overlay={closeToolTip}
                         >
                             <p>
-                                <a href="#" onClick={props.closeHandler}>
-                                    <img src={closeX} alt="close" width='20px' />
-                                </a>
+                                <a href="#" onClick={props.closeHandler} className='close'/>
+                                <br />
+                                <br />
                             </p>
                         </OverlayTrigger>
                         <SensorOverview thingID={props.thingID} />
@@ -48,9 +49,9 @@ function Overview(props) {
                             overlay={closeToolTip}
                         >
                             <p>
-                                <a href="#" onClick={props.closeHandler}>
-                                    <img src={closeX} alt="close" width='20px' />
-                                </a>
+                                <a href="#" onClick={props.closeHandler} className='close'/>
+                                <br />
+                                <br />
                             </p>
                         </OverlayTrigger>
                         <PointOverview />

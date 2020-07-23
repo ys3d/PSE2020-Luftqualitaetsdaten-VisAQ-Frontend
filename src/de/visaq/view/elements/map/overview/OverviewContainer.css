@@ -1,0 +1,62 @@
+#tooltip-top > .tooltip-inner {
+    background-color: #B4E6ED;
+    color: #000;
+    border: 1px  #2f8794;
+  }
+  
+  #tooltip-top > .tooltip-arrow {
+    border-top: #B4E6ED;
+    background-color: #B4E6ED;
+    border-color: azure;
+  }
+
+  .close {
+    position: absolute;
+    right: 93%;
+    top: 10px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+  }
+  .close:hover {
+    opacity: 1;
+    color: #2f8794;
+  }
+  .close:before, .close:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: #333;
+  }
+  .close:before {
+    transform: rotate(45deg);
+  }
+  .close:after {
+    transform: rotate(-45deg);
+  }
+
+  #dataCard >  {
+      background-color: transparent;
+  }
+
+  #accordion {
+    background-color: transparent;
+  }
+
+  #sensorOverviewContainer {
+    background-image: linear-gradient(to left, rgba(227, 240, 239, 0.527), #dcfbff);
+  }
+
+  .arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+
+  .down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }  

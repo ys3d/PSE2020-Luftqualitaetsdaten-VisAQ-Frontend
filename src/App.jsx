@@ -4,9 +4,9 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Navigationbar from './de/visaq/view/elements/navbar/Navigationbar'
 import MapView from './de/visaq/view/MapView';
-
-import CookieNotice from './de/visaq/view/elements/CookieNotice'
+import {Button} from 'react-bootstrap'
 import { Container, Row, Col } from "react-bootstrap";
+import './de/visaq/view/elements/theme/LightTheme.css'
 
 import Overview from './de/visaq/view/elements/map/overview/OverviewContainer'
 
@@ -46,24 +46,25 @@ class App extends Component {
     });
   }
 
-
   render() {
     return (
-      <Suspense fallback='loading'>
-        <React.Fragment>
-          <Router>
-            <Container fluid>
-              <Row>
-                <Col id="map-content">
-                  
-                  <Navigationbar openHandler={(e) => this.handleShowSensorClick(e)}/>
-                </Col>
-                <Overview show={this.state.showOverview} closeHandler={this.handleCloseClick} thingID={this.state.thingID} isSensor={this.state.isSensor} />
-              </Row>
-            </Container>
-          </Router>
-        </React.Fragment>
-      </Suspense>
+      <div id='app' className="light-theme">
+        <Suspense fallback='loading'>
+          <React.Fragment>
+            <Router>
+              <Container fluid>
+                <Row>
+                  <Col id="map-content">
+                    <Button onclick={this.replaceTheme('dark-theme')}>Change</Button>
+                    <Navigationbar openHandler={(e) => this.handleShowSensorClick(e)}/>
+                  </Col>
+                  <Overview show={this.state.showOverview} closeHandler={this.handleCloseClick} thingID={this.state.thingID} isSensor={this.state.isSensor} />
+                </Row>
+              </Container>
+            </Router>
+          </React.Fragment>
+        </Suspense>
+      </div>
     );
   }
 }

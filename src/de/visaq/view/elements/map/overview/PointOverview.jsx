@@ -65,10 +65,10 @@ class PointOverview extends Component {
         </h1>
         <ShareField subject={t('shareTitle')} body={t('shareBody')}/>
         <div className="Demo__some-network__share-count">&nbsp;</div>
-        <Accordion>
+        <Accordion><i class="arrow down"></i>
           <DataCard
             show={true}
-            cardTitle={t('airPressure')}
+            cardTitle={t('airPressure')} 
             currentValue="1000hPa"
             consequences = {t(this.getConsequencesAirQuality(this.currentValue))}
             dataRowLabel="hPa"
