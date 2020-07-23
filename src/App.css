@@ -36,3 +36,36 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  height: 0vw;
+  width: 100vw;
+  padding: 0px;
+}
+
+.map-content {
+  border: none;
+}
+
+.map {
+  border: none;
+}
+
+.app {
+  height: 30vw;
+  width: 70vw;
+}
+
+.container {
+  height: 20px;
+  width: 100vw;
+  padding: 0px;
+  border: none;
+}
+
+.row {
+  height: 30vw;
+  width: 100vw;
+  padding: 0px;
+  border: none;
+}
