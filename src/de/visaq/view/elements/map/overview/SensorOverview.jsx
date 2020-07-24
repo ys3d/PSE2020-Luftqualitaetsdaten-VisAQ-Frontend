@@ -81,7 +81,6 @@ class SensorOverview extends Component {
     var thing = request("/api/thing/id", true, {
       id: this.props.thingID
     }, Thing);
-    console.log("Load");
     thing.then(thing => {
       this.setState({
         thingName: thing.name,
@@ -101,6 +100,36 @@ class SensorOverview extends Component {
               airHumidity: true,
             },
           }));
+          var newestObservations = request("/api/observation/all/newest", true, {
+            "datastreamId": datastream.id,
+            "topNumber": 20
+          }, Observation);
+          newestObservations.then(newest => {
+            this.setState(({ value }) => ({
+              value: {
+                ...value,
+                airHumidity: newest[0].result,
+              },
+            }));
+            let adding_list_data = [];
+            let adding_list_label = [];
+            newest.map((element, index) => {
+              adding_list_data.unshift(element.result);
+              adding_list_label.unshift(formatDate(element.phenomenonTime));
+            });
+            this.setState(({ diagram }) => ({
+              diagram: {
+                data: {
+                  ...diagram.data,
+                  airHumidity: adding_list_data
+                },
+                label: {
+                  ...diagram.label,
+                  airHumidity: adding_list_label
+                }
+              },
+            }));
+          });
         }
       });
 
@@ -117,6 +146,37 @@ class SensorOverview extends Component {
               airTemperature: true,
             }
           }));
+          var newestObservations = request("/api/observation/all/newest", true, {
+            "datastreamId": datastream.id,
+            "topNumber": 20
+          }, Observation);
+          newestObservations.then(newest => {
+            this.setState(({ value }) => ({
+              value: {
+                ...value,
+                airTemperature: newest[0].result,
+              },
+            }));
+
+            let adding_list_data = [];
+            let adding_list_label = [];
+            newest.map((element, index) => {
+              adding_list_data.unshift(element.result);
+              adding_list_label.unshift(formatDate(element.phenomenonTime));
+            });
+            this.setState(({ diagram }) => ({
+              diagram: {
+                data: {
+                  ...diagram.data,
+                  airTemperature: adding_list_data
+                },
+                label: {
+                  ...diagram.label,
+                  airTemperature: adding_list_label
+                }
+              },
+            }));
+          });
         }
       });
 
@@ -133,6 +193,37 @@ class SensorOverview extends Component {
               airPressure: true,
             }
           }));
+          var newestObservations = request("/api/observation/all/newest", true, {
+            "datastreamId": datastream.id,
+            "topNumber": 20
+          }, Observation);
+          newestObservations.then(newest => {
+            this.setState(({ value }) => ({
+              value: {
+                ...value,
+                airPressure: newest[0].result,
+              },
+            }));
+
+            let adding_list_data = [];
+            let adding_list_label = [];
+            newest.map((element, index) => {
+              adding_list_data.unshift(element.result);
+              adding_list_label.unshift(formatDate(element.phenomenonTime));
+            });
+            this.setState(({ diagram }) => ({
+              diagram: {
+                data: {
+                  ...diagram.data,
+                  airPressure: adding_list_data
+                },
+                label: {
+                  ...diagram.label,
+                  airPressure: adding_list_label
+                }
+              },
+            }));
+          });
         }
       });
 
@@ -149,36 +240,38 @@ class SensorOverview extends Component {
               particulateMatter: true,
             }
           }));
+          var newestObservations = request("/api/observation/all/newest", true, {
+            "datastreamId": datastream.id,
+            "topNumber": 20
+          }, Observation);
+          newestObservations.then(newest => {
+            this.setState(({ value }) => ({
+              value: {
+                ...value,
+                particulateMatter: newest[0].result,
+              },
+            }));
+
+            let adding_list_data = [];
+            let adding_list_label = [];
+            newest.map((element, index) => {
+              adding_list_data.unshift(element.result);
+              adding_list_label.unshift(formatDate(element.phenomenonTime));
+            });
+            this.setState(({ diagram }) => ({
+              diagram: {
+                data: {
+                  ...diagram.data,
+                  particulateMatter: adding_list_data
+                },
+                label: {
+                  ...diagram.label,
+                  particulateMatter: adding_list_label
+                }
+              },
+            }));
+          });
         }
-      });
-
-
-
-
-
-
-
-      this.setState({
-        value: {
-          airHumidity: "5",
-          airPressure: "3",
-          airTemperature: "1",
-          particulateMatter: "8"
-        },
-        diagram: {
-          label: {
-            airHumidity: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            airPressure: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            airTemperature: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            particulateMatter: ['January', 'February', 'March', 'April', 'May', 'June', 'July']
-          },
-          data: {
-            airHumidity: [65, 59, 80, 81, 56, 55, 40],
-            airPressure: [65, 59, 80, 81, 56, 55, 40],
-            airTemperature: [65, 59, 80, 81, 56, 55, 40],
-            particulateMatter: [65, 59, 80, 81, 56, 55, 40]
-          }
-        },
       });
     });
   }
@@ -203,7 +296,7 @@ class SensorOverview extends Component {
             show={this.state.show.airPressure}
             cardTitle={t('airPressure')}
             currentValue={this.state.value.airPressure}
-            dataRowLabel={this.state.unit.airPressure}
+            dataUnit={this.state.unit.airPressure}
             dataLabels={this.state.diagram.label.airPressure}
             data={this.state.diagram.data.airPressure}
             eventKey={1}
@@ -212,7 +305,7 @@ class SensorOverview extends Component {
             show={this.state.show.airTemperature}
             cardTitle={t('airTemperature')}
             currentValue={this.state.value.airTemperature}
-            dataRowLabel={this.state.unit.airTemperature}
+            dataUnit={this.state.unit.airTemperature}
             dataLabels={this.state.diagram.label.airTemperature}
             data={this.state.diagram.data.airTemperature}
             eventKey={2}
@@ -221,7 +314,7 @@ class SensorOverview extends Component {
             show={this.state.show.airHumidity}
             cardTitle={t('airHumidity')}
             currentValue={this.state.value.airHumidity}
-            dataRowLabel={this.state.unit.airHumidity}
+            dataUnit={this.state.unit.airHumidity}
             dataLabels={this.state.diagram.label.airHumidity}
             data={this.state.diagram.data.airHumidity}
             eventKey={3}
@@ -230,7 +323,7 @@ class SensorOverview extends Component {
             show={this.state.show.particulateMatter}
             cardTitle={t('particulateMatter')}
             currentValue={this.state.value.particulateMatter}
-            dataRowLabel={this.state.unit.particulateMatter}
+            dataUnit={this.state.unit.particulateMatter}
             dataLabels={this.state.diagram.label.particulateMatter}
             data={this.state.diagram.data.particulateMatter}
             eventKey={4}
@@ -244,3 +337,9 @@ class SensorOverview extends Component {
 const dynamicSensorOverview = withTranslation('overview')(SensorOverview)
 
 export default dynamicSensorOverview;
+
+function formatDate(dateIS8601) {
+  var d = new Date(dateIS8601);
+  var options = { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+  return d.toLocaleString('de-DE', options);
+}
