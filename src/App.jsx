@@ -37,7 +37,7 @@ class App extends Component {
   }
   
   updateWindowDimensions() {
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
+    this.setState({ width: window.outerWidth, height: window.innerHeight });
   }
 
 
@@ -69,7 +69,7 @@ class App extends Component {
         <Suspense fallback='loading'>
           <React.Fragment>
             <Router>
-              <Container className='container'>
+              <Container fluid>
                 <Row className='row'>
                   <Col id="map-content">
                     <Navigationbar openHandler={(e) => this.handleShowSensorClick(e)}/>

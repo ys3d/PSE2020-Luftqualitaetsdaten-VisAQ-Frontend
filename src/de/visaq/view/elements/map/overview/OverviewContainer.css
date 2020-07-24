@@ -37,16 +37,12 @@
     transform: rotate(-45deg);
   }
 
-  #dataCard >  {
-      background-color: transparent;
-  }
-
   #accordion {
     background-color: transparent;
   }
 
   #sensorOverviewContainer {
-    background-image: linear-gradient(to left, rgba(227, 240, 239, 0.527), #dcfbff);
+    background-color: rgb(241, 241, 241)
   }
 
   .arrow {
@@ -60,3 +56,23 @@
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
   }  
+
+  .datacard {
+    background-color: transparent;
+    border: none;
+  }
+
+  .accordion {
+    background-color: transparent;
+    border: none
+  }
+
+  .card {
+    background-color: transparent;
+    border: none;
+    text-align:  center;
+  }
+
+  .card:hover {
+    color: #2f8794;
+  }

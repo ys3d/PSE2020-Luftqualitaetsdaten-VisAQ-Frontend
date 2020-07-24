@@ -25,7 +25,8 @@ class Navigationbar extends React.Component {
         this.state = {
             isOpen: false,
             airQualityData: new AirQualityData(data.particulateMatter)
-        };
+        }
+
     }
 
     handleOpen = () => {
