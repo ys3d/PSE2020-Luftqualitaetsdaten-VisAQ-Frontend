@@ -7,10 +7,12 @@ import Legend from './elements/map/Legend';
 import request from "../controller/Request";
 import Thing from "../model/Thing";
 import Observation from "../model/Observation";
+import PointDatum from '../model/PointDatum';
 import ObservedProperty from "../model/ObservedProperty";
 import { ReactLeafletSearch } from 'react-leaflet-search';
 import { getInitialProps } from 'react-i18next';
 import cookieNotice from './elements/CookieNotice';
+import InterpolationOverlayFactory from './overlayfactory/InterpolationOverlayFactory'
 
 /**
  * Class that contains the MapView.
@@ -26,6 +28,7 @@ export default class MapView extends Component {
             zoom: 13,
             bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
             airQualityData: props.airQ,
+            pointData : [],
             cells: {}
         };
         this.gridSize = 0.15;
@@ -39,10 +42,12 @@ export default class MapView extends Component {
                     lng: position.coords.longitude,
                 }, () => {
                     this.onBoundsUpdate(this.state.bounds);
+                    this.requestInterpolation();
                 });
             }, (error) => {
                 this.setState({ lat: 48.3705449, lng: 10.89779 }, () => {
                     this.onBoundsUpdate(this.state.bounds);
+                    this.requestInterpolation();
                 })
             })
         }
@@ -75,14 +80,14 @@ export default class MapView extends Component {
         if (this.state.cells.hasOwnProperty(`${lat}|${lng}`) || this.state.cells[`${lat}|${lng}`] != undefined) {
             return;
         }
-
-        request("/api/thing/all/square", true, {
+        /**
+         * request("http://localhost:8080/api/thing/all/square", false, {
             "y1": lat,
             "x1": lng,
             "y2": lat + this.gridSize,
             "x2": lng + this.gridSize
         }, Thing).then(things => {
-            request("/api/observation/all/things/timeframed", true, {
+            request("http://localhost:8080/api/observation/all/things/timeframed", false, {
                 "things": things,
                 "millis": Date.now(),
                 "range": "PT12H",
@@ -96,6 +101,27 @@ export default class MapView extends Component {
             delete this.state.cells[`${lat}|${lng}`];
         });
         this.state.cells[`${lat}|${lng}`] = null;
+        */
+    }
+
+    requestInterpolation() {
+        console.log(this.state.bounds.getSouthWest().lat);
+        console.log(this.state.bounds.getSouthWest().lng);
+        console.log(this.state.bounds.getNorthEast().lat);
+        console.log(this.state.bounds.getNorthEast().lng);
+        request("http://localhost:8080/api/interpolation/default", false, {
+            "x1": this.state.bounds.getSouthWest().lng,
+            "x2": this.state.bounds.getNorthEast().lng,
+            "y1": this.state.bounds.getSouthWest().lat,
+            "y2": this.state.bounds.getNorthEast().lat,
+            "millis": Date.now(),
+            "range": "PT12H",
+            "observedProperty": this.state.airQualityData.observedProperty
+        }, PointDatum).then(pointDatum => {
+            console.log("Hier: ");
+            console.log(pointDatum);
+            this.setState({pointData : pointDatum});
+        });
     }
 
     onBoundsUpdate(newBounds) {
@@ -119,6 +145,7 @@ export default class MapView extends Component {
                 }
             }
         });
+        this.requestInterpolation();
     }
 
     onMove(event) {
@@ -142,6 +169,8 @@ export default class MapView extends Component {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <OverlayBuilder mapState={this.state} gridSize={this.gridSize} openHandler={(e) => this.props.openHandler(e)}/>
+                <InterpolationOverlayFactory airQ={this.state.airQualityData
+                />
                 <Legend airQ={this.state.airQualityData}
                 />
                 <ReactLeafletSearchComponent

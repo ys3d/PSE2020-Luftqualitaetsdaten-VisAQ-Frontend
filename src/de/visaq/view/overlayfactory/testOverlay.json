@@ -2,7 +2,7 @@
     "sensors" : [
         {
             "name" : "sensorname1",
-            "coordinates" : [48.3705449,10.87],
+            "coordinates" : [48.37,10.87],
             "particulate_matter" : 120,
             "air_pressure" : 0.03,
             "temperature" : 30,
@@ -10,7 +10,7 @@
         },
         {
             "name" : "sensorname2",
-            "coordinates" : [48.3705449,10.88],
+            "coordinates" : [48.4,10.87],
             "particulate_matter" : 50,
             "air_pressure" : 0.03,
             "temperature" : 30,
@@ -18,7 +18,7 @@
         },
         {
             "name" : "sensorname3",
-            "coordinates" : [48.3705449,10.89],
+            "coordinates" : [48.43,10.87],
             "particulate_matter" : 45,
             "air_pressure" : 0.03,
             "temperature" : 30,
@@ -26,7 +26,7 @@
         },
         {
             "name" : "sensorname4",
-            "coordinates" : [48.3705449,10.9],
+            "coordinates" : [48.47,10.87],
             "particulate_matter" : 42,
             "air_pressure" : 0.03,
             "temperature" : 30,
@@ -34,7 +34,7 @@
         },
         {
             "name" : "sensorname5",
-            "coordinates" : [48.3705449,10.91],
+            "coordinates" : [48.37,10.84],
             "particulate_matter" : 41,
             "air_pressure" : 0.03,
             "temperature" : 35,
@@ -42,7 +42,7 @@
         },
         {
             "name" : "sensorname6",
-            "coordinates" : [48.3705449,10.92],
+            "coordinates" : [48.4,10.84],
             "particulate_matter" : 40,
             "air_pressure" : 0.03,
             "temperature" : 30,
@@ -50,7 +50,7 @@
         },
         {
             "name" : "sensorname7",
-            "coordinates" : [48.3705449,10.93],
+            "coordinates" : [48.43,10.84],
             "particulate_matter" : 38,
             "air_pressure" : 0.03,
             "temperature" : 30,
@@ -58,27 +58,11 @@
         },
         {
             "name" : "sensorname7",
-            "coordinates" : [48.3705449,10.94],
+            "coordinates" : [48.47,10.84],
             "particulate_matter" : 35,
             "air_pressure" : 0.03,
             "temperature" : 30,
             "humidity" : 90
-        },
-        {
-            "name" : "sensorname7",
-            "coordinates" : [48.3705449,10.95],
-            "particulate_matter" : 33,
-            "air_pressure" : 0.03,
-            "temperature" : 30,
-            "humidity" : 4
-        },
-        {
-            "name" : "sensorname7",
-            "coordinates" : [48.3705449,10.95],
-            "particulate_matter" : -10,
-            "air_pressure" : 0.03,
-            "temperature" : 30,
-            "humidity" : 4
         }
     ]
 }   
