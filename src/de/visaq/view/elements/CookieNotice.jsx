@@ -73,7 +73,7 @@ class CookieNotice extends Component {
             {t('cookieNotice')}
             <br />
             <br />
-            <Button eventKey={1} className={'buttonLink'} variant="link">
+            <Button eventKey={1} className={'buttonLink'} variant="link" className='moreInfo'>
               <CookieNoticeInformation />
             </Button>
           </Modal.Body>

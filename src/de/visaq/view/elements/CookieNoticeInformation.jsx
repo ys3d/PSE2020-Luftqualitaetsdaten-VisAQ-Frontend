@@ -62,6 +62,7 @@ class CookieNoticeInformation extends Component {
            <strong>{t('cookie6')}</strong> <br /><br />
            {t('cookie7')} <br /><br />
            {t('cookie8')} <br />
+           {t('cookie9')} <br />
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.close.bind(this)} className={'button'}>
