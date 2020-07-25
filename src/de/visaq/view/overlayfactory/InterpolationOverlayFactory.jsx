@@ -4,9 +4,6 @@ import L from 'leaflet';
 import Gradient from '../elements/theme/Gradient';
 
 
-
-let geojson;
-
 /**
  * Creates an interpolated Overlay for them Map. 
  * An array of PointData is the base data for the overlay. This is an array of coordinates with an evenly distance, calculated in 
@@ -58,9 +55,8 @@ export default class InterpolationOverlayFactory extends Component {
         return ({
             weight: 2,
             opacity: 0,
-            color: "white",
             dashArray: "3",
-            fillOpacity: 0.5,
+            fillOpacity: 0.6,
             fillColor: Gradient(feature.properties.value, this.state.airQualityData)
         });
     }
@@ -97,6 +93,10 @@ export default class InterpolationOverlayFactory extends Component {
     }
     
 }
+
+
+
+let geojson;
 
 /**
  * Calculates the GeoJSON Data.
@@ -143,7 +143,7 @@ function getGeoJson(pointData)   {
 }
       
 /**
-   * Writes the interpolated data into features. 
+   * Writes the squares into smaller squares and then into GeoJSON features.
    * 
    * @param {Object[]} squareData     
    */
@@ -152,7 +152,7 @@ function getGeoJson(pointData)   {
     /**
      * Needs to be square Number.
      */
-    const INTERPOLATED_NUM = 64;
+    const INTERPOLATED_NUM = 625;
 
     const interval = (squareData[1].json.location.x - squareData[0].json.location.x) / Math.sqrt(INTERPOLATED_NUM);
 

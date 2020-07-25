@@ -40,12 +40,12 @@ export default class MapView extends Component {
                     lng: position.coords.longitude,
                 }, () => {
                     this.onBoundsUpdate(this.state.bounds);
-                    //this.requestInterpolation();
+                    this.requestInterpolation();
                 });
             }, (error) => {
                 this.setState({ lat: 48.3705449, lng: 10.89779 }, () => {
                     this.onBoundsUpdate(this.state.bounds);
-                    //this.requestInterpolation();
+                    this.requestInterpolation();
                 })
             })
         }
@@ -58,13 +58,14 @@ export default class MapView extends Component {
 
         /*
         *DON'T KEEP!!!!!!!!!!!ONLY FOR TESTING
-        */
+        *
         var pointdata = [];
         for(var i = 0; i < 8; i++)  {
             var pd1 = new PointDatum(data.json[i]);
             pointdata.push(pd1)
         } 
         this.setState({ pointData: pointdata });
+        */
     }
 
 
@@ -113,7 +114,7 @@ export default class MapView extends Component {
         this.state.cells[`${lat}|${lng}`] = null;
         
     }
-    /*
+    
     requestInterpolation() {
         console.log(this.state.bounds.getSouthWest().lat);
         console.log(this.state.bounds.getSouthWest().lng);
@@ -132,9 +133,20 @@ export default class MapView extends Component {
             this.setState({pointData : pointDatum});
         });        
     }
-    */
+    
 
     onBoundsUpdate(newBounds) {
+
+        /**
+         * Requests a new Interpolation Overlay if the user leaves the viewport
+         */
+        if((newBounds.getSouthWest().lng > this.state.bounds.getSouthWest().lng)
+            || (newBounds.getSouthWest().lat > this.state.bounds.getSouthWest().lat)
+            || (newBounds.getNorthEast().lat > this.state.bounds.getNorthEast().lat)
+            || (newBounds.getNorthEast().lng > this.state.bounds.getNorthEast().lng)) {
+                this.requestInterpolation();
+            }
+
         this.setState({ bounds: newBounds }, () => {
             var southWest = newBounds.getSouthWest();
             var southCell = Math.floor(southWest.lat/this.gridSize);
@@ -155,7 +167,6 @@ export default class MapView extends Component {
                 }
             }
         });
-        //this.requestInterpolation();
     }
 
     onMove(event) {
