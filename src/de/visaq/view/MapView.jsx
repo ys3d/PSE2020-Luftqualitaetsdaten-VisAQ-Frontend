@@ -1,5 +1,5 @@
 import React, { createRef, Component } from 'react';
-import { Map, TileLayer, withLeaflet, GeoJSON, FeatureGroup } from 'react-leaflet';
+import { Map, TileLayer, withLeaflet} from 'react-leaflet';
 import L from 'leaflet';
 import "./MapView.module.css";
 import OverlayBuilder from './overlayfactory/OverlayBuilder';
@@ -8,48 +8,8 @@ import request from "../controller/Request";
 import Thing from "../model/Thing";
 import Observation from "../model/Observation";
 import PointDatum from '../model/PointDatum';
-import ObservedProperty from "../model/ObservedProperty";
 import { ReactLeafletSearch } from 'react-leaflet-search';
-import { getInitialProps } from 'react-i18next';
-import cookieNotice from './elements/CookieNotice';
-import InterpolationOverlayFactory from './overlayfactory/InterpolationOverlayFactory'
 import * as data from './overlayfactory/testPointDatum.json';
-import Choropleth from 'react-leaflet-choropleth'
-
-const mapStyle = (feature) => {
-    return ({
-      weight: 2,
-      opacity: 1,
-      color: "white",
-      dashArray: "3",
-      fillOpacity: 0.7,
-      fillColor: "red"
-    });
-  }
-  const style = {
-    fillColor: '#F28F3B',
-    weight: 2,
-    opacity: 1,
-    color: 'white',
-    dashArray: '3',
-    fillOpacity: 0.5
-}
-
-const map = (datag) => (
-    <Map>
-      <Choropleth
-        data={{type: 'FeatureCollection', features: datag}}
-        valueProperty={(feature) => feature.properties.value}
-        visible={true}
-        scale={['#b3cde0', '#011f4b']}
-        steps={7}
-        mode='e'
-        style={style}
-        onEachFeature={(feature, layer) => layer.bindPopup(feature.properties.label)}
-        ref={(el) => this.choropleth = el.leafletElement}
-      />
-    </Map>
-  )
 
 /**
  * Class that contains the MapView.

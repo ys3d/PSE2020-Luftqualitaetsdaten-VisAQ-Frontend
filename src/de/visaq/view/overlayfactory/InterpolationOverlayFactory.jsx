@@ -1,12 +1,8 @@
-import React, { Fragment, Component } from 'react';
-import { render } from 'react-dom';
-import PointDatum from '../../model/PointDatum'
-import { FeatureGroup, CircleMarker, LatLngBounds, Map, MapLayer, Popup, Marker, LayerGroup, GeoJSON } from 'react-leaflet';
+import React, { Component } from 'react';
+import { FeatureGroup} from 'react-leaflet';
 import L from 'leaflet';
-import Choropleth from 'react-leaflet-choropleth';
 import Gradient from '../elements/theme/Gradient';
-import { point } from 'leaflet';
-import * as data from './testPointDatum.json';
+
 
 
 let geojson;
@@ -73,24 +69,19 @@ export default class InterpolationOverlayFactory extends Component {
      * Adds the GeoJSON data to a Feature Group
      */
     onFeatureGroupReady = (ref) => {
-
         if(ref===null) {
              return;
         }
-        
-        this.featureGroup = ref; 
-       
+        this.featureGroup = ref;
         let leafletGeoJSON = new L.GeoJSON(getGeoJson(this.state.pointData), {
             style: this.mapStyle
         });
-        
         let leafletFG = this.featureGroup.leafletElement;
         /*
         * clears the old Layers
         */
         leafletFG.clearLayers()
         leafletGeoJSON.eachLayer( layer =>leafletFG.addLayer(layer));
-
     }
 
     /**
@@ -161,7 +152,7 @@ function getGeoJson(pointData)   {
     /**
      * Needs to be square Number.
      */
-    const INTERPOLATED_NUM = 36;
+    const INTERPOLATED_NUM = 64;
 
     const interval = (squareData[1].json.location.x - squareData[0].json.location.x) / Math.sqrt(INTERPOLATED_NUM);
 
@@ -205,7 +196,6 @@ function bilinearInterpolation(coordinates, squareDatum) {
     var x2 = squareDatum[1].location.x;
     var y1 = squareDatum[0].location.y;
     var y2 = squareDatum[2].location.y;
-
 
     if ((x2 -x1) * (y2 - y1) === 0) {
         return false;

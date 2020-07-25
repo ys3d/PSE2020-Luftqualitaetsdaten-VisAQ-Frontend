@@ -4347,11 +4347,6 @@ chownr@^1.0.1, chownr@^1.1.1, chownr@^1.1.2:
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.1.4.tgz#6fc9d7b42d32a583596337666e7d08084da2cc6b"
   integrity sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==
 
-chroma-js@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/chroma-js/-/chroma-js-1.1.1.tgz#9bb9434959336ece75700aaadfeedc71806d8c05"
-  integrity sha1-m7lDSVkzbs51cAqq3+7ccYBtjAU=
-
 chrome-trace-event@^1.0.0, chrome-trace-event@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/chrome-trace-event/-/chrome-trace-event-1.0.2.tgz#234090ee97c7d4ad1a2c4beae27505deffc608a4"
@@ -11656,13 +11651,6 @@ react-leaflet-bounds@^0.0.0:
   integrity sha512-Exo81labdNfcqw2fTp4VSgiZdEsxzMSmfsrsXO/2pNrH/JkHX4/d/i5u+opDUNVs/2io33QT7/T327I+zH3PGw==
   dependencies:
     tslib "^1.7.1"
-
-react-leaflet-choropleth@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/react-leaflet-choropleth/-/react-leaflet-choropleth-2.0.1.tgz#dc8716c6bcf4fc53e48201a5641d4ccb6e958184"
-  integrity sha512-OACZWbcPgQ+WI2LxI6xalHQukTcHAolcSd+ZbNtNmMOK4xN1ITWRPb8bFIPlVmofh6iYFv7SGlz8YrkjeDSQ5g==
-  dependencies:
-    chroma-js "1.1.1"
 
 react-leaflet-search@^1.0.3:
   version "1.0.3"
