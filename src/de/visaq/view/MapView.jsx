@@ -93,6 +93,18 @@ export default class MapView extends Component {
 
     componentWillMount() {
         this.setPosition();
+        
+
+
+        /*
+        *DON'T KEEP!!!!!!!!!!!ONLY FOR TESTING
+        */
+        var pointdata = [];
+        for(var i = 0; i < 8; i++)  {
+            var pd1 = new PointDatum(data.json[i]);
+            pointdata.push(pd1)
+        } 
+        this.setState({ pointData: pointdata });
     }
 
 
@@ -119,13 +131,13 @@ export default class MapView extends Component {
         if (this.state.cells.hasOwnProperty(`${lat}|${lng}`) || this.state.cells[`${lat}|${lng}`] != undefined) {
             return;
         }
-        request("http://localhost:8080/api/thing/all/square", false, {
+        request("/api/thing/all/square", true, {
             "y1": lat,
             "x1": lng,
             "y2": lat + this.gridSize,
             "x2": lng + this.gridSize
         }, Thing).then(things => {
-            request("http://localhost:8080/api/observation/all/things/timeframed", false, {
+            request("/api/observation/all/things/timeframed", true, {
                 "things": things,
                 "millis": Date.now(),
                 "range": "PT12H",
@@ -207,7 +219,6 @@ export default class MapView extends Component {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <OverlayBuilder mapState={this.state} gridSize={this.gridSize} openHandler={(e) => this.props.openHandler(e)}/>
-               <InterpolationOverlayFactory airQ={this.state.airQualityData}/>
                 <Legend airQ={this.state.airQualityData}
                 />
                 <ReactLeafletSearchComponent
