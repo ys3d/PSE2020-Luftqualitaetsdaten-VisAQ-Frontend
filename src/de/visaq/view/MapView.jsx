@@ -1,5 +1,5 @@
 import React, { createRef, Component } from 'react';
-import { Map, TileLayer, withLeaflet } from 'react-leaflet';
+import { Map, TileLayer, withLeaflet, GeoJSON, FeatureGroup } from 'react-leaflet';
 import L from 'leaflet';
 import "./MapView.module.css";
 import OverlayBuilder from './overlayfactory/OverlayBuilder';
@@ -13,6 +13,43 @@ import { ReactLeafletSearch } from 'react-leaflet-search';
 import { getInitialProps } from 'react-i18next';
 import cookieNotice from './elements/CookieNotice';
 import InterpolationOverlayFactory from './overlayfactory/InterpolationOverlayFactory'
+import * as data from './overlayfactory/testPointDatum.json';
+import Choropleth from 'react-leaflet-choropleth'
+
+const mapStyle = (feature) => {
+    return ({
+      weight: 2,
+      opacity: 1,
+      color: "white",
+      dashArray: "3",
+      fillOpacity: 0.7,
+      fillColor: "red"
+    });
+  }
+  const style = {
+    fillColor: '#F28F3B',
+    weight: 2,
+    opacity: 1,
+    color: 'white',
+    dashArray: '3',
+    fillOpacity: 0.5
+}
+
+const map = (datag) => (
+    <Map>
+      <Choropleth
+        data={{type: 'FeatureCollection', features: datag}}
+        valueProperty={(feature) => feature.properties.value}
+        visible={true}
+        scale={['#b3cde0', '#011f4b']}
+        steps={7}
+        mode='e'
+        style={style}
+        onEachFeature={(feature, layer) => layer.bindPopup(feature.properties.label)}
+        ref={(el) => this.choropleth = el.leafletElement}
+      />
+    </Map>
+  )
 
 /**
  * Class that contains the MapView.
@@ -32,6 +69,7 @@ export default class MapView extends Component {
             cells: {}
         };
         this.gridSize = 0.15;
+
     }
 
     setPosition() {
@@ -42,12 +80,12 @@ export default class MapView extends Component {
                     lng: position.coords.longitude,
                 }, () => {
                     this.onBoundsUpdate(this.state.bounds);
-                    this.requestInterpolation();
+                    //this.requestInterpolation();
                 });
             }, (error) => {
                 this.setState({ lat: 48.3705449, lng: 10.89779 }, () => {
                     this.onBoundsUpdate(this.state.bounds);
-                    this.requestInterpolation();
+                    //this.requestInterpolation();
                 })
             })
         }
@@ -56,6 +94,7 @@ export default class MapView extends Component {
     componentWillMount() {
         this.setPosition();
     }
+
 
     /**
      * Changes the airQualityData state of the component.
@@ -69,8 +108,8 @@ export default class MapView extends Component {
         if (this.state.airQualityData.name === airQ.airQ.name) {
             return;
         }
-
         this.setState({ airQualityData: airQ.airQ });
+    
         if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
             document.cookie = 'AirQuality=' + JSON.stringify(this.state.airQualityData);
         }
@@ -80,8 +119,7 @@ export default class MapView extends Component {
         if (this.state.cells.hasOwnProperty(`${lat}|${lng}`) || this.state.cells[`${lat}|${lng}`] != undefined) {
             return;
         }
-        /**
-         * request("http://localhost:8080/api/thing/all/square", false, {
+        request("http://localhost:8080/api/thing/all/square", false, {
             "y1": lat,
             "x1": lng,
             "y2": lat + this.gridSize,
@@ -101,9 +139,9 @@ export default class MapView extends Component {
             delete this.state.cells[`${lat}|${lng}`];
         });
         this.state.cells[`${lat}|${lng}`] = null;
-        */
+        
     }
-
+    /*
     requestInterpolation() {
         console.log(this.state.bounds.getSouthWest().lat);
         console.log(this.state.bounds.getSouthWest().lng);
@@ -118,11 +156,11 @@ export default class MapView extends Component {
             "range": "PT12H",
             "observedProperty": this.state.airQualityData.observedProperty
         }, PointDatum).then(pointDatum => {
-            console.log("Hier: ");
             console.log(pointDatum);
             this.setState({pointData : pointDatum});
-        });
+        });        
     }
+    */
 
     onBoundsUpdate(newBounds) {
         this.setState({ bounds: newBounds }, () => {
@@ -145,7 +183,7 @@ export default class MapView extends Component {
                 }
             }
         });
-        this.requestInterpolation();
+        //this.requestInterpolation();
     }
 
     onMove(event) {
@@ -169,8 +207,7 @@ export default class MapView extends Component {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <OverlayBuilder mapState={this.state} gridSize={this.gridSize} openHandler={(e) => this.props.openHandler(e)}/>
-                <InterpolationOverlayFactory airQ={this.state.airQualityData
-                />
+               <InterpolationOverlayFactory airQ={this.state.airQualityData}/>
                 <Legend airQ={this.state.airQualityData}
                 />
                 <ReactLeafletSearchComponent
@@ -189,3 +226,13 @@ export default class MapView extends Component {
         );
     }
 }
+
+
+
+
+
+
+
+  
+
+  

@@ -76,9 +76,7 @@ class Navigationbar extends React.Component {
     }
 
     shouldComponentUpdate(nextprops, nextState) {
-        console.log(nextprops.airQ);
-        if (JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextprops.airQ)) {
-            console.log(nextprops.airQ);
+        if (JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextState.airQ)) {
             return true;
         } else {
             return false;
