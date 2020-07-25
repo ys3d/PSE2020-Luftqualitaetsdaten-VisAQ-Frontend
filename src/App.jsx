@@ -17,12 +17,14 @@ class App extends Component {
     this.state = {
       showOverview: false,
       thingID: "saqn:t:grimm-aerosol.com:EDM80NEPH:SN17017",
-      isSensor: false
+      isSensor: false,
+      overviewDetails: false
     };
 
     this.handleShowSensorClick = this.handleShowSensorClick.bind(this);
     this.handleCloseClick = this.handleCloseClick.bind(this);
     this.handleShowPointClick = this.handleShowPointClick.bind(this);
+    this.toggleDetails = this.toggleDetails.bind(this);
   }
 
   handleShowSensorClick(toSetThingID) {
@@ -46,6 +48,12 @@ class App extends Component {
     });
   }
 
+  toggleDetails() {
+    this.setState({
+      overviewDetails: !this.state.overviewDetails
+    });
+  }
+
 
   render() {
     return (
@@ -56,9 +64,9 @@ class App extends Component {
               <Row>
                 <Col id="map-content">
                   
-                  <Navigationbar openHandler={(e) => this.handleShowSensorClick(e)}/>
+                  <Navigationbar openHandler={(e) => this.handleShowSensorClick(e)} overviewDetailHandler={() => this.toggleDetails()} />
                 </Col>
-                <Overview show={this.state.showOverview} closeHandler={this.handleCloseClick} thingID={this.state.thingID} isSensor={this.state.isSensor} />
+                <Overview show={this.state.showOverview} closeHandler={this.handleCloseClick} thingID={this.state.thingID} isSensor={this.state.isSensor} showDetails={this.state.overviewDetails}/>
               </Row>
             </Container>
           </Router>

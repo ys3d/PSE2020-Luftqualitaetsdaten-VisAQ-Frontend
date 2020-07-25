@@ -147,6 +147,7 @@ class Navigationbar extends React.Component {
                                     <Form.Group controlId='form-switch' alignRight>
                                         <Form.Check type='checkbox' id='1' label={t('officalSensor')} checked />
                                         <Form.Check type='checkbox' id='2' label={t('nonOfficalSensor')} checked />
+                                        <Form.Check type='checkbox' id='3' label={t('sensorOverviewExpert')} onClick={() => this.props.overviewDetailHandler()} />
                                     </Form.Group>
                                 </NavDropdown>
                                 <Nav className='ml-auto'>

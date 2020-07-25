@@ -86,7 +86,6 @@ class SensorOverview extends Component {
         thingName: thing.name,
         thingDescription: thing.description
       });
-
       /* Humidity Datastream ####################################################################################### */
       var datastreams = request("/api/datastream/thing/observedProperty", true, {
         "thing": thing,
@@ -281,13 +280,14 @@ class SensorOverview extends Component {
 
     return (
       <>
-        <p>{this.props.thingID}</p>
         <h1>
           {t('sensor')} {this.state.thingName}
         </h1>
+        { this.props.expert &&
         <p>
           {t('description')} {this.state.thingDescription}
         </p>
+        } 
         <ShareField subject={t('shareTitle')} body={t('shareBody')} />
         <div className="Demo__some-network__share-count">&nbsp;</div>
 
