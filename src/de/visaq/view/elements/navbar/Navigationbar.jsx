@@ -86,8 +86,8 @@ class Navigationbar extends React.Component {
                                 <Dropdown inline id='link'>
                                     {t('furtherFunc')}
                                 </Dropdown>
-                                <NavDropdown variant="success" id="dropdown-basic">
-                                    <NavDropdown.Item href='https://www.smartaq.net/de/participate/'>
+                                <NavDropdown variant="success" className="dropdown-basic" id="dropdown-basic" >
+                                    <NavDropdown.Item className='nav-link' id='nav-link' href='https://www.smartaq.net/de/participate/'>
                                         {t('diy')}
                                     </NavDropdown.Item>
                                     <NavDropdown.Item className='nav-link' id='nav-link' href='https://www.smartaq.net/en/dashboard/#/home'>

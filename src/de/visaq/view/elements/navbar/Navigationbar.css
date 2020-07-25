@@ -12,7 +12,7 @@ a, .navbar-nav, .navbar-dark .nav-link {
   right: 25%;
 }
 
-.dropdown:hover>.dropdown-menu {
+.dropdown:hover>.dropdown-basic {
   display: block;
 }
 
@@ -54,4 +54,8 @@ a, .navbar-nav, .navbar-dark .nav-link {
 
 #dropdown-basic:hover {
   color: #44c2d4;
+}
+
+#dropdown-basic {
+  border: none;
 }
