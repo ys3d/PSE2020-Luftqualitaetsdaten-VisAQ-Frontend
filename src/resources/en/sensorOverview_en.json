@@ -10,17 +10,5 @@
     "particulateMatter": "Particulate matter",
     "notFound": "The requested Sensor could not be found",
     "location": "Location",
-    "consequences": "Consequences",
-    "overpressure": "The region is currently under high pressure",
-    "underpressure": "The region is currently under low pressure",
-    "normalPressure": "The pressure in this region is normal",
-    "heat": "There is currently a higher temperature in this area. It is also advised to avoid direct sunshine",
-    "cold": "In this area, the temperature is below freezing, so it is advisable to dress accordingly to avoid cold damage to the hands and face",
-    "normalTemperature": "The temperature in this area does not damage human health",
-    "wettness": "The humidity in this area is wetter than the norm",
-    "dry": "The humidity in this area is drier than the norm",
-    "normalHumidity": "The humidity in this area is normal",
-    "highPMConcentration": "",
-    "lowPMConcentration": "",
-    "normalPMConcentration": ""
+    "consequences": "Consequences"
 }
