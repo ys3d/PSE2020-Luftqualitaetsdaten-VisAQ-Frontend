@@ -23,10 +23,10 @@ class DataCard extends Component {
                     </Card.Header>
                     <Accordion.Collapse eventKey={this.props.eventKey}>
                         <Card.Body>
-                            <p>{t('currently')}: {this.props.currentValue} {this.props.dataRowLabel}</p>
+                            <p>{t('currently')}: {this.props.currentValue} {this.props.dataUnit}</p>
                             <Diagram
                                 title={t('historicalDevelopment')}
-                                dataRowLabel={this.props.cardTitle}
+                                dataRowLabel={this.props.dataUnit}
                                 dataLabels={this.props.dataLabels}
                                 data={this.props.data}
                             />
