@@ -10,22 +10,5 @@
     "particulateMatter": "Feinstaub",
     "notFound": "Der gesuchte Sensor kann nicht in der Datenbank gefunden werden",
     "location": "Ort",
-<<<<<<< HEAD
     "consequences": "Folgen "
 }
-=======
-    "consequences": "Folgen ",
-    "overpressure": "Es herrscht zurzeit Überdruck in dieser Region",
-    "underpressure": "Es herrscht zurzeit Unterdurck in dieser Region",
-    "normalPressure": "Der aktuelle Luftdruck befindet sich in einem für den Menschen angenehmen Bereich",
-    "heat": "In diesem Gebiet gibt es zurzeit eine erhöhte Temperatur, es wird geraten direkten Sonnenschein zu vermeiden",
-    "cold": "In diesem Gebiet liegt die Temperatur unter dem Gefrierpunk, es wird geraten sich dementsprechend zu kleiden um Kälteschaden an Händen und Gesicht zu vermeiden",
-    "normalTemperature": "Die Temperatur in diesem Gebiet führt zu keinen gesundheitlichen Schäden für einen Menschen",
-    "wettness": " Die Luftfeuchtigkeit in diesem Gebiet ist feuchter als die Norm",
-    "dry": "Die Luftfeuchtigkeit in diesem Gebiet ist trockener als die Norm. Dies kann zu tockeneren Luftschleimhäuten führen",
-    "normalHumidity": "Die Luftfeuchtigkeit in diesem Gebiet liegt in der Norm",
-    "highPMConcentration": "",
-    "lowPMConcentration": "",
-    "normalPMConcentration": ""
-}
->>>>>>> css-themes
