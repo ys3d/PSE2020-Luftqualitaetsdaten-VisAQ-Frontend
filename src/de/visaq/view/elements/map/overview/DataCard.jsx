@@ -5,6 +5,7 @@ import Accordion from 'react-bootstrap/Accordion'
 import Diagram from '../../diagram/Diagram'
 import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
+import './OverviewContainer.css'
 
 class DataCard extends Component {
     constructor(props) {
@@ -14,9 +15,9 @@ class DataCard extends Component {
         const { t } = this.props;
         if (this.props.show) {
             return (
-                <Card>
-                    <Card.Header>
-                        <Accordion.Toggle as={Card.Header} eventKey={this.props.eventKey}>
+                <Card >
+                    <Card.Header >
+                        <Accordion.Toggle as={Card.Header} eventKey={this.props.eventKey} className='card'>
                             {this.props.cardTitle}
                         </Accordion.Toggle>
                     </Card.Header>

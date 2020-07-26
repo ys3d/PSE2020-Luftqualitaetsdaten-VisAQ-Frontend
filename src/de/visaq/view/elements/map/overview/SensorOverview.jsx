@@ -276,6 +276,42 @@ class SensorOverview extends Component {
     });
   }
 
+  getConsequencesAirQuality(data) {
+    if (data >= 1100) {
+      return 'overpressure'
+    } else if (data < 1000) {
+      return 'underpressure'
+    }
+    return 'normalPressure'
+  }
+
+  getConsequencesTemperature(data) {
+    if (data >= 37) {
+      return 'heat'
+    } else if (data < -5) {
+      return 'cold'
+    }
+    return 'normalTemperature'
+  }
+
+  getConsequencesHumidity(data) {
+    if (data >= 60) {
+      return 'wettness'
+    } else if (data < 30) {
+      return 'dry'
+    }
+    return 'normalHumidity'
+  }
+  
+  getConsequencesPM(data) {
+    if (data >= 1100) {
+      return 'overpressure'
+    } else if (data < 1000) {
+      return 'underpressure'
+    }
+    return 'normalPM'
+  }
+
   render() {
     const { t } = this.props;
 
@@ -289,9 +325,9 @@ class SensorOverview extends Component {
           {t('description')} {this.state.thingDescription}
         </p>
         <ShareField subject={t('shareTitle')} body={t('shareBody')} />
-        <div className="Demo__some-network__share-count">&nbsp;</div>
+        <div className="network">&nbsp;</div>
 
-        <Accordion>
+        <Accordion className='accordion'>
           <DataCard
             show={this.state.show.airPressure}
             cardTitle={t('airPressure')}
@@ -300,6 +336,7 @@ class SensorOverview extends Component {
             dataLabels={this.state.diagram.label.airPressure}
             data={this.state.diagram.data.airPressure}
             eventKey={1}
+            className='datacard'
           />
           <DataCard
             show={this.state.show.airTemperature}
@@ -309,6 +346,7 @@ class SensorOverview extends Component {
             dataLabels={this.state.diagram.label.airTemperature}
             data={this.state.diagram.data.airTemperature}
             eventKey={2}
+            className='datacard'
           />
           <DataCard
             show={this.state.show.airHumidity}
@@ -318,6 +356,7 @@ class SensorOverview extends Component {
             dataLabels={this.state.diagram.label.airHumidity}
             data={this.state.diagram.data.airHumidity}
             eventKey={3}
+            className='datacard'
           />
           <DataCard
             show={this.state.show.particulateMatter}
@@ -327,6 +366,7 @@ class SensorOverview extends Component {
             dataLabels={this.state.diagram.label.particulateMatter}
             data={this.state.diagram.data.particulateMatter}
             eventKey={4}
+            className='datacard'
           />
         </Accordion>
       </>
