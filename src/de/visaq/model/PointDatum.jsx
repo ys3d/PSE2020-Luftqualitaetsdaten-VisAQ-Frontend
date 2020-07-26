@@ -12,6 +12,6 @@ export default class PointDatum {
     }
     
     get datum() {
-        return this.json.datum;
+        return parseInt(this.json.datum);
     }
 };

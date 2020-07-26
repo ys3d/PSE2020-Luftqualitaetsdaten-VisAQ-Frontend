@@ -39,10 +39,12 @@ export default class InterpolationOverlayFactory extends Component {
    * 
    * @param {Object} airQ The new AirQuality Data.
    */
-  componentDidUpdate(airQ) {
-    if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(airQ.airq)) {
-      this.setState({airQualityData : airQ.airQ});
-    }      
+  componentDidUpdate(props) {
+    if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(props.airQ)) {
+      this.setState({airQualityData : props.airQ});
+    }  else if(JSON.stringify(this.state.pointData[0]) !== JSON.stringify(props.pointData[0]))   {
+        this.setState({pointData : props.pointData});
+    }
   }
     /*
     const {sensors} = props;
