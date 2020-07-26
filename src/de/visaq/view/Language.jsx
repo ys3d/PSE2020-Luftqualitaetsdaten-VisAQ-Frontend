@@ -8,6 +8,9 @@ import navbar_en from '../../../resources/en/navbar_en.json';
 import sensorOverview_de from '../../../resources/de/sensorOverview_de.json'
 import sensorOverview_en from '../../../resources/en/sensorOverview_en.json'
  
+/**
+ * The resources used to get the translations
+ */
 const resources = {
         en: {
         common: navbar_en,
@@ -23,12 +26,18 @@ const resources = {
 i18n
 .use(initReactI18next)
 
+/**
+ * Desicion on what happens when language is changed
+ */
 .on('languageChanged', function(lng) {
   if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
     document.cookie= 'Language=' + lng;
   }
 })
 
+/**
+ * Initialization of the Language settings
+ */
 .init({
     lng: document.cookie.split(';').some((item) => item.trim().startsWith('Language=en')) ? 'en' : 'de',
     resources,
@@ -43,6 +52,9 @@ i18n
     
 });
 
+/**
+ * Method that changes the language
+ */
 i18next
   .changeLanguage('')
   .then((t) => {
