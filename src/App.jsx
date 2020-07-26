@@ -17,14 +17,15 @@ class App extends Component {
     this.state = {
       showOverview: false,
       thingID: "saqn:t:grimm-aerosol.com:EDM80NEPH:SN17017",
-      isSensor: false
-      
+      isSensor: false,
+      overviewDetails: false
     };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     
     this.handleShowSensorClick = this.handleShowSensorClick.bind(this);
     this.handleCloseClick = this.handleCloseClick.bind(this);
     this.handleShowPointClick = this.handleShowPointClick.bind(this);
+    this.toggleDetails = this.toggleDetails.bind(this);
   }
 
   componentDidMount() {
@@ -62,6 +63,12 @@ class App extends Component {
     });
   }
 
+
+  toggleDetails() {
+    this.setState({
+      overviewDetails: !this.state.overviewDetails
+    });
+  }
   render() {
     document.body.style.overflow = "hidden"
     return (
@@ -72,13 +79,14 @@ class App extends Component {
               <Container fluid>
                 <Row className='row'>
                   <Col id="map-content">
-                    <Navigationbar openHandler={(e) => this.handleShowSensorClick(e)}/>
+                    <Navigationbar openHandler={(e) => this.handleShowSensorClick(e)} overviewDetailHandler={() => this.toggleDetails()} />
                   </Col>
                   <Overview 
                     show={this.state.showOverview}
                     closeHandler={this.handleCloseClick}
                     thingID={this.state.thingID}
-                    isSensor={this.state.isSensor} 
+                    isSensor={this.state.isSensor}
+                    showDetails={this.state.overviewDetails}
                     id='map'
                     className='map'
                   />

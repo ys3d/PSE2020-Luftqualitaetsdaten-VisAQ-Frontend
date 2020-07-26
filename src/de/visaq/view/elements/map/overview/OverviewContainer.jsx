@@ -34,7 +34,7 @@ function Overview(props) {
                                 <br />
                             </p>
                         </OverlayTrigger>
-                        <SensorOverview thingID={props.thingID} />
+                        <SensorOverview thingID={props.thingID} expert={props.showDetails} />
                     </Col>
                 </>
             );
