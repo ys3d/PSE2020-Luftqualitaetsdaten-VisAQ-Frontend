@@ -112,8 +112,13 @@ class Navigationbar extends React.Component {
                                 <Dropdown inline id='link'>
                                     {t('furtherFunc')}
                                 </Dropdown>
+<<<<<<< HEAD
                                 <NavDropdown variant="success" className="dropdown-nav" id="dropdown-nav" >
                                     <NavDropdown.Item className='nav-link' id='nav-link' href='https://www.smartaq.net/de/participate/'>
+=======
+                                <NavDropdown variant="success" id="dropdown-basic">
+                                    <NavDropdown.Item href='https://www.smartaq.net/de/participate/'>
+>>>>>>> parent of a820904... Add css to a button that was missing
                                         {t('diy')}
                                     </NavDropdown.Item>
                                     <NavDropdown.Item className='nav-link' id='nav-link' href='https://www.smartaq.net/en/dashboard/#/home'>
