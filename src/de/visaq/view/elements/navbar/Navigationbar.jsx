@@ -17,9 +17,16 @@ import Timeline from './Timeline'
 import './Navigationbar.css'
 
 
-/* Constructs the Navigationbar with all functions */
+/**
+ * Class containing the Navigationbar
+ */
 class Navigationbar extends React.Component {
 
+    /**
+     * Sole constructor of the class
+     * 
+     * @param {*} props 
+     */
     constructor(props) {
         super(props)
         this.state = {
@@ -29,14 +36,25 @@ class Navigationbar extends React.Component {
 
     }
 
+    /**
+     * Opens an element of the navbar
+     */
     handleOpen = () => {
         this.setState({ isOpen: true })
     }
 
+    /**
+     * Closes an element of the navbar
+     */
     handleClose = () => {
         this.setState({ isOpen: false })
     }
 
+    /**
+     * Selector used for the Themes
+     * 
+     * @param {*} id 
+     */
     selectOnlyThis(id) {
         for (var i = 1; i <= 3; i++) {
             document.getElementById(i).checked = false;
@@ -44,6 +62,12 @@ class Navigationbar extends React.Component {
         document.getElementById(id).checked = true;
     }
 
+    /**
+     * Indicates whether an airquality element should change
+     * 
+     * @param {*} nextprops 
+     * @param {*} nextState 
+     */
     shouldComponentUpdate(nextprops, nextState) {
         console.log(nextprops.airQ);
         if (JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextprops.airQ)) {
@@ -55,7 +79,9 @@ class Navigationbar extends React.Component {
       }
 
     
-
+      /**
+       * Returns the Navbar
+       */
     render() {
         const { t } = this.props;
         return (
@@ -86,7 +112,7 @@ class Navigationbar extends React.Component {
                                 <Dropdown inline id='link'>
                                     {t('furtherFunc')}
                                 </Dropdown>
-                                <NavDropdown variant="success" className="dropdown-basic" id="dropdown-basic" >
+                                <NavDropdown variant="success" className="dropdown-nav" id="dropdown-nav" >
                                     <NavDropdown.Item className='nav-link' id='nav-link' href='https://www.smartaq.net/de/participate/'>
                                         {t('diy')}
                                     </NavDropdown.Item>

@@ -5,9 +5,15 @@ import i18next from 'i18next';
 import {withTranslation} from 'react-i18next';
 import './CookieNoticeInformation.css'
 
+/**
+ * Class that shows more cookie informations
+ */
 class CookieNoticeInformation extends Component {
   MODAL_TYPE_CAUSES = 2;
 
+  /**
+   * Sole constructor of the class
+   */
   constructor() {
     super();
     this.render.bind(this);
@@ -16,10 +22,18 @@ class CookieNoticeInformation extends Component {
     }
   }
 
+  /**
+   * Closes the Modal
+   */
   close() {
     this.setState({ showModal: false });
   }
 
+  /**
+   * Opens the cookie Informations
+   * 
+   * @param {*} modalType 
+   */
   open(modalType) {
     this.setState({ 
       showModal: true,
@@ -27,11 +41,19 @@ class CookieNoticeInformation extends Component {
     });
   }
 
+  /**
+   * Tells if the Event was selected
+   * 
+   * @param {*} eventKey 
+   */
   handleSelect(eventKey) {
     event.preventDefault();
     alert(`selected ${eventKey}`);
   }
 
+  /**
+   * Returns the Modal containing the cookie informations
+   */
   render () {
     const popover = (
       <Popover id="modal-popover" title="popover">

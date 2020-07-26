@@ -5,6 +5,9 @@ import { withTranslation } from 'react-i18next';
 import CookieNoticeInformation from './CookieNoticeInformation'
 import './CookieNotice.css'
 
+/**
+ * Class that creates the cookies and shows the cookie notice
+ */
 class CookieNotice extends Component {
   constructor() {
     super();
@@ -14,6 +17,11 @@ class CookieNotice extends Component {
     };
   }
 
+  /**
+   * Gets the safed language out of the cookie
+   * 
+   * @param {*} name 
+   */
   getLanguage = (name) => {
     if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
       var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -29,6 +37,10 @@ class CookieNotice extends Component {
     }
   }
 
+  /**
+   * Run when loading the site. Loads the saved language 
+   */
+
   componentWillMount() {
     if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
       i18next.changeLanguage(this.getLanguage('Language'));
@@ -36,20 +48,34 @@ class CookieNotice extends Component {
     }
   }
 
+  /**
+   * Closes the Modal
+   */
   close() {
     this.setState({ showModal: false });
   }
 
+  /**
+   * Tells if the Event was selected
+   * 
+   * @param {*} eventKey 
+   */
   handleSelect(eventKey) {
     event.preventDefault();
     alert(`selected ${eventKey}`);
   }
-  // Saves the Language in the Cookie
+
+  /**
+   * Saves the language in the cookie
+   */
   setCookie = () => {
     document.cookie = 'Language=' + i18next.language + ';max-age=' + 60 * 60 * 24 * 365;
     this.setState({ showModal: false });
   }
 
+  /**
+   * Returns the cookieNotice
+   */
   render() {
     const popover = (
       <Popover id="modal-popover" title="popover">
