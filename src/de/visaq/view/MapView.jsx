@@ -1,7 +1,7 @@
 import React, { createRef, Component } from 'react';
 import { Map, TileLayer, withLeaflet } from 'react-leaflet';
 import L from 'leaflet';
-import "./MapView.module.css";
+import "./MapView.css";
 import OverlayBuilder from './overlayfactory/OverlayBuilder';
 import Legend from './elements/map/Legend';
 import request from "../controller/Request";
@@ -10,7 +10,7 @@ import Observation from "../model/Observation";
 import ObservedProperty from "../model/ObservedProperty";
 import { ReactLeafletSearch } from 'react-leaflet-search';
 import { getInitialProps } from 'react-i18next';
-import cookieNotice from './elements/CookieNotice';
+
 
 /**
  * Class that contains the MapView.
@@ -48,8 +48,14 @@ export default class MapView extends Component {
         }
     }
 
+    updateDimensions() {
+        const height = window.innerWidth >= 992 ? window.innerHeight : 400
+        this.setState({ height: height })
+      }
+
     componentWillMount() {
         this.setPosition();
+        this.updateDimensions()
     }
 
     /**
@@ -69,6 +75,14 @@ export default class MapView extends Component {
         if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
             document.cookie = 'AirQuality=' + JSON.stringify(this.state.airQualityData);
         }
+    }
+
+    componentDidMount() {
+        window.addEventListener("resize", this.updateDimensions.bind(this))
+    }
+    
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updateDimensions.bind(this))
     }
 
     requestCell(lat, lng) {
@@ -128,35 +142,38 @@ export default class MapView extends Component {
     render() {
         const ReactLeafletSearchComponent = withLeaflet(ReactLeafletSearch)
         return (
-            <Map
-                center={[this.state.lat, this.state.lng]}
-                zoom={this.state.zoom}
-                style={{ width: '100%', height: '100vh' }}
-                boundsOptions={{ padding: [50, 50] }}
-                ref={this.mapRef}
-                onMoveEnd={this.onMove.bind(this)}
-                zoomControl={false}
-            >
-                <TileLayer
-                    attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <OverlayBuilder mapState={this.state} gridSize={this.gridSize} openHandler={(e) => this.props.openHandler(e)}/>
-                <Legend airQ={this.state.airQualityData}
-                />
-                <ReactLeafletSearchComponent
-                    className="custom-style"
-                    position="topleft"
-                    provider="OpenStreetMap"
-                    providerOptions={{ region: "de" }}
-                    inputPlaceholder="Search"
-                    zoom={12}
-                    showMarker={false}
-                    showPopUp={false}
-                    closeResultsOnClick={true}
-                    openSearchOnLoad={true}
-                />
-            </Map>
+            <div className="map-container" style={{ height: this.state.height }}>
+                <Map
+                    center={[this.state.lat, this.state.lng]}
+                    zoom={this.state.zoom}
+                    style={{ width: '100%', height: '100vh' }}
+                    boundsOptions={{ padding: [50, 50] }}
+                    ref={this.mapRef}
+                    onMoveEnd={this.onMove.bind(this)}
+                    zoomControl={false}
+
+                >
+                    <TileLayer
+                        attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    <OverlayBuilder mapState={this.state} gridSize={this.gridSize} openHandler={(e) => this.props.openHandler(e)}/>
+                    <Legend airQ={this.state.airQualityData} className='legend' id='legend'
+                    />
+                    <ReactLeafletSearchComponent
+                        className="custom-style"
+                        position="topleft"
+                        provider="OpenStreetMap"
+                        providerOptions={{ region: "de" }}
+                        inputPlaceholder="Search"
+                        zoom={12}
+                        showMarker={false}
+                        showPopUp={false}
+                        closeResultsOnClick={true}
+                        openSearchOnLoad={true}
+                    />
+                </Map>
+            </div>
         );
     }
 }

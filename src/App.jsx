@@ -4,9 +4,9 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Navigationbar from './de/visaq/view/elements/navbar/Navigationbar'
 import MapView from './de/visaq/view/MapView';
-
-import CookieNotice from './de/visaq/view/elements/CookieNotice'
+import {Button} from 'react-bootstrap'
 import { Container, Row, Col } from "react-bootstrap";
+import './de/visaq/view/elements/theme/LightTheme.css'
 
 import Overview from './de/visaq/view/elements/map/overview/OverviewContainer'
 
@@ -20,12 +20,27 @@ class App extends Component {
       isSensor: false,
       overviewDetails: false
     };
-
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+    
     this.handleShowSensorClick = this.handleShowSensorClick.bind(this);
     this.handleCloseClick = this.handleCloseClick.bind(this);
     this.handleShowPointClick = this.handleShowPointClick.bind(this);
     this.toggleDetails = this.toggleDetails.bind(this);
   }
+
+  componentDidMount() {
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
+  
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+  
+  updateWindowDimensions() {
+    this.setState({ width: window.outerWidth, height: window.innerHeight });
+  }
+
 
   handleShowSensorClick(toSetThingID) {
     this.setState({
@@ -48,30 +63,39 @@ class App extends Component {
     });
   }
 
+
   toggleDetails() {
     this.setState({
       overviewDetails: !this.state.overviewDetails
     });
   }
-
-
   render() {
+    document.body.style.overflow = "hidden"
     return (
-      <Suspense fallback='loading'>
-        <React.Fragment>
-          <Router>
-            <Container fluid>
-              <Row>
-                <Col id="map-content">
-                  
-                  <Navigationbar openHandler={(e) => this.handleShowSensorClick(e)} overviewDetailHandler={() => this.toggleDetails()} />
-                </Col>
-                <Overview show={this.state.showOverview} closeHandler={this.handleCloseClick} thingID={this.state.thingID} isSensor={this.state.isSensor} showDetails={this.state.overviewDetails}/>
-              </Row>
-            </Container>
-          </Router>
-        </React.Fragment>
-      </Suspense>
+      <div id='app' className="app">
+        <Suspense fallback='loading'>
+          <React.Fragment>
+            <Router>
+              <Container fluid>
+                <Row className='row'>
+                  <Col id="map-content">
+                    <Navigationbar openHandler={(e) => this.handleShowSensorClick(e)} overviewDetailHandler={() => this.toggleDetails()} />
+                  </Col>
+                  <Overview 
+                    show={this.state.showOverview}
+                    closeHandler={this.handleCloseClick}
+                    thingID={this.state.thingID}
+                    isSensor={this.state.isSensor}
+                    showDetails={this.state.overviewDetails}
+                    id='map'
+                    className='map'
+                  />
+                </Row>
+              </Container>
+            </Router>
+          </React.Fragment>
+        </Suspense>
+      </div>
     );
   }
 }
