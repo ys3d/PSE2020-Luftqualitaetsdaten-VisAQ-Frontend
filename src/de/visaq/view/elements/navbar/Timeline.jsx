@@ -5,9 +5,15 @@ import {withTranslation} from 'react-i18next';
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 
+/**
+ * Class that shows the Calendar
+ */
 class Timeline extends Component {
   MODAL_TYPE_REASONS = 2;
 
+  /**
+   * Sole constructor of the class
+   */
   constructor() {
     super();
     this.render.bind(this);
@@ -17,27 +23,29 @@ class Timeline extends Component {
     }
   }
 
-  close() {
-    this.setState({ showModal: false });
-  }
-
-  open(modalType) {
-    this.setState({ 
-      showModal: true,
-    });
-  }
-
+  /**
+   * Used when the eventkey was choosen
+   * 
+   * @param {*} eventKey 
+   */
   handleSelect(eventKey) {
     event.preventDefault();
     alert(`selected ${eventKey}`);
   }
 
+  /**
+   * Changes the date
+   * @param {*} date the new Date
+   */
   handleChange = date => {
     this.setState({
       startDate: date
     });
   };
 
+  /**
+   * Returns the Calendar
+   */
   render () {
     const popover = (
       <Popover id="modal-popover" title="popover">

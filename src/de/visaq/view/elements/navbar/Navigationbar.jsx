@@ -53,7 +53,7 @@ class Navigationbar extends React.Component {
     /**
      * Selector used for the Themes
      * 
-     * @param {*} id 
+     * @param {*} id Id of the element that has to change
      */
     selectOnlyThis(id) {
         for (var i = 1; i <= 3; i++) {
