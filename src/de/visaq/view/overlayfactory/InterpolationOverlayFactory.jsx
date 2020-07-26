@@ -42,6 +42,8 @@ export default class InterpolationOverlayFactory extends Component {
   componentDidUpdate(props) {
     if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(props.airQ)) {
       this.setState({airQualityData : props.airQ});
+    } else if (this.state.pointData === null)   {
+        this.setState({pointData : props.pointData});
     }  else if(JSON.stringify(this.state.pointData[0]) !== JSON.stringify(props.pointData[0]))   {
         this.setState({pointData : props.pointData});
     }
