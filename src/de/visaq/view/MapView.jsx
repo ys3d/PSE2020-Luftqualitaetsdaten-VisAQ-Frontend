@@ -11,6 +11,7 @@ import PointDatum from '../model/PointDatum';
 import { ReactLeafletSearch } from 'react-leaflet-search';
 import * as data from './overlayfactory/testPointDatum.json';
 import { getInitialProps } from 'react-i18next';
+import InterpolationOverlayFactory from './overlayfactory/InterpolationOverlayFactory';
 
 
 /**
@@ -25,7 +26,7 @@ export default class MapView extends Component {
             lat: 48.3705449,
             lng: 10.89779,
             zoom: 13,
-            bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
+            bounds: L.latLngBounds(L.latLng(48.256, 11.02), L.latLng(48.77, 10.711)),
             airQualityData: props.airQ,
             pointData : [],
             cells: {}
@@ -42,12 +43,12 @@ export default class MapView extends Component {
                     lng: position.coords.longitude,
                 }, () => {
                     this.onBoundsUpdate(this.state.bounds);
-                    this.requestInterpolation();
+                    this.requestInterpolation(this.state.bounds);
                 });
             }, (error) => {
                 this.setState({ lat: 48.3705449, lng: 10.89779 }, () => {
                     this.onBoundsUpdate(this.state.bounds);
-                    this.requestInterpolation();
+                    this.requestInterpolation(this.state.bounds);
                 })
             })
         }
@@ -67,6 +68,7 @@ export default class MapView extends Component {
         /*
         *DON'T KEEP!!!!!!!!!!!ONLY FOR TESTING
         *
+       console.log(data);
         var pointdata = [];
         for(var i = 0; i < 8; i++)  {
             var pd1 = new PointDatum(data.json[i]);
@@ -75,6 +77,8 @@ export default class MapView extends Component {
         this.setState({ pointData: pointdata });
         */
     }
+
+
 
 
     /**
@@ -131,23 +135,24 @@ export default class MapView extends Component {
         
     }
     
-    requestInterpolation() {
-        console.log(this.state.bounds.getSouthWest().lat);
-        console.log(this.state.bounds.getSouthWest().lng);
-        console.log(this.state.bounds.getNorthEast().lat);
-        console.log(this.state.bounds.getNorthEast().lng);
+    requestInterpolation(newBounds) {
+        console.log(newBounds.getSouthWest().lng);
+        console.log(newBounds.getNorthEast().lng);
+        console.log(newBounds.getSouthWest().lat);
+        console.log(newBounds.getNorthEast().lat);
         request("http://localhost:8080/api/interpolation/default", false, {
-            "x1": this.state.bounds.getSouthWest().lng,
-            "x2": this.state.bounds.getNorthEast().lng,
-            "y1": this.state.bounds.getSouthWest().lat,
-            "y2": this.state.bounds.getNorthEast().lat,
+            "x1": newBounds.getSouthWest().lng,
+            "x2": newBounds.getNorthEast().lng,
+            "y1": newBounds.getSouthWest().lat,
+            "y2": newBounds.getNorthEast().lat,
             "millis": Date.now(),
             "range": "PT12H",
             "observedProperty": this.state.airQualityData.observedProperty
         }, PointDatum).then(pointDatum => {
             console.log(pointDatum);
             this.setState({pointData : pointDatum});
-        });        
+            console.log(this.state.pointData);
+        });       
     }
     
 
@@ -160,7 +165,7 @@ export default class MapView extends Component {
             || (newBounds.getSouthWest().lat > this.state.bounds.getSouthWest().lat)
             || (newBounds.getNorthEast().lat > this.state.bounds.getNorthEast().lat)
             || (newBounds.getNorthEast().lng > this.state.bounds.getNorthEast().lng)) {
-                this.requestInterpolation();
+                this.requestInterpolation(newBounds);
             }
 
         this.setState({ bounds: newBounds }, () => {
@@ -210,6 +215,8 @@ export default class MapView extends Component {
                     <OverlayBuilder mapState={this.state} gridSize={this.gridSize} openHandler={(e) => this.props.openHandler(e)}/>
                     <Legend airQ={this.state.airQualityData} className='legend' id='legend'
                     />
+                    <InterpolationOverlayFactory airQ={this.state.airQualityData} pointData={this.state.pointData}/>
+
                     <ReactLeafletSearchComponent
                         className="custom-style"
                         position="topleft"

@@ -19,20 +19,6 @@ export default class InterpolationOverlayFactory extends Component {
             pointData : props.pointData
         }
     }
-  /**
-   * Decides whether the component should update. 
-   * Returns true if the state of AirQualityData changed in the parent component, false otherwise.
-   * 
-   * @param {Object} nextprops The properties
-   * @param {Object} nextState The new state
-   */
-  shouldComponentUpdate(nextprops, nextState) {
-    if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextprops.airQ)){
-      return true;
-    } else {
-       return false;
-     }
-  }
 
   /**
    * Updates the InterpolationOverlaysFactory's state.
@@ -40,11 +26,10 @@ export default class InterpolationOverlayFactory extends Component {
    * @param {Object} airQ The new AirQuality Data.
    */
   componentDidUpdate(props) {
+    console.log(props);
     if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(props.airQ)) {
       this.setState({airQualityData : props.airQ});
-    } else if (this.state.pointData === null)   {
-        this.setState({pointData : props.pointData});
-    }  else if(JSON.stringify(this.state.pointData[0]) !== JSON.stringify(props.pointData[0]))   {
+    } if(JSON.stringify(this.state.pointData) !== JSON.stringify(props.pointData))   {
         this.setState({pointData : props.pointData});
     }
   }
@@ -58,20 +43,27 @@ export default class InterpolationOverlayFactory extends Component {
    mapStyle = (feature) => {
         return ({
             weight: 2,
-            opacity: 0,
+            opacity: 1,
             dashArray: "3",
-            fillOpacity: 0.6,
-            fillColor: Gradient(feature.properties.value, this.state.airQualityData)
+            fillOpacity: 0.2,
+            fillColor: Gradient(feature.properties.value, this.state.airQualityData)  
         });
     }
+
+    getFillOpacity(value) {
+        //     
+    }
+
 
     /**
      * Adds the GeoJSON data to a Feature Group
      */
     onFeatureGroupReady = (ref) => {
         if(ref===null) {
+            console.log("zufrühdran");
              return;
         }
+        console.log("Es wassiert was")
         this.featureGroup = ref;
         let leafletGeoJSON = new L.GeoJSON(getGeoJson(this.state.pointData), {
             style: this.mapStyle
@@ -82,12 +74,15 @@ export default class InterpolationOverlayFactory extends Component {
         */
         leafletFG.clearLayers()
         leafletGeoJSON.eachLayer( layer =>leafletFG.addLayer(layer));
+        console.log(leafletGeoJSON);
     }
 
     /**
      * Renders the GeoJSON Data 
      */
     render()    {
+        console.log("ich mach was");
+        console.log(this.state.pointData);
     return (
         <div>
         <FeatureGroup ref={ (reactFGref) => {this.onFeatureGroupReady(reactFGref);} }>
@@ -110,9 +105,18 @@ let geojson;
 function getGeoJson(pointData)   {
     geojson = [];
     let colNum;
-    let rowNum
+    let rowNum;
+
+    if(pointData === null)  {
+        console.log("pointData is null");
+        return;
+    }
     
-    /**
+    if(pointData.length === 0)  {
+        console.log("no PointData");
+        return;
+    }
+    /** 
     * Get the length of the rows
     */
     for(var i = 0; i < pointData.length; i++)   {
@@ -122,7 +126,7 @@ function getGeoJson(pointData)   {
             break;
         }
     }
-      
+    console.log(colNum);
     rowNum = pointData.length /colNum;
       
     if (!(Number.isInteger(rowNum))) {
@@ -132,13 +136,18 @@ function getGeoJson(pointData)   {
     /**
        * Formats the Point Data into squares
        */
-      for (var k = 0; k < rowNum - 1; k++)    {
-        for(var j = k; j < colNum -  1; j++) {
+      for (var k = 0; k < rowNum * colNum - colNum; k = k + rowNum)    {
+        for(var j = k ; j < k + colNum - 1; j++) {
             var square = [];
                 square.push(pointData[j]);
                 square.push(pointData[j + 1]);
                 square.push(pointData[colNum + j]);
                 square.push(pointData[colNum + j + 1])
+                console.log(j);
+                console.log(j+1);
+                console.log(colNum + j);
+                console.log(colNum + j + 1);
+                
                 console.log(square);
                 writeFeatures(square);
             }
@@ -156,14 +165,15 @@ function getGeoJson(pointData)   {
     /**
      * Needs to be square Number.
      */
-    const INTERPOLATED_NUM = 625;
+    const INTERPOLATED_NUM = 25;
 
-    const interval = (squareData[1].json.location.x - squareData[0].json.location.x) / Math.sqrt(INTERPOLATED_NUM);
+    const intervalX = (squareData[1].json.location.x - squareData[0].json.location.x) / Math.sqrt(INTERPOLATED_NUM);
+    const intervalY = (squareData[2].json.location.y - squareData[0].json.location.y) /Math.sqrt(INTERPOLATED_NUM)
 
     for(var i = 0; i < Math.sqrt(INTERPOLATED_NUM); i++)  {
         for(var j = 0; j < Math.sqrt(INTERPOLATED_NUM); j++)  {
-            var coordinates = [((squareData[0].json.location.x + (i * interval)) + (interval/2)),
-                                 ((squareData[0].json.location.y + (j * interval)) + (interval/2))]
+            var coordinates = [((squareData[0].json.location.x + (i * intervalX)) + (intervalX/2)),
+                                 ((squareData[0].json.location.y + (j * intervalY)) + (intervalY/2))]
             var geojsonFeature = {
                 "type": "Feature",
                 "properties": {
@@ -171,15 +181,15 @@ function getGeoJson(pointData)   {
                 },
                 "geometry": {
                     "type": "Polygon",
-                    "coordinates": [[[(squareData[0].location.y + (j * interval)), (squareData[0].location.x + (i * interval))],
-                                    [(squareData[0].location.y + (j * interval)), (squareData[0].location.x + ((i + 1) * interval))],
-                                    [(squareData[0].location.y + ((j + 1) * interval)), (squareData[0].location.x + ((i + 1) * interval))],
-                                    [(squareData[0].location.y + ((j + 1) * interval)), (squareData[0].location.x + (i * interval))],
-                                    [(squareData[0].location.y + (j * interval)), (squareData[0].location.x + (i * interval))]]]
-                        
+                    "coordinates": [[[(squareData[0].location.x + (i * intervalX)), (squareData[0].location.y + (j * intervalY))],
+                                    [(squareData[0].location.x + (i * intervalX)), (squareData[0].location.y + ((j + 1) * intervalY))],
+                                    [(squareData[0].location.x + ((i + 1) * intervalX)), (squareData[0].location.y + ((j + 1) * intervalY))],
+                                    [ (squareData[0].location.x + ((i + 1) * intervalX)), (squareData[0].location.y + (j * intervalY))],
+                                    [(squareData[0].location.x + (i * intervalX)), (squareData[0].location.y + (j * intervalY))]]]     
                 }
             };
             geojson.push(geojsonFeature);
+            console.log(geojsonFeature);
         }
     }   
 }
@@ -208,9 +218,9 @@ function bilinearInterpolation(coordinates, squareDatum) {
     /**
      * mathematical formula from Wikipedia: https://en.wikipedia.org/wiki/Bilinear_interpolation
      */
-    return ((1 /((x2 -x1) * (y2 - y1))) * ((squareDatum[0].json.value * (x2 - x) * (y2 - y))
-                                        + (squareDatum[1].json.value * (x - x1) * (y2 - y))
-                                        + (squareDatum[2].json.value * (x2 - x) * (y - y1))
-                                        + (squareDatum[3].json.value * (x - x1) * (y - y1))));
+    return ((1 /((x2 -x1) * (y2 - y1))) * ((squareDatum[0].json.datum * (x2 - x) * (y2 - y))
+                                        + (squareDatum[1].json.datum * (x - x1) * (y2 - y))
+                                        + (squareDatum[2].json.datum * (x2 - x) * (y - y1))
+                                        + (squareDatum[3].json.datum * (x - x1) * (y - y1))));
 }
 
