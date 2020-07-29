@@ -10,7 +10,7 @@ import './de/visaq/view/elements/theme/LightTheme.css'
 
 import Overview from './de/visaq/view/elements/map/overview/OverviewContainer'
 
-class App extends Component {
+class VisAQ extends Component {
 
   constructor(props) {
     super(props);
@@ -99,4 +99,4 @@ class App extends Component {
     );
   }
 }
-export default App;
+export default VisAQ;
