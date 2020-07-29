@@ -15,7 +15,7 @@
     "jquery": "*",
     "js-cookie": "^2.2.1",
     "leaflet": "^1.6.0",
-    "next": "7.0.0",
+    "next": "9.3.2",
     "next-i18next": "^4.5.0",
     "popper.js": "1.16.0",
     "prop-types": "^15.7.2",
