@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { FeatureGroup} from 'react-leaflet';
+import { FeatureGroup, GeoJSON} from 'react-leaflet';
 import L from 'leaflet';
 import Gradient from '../elements/theme/Gradient';
 
-
+let iopenHandler;
 /**
  * Creates an interpolated Overlay for them Map. 
  * An array of PointData is the base data for the overlay. This is an array of coordinates with an evenly distance, calculated in 
@@ -21,8 +21,9 @@ export default class InterpolationOverlayFactory extends Component {
         super(props);
         this.state = {
             airQualityData : props.airQ,
-            pointData : props.pointData
+            pointData : props.pointData,
         }
+        iopenHandler = props.iopenHandler;
     }
 
   /**
@@ -68,17 +69,22 @@ export default class InterpolationOverlayFactory extends Component {
         }
     }
 
-
+      
     /**
      * Adds the GeoJSON data to a Feature Group
      */
-    onFeatureGroupReady = (ref) => {
+    onGeoJSON = (ref) => {
         if(ref===null) {
              return;
         }
         this.featureGroup = ref;
         let leafletGeoJSON = new L.GeoJSON(getGeoJson(this.state.pointData), {
-            style: this.mapStyle
+            style: this.mapStyle,
+            onEachFeature: function (feature, layer) {
+                layer.on({
+                    click: signalHandler.bind(this)
+                  });
+                }
         });
         let leafletFG = this.featureGroup.leafletElement;
         /*
@@ -94,14 +100,21 @@ export default class InterpolationOverlayFactory extends Component {
     render()    {
     return (
         <div>
-        <FeatureGroup ref={ (reactFGref) => {this.onFeatureGroupReady(reactFGref);} }>
-        </FeatureGroup> 
+        <GeoJSON ref={( reactFGref) => {this.onGeoJSON(reactFGref);} }>
+        </GeoJSON> 
         </div> 
     );
-    }
-    
+    }   
 }
 
+/**
+ * Gives the feature parameters to the iopenHandler.
+ * 
+ * @param {Object} feature  The GeoJSON feature
+ */
+function signalHandler(feature) {
+    iopenHandler(feature.target.feature.properties.value);
+}
 
 
 let geojson;
@@ -170,7 +183,7 @@ function getGeoJson(pointData)   {
     /**
      * Needs to be square Number.
      */
-    const INTERPOLATED_NUM = 25;
+    const INTERPOLATED_NUM = 4;
 
     const intervalX = (squareData[1].json.location.x - squareData[0].json.location.x) / Math.sqrt(INTERPOLATED_NUM);
     const intervalY = (squareData[2].json.location.y - squareData[0].json.location.y) /Math.sqrt(INTERPOLATED_NUM)

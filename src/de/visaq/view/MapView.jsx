@@ -78,7 +78,10 @@ export default class MapView extends Component {
         if (this.state.airQualityData.name === airQ.airQ.name) {
             return;
         }
+        this.requestInterpolation(this.state.bounds);
         this.setState({ airQualityData: airQ.airQ });
+        console.log(this.state.airQualityData);
+        
     
         if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
             document.cookie = 'AirQuality=' + JSON.stringify(this.state.airQualityData);
@@ -146,7 +149,10 @@ export default class MapView extends Component {
         });       
     }
     
-
+    /**
+     * 
+     * @param {Object} newBounds  The map bounds
+     */
     onBoundsUpdate(newBounds) {
 
         /**
@@ -211,10 +217,10 @@ export default class MapView extends Component {
                         attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    <OverlayBuilder mapState={this.state} gridSize={this.gridSize} openHandler={(e) => this.props.openHandler(e)}/>
+                    <OverlayBuilder mapState={this.state} gridSize={this.gridSize} openHandler={(e) => this.props.openHandler(e)} iopenHandler={(e) => this.props.iopenHandler(e)}/>
                     <Legend airQ={this.state.airQualityData} className='legend' id='legend'
                     />
-                    
+                
                     <ReactLeafletSearchComponent
                         className="custom-style"
                         position="topleft"

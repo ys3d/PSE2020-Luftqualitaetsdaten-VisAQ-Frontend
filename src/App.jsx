@@ -48,9 +48,11 @@ class App extends Component {
       isSensor: true
     });
   }
-  handleShowPointClick() {
+  handleShowPointClick(interpolatedValue) {
+    alert("click");
     this.setState({
       showOverview: true,
+      interpolatedValue: interpolatedValue,
       isSensor: false
     });
   }
@@ -72,7 +74,7 @@ class App extends Component {
               <Container fluid>
                 <Row className='row'>
                   <Col id="map-content">
-                    <Navigationbar openHandler={(e) => this.handleShowSensorClick(e)}/>
+                    <Navigationbar openHandler={(e) => this.handleShowSensorClick(e)} iopenHandler={(e) => this.handleShowPointClick(e)}/>
                   </Col>
                   <Overview 
                     show={this.state.showOverview}
