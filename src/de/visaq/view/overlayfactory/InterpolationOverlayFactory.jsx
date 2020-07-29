@@ -12,6 +12,11 @@ import Gradient from '../elements/theme/Gradient';
  */
 export default class InterpolationOverlayFactory extends Component {
      
+    /**
+     * Sole constructor of the class.
+     * 
+     * @param {Objects} props   The properties of the component
+     */
     constructor(props)  {
         super(props);
         this.state = {
@@ -23,7 +28,7 @@ export default class InterpolationOverlayFactory extends Component {
   /**
    * Updates the InterpolationOverlaysFactory's state.
    * 
-   * @param {Object} airQ The new AirQuality Data.
+   * @param {Object} props  The new map properties.
    */
   componentDidUpdate(props) {
     console.log(props);
@@ -33,25 +38,34 @@ export default class InterpolationOverlayFactory extends Component {
         this.setState({pointData : props.pointData});
     }
   }
-    /*
-    const {sensors} = props;
-    if (!Array.isArray(sensors)) {
-        return <Fragment></Fragment>
-    }
-    */
 
+  /**
+   * Determines how the GeoJSON feature is depicted on the map.
+   * 
+   * @param {Object} feature    The GeoJSON feature 
+   */
    mapStyle = (feature) => {
         return ({
             weight: 2,
-            opacity: 1,
+            opacity: 0,
             dashArray: "3",
-            fillOpacity: 0.2,
+            fillOpacity: this.getFillOpacity(feature.properties.value),
             fillColor: Gradient(feature.properties.value, this.state.airQualityData)  
         });
     }
 
+    /**
+     * The method returns the opacity, 
+     * values that are marked insignificant by the backend (having value -999) have an opacity of 0.
+     * 
+     * @param {Number} value The interpolated value of the feature
+     */
     getFillOpacity(value) {
-        //     
+        if (value < -20) {
+            return 0;
+        } else {
+            return 0.3;
+        }
     }
 
 
@@ -60,10 +74,8 @@ export default class InterpolationOverlayFactory extends Component {
      */
     onFeatureGroupReady = (ref) => {
         if(ref===null) {
-            console.log("zufrühdran");
              return;
         }
-        console.log("Es wassiert was")
         this.featureGroup = ref;
         let leafletGeoJSON = new L.GeoJSON(getGeoJson(this.state.pointData), {
             style: this.mapStyle
@@ -74,15 +86,12 @@ export default class InterpolationOverlayFactory extends Component {
         */
         leafletFG.clearLayers()
         leafletGeoJSON.eachLayer( layer =>leafletFG.addLayer(layer));
-        console.log(leafletGeoJSON);
     }
 
     /**
      * Renders the GeoJSON Data 
      */
     render()    {
-        console.log("ich mach was");
-        console.log(this.state.pointData);
     return (
         <div>
         <FeatureGroup ref={ (reactFGref) => {this.onFeatureGroupReady(reactFGref);} }>
@@ -113,7 +122,7 @@ function getGeoJson(pointData)   {
     }
     
     if(pointData.length === 0)  {
-        console.log("no PointData");
+        console.log("PointData is empty");
         return;
     }
     /** 
@@ -143,12 +152,7 @@ function getGeoJson(pointData)   {
                 square.push(pointData[j + 1]);
                 square.push(pointData[colNum + j]);
                 square.push(pointData[colNum + j + 1])
-                console.log(j);
-                console.log(j+1);
-                console.log(colNum + j);
-                console.log(colNum + j + 1);
-                
-                console.log(square);
+
                 writeFeatures(square);
             }
       }
@@ -157,6 +161,7 @@ function getGeoJson(pointData)   {
       
 /**
    * Writes the squares into smaller squares and then into GeoJSON features.
+   * The number of squares is determined by INTERPOLATED_NUM.
    * 
    * @param {Object[]} squareData     
    */
@@ -189,7 +194,6 @@ function getGeoJson(pointData)   {
                 }
             };
             geojson.push(geojsonFeature);
-            console.log(geojsonFeature);
         }
     }   
 }

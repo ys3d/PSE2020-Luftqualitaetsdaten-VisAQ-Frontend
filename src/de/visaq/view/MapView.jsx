@@ -26,7 +26,7 @@ export default class MapView extends Component {
             lat: 48.3705449,
             lng: 10.89779,
             zoom: 13,
-            bounds: L.latLngBounds(L.latLng(48.256, 11.02), L.latLng(48.77, 10.711)),
+            bounds: L.latLngBounds(L.latLng(48.31, 11.05), L.latLng(48.42, 10.741)),
             airQualityData: props.airQ,
             pointData : [],
             cells: {}
@@ -59,26 +59,11 @@ export default class MapView extends Component {
         this.setState({ height: height })
       }
 
+
     componentWillMount() {
         this.setPosition();
         this.updateDimensions()
-        
-
-
-        /*
-        *DON'T KEEP!!!!!!!!!!!ONLY FOR TESTING
-        *
-       console.log(data);
-        var pointdata = [];
-        for(var i = 0; i < 8; i++)  {
-            var pd1 = new PointDatum(data.json[i]);
-            pointdata.push(pd1)
-        } 
-        this.setState({ pointData: pointdata });
-        */
     }
-
-
 
 
     /**
@@ -135,6 +120,12 @@ export default class MapView extends Component {
         
     }
     
+    /**
+     * Sends a request to the Backend. 
+     * The return value is an array of pointDatum.
+     * 
+     * @param {Object} newBounds  LatLng Bounds of the map
+     */
     requestInterpolation(newBounds) {
         console.log(newBounds.getSouthWest().lng);
         console.log(newBounds.getNorthEast().lng);
@@ -190,10 +181,18 @@ export default class MapView extends Component {
         });
     }
 
+    /**
+     * Gives new map bounds to the method onBoundsUpdata.
+     * 
+     * @param {Object} event The map's move event
+     */
     onMove(event) {
         this.onBoundsUpdate(event.target.getBounds());
     }
 
+    /**
+     * Renders the map and all of its children.
+     */
     render() {
         const ReactLeafletSearchComponent = withLeaflet(ReactLeafletSearch)
         return (
@@ -215,8 +214,7 @@ export default class MapView extends Component {
                     <OverlayBuilder mapState={this.state} gridSize={this.gridSize} openHandler={(e) => this.props.openHandler(e)}/>
                     <Legend airQ={this.state.airQualityData} className='legend' id='legend'
                     />
-                    <InterpolationOverlayFactory airQ={this.state.airQualityData} pointData={this.state.pointData}/>
-
+                    
                     <ReactLeafletSearchComponent
                         className="custom-style"
                         position="topleft"
