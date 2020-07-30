@@ -81,7 +81,7 @@ export default class OverlayBuilder extends Component {
                 </LayerGroup>
                 </LayersControl.Overlay>
                 <LayersControl.Overlay name="Interpolation">
-                <InterpolationOverlayFactory airQ={this.props.airQualityData} pointData={this.props.pointData} iopenHandler={(e) => this.props.iopenHandler(e)}/>
+                <InterpolationOverlayFactory airQ={this.props.airQualityData} pointData={this.props.pointData} iopenHandler={(e, a) => this.props.iopenHandler(e, a)}/>
                 </LayersControl.Overlay>
                 </LayersControl>
             </div>

@@ -53,7 +53,7 @@ function Overview(props) {
                                 <br />
                             </p>
                         </OverlayTrigger>
-                        <PointOverview />
+                        <PointOverview value={props.pointValue} airQualityData={props.airQualityData}/>
                     </Col>
                 </>
             );

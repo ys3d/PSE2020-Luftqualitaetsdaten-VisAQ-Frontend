@@ -95,6 +95,7 @@ export default class InterpolationOverlayFactory extends Component {
  * 
  * @param {Object} feature  The GeoJSON feature
  */
+
 function signalHandler(feature, airQualityData) {
     iopenHandler(feature.target.feature.properties.value, airQualityData);
 }
@@ -131,7 +132,7 @@ function getGeoJson(pointData)   {
             break;
         }
     }
-    console.log(colNum);
+
     rowNum = pointData.length /colNum;
       
     if (!(Number.isInteger(rowNum))) {

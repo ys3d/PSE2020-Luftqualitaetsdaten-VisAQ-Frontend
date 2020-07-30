@@ -24,7 +24,9 @@ class VisAQ extends Component {
       showOverview: false,
       thingID: "saqn:t:grimm-aerosol.com:EDM80NEPH:SN17017",
       isSensor: false,
-      overviewDetails: false
+      overviewDetails: false,
+      interpolatedValue: -1,
+      airQualityDataPoint: null
     };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     
@@ -74,11 +76,12 @@ class VisAQ extends Component {
    * 
    * @param {Object} interpolatedValue    The interpolated value
    */
-  handleShowPointClick(interpolatedValue) {
+  handleShowPointClick(interpolatedValue, airQualityData) {
     this.setState({
       showOverview: true,
       interpolatedValue: interpolatedValue,
-      isSensor: false
+      isSensor: false,
+      airQualityDataPoint: airQualityData
     });
   }
 
@@ -115,7 +118,7 @@ class VisAQ extends Component {
                 <Row className='row'>
                   <Col id="map-content">
                     <Navigationbar openHandler={(e) => this.handleShowSensorClick(e)} overviewDetailHandler={() => this.toggleDetails()} 
-                    iopenHandler={(e) => this.handleShowPointClick(e)}/>
+                    iopenHandler={(e, a) => this.handleShowPointClick(e, a)}/>
                   </Col>
                   <Overview 
                     show={this.state.showOverview}
@@ -125,6 +128,8 @@ class VisAQ extends Component {
                     showDetails={this.state.overviewDetails}
                     id='map'
                     className='map'
+                    pointValue={this.state.interpolatedValue}
+                    airQualityData={this.state.airQualityDataPoint}
                   />
                 </Row>
               </Container>
