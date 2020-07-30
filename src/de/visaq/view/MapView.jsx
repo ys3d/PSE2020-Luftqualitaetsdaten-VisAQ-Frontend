@@ -136,7 +136,7 @@ export default class MapView extends Component {
             || (newBounds.getNorthEast().lng > this.state.bounds.getNorthEast().lng)) {
                 return;
             }
-        request("http://localhost:8080/api/interpolation/nearestNeighbor", false, {
+        request("/api/interpolation/nearestNeighbor", true, {
             "x1": newBounds.getSouthWest().lng,
             "x2": newBounds.getNorthEast().lng,
             "y1": newBounds.getSouthWest().lat,
