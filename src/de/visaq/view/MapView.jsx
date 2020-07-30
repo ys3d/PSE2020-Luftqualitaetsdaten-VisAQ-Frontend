@@ -9,10 +9,6 @@ import Thing from "../model/Thing";
 import Observation from "../model/Observation";
 import PointDatum from '../model/PointDatum';
 import { ReactLeafletSearch } from 'react-leaflet-search';
-import * as data from './overlayfactory/testPointDatum.json';
-import { getInitialProps } from 'react-i18next';
-import InterpolationOverlayFactory from './overlayfactory/InterpolationOverlayFactory';
-
 
 /**
  * Class that contains the MapView.
@@ -140,7 +136,7 @@ export default class MapView extends Component {
             || (newBounds.getNorthEast().lng > this.state.bounds.getNorthEast().lng)) {
                 return;
             }
-        request("http://localhost:8080/api/interpolation/default", false, {
+        request("http://localhost:8080/api/interpolation/nearestNeighbor", false, {
             "x1": newBounds.getSouthWest().lng,
             "x2": newBounds.getNorthEast().lng,
             "y1": newBounds.getSouthWest().lat,

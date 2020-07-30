@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FeatureGroup, GeoJSON} from 'react-leaflet';
+import { GeoJSON } from 'react-leaflet';
 import L from 'leaflet';
 import Gradient from '../elements/theme/Gradient';
 
