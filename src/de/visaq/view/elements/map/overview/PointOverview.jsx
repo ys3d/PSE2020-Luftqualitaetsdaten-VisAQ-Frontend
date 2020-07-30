@@ -13,12 +13,19 @@ import ShareField from './ShareField'
  * Displays all the Information on a Specifik Sensor or Location
  */
 class PointOverview extends Component {
+  /**
+   * Sole constructor of the class.
+   * 
+   * @param {Object} props  The properties 
+   */
   constructor(props) {
     super(props);
     this.state = {
     };
   }
-
+  /**
+   * Renders the PointOverview.
+   */
   render() {
     const { t } = this.props;
 

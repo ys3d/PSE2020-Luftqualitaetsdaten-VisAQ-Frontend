@@ -1,5 +1,4 @@
 import React from 'react';
-import closeX from '../../../../../../Black_close_x.svg'
 import Tooltip from 'react-bootstrap/Tooltip'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import SensorOverview from './SensorOverview'
@@ -10,7 +9,7 @@ import './OverviewContainer.css'
 
 /**
  * Container for The SensorOverview
- * @param {*} props 
+ * @param {Object} props    The properties of Overview.
  */
 function Overview(props) {
     if (!props.show) {
@@ -63,6 +62,11 @@ function Overview(props) {
 }
 render(<Overview />);
 
+/**
+ * Shows the Tooltip for the close button.
+ * 
+ * @param {Object} props  The properties
+ */
 function closeToolTip(props) {
     return (
         <Tooltip id="button-tooltip" {...props} className='tooltip'>

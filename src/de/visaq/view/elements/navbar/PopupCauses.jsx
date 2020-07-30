@@ -1,12 +1,17 @@
 import React, { Component, event } from 'react'
 import { Button, Modal, ModalTitle, Popover, Tooltip, Nav, NavItem, Row, Col, FormGroup, FieldGroup, Checkbox } from 'react-bootstrap'
-import i18next from 'i18next';
 import {withTranslation} from 'react-i18next';
 import './Popup.css'
 
+/**
+ * Shows the consequences for air pollution.
+ */
 class PopupCauses extends Component {
   MODAL_TYPE_CAUSES = 2;
 
+  /**
+   * Sole constructor of the class.
+   */
   constructor() {
     super();
     this.render.bind(this);
@@ -15,10 +20,18 @@ class PopupCauses extends Component {
     }
   }
 
+  /**
+   * Closes the popup.
+   */
   close() {
     this.setState({ showModal: false });
   }
 
+  /**
+   * Opens the popup.
+   * 
+   * @param {Object} modalType  The modal type
+   */
   open(modalType) {
     this.setState({ 
       showModal: true,

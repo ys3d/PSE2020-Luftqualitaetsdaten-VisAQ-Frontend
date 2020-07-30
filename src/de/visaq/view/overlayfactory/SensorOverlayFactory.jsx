@@ -2,7 +2,11 @@ import React, { Fragment } from 'react';
 import { CircleMarker } from 'react-leaflet';
 import Gradient from '../elements/theme/Gradient';
 
-
+/**
+ * Builds an Overlay of Circle Markers that represent the sensor data.
+ * 
+ * @param {Object} props    The class properties
+ */
 const SensorOverlayFactory = (props) => {
     const data = props.data;
     function handler(id) {

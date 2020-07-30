@@ -4,7 +4,7 @@ import L from 'leaflet';
 import Gradient from '../elements/theme/Gradient';
 
 let iopenHandler;
-let airQualityData;
+
 /**
  * Creates an interpolated Overlay for them Map. 
  * An array of PointData is the base data for the overlay. This is an array of coordinates with an evenly distance, calculated in 
@@ -21,7 +21,6 @@ export default class InterpolationOverlayFactory extends Component {
     constructor(props)  {
         super(props);
         iopenHandler = props.iopenHandler;
-        airQualityData = props.airQ;
     }
 
   /**
@@ -96,8 +95,8 @@ export default class InterpolationOverlayFactory extends Component {
  * 
  * @param {Object} feature  The GeoJSON feature
  */
-function signalHandler(feature) {
-    console.log(airQualityData);
+
+function signalHandler(feature, airQualityData) {
     iopenHandler(feature.target.feature.properties.value, airQualityData);
 }
 

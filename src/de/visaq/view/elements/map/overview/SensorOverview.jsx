@@ -58,17 +58,27 @@ class SensorOverview extends Component {
     };
   }
 
+  /**
+   * Starts the SensorOverview.
+   */
   componentDidMount() {
     this.update();
   }
 
-
+  /**
+   * Opens a new Sensor Overview.
+   * 
+   * @param {Object} prevProps  Contains the ThingId.
+   */
   componentDidUpdate(prevProps) {
-    if (prevProps.thingID != this.props.thingID) {
+    if (prevProps.thingID !== this.props.thingID) {
       this.update();
     }
   }
 
+  /**
+   * Updates the Sensor Overview.
+   */
   update() {
     this.setState({
       show: {
@@ -275,6 +285,11 @@ class SensorOverview extends Component {
     });
   }
 
+  /**
+   * Returns a description for air pressure.
+   * 
+   * @param {Number} data   The measured value
+   */
   getConsequencesAirQuality(data) {
     if (data >= 1100) {
       return 'overpressure'
@@ -284,6 +299,11 @@ class SensorOverview extends Component {
     return 'normalPressure'
   }
 
+  /**
+   * Returns a description for temperature.
+   * 
+   * @param {Number} data   The temperature
+   */
   getConsequencesTemperature(data) {
     if (data >= 37) {
       return 'heat'
@@ -293,6 +313,11 @@ class SensorOverview extends Component {
     return 'normalTemperature'
   }
 
+  /**
+   * Returns a description for humidity.
+   * 
+   * @param {Number} data   The humidity
+   */
   getConsequencesHumidity(data) {
     if (data >= 60) {
       return 'wettness'
@@ -302,6 +327,11 @@ class SensorOverview extends Component {
     return 'normalHumidity'
   }
   
+  /**
+   * Returns a description for particulate matter.
+   * 
+   * @param {Number} data   The particualte matter
+   */
   getConsequencesPM(data) {
     if (data >= 1100) {
       return 'overpressure'
@@ -311,6 +341,9 @@ class SensorOverview extends Component {
     return 'normalPM'
   }
 
+  /**
+   * Renders the SensorOverview.
+   */
   render() {
     const { t } = this.props;
 
@@ -378,6 +411,11 @@ const dynamicSensorOverview = withTranslation('overview')(SensorOverview)
 
 export default dynamicSensorOverview;
 
+/**
+ * Formats the Date.
+ * 
+ * @param {Number} dateIS8601   The date
+ */
 function formatDate(dateIS8601) {
   var d = new Date(dateIS8601);
   var options = { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' };

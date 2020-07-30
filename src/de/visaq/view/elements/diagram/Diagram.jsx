@@ -23,7 +23,15 @@ const diagramConfig = {
     pointHitRadius: 10,
 };
 
+/**
+ * Draws a diagram.
+ */
 export default class Diagram extends React.Component {
+    /**
+     * Sole constructor of the class.
+     * 
+     * @param {Object} props The Diagram properties
+     */
     constructor(props) {
         super(props);
 

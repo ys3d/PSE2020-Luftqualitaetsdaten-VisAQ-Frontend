@@ -18,8 +18,6 @@ const Gradient = (measurement, airQ) =>  {
         at =  (measurement - minValue) * percentage;
 
     }
-    
-    
     var min = rgbToHsl(hexToRgb(airQualityData.getPrimaryColor()));
     var max = rgbToHsl(hexToRgb(airQualityData.getSecondaryColor()));
 
