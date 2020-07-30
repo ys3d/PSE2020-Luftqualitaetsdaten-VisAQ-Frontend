@@ -86,6 +86,7 @@ export default class MapView extends Component {
         }
     }
 
+
     componentDidMount() {
         window.addEventListener("resize", this.updateDimensions.bind(this))
     }
@@ -94,6 +95,12 @@ export default class MapView extends Component {
         window.removeEventListener("resize", this.updateDimensions.bind(this))
     }
 
+    /**
+     * 
+     * @param {Object} airQualityData The current Air Quality Data
+     * @param {Number} lat 
+     * @param {Number} lng 
+     */
     requestCell(airQualityData, lat, lng) {
         if (this.state.cells.hasOwnProperty(`${airQualityData.name}|${lat}|${lng}`) || this.state.cells[`${airQualityData.name}|${lat}|${lng}`] != undefined) {
             return;
@@ -149,7 +156,9 @@ export default class MapView extends Component {
         });       
     }
     
-
+    /**
+     * Transforms the map bounds into uniform cells and requests the data for these cells.
+     */
     requestInBoundCells() {
         var southWest = this.state.bounds.getSouthWest();
         var southCell = Math.floor(southWest.lat/this.gridSize);
@@ -171,7 +180,11 @@ export default class MapView extends Component {
         }
     }
 
-
+    /**
+     * Sets the state of bounds with the new map bounds and request an Interpolation.
+     * 
+     * @param {Object} newBounds The new map bounds
+     */
     onBoundsUpdate(newBounds) {
         this.setState({ bounds: newBounds }, () => {
             this.requestInBoundCells();
