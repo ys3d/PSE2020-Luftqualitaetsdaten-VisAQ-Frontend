@@ -103,9 +103,6 @@ class Navigationbar extends React.Component {
                                     <NavDropdown.Item className='nav-link' id='nav-link' href='https://www.smartaq.net/en/dashboard/#/home'>
                                         SmartAQNet
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item href='#'>
-                                        <Timeline />
-                                    </NavDropdown.Item>
                                     <NavDropdown.Item className='nav-link' id='nav-link' eventKey={2} href='#'>
                                         <PopupReasons />
                                     </NavDropdown.Item>
