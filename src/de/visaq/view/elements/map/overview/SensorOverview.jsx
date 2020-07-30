@@ -275,41 +275,6 @@ class SensorOverview extends Component {
     });
   }
 
-  getConsequencesAirQuality(data) {
-    if (data >= 1100) {
-      return 'overpressure'
-    } else if (data < 1000) {
-      return 'underpressure'
-    }
-    return 'normalPressure'
-  }
-
-  getConsequencesTemperature(data) {
-    if (data >= 37) {
-      return 'heat'
-    } else if (data < -5) {
-      return 'cold'
-    }
-    return 'normalTemperature'
-  }
-
-  getConsequencesHumidity(data) {
-    if (data >= 60) {
-      return 'wettness'
-    } else if (data < 30) {
-      return 'dry'
-    }
-    return 'normalHumidity'
-  }
-  
-  getConsequencesPM(data) {
-    if (data >= 1100) {
-      return 'overpressure'
-    } else if (data < 1000) {
-      return 'underpressure'
-    }
-    return 'normalPM'
-  }
 
   render() {
     const { t } = this.props;
