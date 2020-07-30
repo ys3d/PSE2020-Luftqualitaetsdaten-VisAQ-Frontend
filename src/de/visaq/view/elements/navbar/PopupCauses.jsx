@@ -2,6 +2,7 @@ import React, { Component, event } from 'react'
 import { Button, Modal, ModalTitle, Popover, Tooltip, Nav, NavItem, Row, Col, FormGroup, FieldGroup, Checkbox } from 'react-bootstrap'
 import i18next from 'i18next';
 import {withTranslation} from 'react-i18next';
+import './Popup.css'
 
 class PopupCauses extends Component {
   MODAL_TYPE_CAUSES = 2;
@@ -48,14 +49,14 @@ class PopupCauses extends Component {
         <span onClick={this.open.bind(this, this.MODAL_TYPE_CAUSES)}>{t('consequencesPM')}</span>
 
         <Modal size="lg" show={this.state.showModal} onHide={this.close.bind(this)}>
-          <ModalTitle center>
+          <ModalTitle center className='title'>
             {t('consequencesPM')}
           </ModalTitle>
           <Modal.Body>
             {t('consequences')}
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.close.bind(this)}>{t('close')}</Button>
+            <Button onClick={this.close.bind(this)} className='button'>{t('close')}</Button>
           </Modal.Footer>
         </Modal>
       </div>

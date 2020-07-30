@@ -1,0 +1,13 @@
+.title{
+    color: #44c2d4;
+    text-align:  center;
+}
+
+.button {
+    background-color: #44c2d4;
+    border: none;
+}
+
+.button:hover {
+    background-color: #42929e;
+}
