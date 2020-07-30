@@ -1,12 +1,8 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import SensorOverlayFactory from './SensorOverlayFactory';
-import {L, getSouthWest,lng,LatLngBounds, toBBoxString} from 'leaflet';
-import {useLeaflet } from 'react-leaflet';
+import {LayersControl, LayerGroup} from 'react-leaflet';
 import InterpolationOverlayFactory from './InterpolationOverlayFactory';
-import Gradient from '../elements/theme/Gradient';
-import * as data from './testOverlay.json';
-import * as ipdata from './testIPOverlay.json';
-import AirQualityData from '../elements/airquality/AirQualityData';
+
 
 
 export default class OverlayBuilder extends Component {
@@ -68,9 +64,16 @@ export default class OverlayBuilder extends Component {
 
         return (
             <div>
-                <Fragment>
-                    <SensorOverlayFactory data = {data} airQ = {this.props.airQualityData} openHandler={(e) => this.props.openHandler(e)}/>
-                </Fragment>
+                <LayersControl position='topright'>
+                <LayersControl.Overlay checked name="Sensor">
+                <LayerGroup>
+                <SensorOverlayFactory data = {data} airQ = {this.props.airQualityData} openHandler={(e) => this.props.openHandler(e)}/>
+                </LayerGroup>
+                </LayersControl.Overlay>
+                <LayersControl.Overlay name="Interpolation">
+                <InterpolationOverlayFactory airQ={this.props.airQualityData} pointData={this.props.pointData} iopenHandler={(e, a) => this.props.iopenHandler(e, a)}/>
+                </LayersControl.Overlay>
+                </LayersControl>
             </div>
         );
     }

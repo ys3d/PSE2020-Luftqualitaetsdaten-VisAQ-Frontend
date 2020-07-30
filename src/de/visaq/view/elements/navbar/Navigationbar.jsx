@@ -1,9 +1,5 @@
-import React, { state, isOpen } from 'react';
-import {
-    Navbar, NavDropdown, Form, FormCheck, FormControl, NavbarToggler, Collapse, Nav, NavItem,
-    NavLink, NavbarBrand, DropdownToggle, Dropdown, Button, DropdownMenu, ButtonGroup
-} from 'react-bootstrap';
-import styled from 'styled-components';
+import React from 'react';
+import { Navbar, NavDropdown, Form, Nav, Dropdown } from 'react-bootstrap';
 import PopupReasons from './PopupReasons';
 import { BrowserRouter as Router } from 'react-router-dom';
 import PopupCauses from './PopupCauses';
@@ -13,7 +9,6 @@ import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 import AirQualityData from '../airquality/AirQualityData';
 import * as data from '../../../../../resources/AirQualityData.json';
-import Timeline from './Timeline'
 import './Navigationbar.css'
 
 
@@ -124,7 +119,7 @@ class Navigationbar extends React.Component {
                             </Navbar.Collapse>
                         </Navbar>
                     </div>
-                    <MapView airQ={this.state.airQualityData} openHandler={(e) => this.props.openHandler(e)}/>
+                    <MapView airQ={this.state.airQualityData} openHandler={(e) => this.props.openHandler(e)} iopenHandler={(e, a) => this.props.iopenHandler(e, a)}/>
                 </Router>
             </React.Fragment>
         )
