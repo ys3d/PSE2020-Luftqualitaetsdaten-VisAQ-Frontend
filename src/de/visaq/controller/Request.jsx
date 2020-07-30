@@ -1,5 +1,13 @@
 const ENTRY_POINT = "http://api.visaq.de:8080";
 
+/**
+ * Sends requests to the VisAQ Backend.
+ * 
+ * @param {String} url          The url
+ * @param {Object} relative     true or false  
+ * @param {Object} params       The paremeters for the query 
+ * @param {Object} model        The class container for the response
+ */
 export default function request(url, relative, params, model) {
     const requestOptions = {
         method: 'POST',
