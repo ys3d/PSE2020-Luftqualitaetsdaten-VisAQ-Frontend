@@ -19,26 +19,8 @@ export default class InterpolationOverlayFactory extends Component {
      */
     constructor(props)  {
         super(props);
-        this.state = {
-            airQualityData : props.airQ,
-            pointData : props.pointData,
-        }
         iopenHandler = props.iopenHandler;
     }
-
-  /**
-   * Updates the InterpolationOverlaysFactory's state.
-   * 
-   * @param {Object} props  The new map properties.
-   */
-  componentDidUpdate(props) {
-    console.log(props);
-    if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(props.airQ)) {
-      this.setState({airQualityData : props.airQ});
-    } if(JSON.stringify(this.state.pointData) !== JSON.stringify(props.pointData))   {
-        this.setState({pointData : props.pointData});
-    }
-  }
 
   /**
    * Determines how the GeoJSON feature is depicted on the map.
@@ -49,9 +31,9 @@ export default class InterpolationOverlayFactory extends Component {
         return ({
             weight: 2,
             opacity: 0,
-            dashArray: "3",
+            dashArray: '3',
             fillOpacity: this.getFillOpacity(feature.properties.value),
-            fillColor: Gradient(feature.properties.value, this.state.airQualityData)  
+            fillColor: Gradient(feature.properties.value, this.props.airQ)  
         });
     }
 
@@ -78,7 +60,7 @@ export default class InterpolationOverlayFactory extends Component {
              return;
         }
         this.featureGroup = ref;
-        let leafletGeoJSON = new L.GeoJSON(getGeoJson(this.state.pointData), {
+        let leafletGeoJSON = new L.GeoJSON(getGeoJson(this.props.pointData), {
             style: this.mapStyle,
             onEachFeature: function (feature, layer) {
                 layer.on({

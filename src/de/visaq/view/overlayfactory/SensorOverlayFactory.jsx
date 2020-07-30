@@ -7,8 +7,7 @@ import Gradient from '../elements/theme/Gradient';
 const SensorOverlayFactory = (props) => {
     const data = props.data;
     function handler(id) {
-        alert(id);
-        //props.openHandler(id)
+        props.openHandler(id)
     };
 
     const markers = data.map((datum, index) => (

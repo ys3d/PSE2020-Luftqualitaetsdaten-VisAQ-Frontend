@@ -46,12 +46,10 @@ export default class MapView extends Component {
                     lng: position.coords.longitude,
                 }, () => {
                     this.onBoundsUpdate(this.state.bounds);
-                    this.requestInterpolation(this.state.bounds);
                 });
             }, (error) => {
                 this.setState({ lat: 48.3705449, lng: 10.89779 }, () => {
                     this.onBoundsUpdate(this.state.bounds);
-                    this.requestInterpolation(this.state.bounds);
                 })
             })
         }
@@ -85,6 +83,7 @@ export default class MapView extends Component {
         }
 
         this.requestInBoundCells();
+        this.requestInterpolation(this.state.bounds);
 
         if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
             document.cookie = 'AirQuality=' + JSON.stringify(this.props.airQ);
@@ -132,32 +131,6 @@ export default class MapView extends Component {
      * @param {Object} newBounds  LatLng Bounds of the map
      */
     requestInterpolation(newBounds) {
-        console.log(newBounds.getSouthWest().lng);
-        console.log(newBounds.getNorthEast().lng);
-        console.log(newBounds.getSouthWest().lat);
-        console.log(newBounds.getNorthEast().lat);
-        console.log(this.state.airQualityData);
-        request("http://localhost:8080/api/interpolation/default", false, {
-            "x1": newBounds.getSouthWest().lng,
-            "x2": newBounds.getNorthEast().lng,
-            "y1": newBounds.getSouthWest().lat,
-            "y2": newBounds.getNorthEast().lat,
-            "millis": Date.now(),
-            "range": "PT12H",
-            "observedProperty": this.state.airQualityData.observedProperty
-        }, PointDatum).then(pointDatum => {
-            console.log(pointDatum);
-            this.setState({pointData : pointDatum});
-            console.log(this.state.pointData);
-        });       
-    }
-    
-    /**
-     * 
-     * @param {Object} newBounds  The map bounds
-     */
-    onBoundsUpdate(newBounds) {
-
         /**
          * Requests a new Interpolation Overlay if the user leaves the viewport
          */
@@ -165,13 +138,26 @@ export default class MapView extends Component {
             || (newBounds.getSouthWest().lat > this.state.bounds.getSouthWest().lat)
             || (newBounds.getNorthEast().lat > this.state.bounds.getNorthEast().lat)
             || (newBounds.getNorthEast().lng > this.state.bounds.getNorthEast().lng)) {
-                this.requestInterpolation(newBounds);
+                return;
             }
+        request("http://localhost:8080/api/interpolation/default", false, {
+            "x1": newBounds.getSouthWest().lng,
+            "x2": newBounds.getNorthEast().lng,
+            "y1": newBounds.getSouthWest().lat,
+            "y2": newBounds.getNorthEast().lat,
+            "millis": Date.now(),
+            "range": "PT12H",
+            "observedProperty": this.props.airQ.observedProperty
+        }, PointDatum).then(pointDatum => {
+            this.setState({pointData : pointDatum});
+        });       
+    }
+    
 
-        this.setState({ bounds: newBounds }, () => {
-            var southWest = newBounds.getSouthWest();
-            var southCell = Math.floor(southWest.lat/this.gridSize);
-            var westCell = Math.floor(southWest.lng/this.gridSize);
+    requestInBoundCells() {
+        var southWest = this.state.bounds.getSouthWest();
+        var southCell = Math.floor(southWest.lat/this.gridSize);
+        var westCell = Math.floor(southWest.lng/this.gridSize);
 
         var northEast = this.state.bounds.getNorthEast();
         var northCell = Math.floor(northEast.lat/this.gridSize);
@@ -189,11 +175,14 @@ export default class MapView extends Component {
         }
     }
 
+
     onBoundsUpdate(newBounds) {
         this.setState({ bounds: newBounds }, () => {
             this.requestInBoundCells();
+            this.requestInterpolation(newBounds);
         });
     }
+
 
     /**
      * Gives new map bounds to the method onBoundsUpdata.
@@ -225,7 +214,8 @@ export default class MapView extends Component {
                         attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    <OverlayBuilder mapState={this.state} airQualityData={this.props.airQ} gridSize={this.gridSize} openHandler={(e) => this.props.openHandler(e)}/>
+                    <OverlayBuilder mapState={this.state} airQualityData={this.props.airQ} gridSize={this.gridSize} 
+                    openHandler={(e) => this.props.openHandler(e)} pointData={this.state.pointData} iopenHandler={(e) => this.props.iopenHandler(e)}/>
                     <Legend airQ={this.props.airQ} className='legend' id='legend'
                     />
                 

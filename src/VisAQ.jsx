@@ -49,9 +49,10 @@ class VisAQ extends Component {
       isSensor: true
     });
   }
-  handleShowPointClick() {
+  handleShowPointClick(interpolatedValue) {
     this.setState({
       showOverview: true,
+      interpolatedValue: interpolatedValue,
       isSensor: false
     });
   }
@@ -79,7 +80,8 @@ class VisAQ extends Component {
               <Container fluid>
                 <Row className='row'>
                   <Col id="map-content">
-                    <Navigationbar openHandler={(e) => this.handleShowSensorClick(e)} overviewDetailHandler={() => this.toggleDetails()} />
+                    <Navigationbar openHandler={(e) => this.handleShowSensorClick(e)} overviewDetailHandler={() => this.toggleDetails()} 
+                    iopenHandler={(e) => this.handleShowPointClick(e)}/>
                   </Col>
                   <Overview 
                     show={this.state.showOverview}

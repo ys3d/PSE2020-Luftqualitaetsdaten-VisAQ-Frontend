@@ -71,11 +71,11 @@ export default class OverlayBuilder extends Component {
                 <LayersControl position='topright'>
                 <LayersControl.Overlay checked name="Sensor">
                 <LayerGroup>
-                <SensorOverlayFactory data = {data} airQ = {this.props.mapState.airQualityData} openHandler={(e) => this.props.openHandler(e)}/>
+                <SensorOverlayFactory data = {data} airQ = {this.props.airQualityData} openHandler={(e) => this.props.openHandler(e)}/>
                 </LayerGroup>
                 </LayersControl.Overlay>
-                <LayersControl.Overlay checked name="Interpolation">
-                <InterpolationOverlayFactory airQ={this.props.mapState.airQualityData} pointData={this.props.mapState.pointData} iopenHandler={(e) => this.props.iopenHandler(e)}/>
+                <LayersControl.Overlay name="Interpolation">
+                <InterpolationOverlayFactory airQ={this.props.airQualityData} pointData={this.props.pointData} iopenHandler={(e) => this.props.iopenHandler(e)}/>
                 </LayersControl.Overlay>
                 </LayersControl>
             </div>
