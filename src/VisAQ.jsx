@@ -3,15 +3,21 @@ import { BrowserRouter as Router } from "react-router-dom";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Navigationbar from './de/visaq/view/elements/navbar/Navigationbar'
-import MapView from './de/visaq/view/MapView';
-import {Button} from 'react-bootstrap'
 import { Container, Row, Col } from "react-bootstrap";
 import './de/visaq/view/elements/theme/LightTheme.css'
 
 import Overview from './de/visaq/view/elements/map/overview/OverviewContainer'
 
+/**
+ * The main class of the Project.
+ */
 class VisAQ extends Component {
 
+  /**
+   * Sole constructor of the class
+   * 
+   * @param {Object} props  The class properties
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -28,20 +34,33 @@ class VisAQ extends Component {
     this.toggleDetails = this.toggleDetails.bind(this);
   }
 
+  /**
+   * Stores the window size, activates an event listener.
+   */
   componentDidMount() {
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
   }
   
+  /**
+   * Removes the event listener.
+   */
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateWindowDimensions);
   }
   
+  /**
+   * Updates the window when the screen size changes.
+   */
   updateWindowDimensions() {
     this.setState({ width: window.outerWidth, height: window.innerHeight });
   }
 
-
+  /**
+   * Handels the click on a sensor.
+   * 
+   * @param {Object} toSetThingID   	 The thing id
+   */
   handleShowSensorClick(toSetThingID) {
     this.setState({
       showOverview: true,
@@ -49,6 +68,12 @@ class VisAQ extends Component {
       isSensor: true
     });
   }
+
+  /**
+   * Handels the click on a place.
+   * 
+   * @param {Object} interpolatedValue    The interpolated value
+   */
   handleShowPointClick(interpolatedValue) {
     this.setState({
       showOverview: true,
@@ -57,6 +82,9 @@ class VisAQ extends Component {
     });
   }
 
+  /**
+   * Handels the closing of the SensorOverview.
+   */
   handleCloseClick() {
     this.setState({
       showOverview: false,
@@ -64,12 +92,18 @@ class VisAQ extends Component {
     });
   }
 
-
+  /**
+   * Handels the SensorOverview.
+   */
   toggleDetails() {
     this.setState({
       overviewDetails: !this.state.overviewDetails
     });
   }
+
+  /**
+   * Renders the Project.
+   */
   render() {
     document.body.style.overflow = "hidden"
     return (

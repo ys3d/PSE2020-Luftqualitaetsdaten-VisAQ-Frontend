@@ -1,31 +1,58 @@
 import Sensorthing from "./Sensorthing";
 import Location from "./Location";
 
+/**
+ * The class is a data container. It is the equivalent to the class Thing in the Backend.
+ */
 export default class Thing extends Sensorthing {
+    
+    /**
+     * Sole constructor of the class.
+     * 
+     * @param {Object} json     The Thing as JSON Object.
+     */
     constructor(json) {
         super(json);
     }
 
+    /**
+     * Returns the description.
+     */
     get description() {
         return this.json.description;
     }
 
+    /**
+     * Returns the name.
+     */
     get name() {
         return this.json.name;
     }
 
+    /**
+     * Returns the DataStream Link.
+     */
     get datastreamsLink() {
         return this.json.datastreamsLink;
     }
 
+    /**
+     * Returns the HistoricalLocation Link.
+     */
     get historicalLocationsLink() {
         return this.json.historicalLocationsLink;
     }
 
+    /**
+     * Returns the LocationLink.
+     */
     get locationsLink() {
         return this.json.locationsLink;
     }
 
+    /**
+     * Returns a cached Location if possible.
+     */
     get locations() {
         var cachedLocations = this.json.locationsLink.cachedSensorthing;
 
@@ -42,6 +69,9 @@ export default class Thing extends Sensorthing {
         return locations;
     }
 
+    /**
+     * Parses the Thing into a JSON Object.
+     */
     toJSON() {
         return {
             id: this.id,

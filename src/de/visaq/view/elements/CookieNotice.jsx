@@ -20,7 +20,7 @@ class CookieNotice extends Component {
   /**
    * Gets the safed language out of the cookie
    * 
-   * @param {*} name 
+   * @param {String} name   The name 
    */
   getLanguage = (name) => {
     if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
@@ -58,7 +58,7 @@ class CookieNotice extends Component {
   /**
    * Tells if the Event was selected
    * 
-   * @param {*} eventKey 
+   * @param {Object} eventKey   An event
    */
   handleSelect(eventKey) {
     event.preventDefault();

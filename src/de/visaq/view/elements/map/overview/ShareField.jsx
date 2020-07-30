@@ -11,6 +11,9 @@ import {
 } from "react-share";
 import * as data from '../../../../../../resources/shareConfig.json'
 
+/**
+ * Shows the share buttons from social media sites.
+ */
 export default class ShareField extends Component {
     render() {
         return (

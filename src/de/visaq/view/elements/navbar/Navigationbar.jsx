@@ -20,7 +20,7 @@ class Navigationbar extends React.Component {
     /**
      * Sole constructor of the class
      *
-     * @param {*} props
+     * @param {Object} props    The properties.
      */
     constructor(props) {
         super(props)

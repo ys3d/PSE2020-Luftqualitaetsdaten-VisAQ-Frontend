@@ -3,13 +3,23 @@ import SensorOverlayFactory from './SensorOverlayFactory';
 import {LayersControl, LayerGroup} from 'react-leaflet';
 import InterpolationOverlayFactory from './InterpolationOverlayFactory';
 
-
-
+/**
+ * The class organizes the map overlays.
+ */
 export default class OverlayBuilder extends Component {
+    
+    /**
+     * Sole constructor of the class.
+     * 
+     * @param {Object} props    The properties
+     */
     constructor(props) {
         super(props);
     }
 
+    /**
+     * Renders the map overlays using LayersControl
+     */
     render() {
         var southWest = this.props.mapState.bounds.getSouthWest();
         var southCell = Math.floor(southWest.lat/this.props.gridSize);

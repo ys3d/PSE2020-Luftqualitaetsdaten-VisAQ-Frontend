@@ -67,7 +67,6 @@ export default class MapView extends Component {
         this.updateDimensions();
     }
 
-
     /**
      * Changes the airQualityData state of the component.
      *
@@ -86,20 +85,28 @@ export default class MapView extends Component {
         }
     }
 
-
+    /**
+     * Activates the Event Listener.
+     */
     componentDidMount() {
         window.addEventListener("resize", this.updateDimensions.bind(this))
     }
 
+    /**
+     * Removes the Event Listener.
+     */
     componentWillUnmount() {
         window.removeEventListener("resize", this.updateDimensions.bind(this))
     }
 
     /**
+     * Sends a request to the Backend.
+     * The return value is an array of Things and an array of Observations. 
+     * These data is stored in cells.
      * 
-     * @param {Object} airQualityData The current Air Quality Data
-     * @param {Number} lat 
-     * @param {Number} lng 
+     * @param {Object} airQualityData   The current Air Quality Data
+     * @param {Number} lat              The degree of longitude
+     * @param {Number} lng              The degree of latitude
      */
     requestCell(airQualityData, lat, lng) {
         if (this.state.cells.hasOwnProperty(`${airQualityData.name}|${lat}|${lng}`) || this.state.cells[`${airQualityData.name}|${lat}|${lng}`] != undefined) {

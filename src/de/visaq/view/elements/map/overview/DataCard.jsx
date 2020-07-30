@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
-import styles from './Overview.module.css'
 import Card from 'react-bootstrap/Card'
 import Accordion from 'react-bootstrap/Accordion'
 import Diagram from '../../diagram/Diagram'
-import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 import './OverviewContainer.css'
 
+/**
+ * Shows the data of one AirQualityData on the the SensorOverview.
+ */
 class DataCard extends Component {
+    /**
+     * Sole constructor of the class.
+     * 
+     * @param {Object} props    The properties
+     */
     constructor(props) {
         super(props);
     }
+
+    /**
+     * Renders the Datacard.
+     */
     render() {
         const { t } = this.props;
         if (this.props.show) {

@@ -1,7 +1,6 @@
 
 import React, { Component, event } from 'react'
 import { Button, Modal, ModalTitle, Popover, Tooltip, Nav, NavItem, Row, Col, FormGroup, FieldGroup, Checkbox } from 'react-bootstrap'
-import i18next from 'i18next';
 import {withTranslation} from 'react-i18next';
 import './CookieNoticeInformation.css'
 
@@ -32,7 +31,7 @@ class CookieNoticeInformation extends Component {
   /**
    * Opens the cookie Informations
    * 
-   * @param {*} modalType 
+   * @param {Object} modalType    The modal type
    */
   open(modalType) {
     this.setState({ 
@@ -44,7 +43,7 @@ class CookieNoticeInformation extends Component {
   /**
    * Tells if the Event was selected
    * 
-   * @param {*} eventKey 
+   * @param {Object} eventKey   The event key
    */
   handleSelect(eventKey) {
     event.preventDefault();
