@@ -105,20 +105,8 @@ class Navigationbar extends React.Component {
                                         <PopupCauses />
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                    <Form.Group controlId='formBasicCheckbox' label='Experten-Einstellungen' inline>
-                                        {t('colorScheme')}
-                                        <Form.Check type='checkbox' id='1' label='Dark-Mode' onClick={() => this.selectOnlyThis(1)} />
-                                        <Form.Check type='checkbox' id='2' label={t('colorBlind')} onClick={() => this.selectOnlyThis(2)} />
-                                        <Form.Check type='checkbox' id='3' label={t('standard')} checked onClick={() => this.selectOnlyThis(3)} />
-                                    </Form.Group>
-                                </NavDropdown>
-                                <Dropdown inline id='link'>
-                                    {t('expert-Mode')}
-                                </Dropdown>
-                                <NavDropdown variant="success" id="dropdown-basic">
+                                    {t('expert-Mode')} 
                                     <Form.Group controlId='form-switch' alignRight>
-                                        <Form.Check type='checkbox' id='1' label={t('officalSensor')} checked />
-                                        <Form.Check type='checkbox' id='2' label={t('nonOfficalSensor')} checked />
                                         <Form.Check type='checkbox' id='3' label={t('sensorOverviewExpert')} onClick={() => this.props.overviewDetailHandler()} />
                                     </Form.Group>
                                 </NavDropdown>
