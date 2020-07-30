@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App.jsx';
+import VisAQ from './VisAQ.jsx';
 import './de/visaq/view/Language'
 import * as serviceWorker from './serviceWorker';
 
@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <VisAQ />
   </React.StrictMode>,
   document.getElementById('root')
 );

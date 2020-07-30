@@ -24,8 +24,8 @@ class Navigationbar extends React.Component {
 
     /**
      * Sole constructor of the class
-     * 
-     * @param {*} props 
+     *
+     * @param {*} props
      */
     constructor(props) {
         super(props)
@@ -52,7 +52,7 @@ class Navigationbar extends React.Component {
 
     /**
      * Selector used for the Themes
-     * 
+     *
      * @param {*} id Id of the element that has to change
      */
     selectOnlyThis(id) {
@@ -62,24 +62,10 @@ class Navigationbar extends React.Component {
         document.getElementById(id).checked = true;
     }
 
-    /**
-     * Indicates whether an airquality element should change
-     * 
-     * @param {*} nextprops 
-     * @param {*} nextState 
-     */
-    shouldComponentUpdate(nextprops, nextState) {
-        if (JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextState.airQ)) {
-            return true;
-        } else {
-            return false;
-        }
-      }
 
-    
-      /**
-       * Returns the Navbar
-       */
+    /**
+     * Returns the Navbar
+     */
     render() {
         const { t } = this.props;
         return (
@@ -141,6 +127,7 @@ class Navigationbar extends React.Component {
                                     <Form.Group controlId='form-switch' alignRight>
                                         <Form.Check type='checkbox' id='1' label={t('officalSensor')} checked />
                                         <Form.Check type='checkbox' id='2' label={t('nonOfficalSensor')} checked />
+                                        <Form.Check type='checkbox' id='3' label={t('sensorOverviewExpert')} onClick={() => this.props.overviewDetailHandler()} />
                                     </Form.Group>
                                 </NavDropdown>
                                 <Nav className='ml-auto'>
@@ -160,7 +147,7 @@ class Navigationbar extends React.Component {
         )
     }
   }
-  
+
 const dynamicNavbar = withTranslation('common')(Navigationbar)
 
 export default dynamicNavbar

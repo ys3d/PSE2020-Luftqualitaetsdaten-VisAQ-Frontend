@@ -34,8 +34,8 @@ export default class OverlayBuilder extends Component {
                 for (var x = 0; x <= xCells; x++) {
                     var lat = (southCell + y) * this.props.gridSize;
                     var lng = (westCell + x) * this.props.gridSize;
-                    if (this.props.mapState.cells.hasOwnProperty(`${lat}|${lng}`) || this.props.mapState.cells[`${lat}|${lng}`] != undefined) {
-                        cellsData.push(this.props.mapState.cells[`${lat}|${lng}`]);
+                    if (this.props.mapState.cells.hasOwnProperty(`${this.props.airQualityData.name}|${lat}|${lng}`) || this.props.mapState.cells[`${this.props.airQualityData.name}|${lat}|${lng}`] != undefined) {
+                        cellsData.push(this.props.mapState.cells[`${this.props.airQualityData.name}|${lat}|${lng}`]);
                     }
                 }
             }
