@@ -10,5 +10,6 @@
     "particulateMatter": "Feinstaub",
     "notFound": "Der gesuchte Sensor kann nicht in der Datenbank gefunden werden",
     "location": "Ort",
-    "consequences": "Folgen "
+    "consequences": "Folgen ",
+    "valueHere": "An diesem Punkt beträgt der aktuelle Interpolierte Wert "
 }
