@@ -17,7 +17,7 @@ const SensorOverlayFactory = (props) => {
             fillColor={Gradient(datum[1].result, props.airQ)}
             fillOpacity='0.8'
             radius={10}
-            onClick={() => handler(datum[1].result)}
+            onClick={() => handler(datum[0].id)}
         >
         </CircleMarker>
     ));
