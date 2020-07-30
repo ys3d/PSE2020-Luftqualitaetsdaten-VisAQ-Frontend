@@ -3,7 +3,6 @@ import {
     Navbar, NavDropdown, Form, FormCheck, FormControl, NavbarToggler, Collapse, Nav, NavItem,
     NavLink, NavbarBrand, DropdownToggle, Dropdown, Button, DropdownMenu, ButtonGroup
 } from 'react-bootstrap';
-import styled from 'styled-components';
 import PopupReasons from './PopupReasons';
 import { BrowserRouter as Router } from 'react-router-dom';
 import PopupCauses from './PopupCauses';
@@ -13,7 +12,6 @@ import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 import AirQualityData from '../airquality/AirQualityData';
 import * as data from '../../../../../resources/AirQualityData.json';
-import Timeline from './Timeline'
 import './Navigationbar.css'
 
 
@@ -119,30 +117,15 @@ class Navigationbar extends React.Component {
                                     <NavDropdown.Item className='nav-link' id='nav-link' href='https://www.smartaq.net/en/dashboard/#/home'>
                                         SmartAQNet
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item href='#'>
-                                        <Timeline />
-                                    </NavDropdown.Item>
                                     <NavDropdown.Item className='nav-link' id='nav-link' eventKey={2} href='#'>
                                         <PopupReasons />
                                     </NavDropdown.Item>
                                     <NavDropdown.Item className='nav-link' id='nav-link' eventKey={1} href='#'>
                                         <PopupCauses />
                                     </NavDropdown.Item>
-                                    <NavDropdown.Divider />
-                                    <Form.Group controlId='formBasicCheckbox' label='Experten-Einstellungen' inline>
-                                        {t('colorScheme')}
-                                        <Form.Check type='checkbox' id='1' label='Dark-Mode' onClick={() => this.selectOnlyThis(1)} />
-                                        <Form.Check type='checkbox' id='2' label={t('colorBlind')} onClick={() => this.selectOnlyThis(2)} />
-                                        <Form.Check type='checkbox' id='3' label={t('standard')} checked onClick={() => this.selectOnlyThis(3)} />
-                                    </Form.Group>
-                                </NavDropdown>
-                                <Dropdown inline id='link'>
+                                    <Dropdown.Divider />
                                     {t('expert-Mode')}
-                                </Dropdown>
-                                <NavDropdown variant='success' id='dropdown-basic'>
                                     <Form.Group controlId='form-switch' alignRight>
-                                        <Form.Check type='checkbox' id='1' label={t('officalSensor')} checked />
-                                        <Form.Check type='checkbox' id='2' label={t('nonOfficalSensor')} checked />
                                         <Form.Check type='checkbox' id='3' label={t('sensorOverviewExpert')} onClick={() => this.props.overviewDetailHandler()} />
                                     </Form.Group>
                                 </NavDropdown>
