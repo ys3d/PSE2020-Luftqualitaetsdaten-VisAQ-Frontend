@@ -11,5 +11,7 @@
     "notFound": "Der gesuchte Sensor kann nicht in der Datenbank gefunden werden",
     "location": "Ort",
     "consequences": "Folgen ",
-    "valueHere": "An diesem Punkt beträgt der aktuelle Interpolierte Wert "
+    "valueHere": "An diesem Punkt beträgt der aktuelle Interpolierte Wert ",
+    "shareTitle": "Schau mal!",
+    "shareBody": "Schau dir mal die Messwerte an!"
 }

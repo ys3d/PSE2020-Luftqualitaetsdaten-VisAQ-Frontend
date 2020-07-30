@@ -11,5 +11,7 @@
     "notFound": "The requested Sensor could not be found",
     "location": "Location",
     "consequences": "Consequences",
-    "valueHere": "The current interpolated value here is "
+    "valueHere": "The current interpolated value here is ",
+    "shareTitle": "Look here!",
+    "shareBody": "Hello there! Look at the air-quality-data!"
 }
