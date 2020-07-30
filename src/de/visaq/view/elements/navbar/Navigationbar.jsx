@@ -24,8 +24,8 @@ class Navigationbar extends React.Component {
 
     /**
      * Sole constructor of the class
-     *
-     * @param {*} props
+     * 
+     * @param {*} props 
      */
     constructor(props) {
         super(props)
@@ -52,7 +52,7 @@ class Navigationbar extends React.Component {
 
     /**
      * Selector used for the Themes
-     *
+     * 
      * @param {*} id Id of the element that has to change
      */
     selectOnlyThis(id) {
@@ -62,10 +62,26 @@ class Navigationbar extends React.Component {
         document.getElementById(id).checked = true;
     }
 
-
     /**
-     * Returns the Navbar
+     * Indicates whether an airquality element should change
+     * 
+     * @param {*} nextprops 
+     * @param {*} nextState 
      */
+    shouldComponentUpdate(nextprops, nextState) {
+        console.log(nextprops.airQ);
+        if (JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextprops.airQ)) {
+            console.log(nextprops.airQ);
+            return true;
+        } else {
+            return false;
+        }
+      }
+
+    
+      /**
+       * Returns the Navbar
+       */
     render() {
         const { t } = this.props;
         return (
@@ -147,7 +163,7 @@ class Navigationbar extends React.Component {
         )
     }
   }
-
+  
 const dynamicNavbar = withTranslation('common')(Navigationbar)
 
 export default dynamicNavbar

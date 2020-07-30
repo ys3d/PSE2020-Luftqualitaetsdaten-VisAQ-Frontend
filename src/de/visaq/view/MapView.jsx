@@ -25,10 +25,10 @@ export default class MapView extends Component {
             lng: 10.89779,
             zoom: 13,
             bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
+            airQualityData: props.airQ,
             cells: {}
         };
         this.gridSize = 0.15;
-        this.requestInBoundCells();
     }
 
     setPosition() {
@@ -49,13 +49,13 @@ export default class MapView extends Component {
     }
 
     updateDimensions() {
-        const height = window.innerWidth >= 992 ? window.innerHeight : 400;
-        this.setState({ height: height });
+        const height = window.innerWidth >= 992 ? window.innerHeight : 400
+        this.setState({ height: height })
       }
 
     componentWillMount() {
         this.setPosition();
-        this.updateDimensions();
+        this.updateDimensions()
     }
 
     /**
@@ -63,28 +63,30 @@ export default class MapView extends Component {
      *
      * @param {Object} airQ The AirQualityData
      */
-    componentDidUpdate(prevProps) {
-        if (this.props.airQ === prevProps.airQ) {
+    componentDidUpdate(airQ) {
+        if (this.state.airQualityData == null && airQ.airQ == null) {
+            return
+        }
+        if (this.state.airQualityData.name === airQ.airQ.name) {
             return;
         }
 
-        this.requestInBoundCells();
-
+        this.setState({ airQualityData: airQ.airQ });
         if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
-            document.cookie = 'AirQuality=' + JSON.stringify(this.props.airQ);
+            document.cookie = 'AirQuality=' + JSON.stringify(this.state.airQualityData);
         }
     }
 
     componentDidMount() {
         window.addEventListener('resize', this.updateDimensions.bind(this))
     }
-
+    
     componentWillUnmount() {
         window.removeEventListener('resize', this.updateDimensions.bind(this))
     }
 
-    requestCell(airQualityData, lat, lng) {
-        if (this.state.cells.hasOwnProperty(`${airQualityData.name}|${lat}|${lng}`) || this.state.cells[`${airQualityData.name}|${lat}|${lng}`] != undefined) {
+    requestCell(lat, lng) {
+        if (this.state.cells.hasOwnProperty(`${lat}|${lng}`) || this.state.cells[`${lat}|${lng}`] != undefined) {
             return;
         }
 
@@ -94,48 +96,42 @@ export default class MapView extends Component {
             'y2': lat + this.gridSize,
             'x2': lng + this.gridSize
         }, Thing).then(things => {
-
             request('/api/observation/all/things/timeframed', true, {
                 'things': things,
                 'millis': Date.now(),
                 'range': 'PT12H',
                 'observedProperty': this.state.airQualityData.observedProperty
-
             }, Observation).then(observations => {
-                this.setState({ cells: { ...this.state.cells, [`${airQualityData.name}|${lat}|${lng}`]: { things: things, observations: observations } } });
+                this.setState({ cells: { ...this.state.cells, [`${lat}|${lng}`]: { things: things, observations: observations } } });
             }, error => {
-                this.setState({ cells: { ...this.state.cells, [`${airQualityData.name}|${lat}|${lng}`]: undefined } });
+                this.setState({ cells: { ...this.state.cells, [`${lat}|${lng}`]: undefined } });
             });
         }, error => {
-            delete this.state.cells[`${airQualityData.name}|${lat}|${lng}`];
+            delete this.state.cells[`${lat}|${lng}`];
         });
-        this.state.cells[`${airQualityData.name}|${lat}|${lng}`] = null;
-    }
-
-    requestInBoundCells() {
-        var southWest = this.state.bounds.getSouthWest();
-        var southCell = Math.floor(southWest.lat/this.gridSize);
-        var westCell = Math.floor(southWest.lng/this.gridSize);
-
-        var northEast = this.state.bounds.getNorthEast();
-        var northCell = Math.floor(northEast.lat/this.gridSize);
-        var eastCell = Math.floor(northEast.lng/this.gridSize);
-
-        var xCells = eastCell - westCell;
-        var yCells = northCell - southCell;
-
-        if (yCells < 5 && xCells < 5) {
-            for (var y = 0; y <= yCells; y++) {
-                for (var x = 0; x <= xCells; x++) {
-                    this.requestCell(this.props.airQ, (southCell + y) * this.gridSize, (westCell + x) * this.gridSize);
-                }
-            }
-        }
+        this.state.cells[`${lat}|${lng}`] = null;
     }
 
     onBoundsUpdate(newBounds) {
         this.setState({ bounds: newBounds }, () => {
-            this.requestInBoundCells();
+            var southWest = newBounds.getSouthWest();
+            var southCell = Math.floor(southWest.lat/this.gridSize);
+            var westCell = Math.floor(southWest.lng/this.gridSize);
+
+            var northEast = newBounds.getNorthEast();
+            var northCell = Math.floor(northEast.lat/this.gridSize);
+            var eastCell = Math.floor(northEast.lng/this.gridSize);
+
+            var xCells = eastCell - westCell;
+            var yCells = northCell - southCell;
+
+            if (yCells < 5 && xCells < 5) {
+                for (var y = 0; y <= yCells; y++) {
+                    for (var x = 0; x <= xCells; x++) {
+                        this.requestCell((southCell + y) * this.gridSize, (westCell + x) * this.gridSize);
+                    }
+                }
+            }
         });
     }
 
@@ -161,8 +157,8 @@ export default class MapView extends Component {
                         attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                     />
-                    <OverlayBuilder mapState={this.state} airQualityData={this.props.airQ} gridSize={this.gridSize} openHandler={(e) => this.props.openHandler(e)}/>
-                    <Legend airQ={this.props.airQ} className='legend' id='legend'
+                    <OverlayBuilder mapState={this.state} gridSize={this.gridSize} openHandler={(e) => this.props.openHandler(e)}/>
+                    <Legend airQ={this.state.airQualityData} className='legend' id='legend'
                     />
                     <ReactLeafletSearchComponent
                         className='custom-style'
