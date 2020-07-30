@@ -49,7 +49,6 @@ class App extends Component {
     });
   }
   handleShowPointClick(interpolatedValue) {
-    alert("click");
     this.setState({
       showOverview: true,
       interpolatedValue: interpolatedValue,

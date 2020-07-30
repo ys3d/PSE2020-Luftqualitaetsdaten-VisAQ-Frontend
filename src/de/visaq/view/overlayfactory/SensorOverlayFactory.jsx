@@ -7,7 +7,8 @@ import Gradient from '../elements/theme/Gradient';
 const SensorOverlayFactory = (props) => {
     const data = props.data;
     function handler(id) {
-        props.openHandler(id)
+        alert(id);
+        //props.openHandler(id)
     };
 
     const markers = data.map((datum, index) => (
@@ -18,8 +19,7 @@ const SensorOverlayFactory = (props) => {
             fillColor={Gradient(datum[1].result, props.airQ)}
             fillOpacity='0.8'
             radius={10}
-            //onClick={() => onCircleClick(datum[0].name)}
-            onClick={() => handler(datum[0].id)}
+            onClick={() => handler(datum[1].result)}
         >
         </CircleMarker>
     ));

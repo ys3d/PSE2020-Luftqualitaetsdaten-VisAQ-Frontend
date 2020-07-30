@@ -35,6 +35,10 @@ export default class MapView extends Component {
 
     }
 
+    /**
+     * Centers the map on the user's position if the Cookie was accepted.
+     * Otherwise the map centers on Augsburg.
+     */
     setPosition() {
         if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
             navigator.geolocation.watchPosition((position) => {
@@ -54,12 +58,17 @@ export default class MapView extends Component {
         }
     }
 
+    /**
+     * Sets the height according to the window height.
+     */
     updateDimensions() {
         const height = window.innerWidth >= 992 ? window.innerHeight : 400
         this.setState({ height: height })
-      }
+    }
 
-
+    /**
+     * Starts the proccesses setPosition and updateDimensions when the component is mounted.
+     */
     componentWillMount() {
         this.setPosition();
         this.updateDimensions()
@@ -134,6 +143,7 @@ export default class MapView extends Component {
         console.log(newBounds.getNorthEast().lng);
         console.log(newBounds.getSouthWest().lat);
         console.log(newBounds.getNorthEast().lat);
+        console.log(this.state.airQualityData);
         request("http://localhost:8080/api/interpolation/default", false, {
             "x1": newBounds.getSouthWest().lng,
             "x2": newBounds.getNorthEast().lng,
