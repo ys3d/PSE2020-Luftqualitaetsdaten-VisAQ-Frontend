@@ -1,13 +1,13 @@
 import React, { createRef, Component } from 'react';
 import { Map, TileLayer, withLeaflet } from 'react-leaflet';
 import L from 'leaflet';
-import "./MapView.css";
+import './MapView.css';
 import OverlayBuilder from './overlayfactory/OverlayBuilder';
 import Legend from './elements/map/Legend';
-import request from "../controller/Request";
-import Thing from "../model/Thing";
-import Observation from "../model/Observation";
-import ObservedProperty from "../model/ObservedProperty";
+import request from '../controller/Request';
+import Thing from '../model/Thing';
+import Observation from '../model/Observation';
+import ObservedProperty from '../model/ObservedProperty';
 import { ReactLeafletSearch } from 'react-leaflet-search';
 import { getInitialProps } from 'react-i18next';
 
@@ -76,11 +76,11 @@ export default class MapView extends Component {
     }
 
     componentDidMount() {
-        window.addEventListener("resize", this.updateDimensions.bind(this))
+        window.addEventListener('resize', this.updateDimensions.bind(this))
     }
 
     componentWillUnmount() {
-        window.removeEventListener("resize", this.updateDimensions.bind(this))
+        window.removeEventListener('resize', this.updateDimensions.bind(this))
     }
 
     requestCell(airQualityData, lat, lng) {
@@ -88,17 +88,17 @@ export default class MapView extends Component {
             return;
         }
 
-        request("/api/thing/all/square", true, {
-            "y1": lat,
-            "x1": lng,
-            "y2": lat + this.gridSize,
-            "x2": lng + this.gridSize
+        request('/api/thing/all/square', true, {
+            'y1': lat,
+            'x1': lng,
+            'y2': lat + this.gridSize,
+            'x2': lng + this.gridSize
         }, Thing).then(things => {
-            request("/api/observation/all/things/timeframed", true, {
-                "things": things,
-                "millis": Date.now(),
-                "range": "PT12H",
-                "observedProperty": airQualityData.observedProperty
+            request('/api/observation/all/things/timeframed', true, {
+                'things': things,
+                'millis': Date.now(),
+                'range': 'PT12H',
+                'observedProperty': airQualityData.observedProperty
             }, Observation).then(observations => {
                 this.setState({ cells: { ...this.state.cells, [`${airQualityData.name}|${lat}|${lng}`]: { things: things, observations: observations } } });
             }, error => {
@@ -144,7 +144,7 @@ export default class MapView extends Component {
     render() {
         const ReactLeafletSearchComponent = withLeaflet(ReactLeafletSearch)
         return (
-            <div className="map-container" style={{ height: this.state.height }}>
+            <div className='map-container' style={{ height: this.state.height }}>
                 <Map
                     center={[this.state.lat, this.state.lng]}
                     zoom={this.state.zoom}
@@ -157,17 +157,17 @@ export default class MapView extends Component {
                 >
                     <TileLayer
                         attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                     />
                     <OverlayBuilder mapState={this.state} airQualityData={this.props.airQ} gridSize={this.gridSize} openHandler={(e) => this.props.openHandler(e)}/>
                     <Legend airQ={this.props.airQ} className='legend' id='legend'
                     />
                     <ReactLeafletSearchComponent
-                        className="custom-style"
-                        position="topleft"
-                        provider="OpenStreetMap"
-                        providerOptions={{ region: "de" }}
-                        inputPlaceholder="Search"
+                        className='custom-style'
+                        position='topleft'
+                        provider='OpenStreetMap'
+                        providerOptions={{ region: 'de' }}
+                        inputPlaceholder='Search'
                         zoom={12}
                         showMarker={false}
                         showPopUp={false}

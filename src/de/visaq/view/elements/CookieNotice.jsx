@@ -78,12 +78,12 @@ class CookieNotice extends Component {
    */
   render() {
     const popover = (
-      <Popover id="modal-popover" title="popover">
+      <Popover id='modal-popover' title='popover'>
         simple popover
       </Popover>
     );
     const tooltip = (
-      <Tooltip id="modal-tooltip">
+      <Tooltip id='modal-tooltip'>
         tooltip
       </Tooltip>
     );
@@ -91,7 +91,7 @@ class CookieNotice extends Component {
     const { t } = this.props;
     return (
       <div>
-        <Modal size="lg" show={this.state.showModal} onHide={this.close.bind(this)}  backdrop="static">
+        <Modal size='lg' show={this.state.showModal} onHide={this.close.bind(this)}  backdrop='static'>
           <ModalTitle center className={'title'}>
            Cookies
           </ModalTitle>
@@ -99,7 +99,7 @@ class CookieNotice extends Component {
             {t('cookieNotice')}
             <br />
             <br />
-            <Button eventKey={1} className={'buttonLink'} variant="link" className='moreInfo'>
+            <Button eventKey={1} className={'buttonLink'} variant='link' className='moreInfo'>
               <CookieNoticeInformation />
             </Button>
           </Modal.Body>

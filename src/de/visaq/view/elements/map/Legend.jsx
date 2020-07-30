@@ -1,6 +1,6 @@
-import { withLeaflet, MapControl } from "react-leaflet";
+import { withLeaflet, MapControl } from 'react-leaflet';
 import Gradient from '../theme/Gradient';
-import L from "leaflet";
+import L from 'leaflet';
 import './Legend.css';
   
 var legend;
@@ -64,12 +64,12 @@ class Legend extends MapControl {
    * Creates the content of the Legend component.
    */
   createLegend()  {
-    legend = L.control({ position: "bottomleft" });
+    legend = L.control({ position: 'bottomleft' });
     /**
      * Creates the Legend content.
      */
     legend.onAdd = () => {
-      const div = L.DomUtil.create("div", "info legend");
+      const div = L.DomUtil.create('div', 'info legend');
       const num = 10;
       const min = this.state.airQualityData.getAverage() - this.state.airQualityData.getVariance();
       const grades = [];

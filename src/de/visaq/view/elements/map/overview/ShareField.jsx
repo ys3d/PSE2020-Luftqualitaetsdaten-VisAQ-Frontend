@@ -8,7 +8,7 @@ import {
     RedditIcon,
     TelegramIcon,
     WhatsappIcon,
-} from "react-share";
+} from 'react-share';
 import * as data from '../../../../../../resources/shareConfig.json'
 
 export default class ShareField extends Component {
@@ -33,7 +33,7 @@ export default class ShareField extends Component {
                 <WhatsappShareButton
                     url={data.shareURL}
                     title={this.props.subject}
-                    separator=":: "
+                    separator=':: '
                 >
                     <WhatsappIcon size={32} round />
                 </WhatsappShareButton>
