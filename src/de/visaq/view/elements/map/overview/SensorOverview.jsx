@@ -21,8 +21,8 @@ class SensorOverview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      thingName: "",
-      thingDescription: "",
+      thingName: '',
+      thingDescription: '',
       show: {
         airHumidity: false,
         airPressure: false,
@@ -30,10 +30,10 @@ class SensorOverview extends Component {
         particulateMatter: false
       },
       value: {
-        airHumidity: "",
-        airPressure: "",
-        airTemperature: "",
-        particulateMatter: ""
+        airHumidity: '',
+        airPressure: '',
+        airTemperature: '',
+        particulateMatter: ''
       },
       unit: {
         airHumidity: airQualityData.humidity.unitOfMeasurement,
@@ -78,7 +78,7 @@ class SensorOverview extends Component {
         particulateMatter: false
       }
     })
-    var thing = request("/api/thing/id", true, {
+    var thing = request('/api/thing/id', true, {
       id: this.props.thingID
     }, Thing);
     thing.then(thing => {
@@ -87,9 +87,9 @@ class SensorOverview extends Component {
         thingDescription: thing.description
       });
       /* Humidity Datastream ####################################################################################### */
-      var datastreams = request("/api/datastream/thing/observedProperty", true, {
-        "thing": thing,
-        "observedProperty": new ObservedProperty(airQualityData.humidity.observedProperty)
+      var datastreams = request('/api/datastream/thing/observedProperty', true, {
+        'thing': thing,
+        'observedProperty': new ObservedProperty(airQualityData.humidity.observedProperty)
       }, Datastream);
       datastreams.then(datastream => {
         if (datastream != null) {
@@ -99,9 +99,9 @@ class SensorOverview extends Component {
               airHumidity: true,
             },
           }));
-          var newestObservations = request("/api/observation/all/newest", true, {
-            "datastreamId": datastream.id,
-            "topNumber": 20
+          var newestObservations = request('/api/observation/all/newest', true, {
+            'datastreamId': datastream.id,
+            'topNumber': 20
           }, Observation);
           newestObservations.then(newest => {
             this.setState(({ value }) => ({
@@ -133,9 +133,9 @@ class SensorOverview extends Component {
       });
 
       /* Temperature Datastream ####################################################################################### */
-      var datastreams = request("/api/datastream/thing/observedProperty", true, {
-        "thing": thing,
-        "observedProperty": new ObservedProperty(airQualityData.temperature.observedProperty)
+      var datastreams = request('/api/datastream/thing/observedProperty', true, {
+        'thing': thing,
+        'observedProperty': new ObservedProperty(airQualityData.temperature.observedProperty)
       }, Datastream);
       datastreams.then(datastream => {
         if (datastream != null) {
@@ -145,9 +145,9 @@ class SensorOverview extends Component {
               airTemperature: true,
             }
           }));
-          var newestObservations = request("/api/observation/all/newest", true, {
-            "datastreamId": datastream.id,
-            "topNumber": 20
+          var newestObservations = request('/api/observation/all/newest', true, {
+            'datastreamId': datastream.id,
+            'topNumber': 20
           }, Observation);
           newestObservations.then(newest => {
             this.setState(({ value }) => ({
@@ -180,9 +180,9 @@ class SensorOverview extends Component {
       });
 
       /* Air Pressure Datastream ####################################################################################### */
-      var datastreams = request("/api/datastream/thing/observedProperty", true, {
-        "thing": thing,
-        "observedProperty": new ObservedProperty(airQualityData.airPressure.observedProperty)
+      var datastreams = request('/api/datastream/thing/observedProperty', true, {
+        'thing': thing,
+        'observedProperty': new ObservedProperty(airQualityData.airPressure.observedProperty)
       }, Datastream);
       datastreams.then(datastream => {
         if (datastream != null) {
@@ -192,9 +192,9 @@ class SensorOverview extends Component {
               airPressure: true,
             }
           }));
-          var newestObservations = request("/api/observation/all/newest", true, {
-            "datastreamId": datastream.id,
-            "topNumber": 20
+          var newestObservations = request('/api/observation/all/newest', true, {
+            'datastreamId': datastream.id,
+            'topNumber': 20
           }, Observation);
           newestObservations.then(newest => {
             this.setState(({ value }) => ({
@@ -227,9 +227,9 @@ class SensorOverview extends Component {
       });
 
       /* Particulate Matter Datastream ####################################################################################### */
-      var datastreams = request("/api/datastream/thing/observedProperty", true, {
-        "thing": thing,
-        "observedProperty": new ObservedProperty(airQualityData.particulateMatter.observedProperty)
+      var datastreams = request('/api/datastream/thing/observedProperty', true, {
+        'thing': thing,
+        'observedProperty': new ObservedProperty(airQualityData.particulateMatter.observedProperty)
       }, Datastream);
       datastreams.then(datastream => {
         if (datastream != null) {
@@ -239,9 +239,9 @@ class SensorOverview extends Component {
               particulateMatter: true,
             }
           }));
-          var newestObservations = request("/api/observation/all/newest", true, {
-            "datastreamId": datastream.id,
-            "topNumber": 20
+          var newestObservations = request('/api/observation/all/newest', true, {
+            'datastreamId': datastream.id,
+            'topNumber': 20
           }, Observation);
           newestObservations.then(newest => {
             this.setState(({ value }) => ({
@@ -325,7 +325,7 @@ class SensorOverview extends Component {
         </p>
         } 
         <ShareField subject={t('shareTitle')} body={t('shareBody')} />
-        <div className="network">&nbsp;</div>
+        <div className='network'>&nbsp;</div>
 
         <Accordion className='accordion'>
           <DataCard

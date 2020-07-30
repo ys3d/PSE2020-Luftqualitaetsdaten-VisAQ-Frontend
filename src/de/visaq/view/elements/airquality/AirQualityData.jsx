@@ -1,4 +1,4 @@
-import ObservedProperty from "../../../model/ObservedProperty";
+import ObservedProperty from '../../../model/ObservedProperty';
 
 /**
  * Contains the content of an air quality data.

@@ -5,7 +5,7 @@ import {
 } from 'react-bootstrap';
 import styled from 'styled-components';
 import PopupReasons from './PopupReasons';
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from 'react-router-dom';
 import PopupCauses from './PopupCauses';
 import CookieNotice from '../CookieNotice';
 import MapView from '../../MapView';
@@ -112,7 +112,7 @@ class Navigationbar extends React.Component {
                                 <Dropdown inline id='link'>
                                     {t('furtherFunc')}
                                 </Dropdown>
-                                <NavDropdown variant="success" id="dropdown-basic">
+                                <NavDropdown variant='success' id='dropdown-basic'>
                                     <NavDropdown.Item className='nav-link' id='nav-link' href='https://www.smartaq.net/de/participate/'>
                                         {t('diy')}
                                     </NavDropdown.Item>
@@ -125,7 +125,7 @@ class Navigationbar extends React.Component {
                                     <NavDropdown.Item className='nav-link' id='nav-link' eventKey={2} href='#'>
                                         <PopupReasons />
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item className='nav-link' id='nav-link' eventKey={1} href="#">
+                                    <NavDropdown.Item className='nav-link' id='nav-link' eventKey={1} href='#'>
                                         <PopupCauses />
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider />
@@ -139,7 +139,7 @@ class Navigationbar extends React.Component {
                                 <Dropdown inline id='link'>
                                     {t('expert-Mode')}
                                 </Dropdown>
-                                <NavDropdown variant="success" id="dropdown-basic">
+                                <NavDropdown variant='success' id='dropdown-basic'>
                                     <Form.Group controlId='form-switch' alignRight>
                                         <Form.Check type='checkbox' id='1' label={t('officalSensor')} checked />
                                         <Form.Check type='checkbox' id='2' label={t('nonOfficalSensor')} checked />

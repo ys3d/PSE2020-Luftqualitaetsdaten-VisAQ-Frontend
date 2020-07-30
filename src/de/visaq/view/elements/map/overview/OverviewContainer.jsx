@@ -4,7 +4,7 @@ import Tooltip from 'react-bootstrap/Tooltip'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import SensorOverview from './SensorOverview'
 import PointOverview from './PointOverview'
-import { Col } from "react-bootstrap";
+import { Col } from 'react-bootstrap';
 import { render } from '@testing-library/react';
 import './OverviewContainer.css'
 
@@ -22,14 +22,14 @@ function Overview(props) {
         if (props.isSensor) {
             return (
                 <>
-                    <Col xl={4} lg={6} md={8} sm={8} xs={10} id="sensorOverviewContainer">
+                    <Col xl={4} lg={6} md={8} sm={8} xs={10} id='sensorOverviewContainer'>
                         <OverlayTrigger
-                            placement="left"
+                            placement='left'
                             delay={{ show: 250, hide: 400 }}
                             overlay={closeToolTip}
                         >
                             <p>
-                                <a href="#" onClick={props.closeHandler} className='close'/>
+                                <a href='#' onClick={props.closeHandler} className='close'/>
                                 <br />
                                 <br />
                             </p>
@@ -42,14 +42,14 @@ function Overview(props) {
         else {
             return (
                 <>
-                    <Col xl={4} lg={6} md={8} sm={8} xs={10} id="pointOverviewContainer">
+                    <Col xl={4} lg={6} md={8} sm={8} xs={10} id='pointOverviewContainer'>
                         <OverlayTrigger
-                            placement="left"
+                            placement='left'
                             delay={{ show: 250, hide: 400 }}
                             overlay={closeToolTip}
                         >
                             <p>
-                                <a href="#" onClick={props.closeHandler} className='close'/>
+                                <a href='#' onClick={props.closeHandler} className='close'/>
                                 <br />
                                 <br />
                             </p>
@@ -65,7 +65,7 @@ render(<Overview />);
 
 function closeToolTip(props) {
     return (
-        <Tooltip id="button-tooltip" {...props} className='tooltip'>
+        <Tooltip id='button-tooltip' {...props} className='tooltip'>
             Hier klicken um die Detailansicht zu schließen
         </Tooltip>
     );
