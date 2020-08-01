@@ -348,7 +348,7 @@ class SensorOverview extends Component {
     const { t } = this.props;
 
     return (
-      <>
+      <div scrollable={true}>
         <h1>
           {t('sensor')} {this.state.thingName}
         </h1>
@@ -360,7 +360,7 @@ class SensorOverview extends Component {
         <ShareField subject={t('shareTitle')} body={t('shareBody')} />
         <div className="network">&nbsp;</div>
 
-        <Accordion className='accordion'>
+        <Accordion className='accordion' defaultActiveKey={4} >
           <DataCard
             show={this.state.show.airPressure}
             cardTitle={t('airPressure')}
@@ -402,7 +402,7 @@ class SensorOverview extends Component {
             className='datacard'
           />
         </Accordion>
-      </>
+      </div>
     );
   }
 }

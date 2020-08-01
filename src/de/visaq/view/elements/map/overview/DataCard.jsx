@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, toggleClass } from 'react';
 import Card from 'react-bootstrap/Card'
-import Accordion from 'react-bootstrap/Accordion'
+import {Accordion, useAccordionToggle} from 'react-bootstrap'
 import Diagram from '../../diagram/Diagram'
 import { withTranslation } from 'react-i18next';
 import './OverviewContainer.css'
@@ -28,7 +28,13 @@ class DataCard extends Component {
                 <Card >
                     <Card.Header >
                         <Accordion.Toggle as={Card.Header} eventKey={this.props.eventKey} className='card'>
-                            {this.props.cardTitle}
+                            <ul>
+                            <p>{this.props.cardTitle}</p>
+                                <li>
+                                    <span class="arrow">
+                                    </span>
+                                </li>
+                            </ul>
                         </Accordion.Toggle>
                     </Card.Header>
                     <Accordion.Collapse eventKey={this.props.eventKey}>

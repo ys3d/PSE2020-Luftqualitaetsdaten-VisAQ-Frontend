@@ -1,23 +1,51 @@
-#tooltip-top > .tooltip-inner {
-    background-color: #B4E6ED;
-    color: #000;
-    border: 1px  #2f8794;
-  }
-  
-  #tooltip-top > .tooltip-arrow {
-    border-top: #B4E6ED;
-    background-color: #B4E6ED;
-    border-color: azure;
-  }
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
 
-  .close {
-    position: absolute;
-    right: 93%;
-    top: 10px;
-    width: 32px;
-    height: 32px;
-    opacity: 0.3;
-  }
+ul {
+  text-align: center;
+  white-space: nowrap;
+  list-style: none;
+  top: 1cm;
+}
+
+li {
+  text-align: center;
+  white-space: nowrap;
+  list-style: none;
+  top: 1cm;
+  margin-top: -4.3vh;
+}
+.arrow {
+  display: block;
+  width: 15px;
+  height: 15px;
+  border-top: 2px solid #000;
+  border-right: 2px solid #000;
+  transform: rotate(135deg);
+  
+}
+
+.arrow:hover {
+  border-top: 2px solid #2f8794;
+  border-right: 2px solid #2f8794;
+}
+
+.open {
+  transform: rotate(-45deg);
+}
+
+.close {
+  position: absolute;
+  right: 93%;
+  top: 10px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+}
   .close:hover {
     opacity: 1;
     color: #2f8794;
@@ -49,34 +77,13 @@
     background-color: rgb(241, 241, 241)
   }
 
-  .arrow {
-    border: solid black;
-    border-width: 0 3px 3px 0;
-    display: inline-block;
-    padding: 3px;
-  }
-
-  .down {
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-  }  
-
-  .datacard {
-    background-color: transparent;
-    border: none;
-  }
-
-  .accordion {
-    background-color: transparent;
-    border: none
-  }
 
   .card {
     background-color: transparent;
-    border: none;
-    text-align:  center;
+    border: transparent;
   }
 
   .card:hover {
     color: #2f8794;
   }
+
