@@ -44,7 +44,7 @@ class Navigationbar extends React.Component {
     handleClose = () => {
         this.setState({ isOpen: false })
     }
-
+    
     /**
      * Selector used for the Themes
      *
@@ -105,9 +105,8 @@ class Navigationbar extends React.Component {
                                         <PopupCauses />
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                    {t('expert-Mode')} 
                                     <Form.Group controlId='form-switch' alignRight>
-                                        <Form.Check type='checkbox' id='3' label={t('sensorOverviewExpert')} onClick={() => this.props.overviewDetailHandler()} />
+                                        <Form.Check  type='checkbox' id='expert-mode' label={t('sensorOverviewExpert')} onClick={() => this.props.overviewDetailHandler()} />
                                     </Form.Group>
                                 </NavDropdown>
                                 <Nav className='ml-auto'>

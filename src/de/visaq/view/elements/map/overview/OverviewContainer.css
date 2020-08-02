@@ -1,3 +1,20 @@
+:root {
+  --main-page-color: 44c2d4;
+  --white: white;
+  --hover-color: #2f8794;
+  --black: black;
+  --grey: rgb(241, 241, 241);
+  --text-gray: #787878
+}
+
+p {
+  color: var(--text-grey);
+}
+
+p:hover {
+  color: var(--main-page-color);
+}
+
 body {
 	display: flex;
 	justify-content: center;
@@ -9,29 +26,27 @@ ul {
   text-align: center;
   white-space: nowrap;
   list-style: none;
-  top: 1cm;
 }
 
 li {
   text-align: center;
   white-space: nowrap;
   list-style: none;
-  top: 1cm;
-  margin-top: -4.3vh;
+  margin-top: -2.4em;
 }
 .arrow {
   display: block;
   width: 15px;
   height: 15px;
-  border-top: 2px solid #000;
-  border-right: 2px solid #000;
+  border-top: 2px solid var(--black);
+  border-right: 2px solid var(--black);
   transform: rotate(135deg);
   
 }
 
 .arrow:hover {
-  border-top: 2px solid #2f8794;
-  border-right: 2px solid #2f8794;
+  border-top: 2px solid var(--hover-color);
+  border-right: 2px solid var(--hover-color);
 }
 
 .open {
@@ -48,7 +63,7 @@ li {
 }
   .close:hover {
     opacity: 1;
-    color: #2f8794;
+    color: var(--hover-color);
   }
   .close:before, .close:after {
     position: absolute;
@@ -56,7 +71,7 @@ li {
     content: ' ';
     height: 33px;
     width: 2px;
-    background-color: #333;
+    background-color: var(--black);
   }
   .close:before {
     transform: rotate(45deg);
@@ -70,11 +85,11 @@ li {
   }
 
   #sensorOverviewContainer {
-    background-color: rgb(241, 241, 241)
+    background-color: var(--grey)
   }
 
   #pointOverviewContainer {
-    background-color: rgb(241, 241, 241)
+    background-color: var(--grey)
   }
 
 
@@ -83,7 +98,4 @@ li {
     border: transparent;
   }
 
-  .card:hover {
-    color: #2f8794;
-  }
 

@@ -5,6 +5,7 @@ import Diagram from '../../diagram/Diagram'
 import { withTranslation } from 'react-i18next';
 import './OverviewContainer.css'
 
+
 /**
  * Shows the data of one AirQualityData on the the SensorOverview.
  */
