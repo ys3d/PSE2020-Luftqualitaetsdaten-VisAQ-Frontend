@@ -26,7 +26,9 @@ class Navigationbar extends React.Component {
         super(props)
         this.state = {
             isOpen: false,
-            airQualityData: new AirQualityData(data.particulateMatter)
+            airQualityData: new AirQualityData(data.particulateMatter),
+            activeAirQ : 0,
+            activeLanguage: 1    
         }
 
     }
@@ -44,7 +46,7 @@ class Navigationbar extends React.Component {
     handleClose = () => {
         this.setState({ isOpen: false })
     }
-    
+
     /**
      * Selector used for the Themes
      *
@@ -57,6 +59,39 @@ class Navigationbar extends React.Component {
         document.getElementById(id).checked = true;
     }
 
+
+    toggle(position, airQ){
+        if (this.state.active === position) {
+          this.setState({activeAirQ : null})
+        } else {
+          this.setState({activeAirQ : position})
+        }
+        this.setState(state => ({ airQualityData: new AirQualityData(airQ)}))
+      }
+    
+
+      activateAirQuality(position) {
+        if (this.state.activeAirQ === position) {
+          return "#44c2d4";
+        }
+        return "";
+      }
+
+      activateLanguage(position) {
+        if (this.state.activeLanguage === position) {
+          return "#44c2d4";
+        }
+        return "";
+      }
+
+      toggleLanguage(position, lng){
+        if (this.state.activeLanguage === position) {
+          this.setState({activeLanguage : null})
+        } else {
+          this.setState({activeLanguage : position})
+        }
+        i18next.changeLanguage(lng)
+      }
 
     /**
      * Returns the Navbar
@@ -75,16 +110,16 @@ class Navigationbar extends React.Component {
                             <Navbar.Toggle aria-controls='navbar-nav' />
                             <Navbar.Collapse id='navbar-nav' >
                                 <Nav className='mr-auto' justify variant='Tabs'>
-                                    <Nav.Link className='nav-link' id='nav-link' onClick={() => this.setState(state => ({ airQualityData: new AirQualityData(data.particulateMatter) }))}>
+                                    <Nav.Link className='nav-link' id='nav-link'  style={{color: this.activateAirQuality(0)}} onClick={() => {this.toggle(0, new AirQualityData(data.particulateMatter))}}>
                                         {t('particulateMatter')}
                                     </Nav.Link>
-                                    <Nav.Link className='nav-link' id='nav-link' onClick={() => this.setState(state => ({ airQualityData: new AirQualityData(data.humidity) }))}>
+                                    <Nav.Link className='nav-link' id='nav-link'  style={{color: this.activateAirQuality(1)}} onClick={() => {this.toggle(1, new AirQualityData(data.humidity))}}>
                                         {t('humidity')}
                                     </Nav.Link>
-                                    <Nav.Link className='nav-link' id='nav-link' onClick={() => this.setState(state => ({ airQualityData: new AirQualityData(data.temperature) }))}>
+                                    <Nav.Link className='nav-link' id='nav-link' style={{color: this.activateAirQuality(2)}} onClick={() => {this.toggle(2, new AirQualityData(data.temperature))}}>
                                         {t('temperature')}
                                     </Nav.Link>
-                                    <Nav.Link className='nav-link' id='nav-link' onClick={() => this.setState(state => ({ airQualityData: new AirQualityData(data.airPressure) }))}>
+                                    <Nav.Link className='nav-link' id='nav-link' style={{color: this.activateAirQuality(3)}} onClick={() => {this.toggle(3, new AirQualityData(data.airPressure))}}>
                                         {t('airPressure')}
                                     </Nav.Link>
                                 </Nav>
@@ -105,16 +140,17 @@ class Navigationbar extends React.Component {
                                         <PopupCauses />
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider />
+                                    <p>{t('expert-Mode')}</p>
                                     <Form.Group controlId='form-switch' alignRight>
                                         <Form.Check  type='checkbox' id='expert-mode' label={t('sensorOverviewExpert')} onClick={() => this.props.overviewDetailHandler()} />
                                     </Form.Group>
                                 </NavDropdown>
                                 <Nav className='ml-auto'>
-                                    <Nav.Link className='nav-link-lng' id='nav-link-lng' onClick={() => { i18next.changeLanguage('en') }}>
-                                        en
+                                    <Nav.Link className='nav-link-lng' id='nav-link-lng' style={{color: this.activateLanguage(0)}} onClick={() => {this.toggleLanguage(0, 'en')}}>
+                                        EN
                                     </Nav.Link>
-                                    <Nav.Link className='nav-link-lng' id='nav-link-lng' onClick={() => { i18next.changeLanguage('de') }}>
-                                        de
+                                    <Nav.Link className='nav-link-lng' id='nav-link-lng'  style={{color: this.activateLanguage(1)}} onClick={() => {this.toggleLanguage(1, 'de')}}>
+                                        DE
                                     </Nav.Link>
                                 </Nav>
                             </Navbar.Collapse>
