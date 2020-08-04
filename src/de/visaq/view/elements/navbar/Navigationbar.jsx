@@ -28,7 +28,7 @@ class Navigationbar extends React.Component {
             isOpen: false,
             airQualityData: new AirQualityData(data.particulateMatter),
             activeAirQ : 0,
-            activeLanguage: 1    
+            activeLanguage: document.cookie.split(';').some((item) => item.trim().startsWith('Language=en')) ? 0 : 1,  
         }
 
     }
@@ -59,7 +59,11 @@ class Navigationbar extends React.Component {
         document.getElementById(id).checked = true;
     }
 
-
+    /**
+       * Toggles the active state of the air quality buttons
+       * @param {*} position position of the button
+       * @param {*} lng choosen air quality
+       */
     toggle(position, airQ){
         if (this.state.active === position) {
           this.setState({activeAirQ : null})
@@ -69,7 +73,10 @@ class Navigationbar extends React.Component {
         this.setState(state => ({ airQualityData: new AirQualityData(airQ)}))
       }
     
-
+      /**
+       * Activates the button at the given position
+       * @param {*} position Position of the button 
+       */
       activateAirQuality(position) {
         if (this.state.activeAirQ === position) {
           return "#44c2d4";
@@ -77,6 +84,10 @@ class Navigationbar extends React.Component {
         return "";
       }
 
+      /**
+       * Activates the button at the given position
+       * @param {*} position Position of the button 
+       */
       activateLanguage(position) {
         if (this.state.activeLanguage === position) {
           return "#44c2d4";
@@ -84,6 +95,11 @@ class Navigationbar extends React.Component {
         return "";
       }
 
+      /**
+       * Toggles the active state of the language buttons
+       * @param {*} position position of the button
+       * @param {*} lng choosen language
+       */
       toggleLanguage(position, lng){
         if (this.state.activeLanguage === position) {
           this.setState({activeLanguage : null})

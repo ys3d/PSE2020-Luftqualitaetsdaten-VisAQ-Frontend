@@ -21,10 +21,7 @@ style {
 }
 
 .custom-style {
-    width: var(--icon-width);
-    height: var(--icon-height);
-    background-color: aliceblue;
-    --icon-button-max-size: 2px;
+    border: none;
 }
 
 div#map-content { padding: 0 0 0 0; };

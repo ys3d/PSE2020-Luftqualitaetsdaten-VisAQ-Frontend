@@ -8,7 +8,7 @@
 }
 
 .navbar { background-color: #FFF; }
-a, .navbar-nav, .navbar-dark .nav-link {
+.navbar-nav, .navbar-dark .nav-link {
   color: #000;
 }
 .navbar-brand {
@@ -76,6 +76,6 @@ a, .navbar-nav, .navbar-dark .nav-link {
 
 p {
   padding-left: 1em;
-  color: var(--main-page-color)!important
+  color: var(--main-page-color)
 }
 

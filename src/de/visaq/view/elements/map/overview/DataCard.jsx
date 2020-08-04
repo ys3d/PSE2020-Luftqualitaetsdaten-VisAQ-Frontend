@@ -30,7 +30,7 @@ class DataCard extends Component {
                     <Card.Header >
                         <Accordion.Toggle as={Card.Header} eventKey={this.props.eventKey} className='card'>
                             <ul>
-                            <p>{this.props.cardTitle}</p>
+                            {this.props.cardTitle}
                                 <li>
                                     <span class="arrow">
                                     </span>
@@ -40,7 +40,7 @@ class DataCard extends Component {
                     </Card.Header>
                     <Accordion.Collapse eventKey={this.props.eventKey}>
                         <Card.Body>
-                            <p>{t('currently')}: {this.props.currentValue} {this.props.dataUnit}</p>
+                            {t('currently')}: {this.props.currentValue} {this.props.dataUnit}
                             <Diagram
                                 title={t('historicalDevelopment')}
                                 dataRowLabel={this.props.dataUnit}

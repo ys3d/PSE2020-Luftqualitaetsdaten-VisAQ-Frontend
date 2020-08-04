@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styles from './Overview.module.css'
 import Accordion from 'react-bootstrap/Accordion'
 import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
@@ -9,10 +8,9 @@ import DataCard from './DataCard'
 import ShareField from './ShareField'
 import Datastream from '../../../../model/Datastream'
 import ObservedProperty from '../../../../model/ObservedProperty';
-import * as observedPropertiesId from '../../../../../../resources/observedPropertyId.json'
 import * as airQualityData from '../../../../../../resources/AirQualityData.json'
 import Observation from '../../../../model/Observation';
-
+import './OverviewContainer.css'
 
 /**
  * Displays all the Information on a Specifik Sensor or Location
@@ -348,14 +346,15 @@ class SensorOverview extends Component {
     const { t } = this.props;
 
     return (
-      <div scrollable={true}>
+      <>
         <h1>
           {t('sensor')} {this.state.thingName}
         </h1>
         { this.props.expert &&
-        <p>
+        <a>
           {t('description')} {this.state.thingDescription}
-        </p>
+          <div className="network">&nbsp;</div>
+        </a>
         } 
         <ShareField subject={t('shareTitle')} body={t('shareBody')} />
         <div className="network">&nbsp;</div>
@@ -402,7 +401,7 @@ class SensorOverview extends Component {
             className='datacard'
           />
         </Accordion>
-      </div>
+      </>
     );
   }
 }

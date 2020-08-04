@@ -78,8 +78,7 @@ export default class MapView extends Component {
         }
 
         this.requestInBoundCells();
-        this.requestInterpolation(this.state.bounds);
-
+        this.requestInterpolation(this.state.bounds); 
         if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
             document.cookie = 'AirQuality=' + JSON.stringify(this.props.airQ);
         }
@@ -89,7 +88,7 @@ export default class MapView extends Component {
      * Activates the Event Listener.
      */
     componentDidMount() {
-        window.addEventListener("resize", this.updateDimensions.bind(this))
+        window.addEventListener("resize", this.updateDimensions.bind(this));
     }
 
     /**
@@ -246,6 +245,7 @@ export default class MapView extends Component {
                         showPopUp={false}
                         closeResultsOnClick={true}
                         openSearchOnLoad={true}
+                        style={{}}
                     />
                 </Map>
             </div>
