@@ -31,10 +31,10 @@ class DataCard extends Component {
                         <Accordion.Toggle as={Card.Header} eventKey={this.props.eventKey} className='card'>
                             <ul>
                             {this.props.cardTitle}
-                                <li>
+                                <div className='arrow-container'>
                                     <span class="arrow">
                                     </span>
-                                </li>
+                                </div>
                             </ul>
                         </Accordion.Toggle>
                     </Card.Header>

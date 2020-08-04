@@ -19,7 +19,7 @@ ul {
   list-style: none;
 }
 
-li {
+.arrow-container {
   text-align: center;
   white-space: nowrap;
   list-style: none;
