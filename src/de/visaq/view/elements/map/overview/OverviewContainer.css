@@ -23,17 +23,30 @@ ul {
   text-align: center;
   white-space: nowrap;
   list-style: none;
-  margin-top: -1.5em;
+  
 }
 
-.arrow {
+.arrow-down {
+  transition-delay: 0.4s;
   display: block;
   width: 15px;
   height: 15px;
   border-top: 2px solid var(--black);
   border-right: 2px solid var(--black);
   transform: rotate(135deg);
-  
+  margin-top: -1.5em;
+}
+
+.arrow-top {
+  transition-delay: 0.4s;
+  display: block;
+  width: 15px;
+  height: 15px;
+  border-top: 2px solid var(--black);
+  border-right: 2px solid var(--black);
+  transform: rotate(315deg);
+  margin-top: -1em;
+  margin-bottom: -0.5em;
 }
 
 .arrow:hover {

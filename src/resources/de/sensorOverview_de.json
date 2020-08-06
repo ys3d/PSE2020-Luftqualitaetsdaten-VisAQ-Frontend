@@ -13,5 +13,6 @@
     "consequences": "Folgen ",
     "valueHere": "An diesem Punkt beträgt der aktuelle Interpolierte Wert ",
     "shareTitle": "Schau mal!",
-    "shareBody": "Schau dir mal die Messwerte an!"
+    "shareBody": "Schau dir mal die Messwerte an!",
+    "closeTooltip": "Hier klicken um die Sidebar zu schließen"
 }

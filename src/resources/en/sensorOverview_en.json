@@ -13,5 +13,6 @@
     "consequences": "Consequences",
     "valueHere": "The current interpolated value here is ",
     "shareTitle": "Look here!",
-    "shareBody": "Hello there! Look at the air-quality-data!"
+    "shareBody": "Hello there! Look at the air-quality-data!",
+    "closeTooltip": "Click here to close the Sidebar"
 }

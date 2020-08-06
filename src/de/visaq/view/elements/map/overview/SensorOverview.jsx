@@ -284,62 +284,6 @@ class SensorOverview extends Component {
   }
 
   /**
-   * Returns a description for air pressure.
-   * 
-   * @param {Number} data   The measured value
-   */
-  getConsequencesAirQuality(data) {
-    if (data >= 1100) {
-      return 'overpressure'
-    } else if (data < 1000) {
-      return 'underpressure'
-    }
-    return 'normalPressure'
-  }
-
-  /**
-   * Returns a description for temperature.
-   * 
-   * @param {Number} data   The temperature
-   */
-  getConsequencesTemperature(data) {
-    if (data >= 37) {
-      return 'heat'
-    } else if (data < -5) {
-      return 'cold'
-    }
-    return 'normalTemperature'
-  }
-
-  /**
-   * Returns a description for humidity.
-   * 
-   * @param {Number} data   The humidity
-   */
-  getConsequencesHumidity(data) {
-    if (data >= 60) {
-      return 'wettness'
-    } else if (data < 30) {
-      return 'dry'
-    }
-    return 'normalHumidity'
-  }
-  
-  /**
-   * Returns a description for particulate matter.
-   * 
-   * @param {Number} data   The particualte matter
-   */
-  getConsequencesPM(data) {
-    if (data >= 1100) {
-      return 'overpressure'
-    } else if (data < 1000) {
-      return 'underpressure'
-    }
-    return 'normalPM'
-  }
-
-  /**
    * Renders the SensorOverview.
    */
   render() {
@@ -359,7 +303,7 @@ class SensorOverview extends Component {
         <ShareField subject={t('shareTitle')} body={t('shareBody')} />
         <div className="network">&nbsp;</div>
 
-        <Accordion className='accordion' defaultActiveKey={4} >
+        <Accordion className='accordion'>
           <DataCard
             show={this.state.show.airPressure}
             cardTitle={t('airPressure')}

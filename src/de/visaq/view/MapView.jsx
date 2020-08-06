@@ -9,11 +9,13 @@ import Thing from "../model/Thing";
 import Observation from "../model/Observation";
 import PointDatum from '../model/PointDatum';
 import { ReactLeafletSearch } from 'react-leaflet-search';
+import i18next from 'i18next';
+import { withTranslation } from 'react-i18next';
 
 /**
  * Class that contains the MapView.
  */
-export default class MapView extends Component {
+class MapView extends Component {
     /*with props its possible to initalize the map with different map properties*/
     constructor(props) {
         super(props);
@@ -212,6 +214,7 @@ export default class MapView extends Component {
      * Renders the map and all of its children.
      */
     render() {
+        const { t } = this.props;
         const ReactLeafletSearchComponent = withLeaflet(ReactLeafletSearch)
         return (
             <div className="map-container" style={{ height: this.state.height }}>
@@ -239,7 +242,7 @@ export default class MapView extends Component {
                         position="topleft"
                         provider="OpenStreetMap"
                         providerOptions={{ region: "de" }}
-                        inputPlaceholder="Search"
+                        inputPlaceholder={t('search')}
                         zoom={12}
                         showMarker={false}
                         showPopUp={false}
@@ -253,12 +256,6 @@ export default class MapView extends Component {
     }
 }
 
+const dynamicMapView = withTranslation('common')(MapView)
 
-
-
-
-
-
-  
-
-  
+export default dynamicMapView

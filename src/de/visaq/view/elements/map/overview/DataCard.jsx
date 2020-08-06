@@ -17,6 +17,14 @@ class DataCard extends Component {
      */
     constructor(props) {
         super(props);
+        this.state = {
+            isActive: false,
+            thisKey: props.eventKey,
+        };
+    }
+
+    toggleClass = (e) =>{
+        this.setState({isActive: !this.state.isActive})
     }
 
     /**
@@ -26,20 +34,20 @@ class DataCard extends Component {
         const { t } = this.props;
         if (this.props.show) {
             return (
-                <Card >
+                <Card onClick={this.toggleClass}>
                     <Card.Header >
                         <Accordion.Toggle as={Card.Header} eventKey={this.props.eventKey} className='card'>
                             <ul>
                             {this.props.cardTitle}
                                 <div className='arrow-container'>
-                                    <span class="arrow">
+                                    <span className={(this.state.isActive) ? 'arrow-top' : 'arrow-down'}>
                                     </span>
                                 </div>
                             </ul>
                         </Accordion.Toggle>
                     </Card.Header>
-                    <Accordion.Collapse eventKey={this.props.eventKey}>
-                        <Card.Body>
+                    <Accordion.Collapse eventKey={this.props.eventKey} onClick={this.toggleClass}>
+                        <Card.Body >
                             {t('currently')}: {this.props.currentValue} {this.props.dataUnit}
                             <Diagram
                                 title={t('historicalDevelopment')}
