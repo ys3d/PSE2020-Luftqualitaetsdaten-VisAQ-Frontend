@@ -24,8 +24,13 @@ export default class InterpolationOverlayFactory extends Component {
         airQualityData = props.airQ;
     }
 
+    /**
+     * The AirQualityData is updated
+     * 
+     * @param {Object} prevProps     The properties   
+     */
     componentDidUpdate(prevProps) {
-        if (prevProps.airQ != this.props.airQ) {
+        if (prevProps.airQ !== this.props.airQ) {
             airQualityData = this.props.airQ;
         }
       }
@@ -68,6 +73,7 @@ export default class InterpolationOverlayFactory extends Component {
              return;
         }
         this.featureGroup = ref;
+        
         let leafletGeoJSON = new L.GeoJSON(getGeoJson(this.props.pointData), {
             style: this.mapStyle,
             onEachFeature: function (feature, layer) {
@@ -102,7 +108,6 @@ export default class InterpolationOverlayFactory extends Component {
  * 
  * @param {Object} feature  The GeoJSON feature
  */
-
 function signalHandler(feature) {
     iopenHandler(feature.target.feature.properties.value, airQualityData);
 }
@@ -113,53 +118,54 @@ let geojson;
 /**
  * Calculates the GeoJSON Data.
  * 
- * @param {Object} pointData An array of PointData
+ * @param {Object} input An array of array of PointData
  */
-function getGeoJson(pointData)   {
+function getGeoJson(input)   {
     geojson = [];
-    let colNum;
-    let rowNum;
-
-    if(pointData === null)  {
-        console.log("pointData is null");
-        return;
-    }
     
-    if(pointData.length === 0)  {
-        console.log("PointData is empty");
-        return;
-    }
-    /** 
-    * Get the length of the rows
-    */
-    for(var i = 0; i < pointData.length; i++)   {
-        if(pointData[0].location.y === pointData[i].location.y)  {
-            colNum = i + 1; 
-        } else {
-            break;
+    input.forEach(function(cell) {
+        let pointData = cell.pointData;
+        
+        let colNum;
+        let rowNum;
+
+        if(pointData === null || pointData === undefined || pointData.length === 0)  {
+            console.log("pointData is missing");
+            return;
         }
-    }
 
-    rowNum = pointData.length /colNum;
-      
-    if (!(Number.isInteger(rowNum))) {
-        return false;
-    }
-      
-    /**
-       * Formats the Point Data into squares
-       */
-      for (var k = 0; k < rowNum * colNum - colNum; k = k + rowNum)    {
-        for(var j = k ; j < k + colNum - 1; j++) {
-            var square = [];
-                square.push(pointData[j]);
-                square.push(pointData[j + 1]);
-                square.push(pointData[colNum + j]);
-                square.push(pointData[colNum + j + 1])
-
-                writeFeatures(square);
+        /** 
+        * Get the length of the rows
+        */
+        for(var i = 0; i < pointData.length; i++)   {
+            if(pointData[0].location.y === pointData[i].location.y)  {
+                colNum = i + 1; 
+            } else {
+                break;
             }
-      }
+        }
+
+        rowNum = pointData.length /colNum;
+        
+        if (!(Number.isInteger(rowNum))) {
+            return false;
+        }
+      
+        /**
+        * Formats the Point Data into squares
+        */
+        for (var k = 0; k < rowNum * colNum - colNum; k = k + rowNum)    {
+            for(var j = k ; j < k + colNum - 1; j++) {
+                var square = [];
+                    square.push(pointData[j]);
+                    square.push(pointData[j + 1]);
+                    square.push(pointData[colNum + j]);
+                    square.push(pointData[colNum + j + 1])
+
+                    writeFeatures(square);
+                }
+            }
+        });
     return geojson;    
 }
       
@@ -170,7 +176,6 @@ function getGeoJson(pointData)   {
    * @param {Object[]} squareData     
    */
   function writeFeatures(squareData)   {
-   
     /**
      * Needs to be square Number.
      */

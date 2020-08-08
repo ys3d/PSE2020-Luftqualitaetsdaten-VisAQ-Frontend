@@ -8,8 +8,9 @@ import MapView from '../../MapView';
 import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 import AirQualityData from '../airquality/AirQualityData';
+import Checkbox from './Checkbox';
 import * as data from '../../../../../resources/AirQualityData.json';
-import './Navigationbar.css'
+import './Navigationbar.css';
 
 
 /**
@@ -28,7 +29,6 @@ class Navigationbar extends React.Component {
             isOpen: false,
             airQualityData: new AirQualityData(data.particulateMatter)
         }
-
     }
 
     /**
@@ -55,6 +55,26 @@ class Navigationbar extends React.Component {
             document.getElementById(i).checked = false;
         }
         document.getElementById(id).checked = true;
+    }
+
+    start(checkboxElement)  {
+        console.log(checkboxElement.target.id);
+        if(checkboxElement.target.id === 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    onChangeOverlay(event){
+        
+        document.getElementById(event.target.id).checked = true;
+        
+        for (var i = 0; i < 2; i++) {
+            if (i !== event.target.id)  {
+                document.getElementById(i).checked = false;
+            }
+        }
     }
 
 
@@ -88,6 +108,14 @@ class Navigationbar extends React.Component {
                                         {t('airPressure')}
                                     </Nav.Link>
                                 </Nav>
+                                <Dropdown inline id='overlay'>
+                                    {t('mapOverlay')}
+                                </Dropdown>
+                                <NavDropdown variant="success" id="dropdown-basic">
+                                    <Form.Group controlId='switch-overlay' alignRight>
+                                    <Checkbox isChecked0={true} name1={t('Sensors')} isChecked1={false} name2={t('Interpolation')}/>
+                                    </Form.Group>
+                                </NavDropdown>
                                 <Dropdown inline id='link'>
                                     {t('furtherFunc')}
                                 </Dropdown>
@@ -121,7 +149,8 @@ class Navigationbar extends React.Component {
                             </Navbar.Collapse>
                         </Navbar>
                     </div>
-                    <MapView airQ={this.state.airQualityData} openHandler={(e) => this.props.openHandler(e)} iopenHandler={(e, a) => this.props.iopenHandler(e, a)}/>
+                    <MapView airQ={this.state.airQualityData} openHandler={(e) => this.props.openHandler(e)} 
+                    iopenHandler={(e, a) => this.props.iopenHandler(e, a)}/>
                 </Router>
             </React.Fragment>
         )
