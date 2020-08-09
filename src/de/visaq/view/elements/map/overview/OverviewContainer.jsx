@@ -21,7 +21,7 @@ function Overview(props) {
         if (props.isSensor) {
             return (
                 <>
-                    <Col xl={4} lg={6} md={8} sm={8} xs={10} id="sensorOverviewContainer">
+                    <Col xl={4} lg={6} md={8} sm={8} xs={10} id="sensorOverviewContainer" scrollable={true}>
                         <OverlayTrigger
                             placement="left"
                             delay={{ show: 250, hide: 400 }}

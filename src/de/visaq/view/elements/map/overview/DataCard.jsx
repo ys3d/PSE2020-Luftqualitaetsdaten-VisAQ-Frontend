@@ -18,13 +18,12 @@ class DataCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isActive: false,
-            thisKey: props.eventKey,
+            isActive: props.isActive,
         };
     }
 
     toggleClass = (e) =>{
-        this.setState({isActive: !this.state.isActive})
+            this.setState({isActive: !this.state.isActive})
     }
 
     /**

@@ -1,4 +1,5 @@
 import React, { createRef, Component } from 'react';
+import {pure} from 'recompose'
 import { Map, TileLayer, withLeaflet} from 'react-leaflet';
 import L from 'leaflet';
 import "./MapView.css";
@@ -26,7 +27,8 @@ class MapView extends Component {
             zoom: 13,
             bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
             pointData : [],
-            cells: {}
+            cells: {},
+            hasLoaded: false,
         };
         this.gridSize = 0.15;
         this.requestInBoundCells();
@@ -42,6 +44,7 @@ class MapView extends Component {
                 this.setState({
                     lat: position.coords.latitude,
                     lng: position.coords.longitude,
+                    hasLoaded: true,
                 }, () => {
                     this.onBoundsUpdate(this.state.bounds);
                 });
@@ -51,6 +54,13 @@ class MapView extends Component {
                 })
             })
         }
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.state.hasLoaded) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -65,7 +75,6 @@ class MapView extends Component {
      * Starts the proccesses setPosition and updateDimensions when the component is mounted.
      */
     componentWillMount() {
-        this.setPosition();
         this.updateDimensions();
     }
 
@@ -78,18 +87,15 @@ class MapView extends Component {
         if (this.props.airQ === prevProps.airQ) {
             return;
         }
-
         this.requestInBoundCells();
         this.requestInterpolation(this.state.bounds); 
-        if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
-            document.cookie = 'AirQuality=' + JSON.stringify(this.props.airQ);
-        }
     }
 
     /**
      * Activates the Event Listener.
      */
     componentDidMount() {
+        this.setPosition();
         window.addEventListener("resize", this.updateDimensions.bind(this));
     }
 
@@ -238,7 +244,7 @@ class MapView extends Component {
                     />
                 
                     <ReactLeafletSearchComponent
-                        className="custom-style"
+                        className="search-control"
                         position="topleft"
                         provider="OpenStreetMap"
                         providerOptions={{ region: "de" }}
@@ -248,7 +254,6 @@ class MapView extends Component {
                         showPopUp={false}
                         closeResultsOnClick={true}
                         openSearchOnLoad={true}
-                        style={{}}
                     />
                 </Map>
             </div>

@@ -23,11 +23,10 @@ ul {
   text-align: center;
   white-space: nowrap;
   list-style: none;
-  
 }
 
 .arrow-down {
-  transition-delay: 0.4s;
+  transition-delay: 0.25s;
   display: block;
   width: 15px;
   height: 15px;
@@ -38,7 +37,7 @@ ul {
 }
 
 .arrow-top {
-  transition-delay: 0.4s;
+  transition-delay: 0.25s;
   display: block;
   width: 15px;
   height: 15px;

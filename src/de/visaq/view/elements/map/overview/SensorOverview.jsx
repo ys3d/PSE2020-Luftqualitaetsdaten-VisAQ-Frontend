@@ -313,6 +313,7 @@ class SensorOverview extends Component {
             data={this.state.diagram.data.airPressure}
             eventKey={1}
             className='datacard'
+            isActice={false}
           />
           <DataCard
             show={this.state.show.airTemperature}
@@ -323,6 +324,7 @@ class SensorOverview extends Component {
             data={this.state.diagram.data.airTemperature}
             eventKey={2}
             className='datacard'
+            isActice={false}
           />
           <DataCard
             show={this.state.show.airHumidity}
@@ -333,6 +335,7 @@ class SensorOverview extends Component {
             data={this.state.diagram.data.airHumidity}
             eventKey={3}
             className='datacard'
+            isActice={false}
           />
           <DataCard
             show={this.state.show.particulateMatter}
@@ -343,6 +346,7 @@ class SensorOverview extends Component {
             data={this.state.diagram.data.particulateMatter}
             eventKey={4}
             className='datacard'
+            isActice={false}
           />
         </Accordion>
       </>
