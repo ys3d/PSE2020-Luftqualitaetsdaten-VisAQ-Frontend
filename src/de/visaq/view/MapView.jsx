@@ -233,7 +233,8 @@ export default class MapView extends Component {
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
                     <OverlayBuilder mapState={this.state} airQualityData={this.props.airQ} gridSize={this.gridSize} 
-                    openHandler={(e) => this.props.openHandler(e)} pointData={this.state.pointData} iopenHandler={(e, a) => this.props.iopenHandler(e, a)}/>
+                                    openHandler={(e) => this.props.openHandler(e)} pointData={this.state.pointData} 
+                                    iopenHandler={(e, a) => this.props.iopenHandler(e, a)} overlays={this.props.overlays}/>
                     <Legend airQ={this.props.airQ} className='legend' id='legend'
                     />
                 

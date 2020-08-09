@@ -8,10 +8,10 @@ import MapView from '../../MapView';
 import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 import AirQualityData from '../airquality/AirQualityData';
-import Checkbox from './Checkbox';
 import * as data from '../../../../../resources/AirQualityData.json';
 import './Navigationbar.css';
 
+let ov = [true, false];
 
 /**
  * Class containing the Navigationbar
@@ -26,8 +26,9 @@ class Navigationbar extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            isOpen: false,
-            airQualityData: new AirQualityData(data.particulateMatter)
+            isOpen : false,
+            airQualityData: new AirQualityData(data.particulateMatter),
+            overlays : ov
         }
     }
 
@@ -46,35 +47,25 @@ class Navigationbar extends React.Component {
     }
 
     /**
-     * Selector used for the Themes
-     *
-     * @param {*} id Id of the element that has to change
+     * Activates the Sensor Overlay.
      */
-    selectOnlyThis(id) {
-        for (var i = 1; i <= 3; i++) {
-            document.getElementById(i).checked = false;
+    toggleChange0 = () => {
+        ov[0] = !ov[0];
+        if (ov[0])  {
+          ov[1] = false;
         }
-        document.getElementById(id).checked = true;
-    }
-
-    start(checkboxElement)  {
-        console.log(checkboxElement.target.id);
-        if(checkboxElement.target.id === 0) {
-            return true;
-        } else {
-            return false;
+        this.setState({overlays : ov});
+      }
+    
+      /**
+       * Activates the Interpolation Overlay.
+       */
+      toggleChange1 = () => {
+        ov[1] = !ov[1];
+        if(ov[1])  {
+          ov[0] = false;
         }
-    }
-
-    onChangeOverlay(event){
-        
-        document.getElementById(event.target.id).checked = true;
-        
-        for (var i = 0; i < 2; i++) {
-            if (i !== event.target.id)  {
-                document.getElementById(i).checked = false;
-            }
-        }
+        this.setState({overlays : ov});
     }
 
 
@@ -113,7 +104,20 @@ class Navigationbar extends React.Component {
                                 </Dropdown>
                                 <NavDropdown variant="success" id="dropdown-basic">
                                     <Form.Group controlId='switch-overlay' alignRight>
-                                    <Checkbox isChecked0={true} name1={t('Sensors')} isChecked1={false} name2={t('Interpolation')}/>
+                                    <label>
+                                        <input  type="checkbox"
+                                                checked={ov[0]}
+                                                onChange={this.toggleChange0}
+                                        />
+                                    {t('Sensors')}
+                                    </label>
+                                    <label>
+                                    <input  type="checkbox"
+                                            checked={ov[1]}
+                                            onChange={this.toggleChange1}
+                                    />
+                                    {t('Interpolation')}
+                                    </label>
                                     </Form.Group>
                                 </NavDropdown>
                                 <Dropdown inline id='link'>
@@ -150,7 +154,7 @@ class Navigationbar extends React.Component {
                         </Navbar>
                     </div>
                     <MapView airQ={this.state.airQualityData} openHandler={(e) => this.props.openHandler(e)} 
-                    iopenHandler={(e, a) => this.props.iopenHandler(e, a)}/>
+                    iopenHandler={(e, a) => this.props.iopenHandler(e, a)} overlays={this.state.overlays}/>
                 </Router>
             </React.Fragment>
         )

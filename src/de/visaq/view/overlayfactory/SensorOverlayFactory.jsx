@@ -13,6 +13,10 @@ const SensorOverlayFactory = (props) => {
         props.openHandler(id)
     };
 
+    if (!props.overlay)  {
+        return <Fragment></Fragment>
+    }
+
     const markers = data.map((datum, index) => (
         <CircleMarker
             key={index}

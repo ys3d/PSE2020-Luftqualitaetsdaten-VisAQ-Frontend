@@ -72,22 +72,26 @@ export default class InterpolationOverlayFactory extends Component {
         if(ref===null) {
              return;
         }
-        this.featureGroup = ref;
         
-        let leafletGeoJSON = new L.GeoJSON(getGeoJson(this.props.pointData), {
-            style: this.mapStyle,
-            onEachFeature: function (feature, layer) {
-                layer.on({
-                    click: signalHandler.bind(this)
-                  });
-                }
-        });
+        this.featureGroup = ref;
         let leafletFG = this.featureGroup.leafletElement;
+                
         /*
         * clears the old Layers
         */
-        leafletFG.clearLayers()
+       leafletFG.clearLayers();
+        
+       if (this.props.overlay)  {
+            let leafletGeoJSON = new L.GeoJSON(getGeoJson(this.props.pointData), {
+                style: this.mapStyle,
+                onEachFeature: function (feature, layer) {
+                    layer.on({
+                        click: signalHandler.bind(this)
+                    });
+                }
+            });
         leafletGeoJSON.eachLayer( layer =>leafletFG.addLayer(layer));
+        }
     }
 
     /**
