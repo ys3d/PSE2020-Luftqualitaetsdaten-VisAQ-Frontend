@@ -39,28 +39,25 @@ class MapView extends Component {
      * Otherwise the map centers on Augsburg.
      */
     setPosition() {
-        if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
-            navigator.geolocation.watchPosition((position) => {
-                this.setState({
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude,
-                    hasLoaded: true,
-                }, () => {
-                    this.onBoundsUpdate(this.state.bounds);
-                });
-            }, (error) => {
-                this.setState({ lat: 48.3705449, lng: 10.89779 }, () => {
-                    this.onBoundsUpdate(this.state.bounds);
+        if(!this.state.hasLoaded) {
+            if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
+                navigator.geolocation.watchPosition((position) => {
+                    this.setState({
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
+                        hasLoaded: true,
+                    }, () => {
+                        this.onBoundsUpdate(this.state.bounds);
+                    });
+                }, (error) => {
+                    this.setState({ lat: 48.3705449, lng: 10.89779 }, () => {
+                        this.onBoundsUpdate(this.state.bounds);
+                    })
                 })
-            })
+            }
+        } else {
+            this.setState({hasLoaded: true});
         }
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        if (this.state.hasLoaded) {
-            return false;
-        }
-        return true;
     }
 
     /**
@@ -238,8 +235,14 @@ class MapView extends Component {
                         attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    <OverlayBuilder mapState={this.state} airQualityData={this.props.airQ} gridSize={this.gridSize} 
-                    openHandler={(e) => this.props.openHandler(e)} pointData={this.state.pointData} iopenHandler={(e, a) => this.props.iopenHandler(e, a)}/>
+                    <OverlayBuilder 
+                        mapState={this.state} 
+                        airQualityData={this.props.airQ} 
+                        gridSize={this.gridSize} 
+                        openHandler={(e) => this.props.openHandler(e)} 
+                        pointData={this.state.pointData} 
+                        iopenHandler={(e, a) => this.props.iopenHandler(e, a)}
+                    />
                     <Legend airQ={this.props.airQ} className='legend' id='legend'
                     />
                 

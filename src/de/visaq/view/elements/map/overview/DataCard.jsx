@@ -1,4 +1,4 @@
-import React, { Component, toggleClass } from 'react';
+import React, { Component, toggleClass, event } from 'react';
 import Card from 'react-bootstrap/Card'
 import {Accordion, useAccordionToggle} from 'react-bootstrap'
 import Diagram from '../../diagram/Diagram'
@@ -26,6 +26,11 @@ class DataCard extends Component {
             this.setState({isActive: !this.state.isActive})
     }
 
+    handleSelect(eventKey) {
+        event.preventDefault();
+        this.toggleClass();
+      }
+
     /**
      * Renders the Datacard.
      */
@@ -33,7 +38,7 @@ class DataCard extends Component {
         const { t } = this.props;
         if (this.props.show) {
             return (
-                <Card onClick={this.toggleClass}>
+                <Card>
                     <Card.Header >
                         <Accordion.Toggle as={Card.Header} eventKey={this.props.eventKey} className='card'>
                             <ul>
@@ -45,7 +50,7 @@ class DataCard extends Component {
                             </ul>
                         </Accordion.Toggle>
                     </Card.Header>
-                    <Accordion.Collapse eventKey={this.props.eventKey} onClick={this.toggleClass}>
+                    <Accordion.Collapse eventKey={this.props.eventKey}>
                         <Card.Body >
                             {t('currently')}: {this.props.currentValue} {this.props.dataUnit}
                             <Diagram

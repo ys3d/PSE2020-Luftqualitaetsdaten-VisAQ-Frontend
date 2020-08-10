@@ -45,22 +45,10 @@ class PopupReasons extends Component {
   }
 
   render () {
-    const popover = (
-      <Popover id="modal-popover" title="popover">
-        simple popover
-      </Popover>
-    );
-    const tooltip = (
-      <Tooltip id="modal-tooltip">
-        tooltip
-      </Tooltip>
-    );
-
     const { t } = this.props;
     return (
       <div>
         <span onClick={this.open.bind(this, this.MODAL_TYPE_REASONS)}>{t('reasonsPM')}</span>
-
         <Modal size="lg" show={this.state.showModal} onHide={this.close.bind(this)}>
           <ModalTitle center className='title'>
             {t('reasonsPM')}
@@ -69,7 +57,7 @@ class PopupReasons extends Component {
             {t('reasons')}
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.close.bind(this)} className='button'>Close</Button>
+            <Button onClick={this.close.bind(this)} className='button'>{t('close')}</Button>
           </Modal.Footer>
         </Modal>
       </div>

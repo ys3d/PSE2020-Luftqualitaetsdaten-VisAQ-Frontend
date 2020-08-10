@@ -14,5 +14,6 @@
     "valueHere": "The current interpolated value here is ",
     "shareTitle": "Look here!",
     "shareBody": "Hello there! Look at the air-quality-data!",
-    "closeTooltip": "Click here to close the Sidebar"
+    "closeTooltip": "Click here to close the Sidebar",
+    "estimatedValue": "This is a calculated value which can differ from the actual value at this location."
 }

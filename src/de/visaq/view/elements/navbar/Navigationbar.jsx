@@ -30,7 +30,6 @@ class Navigationbar extends React.Component {
             activeAirQ : 0,
             activeLanguage: document.cookie.split(';').some((item) => item.trim().startsWith('Language=en')) ? 0 : 1,  
         }
-
     }
 
     /**
@@ -126,53 +125,121 @@ class Navigationbar extends React.Component {
                             <Navbar.Toggle aria-controls='navbar-nav' />
                             <Navbar.Collapse id='navbar-nav' >
                                 <Nav className='mr-auto' justify variant='Tabs'>
-                                    <Nav.Link className='nav-link' id='nav-link'  style={{color: this.activateAirQuality(0)}} onClick={() => {this.toggle(0, new AirQualityData(data.particulateMatter))}}>
+                                    <Nav.Link 
+                                        className='nav-link' 
+                                        id='nav-link'  
+                                        style={{color: this.activateAirQuality(0)}} 
+                                        onClick={() => {this.toggle(0, new AirQualityData(data.particulateMatter))}}
+                                        draggable="false"
+                                    >
                                         {t('particulateMatter')}
                                     </Nav.Link>
-                                    <Nav.Link className='nav-link' id='nav-link'  style={{color: this.activateAirQuality(1)}} onClick={() => {this.toggle(1, new AirQualityData(data.humidity))}}>
+                                    <Nav.Link 
+                                        className='nav-link' 
+                                        id='nav-link'  
+                                        style={{color: this.activateAirQuality(1)}} 
+                                        onClick={() => {this.toggle(1, new AirQualityData(data.humidity))}} 
+                                        draggable="false"
+                                    >
                                         {t('humidity')}
                                     </Nav.Link>
-                                    <Nav.Link className='nav-link' id='nav-link' style={{color: this.activateAirQuality(2)}} onClick={() => {this.toggle(2, new AirQualityData(data.temperature))}}>
+                                    <Nav.Link 
+                                        className='nav-link' 
+                                        id='nav-link' 
+                                        style={{color: this.activateAirQuality(2)}} 
+                                        onClick={() => {this.toggle(2, new AirQualityData(data.temperature))}} 
+                                        draggable="false"
+                                    >
                                         {t('temperature')}
                                     </Nav.Link>
-                                    <Nav.Link className='nav-link' id='nav-link' style={{color: this.activateAirQuality(3)}} onClick={() => {this.toggle(3, new AirQualityData(data.airPressure))}}>
+                                    <Nav.Link 
+                                        className='nav-link' 
+                                        id='nav-link' 
+                                        style={{color: this.activateAirQuality(3)}} 
+                                        onClick={() => {this.toggle(3, new AirQualityData(data.airPressure))}} 
+                                        draggable="false"
+                                    >
                                         {t('airPressure')}
                                     </Nav.Link>
                                 </Nav>
-                                <Dropdown inline id='link'>
+                                <Dropdown inline id='link' draggable="false">
                                     {t('furtherFunc')}
                                 </Dropdown>
-                                <NavDropdown variant="success" id="dropdown-basic">
-                                    <NavDropdown.Item className='nav-link' id='nav-link' href='https://www.smartaq.net/de/participate/'>
+                                <NavDropdown variant="success" id="dropdown-basic" draggable="false">
+                                    <NavDropdown.Item 
+                                        className='nav-link' 
+                                        id='nav-link' 
+                                        href='https://www.smartaq.net/de/participate/' 
+                                        draggable="false"
+                                    >
                                         {t('diy')}
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item className='nav-link' id='nav-link' href='https://www.smartaq.net/en/dashboard/#/home'>
+                                    <NavDropdown.Item 
+                                        className='nav-link' 
+                                        id='nav-link' 
+                                        href='https://www.smartaq.net/en/dashboard/#/home' 
+                                        draggable="false"
+                                    >
                                         SmartAQNet
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item className='nav-link' id='nav-link' eventKey={2} href='#'>
+                                    <NavDropdown.Item 
+                                        className='nav-link' 
+                                        id='nav-link' 
+                                        eventKey={2} 
+                                        href='#' 
+                                        draggable="false"
+                                    >
                                         <PopupReasons />
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item className='nav-link' id='nav-link' eventKey={1} href="#">
+                                    <NavDropdown.Item 
+                                        className='nav-link' 
+                                        id='nav-link' 
+                                        eventKey={1} 
+                                        href="#" 
+                                        draggable="false"
+                                    >
                                         <PopupCauses />
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <p>{t('expert-Mode')}</p>
                                     <Form.Group controlId='form-switch' alignRight>
-                                        <Form.Check  type='checkbox' id='expert-mode' label={t('sensorOverviewExpert')} onClick={() => this.props.overviewDetailHandler()} />
+                                        <Form.Check  
+                                            type='checkbox' 
+                                            id='expert-mode' 
+                                            label={t('sensorOverviewExpert')} 
+                                            onClick={() => this.props.overviewDetailHandler()} 
+                                            draggable="false"
+                                        />
                                     </Form.Group>
                                 </NavDropdown>
                                 <Nav className='ml-auto'>
-                                    <Nav.Link className='nav-link-lng' id='nav-link-lng' style={{color: this.activateLanguage(0)}} onClick={() => {this.toggleLanguage(0, 'en')}}>
+                                    <Nav.Link 
+                                        className='nav-link-lng' 
+                                        id='nav-link-lng' 
+                                        style={{color: this.activateLanguage(0)}} 
+                                        onClick={() => {this.toggleLanguage(0, 'en')}} 
+                                        draggable="false"
+                                    >
                                         EN
                                     </Nav.Link>
-                                    <Nav.Link className='nav-link-lng' id='nav-link-lng'  style={{color: this.activateLanguage(1)}} onClick={() => {this.toggleLanguage(1, 'de')}}>
+                                    <Nav.Link 
+                                        className='nav-link-lng' 
+                                        id='nav-link-lng'  
+                                        style={{color: this.activateLanguage(1)}} 
+                                        onClick={() => {this.toggleLanguage(1, 'de')}} 
+                                        draggable="false"
+                                    >
                                         DE
                                     </Nav.Link>
                                 </Nav>
                             </Navbar.Collapse>
                         </Navbar>
                     </div>
-                    <MapView airQ={this.state.airQualityData} openHandler={(e) => this.props.openHandler(e)} iopenHandler={(e, a) => this.props.iopenHandler(e, a)}/>
+                    <MapView 
+                        airQ={this.state.airQualityData} 
+                        openHandler={(e) => this.props.openHandler(e)} 
+                        iopenHandler={(e, a) => this.props.iopenHandler(e, a)}
+                    />
                 </Router>
             </React.Fragment>
         )

@@ -1,13 +1,19 @@
+:root {
+    --main-page-color: #44c2d4;
+    --hover-color: #42929e;
+    --align: center;
+}
+
 .title{
-    color: #44c2d4;
-    text-align:  center;
+    color: var(--main-page-color);
+    text-align:  var(--align);
 }
 
 .button {
-    background-color: #44c2d4;
+    background-color: var(--main-page-color);
     border: none;
 }
 
 .button:hover {
-    background-color: #42929e;
+    background-color: var(--hover-color);
 }

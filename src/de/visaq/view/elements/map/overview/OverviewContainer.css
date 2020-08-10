@@ -3,24 +3,26 @@
   --hover-color: #2f8794;
   --black: black;
   --grey: rgb(241, 241, 241);
-  --text-gray: #787878
+  --text-gray: #787878;
+  --transparent: transparent;
+  --align: center;
 }
 
 body {
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	justify-content: var(--align);
+	align-items: var(--align);
 	height: 100vh;
 }
 
 ul {
-  text-align: center;
+  text-align: var(--align);
   white-space: nowrap;
   list-style: none;
 }
 
 .arrow-container {
-  text-align: center;
+  text-align: var(--align);
   white-space: nowrap;
   list-style: none;
 }
@@ -87,7 +89,7 @@ ul {
   }
 
   #accordion {
-    background-color: transparent;
+    background-color: var(--transparent);
   }
 
   #sensorOverviewContainer {
@@ -100,8 +102,8 @@ ul {
 
 
   .card {
-    background-color: transparent;
-    border: transparent;
+    background-color: var(--transparent);
+    border: var(--transparent);
   }  
 
 

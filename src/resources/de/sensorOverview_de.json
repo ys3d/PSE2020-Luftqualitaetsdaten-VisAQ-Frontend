@@ -14,5 +14,6 @@
     "valueHere": "An diesem Punkt beträgt der aktuelle Interpolierte Wert ",
     "shareTitle": "Schau mal!",
     "shareBody": "Schau dir mal die Messwerte an!",
-    "closeTooltip": "Hier klicken um die Sidebar zu schließen"
+    "closeTooltip": "Hier klicken um die Sidebar zu schließen",
+    "estimatedValue": "Hierbei handelt es sich um einen errechneten Wert, welcher von dem tatsächlichem Wert abweichen kann."
 }

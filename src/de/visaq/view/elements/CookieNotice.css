@@ -1,28 +1,37 @@
-
+:root {
+    --main-page-color: #44c2d4;
+    --hover-color: #42929e;
+    --align: center;
+}
 
 .title{
-    color: #44c2d4;
-    text-align:  center;
+    color: var(--main-page-color);
+    text-align:  var(--align);
 }
 
 .text{
-    text-align:  center;
+    text-align:  var(--align);
 }
 
 .button {
-    background-color: #44c2d4;
+    background-color: var(--main-page-color);
     border: none;
 }
 
 .moreInfo {
-    color: #44c2d4;
+    color: var(--main-page-color);
 }
 
 
 .moreInfo:hover {
-    color: #42929e;
+    color: var(--hover-color);
 }
 
 .button:hover {
-    background-color: #42929e;
+    background-color: var(--hover-color);
+}
+
+.infoTitle{
+    text-align:  var(--align);
+    color: var(--main-page-color);
 }
