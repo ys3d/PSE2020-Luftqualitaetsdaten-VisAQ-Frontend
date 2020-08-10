@@ -13,5 +13,7 @@
     "consequences": "Folgen ",
     "valueHere": "An diesem Punkt beträgt der aktuelle Interpolierte Wert ",
     "shareTitle": "Schau mal!",
-    "shareBody": "Schau dir mal die Messwerte an!"
+    "shareBody": "Schau dir mal die Messwerte an!",
+    "helpSensor": "In dieser Ansicht können sie Informationen zu dem von ihnen ausgewählten Sensor sehen. Um Messwerte sehen zu können, klicken sie auf den gewünschten Parameter",
+    "helpPoint": "Diese Ansicht zeigt interpolierte Daten für einen Punkt auf der Karte, Es werden hier nur die Messwerte zum aktuell auf der karte gewählten Parameter gezeigt"
 }

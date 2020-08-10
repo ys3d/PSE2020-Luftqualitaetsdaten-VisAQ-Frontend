@@ -7,6 +7,7 @@ import request from '../../../../controller/Request'
 import Thing from '../../../../model/Thing'
 import DataCard from './DataCard'
 import ShareField from './ShareField'
+import Help from '../../../Help';
 
 
 /**
@@ -34,6 +35,7 @@ class PointOverview extends Component {
         <h1>
           {t('location')}
         </h1>
+        <Help helpText={t('helpPoint')} />
         <ShareField subject={t('shareTitle')} body={t('shareBody')}/>
         <div className="network">&nbsp;</div>
         <p>{t('valueHere')} {Number(this.props.value).toFixed(2)} {this.props.airQualityData.getUnitOfMeasurement()}</p>

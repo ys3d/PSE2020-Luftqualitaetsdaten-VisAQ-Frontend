@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import styles from './Overview.module.css'
-import Accordion from 'react-bootstrap/Accordion'
+import styles from './Overview.module.css';
+import Accordion from 'react-bootstrap/Accordion';
 import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
-import request from '../../../../controller/Request'
-import Thing from '../../../../model/Thing'
-import DataCard from './DataCard'
-import ShareField from './ShareField'
-import Datastream from '../../../../model/Datastream'
+import request from '../../../../controller/Request';
+import Thing from '../../../../model/Thing';
+import DataCard from './DataCard';
+import ShareField from './ShareField';
+import Datastream from '../../../../model/Datastream';
 import ObservedProperty from '../../../../model/ObservedProperty';
-import * as observedPropertiesId from '../../../../../../resources/observedPropertyId.json'
-import * as airQualityData from '../../../../../../resources/AirQualityData.json'
+import * as observedPropertiesId from '../../../../../../resources/observedPropertyId.json';
+import * as airQualityData from '../../../../../../resources/AirQualityData.json';
 import Observation from '../../../../model/Observation';
+import Help from '../../../Help';
 
 
 /**
@@ -357,6 +358,7 @@ class SensorOverview extends Component {
           {t('description')} {this.state.thingDescription}
         </p>
         } 
+        <Help helpText={t('helpSensor')}/>
         <ShareField subject={t('shareTitle')} body={t('shareBody')} />
         <div className="network">&nbsp;</div>
 
