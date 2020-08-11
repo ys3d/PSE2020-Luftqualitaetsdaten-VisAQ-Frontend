@@ -5,10 +5,8 @@
 	"particulateMatter": "Feinstaub",
 	"temperature": "Temperatur",
 	"airPressure":"Luftdruck",
-	"reasonsPM": "Gründe für Luftverschmutzung",
 	"diy": "DIY-Anleitung",
 	"historical": "Historische Werte",
-	"consequencesPM": "Folgen von Luftverschmutzung",
 	"smartAQNet": "SmartAQNet",
 	"furtherFunc":"Weitere Funktionen",
 	"expert-Mode": "Experten-Modus",
@@ -17,10 +15,6 @@
 	"colorScheme": "Farbschema",
 	"officalSensor": "Offizielle Sensoren",
 	"nonOfficalSensor": "Homemade Sensoren",
-	"close": "Schließen",
-	"reasons": "Als Luftverschmutzung wird die Freisetzung umwelt- und gesundheitsschädlicher Schadstoffe in die Luft bezeichnet. Luftverschmutzung hat sowohl natürliche als auch menschengemachte Uhrsachen. Menschengemachte Quellen für Luftverschmutzung sind zum Beispiel die Verbrennung fossiler Brennstoffe, industrielle Prozesse, oder Abfallverwertung. Natürliche Ursachen sind beispielsweise Naturkatastrophen oder natürliche Prozesse wie die Zersetzung von Pflanzenresten.",
-	"consequences": "Die Folgen von Luftverschmutzung sind vielfältig. Luftverschmutzung wirkt sich negativ auf die Umwelt aus, sowohl Planzenwachstum als auch das Klima werden von der Verunreinigung beeinflusst. Weitere negative Auswirkungen beziehen sich auf die Gesundheit. Vor allem Atemwegserkrankungen werden durch die Luftverschmutzung begünstigt.",
 	"cookieNotice": "Wir verwenden auf dieser Website Cookies um ein besseres Nutzererlebnis zu garantieren.",
-	"sensorOverviewExpert": "Sensordetails",
-	"furtherInformation": "Weitere Informationen bezüglich der Gründe und Folgen von Feinstaub können Sie auf folgener Seite nachlesen: https://www.umweltbundesamt.de/themen/luft/luftschadstoffe/feinstaub"
+	"sensorOverviewExpert": "Sensordetails"
 }

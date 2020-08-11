@@ -6,11 +6,11 @@
 
 .title{
     color: var(--main-page-color);
-    text-align:  var(--align);
+    margin-left: 1.2em;
 }
 
 .text{
-    text-align:  var(--align);
+    margin-left: 1em;
 }
 
 .button {
@@ -20,6 +20,7 @@
 
 .moreInfo {
     color: var(--main-page-color);
+    margin-left: -0.6em;
 }
 
 
@@ -32,6 +33,6 @@
 }
 
 .infoTitle{
-    text-align:  var(--align);
     color: var(--main-page-color);
+    margin-left: 1.2em
 }

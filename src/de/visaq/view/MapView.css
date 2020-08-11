@@ -114,6 +114,7 @@
 }
 .search-control-icon-button svg,
 .search-control-active .search-control-close-button > svg {
+    margin-top: 0.7em;
     height: 75%!important;
     width: 75%;
     transform-origin: center;

@@ -1,5 +1,4 @@
 import React, { createRef, Component } from 'react';
-import {pure} from 'recompose'
 import { Map, TileLayer, withLeaflet} from 'react-leaflet';
 import L from 'leaflet';
 import "./MapView.css";

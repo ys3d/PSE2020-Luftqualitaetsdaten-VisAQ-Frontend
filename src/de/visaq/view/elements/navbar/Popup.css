@@ -6,7 +6,12 @@
 
 .title{
     color: var(--main-page-color);
-    text-align:  var(--align);
+    margin-left: 1em;
+     margin-top: 1em;
+}
+
+.text {
+    margin-left: 1em;
 }
 
 .button {
@@ -16,4 +21,13 @@
 
 .button:hover {
     background-color: var(--hover-color);
+}
+
+.piechart {
+    height: 15em;
+    text-align: left;
+}
+
+.container{
+    height: 20em;
 }
