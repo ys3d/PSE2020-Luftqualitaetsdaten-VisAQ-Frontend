@@ -1,16 +1,14 @@
 :root {
   --main-page-color: #44c2d4;
-  --white: white;
+  --white: #ede7e3;
   --hover-color: #2f8794;
   --black: black;
-  --grey: rgb(241, 241, 241);
   --text-gray: #787878
 }
 
-.navbar { 
-  background-color: var(--white); 
+.navbar {
+  background-color: #f3f3f3!important;
 }
-
 .navbar-nav, .navbar-dark .nav-link {
   color: var(--black);
 }
@@ -23,6 +21,8 @@
   left: 25%;
   right: 25%;
 }
+
+.header
 
 .dropdown:hover>.dropdown-menu {
   display: block;

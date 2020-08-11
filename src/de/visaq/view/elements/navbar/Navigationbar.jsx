@@ -118,7 +118,7 @@ class Navigationbar extends React.Component {
                 <Router>
                     <div>
                         <CookieNotice />
-                        <Navbar expand='lg' bg='light' style={{ width: '100%', height: '20%' }} >
+                        <Navbar expand='lg' bg='light' className='navbar' id='navbar'>
                             <Navbar.Brand href=''>
                                 <strong id='title'>VisAQ</strong>
                             </Navbar.Brand>
@@ -162,10 +162,10 @@ class Navigationbar extends React.Component {
                                         {t('airPressure')}
                                     </Nav.Link>
                                 </Nav>
-                                <Dropdown inline id='link' draggable="false">
+                                <Dropdown inline id='link'>
                                     {t('furtherFunc')}
                                 </Dropdown>
-                                <NavDropdown variant="success" id="dropdown-basic" draggable="false">
+                                <NavDropdown variant="success" id="dropdown-basic">
                                     <NavDropdown.Item 
                                         className='nav-link' 
                                         id='nav-link' 
@@ -201,7 +201,7 @@ class Navigationbar extends React.Component {
                                         <PopupCauses />
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                    <p>{t('expert-Mode')}</p>
+                                    <Dropdown.Header className='header'>{t('expert-Mode')}</Dropdown.Header>
                                     <Form.Group controlId='form-switch' alignRight>
                                         <Form.Check  
                                             type='checkbox' 
