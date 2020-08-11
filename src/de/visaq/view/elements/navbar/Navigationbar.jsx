@@ -201,7 +201,7 @@ class Navigationbar extends React.Component {
                                         <PopupCauses />
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                    <Dropdown.Header className='header'>{t('expert-Mode')}</Dropdown.Header>
+                                    <p>{t('expert-Mode')}</p>
                                     <Form.Group controlId='form-switch' alignRight>
                                         <Form.Check  
                                             type='checkbox' 
