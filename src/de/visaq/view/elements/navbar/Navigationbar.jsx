@@ -99,11 +99,11 @@ class Navigationbar extends React.Component {
                                         {t('airPressure')}
                                     </Nav.Link>
                                 </Nav>
-                                <Dropdown inline id='overlay'>
-                                    <p>{t('mapOverlay')}</p>
+                                <Dropdown inline id='link'>
+                                    {t('mapOverlay')}
                                 </Dropdown>
-                                <NavDropdown variant="success" id="dropdown-basic" inline>
-                                    <Form.Group controlId='switch-overlay' alignRight>
+                                <NavDropdown variant="success" id="dropdown-basic">
+                                    <Form.Group controlId='form-switch' alignRight>
                                     <label>
                                         <input  type="checkbox"
                                                 checked={ov[0]}
