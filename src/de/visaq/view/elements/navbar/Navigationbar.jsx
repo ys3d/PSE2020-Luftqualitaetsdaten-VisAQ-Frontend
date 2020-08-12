@@ -100,14 +100,15 @@ class Navigationbar extends React.Component {
                                     </Nav.Link>
                                 </Nav>
                                 <Dropdown inline id='overlay'>
-                                    {t('mapOverlay')}
+                                    <p>{t('mapOverlay')}</p>
                                 </Dropdown>
-                                <NavDropdown variant="success" id="dropdown-basic">
+                                <NavDropdown variant="success" id="dropdown-basic" inline>
                                     <Form.Group controlId='switch-overlay' alignRight>
                                     <label>
                                         <input  type="checkbox"
                                                 checked={ov[0]}
                                                 onChange={this.toggleChange0}
+                                                id='expert-mode'
                                         />
                                     {t('Sensors')}
                                     </label>
@@ -115,6 +116,7 @@ class Navigationbar extends React.Component {
                                     <input  type="checkbox"
                                             checked={ov[1]}
                                             onChange={this.toggleChange1}
+                                            id='expert-mode'
                                     />
                                     {t('Interpolation')}
                                     </label>
