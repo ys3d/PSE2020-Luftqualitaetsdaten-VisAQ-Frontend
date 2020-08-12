@@ -8,6 +8,7 @@ import MapView from '../../MapView';
 import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 import AirQualityData from '../airquality/AirQualityData';
+import TimeQuery from '../map/TimeQuery';
 import * as data from '../../../../../resources/AirQualityData.json';
 import './Navigationbar.css'
 
@@ -56,6 +57,7 @@ class Navigationbar extends React.Component {
         }
         document.getElementById(id).checked = true;
     }
+    
 
 
     /**
@@ -109,6 +111,9 @@ class Navigationbar extends React.Component {
                                     <Form.Group controlId='form-switch' alignRight>
                                         <Form.Check type='checkbox' id='3' label={t('sensorOverviewExpert')} onClick={() => this.props.overviewDetailHandler()} />
                                     </Form.Group>
+                                    <NavDropdown.Divider />
+                                    <p>{t('time-query')}</p>
+                                    <TimeQuery/>
                                 </NavDropdown>
                                 <Nav className='ml-auto'>
                                     <Nav.Link className='nav-link-lng' id='nav-link-lng' onClick={() => { i18next.changeLanguage('en') }}>
@@ -131,3 +136,4 @@ class Navigationbar extends React.Component {
 const dynamicNavbar = withTranslation('common')(Navigationbar)
 
 export default dynamicNavbar
+

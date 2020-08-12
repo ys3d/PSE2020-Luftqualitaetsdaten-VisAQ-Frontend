@@ -4,11 +4,13 @@ import L from 'leaflet';
 import "./MapView.css";
 import OverlayBuilder from './overlayfactory/OverlayBuilder';
 import Legend from './elements/map/Legend';
+import TimeQuery from './elements/map/TimeQuery';
 import request from "../controller/Request";
 import Thing from "../model/Thing";
 import Observation from "../model/Observation";
 import PointDatum from '../model/PointDatum';
 import { ReactLeafletSearch } from 'react-leaflet-search';
+
 
 /**
  * Class that contains the MapView.
@@ -234,7 +236,8 @@ export default class MapView extends Component {
                     openHandler={(e) => this.props.openHandler(e)} pointData={this.state.pointData} iopenHandler={(e, a) => this.props.iopenHandler(e, a)}/>
                     <Legend airQ={this.props.airQ} className='legend' id='legend'
                     />
-                
+                    
+
                     <ReactLeafletSearchComponent
                         className="custom-style"
                         position="topleft"

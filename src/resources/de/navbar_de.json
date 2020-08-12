@@ -32,5 +32,6 @@
 	"accept": "Akzeptieren",
 	"close": "Schließen",
 	"decline": "Ablehnen",
-	"sensorOverviewExpert": "Sensordetails"
+	"sensorOverviewExpert": "Sensordetails",
+	"time-query": "Wähle einen Zeitpunkt"
 }
