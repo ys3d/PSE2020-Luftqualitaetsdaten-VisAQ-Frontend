@@ -49,7 +49,7 @@ class Navigationbar extends React.Component {
     /**
      * Activates the Sensor Overlay.
      */
-    toggleChange0 = () => {
+    activateSensors = () => {
         ov[0] = !ov[0];
         if (ov[0])  {
           ov[1] = false;
@@ -60,7 +60,7 @@ class Navigationbar extends React.Component {
       /**
        * Activates the Interpolation Overlay.
        */
-      toggleChange1 = () => {
+      activateInterpolation = () => {
         ov[1] = !ov[1];
         if(ov[1])  {
           ov[0] = false;
@@ -107,7 +107,7 @@ class Navigationbar extends React.Component {
                                     <label>
                                         <input  type="checkbox"
                                                 checked={ov[0]}
-                                                onChange={this.toggleChange0}
+                                                onChange={this.activateSensors}
                                                 id='expert-mode'
                                         />
                                     {t('Sensors')}
@@ -115,7 +115,7 @@ class Navigationbar extends React.Component {
                                     <label>
                                     <input  type="checkbox"
                                             checked={ov[1]}
-                                            onChange={this.toggleChange1}
+                                            onChange={this.activateInterpolation}
                                             id='expert-mode'
                                     />
                                     {t('Interpolation')}
