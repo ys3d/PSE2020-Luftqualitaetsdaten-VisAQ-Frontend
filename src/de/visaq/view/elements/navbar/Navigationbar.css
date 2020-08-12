@@ -77,6 +77,17 @@
   color: var(--text-gray);
 }
 
+#checkbox {
+  padding-left: 0.8em;
+  color: var(--text-gray);
+  overflow: hidden;
+}
+
+#overlay {
+  margin-left: 1.4em;
+  margin-top: -1.5em;
+}
+
 p {
   padding-left: 1em;
   color: var(--main-page-color)
