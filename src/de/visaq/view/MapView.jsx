@@ -25,9 +25,9 @@ class MapView extends Component {
             lng: 10.89779,
             zoom: 13,
             bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
-            pointData : [],
-            cells: {},
             hasLoaded: false,
+            pointDataCells : {},
+            cells: {}
         };
         this.gridSize = 0.15;
         this.requestInBoundCells();
@@ -112,7 +112,7 @@ class MapView extends Component {
      * @param {Number} lng              The degree of latitude
      */
     requestCell(airQualityData, lat, lng) {
-        if (this.state.cells.hasOwnProperty(`${airQualityData.name}|${lat}|${lng}`) || this.state.cells[`${airQualityData.name}|${lat}|${lng}`] != undefined) {
+        if (this.state.cells.hasOwnProperty(`${airQualityData.name}|${lat}|${lng}`) || this.state.cells[`${airQualityData.name}|${lat}|${lng}`] !== undefined) {
             return;
         }
         request("/api/thing/all/square", true, {
@@ -141,29 +141,31 @@ class MapView extends Component {
      * Sends a request to the Backend. 
      * The return value is an array of pointDatum.
      * 
-     * @param {Object} newBounds  LatLng Bounds of the map
+     * @param {Object} airQualityData   The current Air Quality Data
+     * @param {Number} lat              The degree of longitude
+     * @param {Number} lng              The degree of latitude 
+     * 
      */
-    requestInterpolation(newBounds) {
-        /**
-         * Requests a new Interpolation Overlay if the user leaves the viewport
-         */
-        if((newBounds.getSouthWest().lng > this.state.bounds.getSouthWest().lng)
-            || (newBounds.getSouthWest().lat > this.state.bounds.getSouthWest().lat)
-            || (newBounds.getNorthEast().lat > this.state.bounds.getNorthEast().lat)
-            || (newBounds.getNorthEast().lng > this.state.bounds.getNorthEast().lng)) {
-                return;
-            }
+    requestInterpolation(airQualityData, lat, lng) {
+
+        if (this.state.pointDataCells.hasOwnProperty(`${airQualityData.name}|${lat}|${lng}`) 
+        || this.state.pointDataCells[`${airQualityData.name}|${lat}|${lng}`] !== undefined) {
+            return;
+        }
         request("/api/interpolation/nearestNeighbor", true, {
-            "x1": newBounds.getSouthWest().lng,
-            "x2": newBounds.getNorthEast().lng,
-            "y1": newBounds.getSouthWest().lat,
-            "y2": newBounds.getNorthEast().lat,
+            "y1": lat,
+            "x1": lng,
+            "y2": lat + this.gridSize,
+            "x2": lng + this.gridSize,
             "millis": Date.now(),
             "range": "PT12H",
             "observedProperty": this.props.airQ.observedProperty
         }, PointDatum).then(pointDatum => {
-            this.setState({pointData : pointDatum});
-        });       
+            this.setState({ pointDataCells: { ...this.state.pointDataCells, [`${airQualityData.name}|${lat}|${lng}`]: { pointData: pointDatum} } });
+            }, error => {
+                delete this.state.pointDataCells[`${airQualityData.name}|${lat}|${lng}`];
+            });
+            this.state.pointDataCells[`${airQualityData.name}|${lat}|${lng}`] = null;     
     }
     
     /**
@@ -185,6 +187,7 @@ class MapView extends Component {
             for (var y = 0; y <= yCells; y++) {
                 for (var x = 0; x <= xCells; x++) {
                     this.requestCell(this.props.airQ, (southCell + y) * this.gridSize, (westCell + x) * this.gridSize);
+                    this.requestInterpolation(this.props.airQ, (southCell + y) * this.gridSize, (westCell + x) * this.gridSize)
                 }
             }
         }
@@ -239,8 +242,8 @@ class MapView extends Component {
                         airQualityData={this.props.airQ} 
                         gridSize={this.gridSize} 
                         openHandler={(e) => this.props.openHandler(e)} 
-                        pointData={this.state.pointData} 
                         iopenHandler={(e, a) => this.props.iopenHandler(e, a)}
+                        overlays={this.props.overlays}
                     />
                     <Legend airQ={this.props.airQ} className='legend' id='legend'
                     />
