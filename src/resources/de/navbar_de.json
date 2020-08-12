@@ -16,9 +16,9 @@
 	"officalSensor": "Offizielle Sensoren",
 	"nonOfficalSensor": "Homemade Sensoren",
 	"cookieNotice": "Wir verwenden auf dieser Website Cookies um ein besseres Nutzererlebnis zu garantieren.",
-	"sensorOverviewExpert": "Sensordetails"
-  "mapOverlay": "Ansichten",
-  "accept": "Akzeptieren",
+	"sensorOverviewExpert": "Sensordetails",
+  	"mapOverlay": "Ansichten",
+  	"accept": "Akzeptieren",
 	"close": "Schließen",
-	"decline": "Ablehnen",
+	"decline": "Ablehnen"
 }
