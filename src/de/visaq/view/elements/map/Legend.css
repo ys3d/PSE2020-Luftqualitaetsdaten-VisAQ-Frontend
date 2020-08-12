@@ -1,3 +1,11 @@
+:root {
+    --white: white;
+    --grey: #555;
+    --info-grey: rgba(255,255,255,0.8);
+    --light-grey: #777;
+    --black: rgba(0,0,0,0.2);
+}
+
 body {
     margin: 0px;
   }
@@ -5,20 +13,20 @@ body {
 .info {
     padding: 12px 8px;
     font: 14px/px Arial, Helvetica, sans-serif;
-    background: white;
-    background: rgba(255,255,255,0.8);
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    background: var(--white);
+    background: var(--info-grey);
+    box-shadow: 0 0 15px var(--black);
     border-radius: 5px;
 }
 .info h4 {
     margin: 0 0 5px;
-    color: #777;
+    color: var(--light-grey);
 }
 
 .legend {
     text-align: left;
     line-height: 25px;
-    color: #555;
+    color: var(--gray);
 }
   
 .legend i {

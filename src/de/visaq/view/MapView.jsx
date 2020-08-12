@@ -9,11 +9,13 @@ import Thing from "../model/Thing";
 import Observation from "../model/Observation";
 import PointDatum from '../model/PointDatum';
 import { ReactLeafletSearch } from 'react-leaflet-search';
+import i18next from 'i18next';
+import { withTranslation } from 'react-i18next';
 
 /**
  * Class that contains the MapView.
  */
-export default class MapView extends Component {
+class MapView extends Component {
     /*with props its possible to initalize the map with different map properties*/
     constructor(props) {
         super(props);
@@ -23,6 +25,7 @@ export default class MapView extends Component {
             lng: 10.89779,
             zoom: 13,
             bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
+            hasLoaded: false,
             pointDataCells : {},
             cells: {}
         };
@@ -35,19 +38,24 @@ export default class MapView extends Component {
      * Otherwise the map centers on Augsburg.
      */
     setPosition() {
-        if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
-            navigator.geolocation.watchPosition((position) => {
-                this.setState({
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude,
-                }, () => {
-                    this.onBoundsUpdate(this.state.bounds);
-                });
-            }, (error) => {
-                this.setState({ lat: 48.3705449, lng: 10.89779 }, () => {
-                    this.onBoundsUpdate(this.state.bounds);
+        if(!this.state.hasLoaded) {
+            if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
+                navigator.geolocation.watchPosition((position) => {
+                    this.setState({
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
+                        hasLoaded: true,
+                    }, () => {
+                        this.onBoundsUpdate(this.state.bounds);
+                    });
+                }, (error) => {
+                    this.setState({ lat: 48.3705449, lng: 10.89779 }, () => {
+                        this.onBoundsUpdate(this.state.bounds);
+                    })
                 })
-            })
+            }
+        } else {
+            this.setState({hasLoaded: true});
         }
     }
 
@@ -63,7 +71,6 @@ export default class MapView extends Component {
      * Starts the proccesses setPosition and updateDimensions when the component is mounted.
      */
     componentWillMount() {
-        this.setPosition();
         this.updateDimensions();
     }
 
@@ -76,19 +83,16 @@ export default class MapView extends Component {
         if (this.props.airQ === prevProps.airQ) {
             return;
         }
-
         this.requestInBoundCells();
-
-        if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
-            document.cookie = 'AirQuality=' + JSON.stringify(this.props.airQ);
-        }
+        this.requestInterpolation(this.state.bounds); 
     }
 
     /**
      * Activates the Event Listener.
      */
     componentDidMount() {
-        window.addEventListener("resize", this.updateDimensions.bind(this))
+        this.setPosition();
+        window.addEventListener("resize", this.updateDimensions.bind(this));
     }
 
     /**
@@ -215,6 +219,7 @@ export default class MapView extends Component {
      * Renders the map and all of its children.
      */
     render() {
+        const { t } = this.props;
         const ReactLeafletSearchComponent = withLeaflet(ReactLeafletSearch)
         return (
             <div className="map-container" style={{ height: this.state.height }}>
@@ -232,18 +237,23 @@ export default class MapView extends Component {
                         attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    <OverlayBuilder mapState={this.state} airQualityData={this.props.airQ} gridSize={this.gridSize} 
-                                    openHandler={(e) => this.props.openHandler(e)} pointData={this.state.pointData} 
-                                    iopenHandler={(e, a) => this.props.iopenHandler(e, a)} overlays={this.props.overlays}/>
+                    <OverlayBuilder 
+                        mapState={this.state} 
+                        airQualityData={this.props.airQ} 
+                        gridSize={this.gridSize} 
+                        openHandler={(e) => this.props.openHandler(e)} 
+                        iopenHandler={(e, a) => this.props.iopenHandler(e, a)}
+                        overlays={this.props.overlays}
+                    />
                     <Legend airQ={this.props.airQ} className='legend' id='legend'
                     />
                 
                     <ReactLeafletSearchComponent
-                        className="custom-style"
+                        className="search-control"
                         position="topleft"
                         provider="OpenStreetMap"
                         providerOptions={{ region: "de" }}
-                        inputPlaceholder="Search"
+                        inputPlaceholder={t('search')}
                         zoom={12}
                         showMarker={false}
                         showPopUp={false}
@@ -256,12 +266,6 @@ export default class MapView extends Component {
     }
 }
 
+const dynamicMapView = withTranslation('common')(MapView)
 
-
-
-
-
-
-  
-
-  
+export default dynamicMapView

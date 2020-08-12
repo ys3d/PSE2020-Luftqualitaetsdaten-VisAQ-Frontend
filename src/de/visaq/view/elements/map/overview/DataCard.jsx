@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, toggleClass, event } from 'react';
 import Card from 'react-bootstrap/Card'
-import Accordion from 'react-bootstrap/Accordion'
+import {Accordion, useAccordionToggle} from 'react-bootstrap'
 import Diagram from '../../diagram/Diagram'
 import { withTranslation } from 'react-i18next';
 import './OverviewContainer.css'
+
 
 /**
  * Shows the data of one AirQualityData on the the SensorOverview.
@@ -16,7 +17,19 @@ class DataCard extends Component {
      */
     constructor(props) {
         super(props);
+        this.state = {
+            isActive: props.isActive,
+        };
     }
+
+    toggleClass = (e) =>{
+            this.setState({isActive: !this.state.isActive})
+    }
+
+    handleSelect(eventKey) {
+        event.preventDefault();
+        this.toggleClass();
+      }
 
     /**
      * Renders the Datacard.
@@ -25,15 +38,21 @@ class DataCard extends Component {
         const { t } = this.props;
         if (this.props.show) {
             return (
-                <Card >
+                <Card>
                     <Card.Header >
                         <Accordion.Toggle as={Card.Header} eventKey={this.props.eventKey} className='card'>
+                            <ul>
                             {this.props.cardTitle}
+                                <div className='arrow-container'>
+                                    <span className={(this.state.isActive) ? 'arrow-top' : 'arrow-down'}>
+                                    </span>
+                                </div>
+                            </ul>
                         </Accordion.Toggle>
                     </Card.Header>
                     <Accordion.Collapse eventKey={this.props.eventKey}>
-                        <Card.Body>
-                            <p>{t('currently')}: {this.props.currentValue} {this.props.dataUnit}</p>
+                        <Card.Body >
+                            {t('currently')}: {this.props.currentValue} {this.props.dataUnit}
                             <Diagram
                                 title={t('historicalDevelopment')}
                                 dataRowLabel={this.props.dataUnit}

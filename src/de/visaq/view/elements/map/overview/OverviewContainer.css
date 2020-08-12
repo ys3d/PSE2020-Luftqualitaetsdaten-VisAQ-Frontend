@@ -1,34 +1,85 @@
-#tooltip-top > .tooltip-inner {
-    background-color: #B4E6ED;
-    color: #000;
-    border: 1px  #2f8794;
-  }
-  
-  #tooltip-top > .tooltip-arrow {
-    border-top: #B4E6ED;
-    background-color: #B4E6ED;
-    border-color: azure;
-  }
+:root {
+  --white: white;
+  --hover-color: #2f8794;
+  --black: black;
+  --grey: #faf9f9;
+  --text-gray: #787878;
+  --transparent: transparent;
+  --align: center;
+}
 
-  .close {
-    position: absolute;
-    right: 93%;
-    top: 10px;
-    width: 32px;
-    height: 32px;
-    opacity: 0.3;
-  }
-  .close:hover {
-    opacity: 1;
-    color: #2f8794;
-  }
+body {
+	display: flex;
+	justify-content: var(--align);
+	align-items: var(--align);
+	height: 100vh;
+}
+
+ul {
+  text-align: var(--align);
+  white-space: nowrap;
+  list-style: none;
+}
+
+.arrow-container {
+  text-align: var(--align);
+  white-space: nowrap;
+  list-style: none;
+}
+
+.arrow-down {
+  transition-delay: 0.25s;
+  display: block;
+  width: 15px;
+  height: 15px;
+  border-top: 2px solid var(--black);
+  border-right: 2px solid var(--black);
+  transform: rotate(135deg);
+  margin-top: -1.5em;
+}
+
+.arrow-top {
+  transition-delay: 0.25s;
+  display: block;
+  width: 15px;
+  height: 15px;
+  border-top: 2px solid var(--black);
+  border-right: 2px solid var(--black);
+  transform: rotate(315deg);
+  margin-top: -1em;
+  margin-bottom: -0.5em;
+}
+
+.arrow:hover {
+  border-top: 2px solid var(--hover-color);
+  border-right: 2px solid var(--hover-color);
+}
+
+.open {
+  transform: rotate(-45deg);
+}
+
+.close {
+  position: absolute;
+  right: 93%;
+  top: 10px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+}
+
+.close:hover {
+  opacity: 1;
+  color: var(--hover-color);    
+}
+
   .close:before, .close:after {
     position: absolute;
     left: 15px;
     content: ' ';
     height: 33px;
     width: 2px;
-    background-color: #333;
+    background-color: var(--black);
   }
   .close:before {
     transform: rotate(45deg);
@@ -38,45 +89,21 @@
   }
 
   #accordion {
-    background-color: transparent;
+    background-color: var(--transparent);
   }
 
   #sensorOverviewContainer {
-    background-color: rgb(241, 241, 241)
+    background-color: var(--grey)
   }
 
   #pointOverviewContainer {
-    background-color: rgb(241, 241, 241)
+    background-color: var(--grey)
   }
 
-  .arrow {
-    border: solid black;
-    border-width: 0 3px 3px 0;
-    display: inline-block;
-    padding: 3px;
-  }
-
-  .down {
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-  }  
-
-  .datacard {
-    background-color: transparent;
-    border: none;
-  }
-
-  .accordion {
-    background-color: transparent;
-    border: none
-  }
 
   .card {
-    background-color: transparent;
-    border: none;
-    text-align:  center;
-  }
+    background-color: var(--transparent);
+    border: var(--transparent);
+  }  
 
-  .card:hover {
-    color: #2f8794;
-  }
+
