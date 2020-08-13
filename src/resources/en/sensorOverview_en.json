@@ -8,14 +8,14 @@
     "airTemperature": "Air temperature",
     "airHumidity": "Air humidity",
     "particulateMatter": "Particulate matter",
-    "notFound": "The requested Sensor could not be found",
+    "notFound": "The requested sensor could not be found",
     "location": "Location",
     "consequences": "Consequences",
     "valueHere": "The current interpolated value here is ",
     "shareTitle": "Look here!",
-    "shareBody": "Hello there! Look at the air-quality-data!",
+    "shareBody": "Hello there! Look at the air quality data!",
     "helpSensor": "In this view, you can see detailed information on the sensor you selected. To see detailed information on a parameter click on the parameters below.",
     "helpPoint": "This view shows calculated data for a selected point. Only the currently on the map selected property is shown here",
-    "closeTooltip": "Click here to close the Sidebar",
+    "closeTooltip": "Click here to close the sidebar",
     "estimatedValue": "This is a calculated value which can differ from the actual value at this location."
 }
