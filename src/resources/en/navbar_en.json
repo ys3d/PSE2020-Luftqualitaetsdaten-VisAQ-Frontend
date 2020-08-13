@@ -23,5 +23,5 @@
 	"sensorOverviewExpert": "Detailed Sensorinformations",
 	"mapOverlay": "Map Overlays",
 	"Sensors": "Sensors",
-  "navbarHelp": "To switch between the diffrent observed-properties click on on of them in the menu. More detailed functions can be selected in the 'More Functions' menu. To view detailed sensor-information click on a sensor, a colored circle, on the map. To see interpolated data select the interpolation overlay and click on a point on the map."
+  	"navbarHelp": "To switch between the different observed-properties click on on of them in the menu. More detailed functions can be selected in the 'More Functions' menu. To view detailed sensor-information click on a sensor, a colored circle, on the map. To see interpolated data select the interpolation overlay and click on a point on the map."
 }
