@@ -10,12 +10,14 @@ import Thing from "../model/Thing";
 import Observation from "../model/Observation";
 import PointDatum from '../model/PointDatum';
 import { ReactLeafletSearch } from 'react-leaflet-search';
+import i18next from 'i18next';
+import { withTranslation } from 'react-i18next';
 
 
 /**
  * Class that contains the MapView.
  */
-export default class MapView extends Component {
+class MapView extends Component {
     /*with props its possible to initalize the map with different map properties*/
     constructor(props) {
         super(props);
@@ -25,7 +27,8 @@ export default class MapView extends Component {
             lng: 10.89779,
             zoom: 13,
             bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
-            pointData : [],
+            hasLoaded: false,
+            pointDataCells : {},
             cells: {}
         };
         this.gridSize = 0.15;
@@ -37,19 +40,24 @@ export default class MapView extends Component {
      * Otherwise the map centers on Augsburg.
      */
     setPosition() {
-        if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
-            navigator.geolocation.watchPosition((position) => {
-                this.setState({
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude,
-                }, () => {
-                    this.onBoundsUpdate(this.state.bounds);
-                });
-            }, (error) => {
-                this.setState({ lat: 48.3705449, lng: 10.89779 }, () => {
-                    this.onBoundsUpdate(this.state.bounds);
+        if(!this.state.hasLoaded) {
+            if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
+                navigator.geolocation.watchPosition((position) => {
+                    this.setState({
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
+                        hasLoaded: true,
+                    }, () => {
+                        this.onBoundsUpdate(this.state.bounds);
+                    });
+                }, (error) => {
+                    this.setState({ lat: 48.3705449, lng: 10.89779 }, () => {
+                        this.onBoundsUpdate(this.state.bounds);
+                    })
                 })
-            })
+            }
+        } else {
+            this.setState({hasLoaded: true});
         }
     }
 
@@ -65,7 +73,6 @@ export default class MapView extends Component {
      * Starts the proccesses setPosition and updateDimensions when the component is mounted.
      */
     componentWillMount() {
-        this.setPosition();
         this.updateDimensions();
     }
 
@@ -78,20 +85,16 @@ export default class MapView extends Component {
         if (this.props.airQ === prevProps.airQ) {
             return;
         }
-
         this.requestInBoundCells();
-        this.requestInterpolation(this.state.bounds);
-
-        if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
-            document.cookie = 'AirQuality=' + JSON.stringify(this.props.airQ);
-        }
+        this.requestInterpolation(this.state.bounds); 
     }
 
     /**
      * Activates the Event Listener.
      */
     componentDidMount() {
-        window.addEventListener("resize", this.updateDimensions.bind(this))
+        this.setPosition();
+        window.addEventListener("resize", this.updateDimensions.bind(this));
     }
 
     /**
@@ -111,7 +114,7 @@ export default class MapView extends Component {
      * @param {Number} lng              The degree of latitude
      */
     requestCell(airQualityData, lat, lng) {
-        if (this.state.cells.hasOwnProperty(`${airQualityData.name}|${lat}|${lng}`) || this.state.cells[`${airQualityData.name}|${lat}|${lng}`] != undefined) {
+        if (this.state.cells.hasOwnProperty(`${airQualityData.name}|${lat}|${lng}`) || this.state.cells[`${airQualityData.name}|${lat}|${lng}`] !== undefined) {
             return;
         }
         request("/api/thing/all/square", true, {
@@ -140,29 +143,31 @@ export default class MapView extends Component {
      * Sends a request to the Backend. 
      * The return value is an array of pointDatum.
      * 
-     * @param {Object} newBounds  LatLng Bounds of the map
+     * @param {Object} airQualityData   The current Air Quality Data
+     * @param {Number} lat              The degree of longitude
+     * @param {Number} lng              The degree of latitude 
+     * 
      */
-    requestInterpolation(newBounds) {
-        /**
-         * Requests a new Interpolation Overlay if the user leaves the viewport
-         */
-        if((newBounds.getSouthWest().lng > this.state.bounds.getSouthWest().lng)
-            || (newBounds.getSouthWest().lat > this.state.bounds.getSouthWest().lat)
-            || (newBounds.getNorthEast().lat > this.state.bounds.getNorthEast().lat)
-            || (newBounds.getNorthEast().lng > this.state.bounds.getNorthEast().lng)) {
-                return;
-            }
+    requestInterpolation(airQualityData, lat, lng) {
+
+        if (this.state.pointDataCells.hasOwnProperty(`${airQualityData.name}|${lat}|${lng}`) 
+        || this.state.pointDataCells[`${airQualityData.name}|${lat}|${lng}`] !== undefined) {
+            return;
+        }
         request("/api/interpolation/nearestNeighbor", true, {
-            "x1": newBounds.getSouthWest().lng,
-            "x2": newBounds.getNorthEast().lng,
-            "y1": newBounds.getSouthWest().lat,
-            "y2": newBounds.getNorthEast().lat,
+            "y1": lat,
+            "x1": lng,
+            "y2": lat + this.gridSize,
+            "x2": lng + this.gridSize,
             "millis": Date.now(),
             "range": "PT12H",
             "observedProperty": this.props.airQ.observedProperty
         }, PointDatum).then(pointDatum => {
-            this.setState({pointData : pointDatum});
-        });       
+            this.setState({ pointDataCells: { ...this.state.pointDataCells, [`${airQualityData.name}|${lat}|${lng}`]: { pointData: pointDatum} } });
+            }, error => {
+                delete this.state.pointDataCells[`${airQualityData.name}|${lat}|${lng}`];
+            });
+            this.state.pointDataCells[`${airQualityData.name}|${lat}|${lng}`] = null;     
     }
     
     /**
@@ -184,6 +189,7 @@ export default class MapView extends Component {
             for (var y = 0; y <= yCells; y++) {
                 for (var x = 0; x <= xCells; x++) {
                     this.requestCell(this.props.airQ, (southCell + y) * this.gridSize, (westCell + x) * this.gridSize);
+                    this.requestInterpolation(this.props.airQ, (southCell + y) * this.gridSize, (westCell + x) * this.gridSize)
                 }
             }
         }
@@ -215,6 +221,7 @@ export default class MapView extends Component {
      * Renders the map and all of its children.
      */
     render() {
+        const { t } = this.props;
         const ReactLeafletSearchComponent = withLeaflet(ReactLeafletSearch)
         return (
             <div className="map-container" style={{ height: this.state.height }}>
@@ -232,18 +239,24 @@ export default class MapView extends Component {
                         attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    <OverlayBuilder mapState={this.state} airQualityData={this.props.airQ} gridSize={this.gridSize} 
-                    openHandler={(e) => this.props.openHandler(e)} pointData={this.state.pointData} iopenHandler={(e, a) => this.props.iopenHandler(e, a)}/>
+                    <OverlayBuilder 
+                        mapState={this.state} 
+                        airQualityData={this.props.airQ} 
+                        gridSize={this.gridSize} 
+                        openHandler={(e) => this.props.openHandler(e)} 
+                        iopenHandler={(e, a) => this.props.iopenHandler(e, a)}
+                        overlays={this.props.overlays}
+                    />
                     <Legend airQ={this.props.airQ} className='legend' id='legend'
                     />
                     
 
                     <ReactLeafletSearchComponent
-                        className="custom-style"
+                        className="search-control"
                         position="topleft"
                         provider="OpenStreetMap"
                         providerOptions={{ region: "de" }}
-                        inputPlaceholder="Search"
+                        inputPlaceholder={t('search')}
                         zoom={12}
                         showMarker={false}
                         showPopUp={false}
@@ -256,12 +269,6 @@ export default class MapView extends Component {
     }
 }
 
+const dynamicMapView = withTranslation('common')(MapView)
 
-
-
-
-
-
-  
-
-  
+export default dynamicMapView
