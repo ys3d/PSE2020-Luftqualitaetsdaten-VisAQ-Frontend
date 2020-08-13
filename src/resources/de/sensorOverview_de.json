@@ -15,7 +15,7 @@
     "shareTitle": "Schau mal!",
     "shareBody": "Schau dir mal die Messwerte an!",
     "helpSensor": "In dieser Ansicht können Sie Informationen zu dem von ihnen ausgewählten Sensor sehen. Um Messwerte sehen zu können, klicken sie auf den gewünschten Parameter",
-    "helpPoint": "Diese Ansicht zeigt interpolierte Daten für einen Punkt auf der Karte, es werden hier nur die Messwerte zum aktuell auf der Karte gewählten Parameter gezeigt",
+    "helpPoint": "Diese Ansicht zeigt berechnete Daten für einen Punkt auf der Karte, es werden hier nur die Messwerte zum aktuell auf der Karte gewählten Parameter gezeigt",
     "closeTooltip": "Hier klicken um die Sidebar zu schließen",
     "estimatedValue": "Hierbei handelt es sich um einen errechneten Wert, welcher von dem tatsächlichem Wert abweichen kann."
 }
