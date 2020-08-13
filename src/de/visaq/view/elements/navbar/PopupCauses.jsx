@@ -1,7 +1,7 @@
-import React, { Component, event } from 'react'
+import React, { Component, event } from 'react';
 import { Button, Modal, ModalTitle, Popover, Tooltip, Nav, NavItem, Row, Col, FormGroup, FieldGroup, Checkbox } from 'react-bootstrap'
 import {withTranslation} from 'react-i18next';
-import './Popup.css'
+import './Popup.css';
 
 /**
  * Shows the consequences for air pollution.
@@ -45,28 +45,20 @@ class PopupCauses extends Component {
   }
 
   render () {
-    const popover = (
-      <Popover id="modal-popover" title="popover">
-        simple popover
-      </Popover>
-    );
-    const tooltip = (
-      <Tooltip id="modal-tooltip">
-        tooltip
-      </Tooltip>
-    );
-
     const { t } = this.props;
     return (
       <div>
         <span onClick={this.open.bind(this, this.MODAL_TYPE_CAUSES)}>{t('consequencesPM')}</span>
-
         <Modal size="lg" show={this.state.showModal} onHide={this.close.bind(this)}>
           <ModalTitle center className='title'>
             {t('consequencesPM')}
           </ModalTitle>
-          <Modal.Body>
+          <Modal.Body className='text'>
             {t('consequences')}
+            <div className="network">&nbsp;</div>
+            {t('consequencesOnHuman')}
+            <div className="network">&nbsp;</div>
+            {t('furtherInformation')}
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.close.bind(this)} className='button'>{t('close')}</Button>
@@ -77,6 +69,6 @@ class PopupCauses extends Component {
   }
 }
 
-const dynamicModal = withTranslation('common')(PopupCauses)
+const dynamicModal = withTranslation('causes')(PopupCauses)
 
 export default dynamicModal

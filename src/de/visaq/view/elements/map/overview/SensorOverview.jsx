@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import styles from './Overview.module.css';
-import Accordion from 'react-bootstrap/Accordion';
+import Accordion from 'react-bootstrap/Accordion'
 import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 import request from '../../../../controller/Request';
@@ -9,11 +8,10 @@ import DataCard from './DataCard';
 import ShareField from './ShareField';
 import Datastream from '../../../../model/Datastream';
 import ObservedProperty from '../../../../model/ObservedProperty';
-import * as observedPropertiesId from '../../../../../../resources/observedPropertyId.json';
-import * as airQualityData from '../../../../../../resources/AirQualityData.json';
+import * as airQualityData from '../../../../../../resources/AirQualityData.json'
 import Observation from '../../../../model/Observation';
+import './OverviewContainer.css'
 import Help from '../../../Help';
-
 
 /**
  * Displays all the Information on a Specifik Sensor or Location
@@ -287,62 +285,6 @@ class SensorOverview extends Component {
   }
 
   /**
-   * Returns a description for air pressure.
-   * 
-   * @param {Number} data   The measured value
-   */
-  getConsequencesAirQuality(data) {
-    if (data >= 1100) {
-      return 'overpressure'
-    } else if (data < 1000) {
-      return 'underpressure'
-    }
-    return 'normalPressure'
-  }
-
-  /**
-   * Returns a description for temperature.
-   * 
-   * @param {Number} data   The temperature
-   */
-  getConsequencesTemperature(data) {
-    if (data >= 37) {
-      return 'heat'
-    } else if (data < -5) {
-      return 'cold'
-    }
-    return 'normalTemperature'
-  }
-
-  /**
-   * Returns a description for humidity.
-   * 
-   * @param {Number} data   The humidity
-   */
-  getConsequencesHumidity(data) {
-    if (data >= 60) {
-      return 'wettness'
-    } else if (data < 30) {
-      return 'dry'
-    }
-    return 'normalHumidity'
-  }
-  
-  /**
-   * Returns a description for particulate matter.
-   * 
-   * @param {Number} data   The particualte matter
-   */
-  getConsequencesPM(data) {
-    if (data >= 1100) {
-      return 'overpressure'
-    } else if (data < 1000) {
-      return 'underpressure'
-    }
-    return 'normalPM'
-  }
-
-  /**
    * Renders the SensorOverview.
    */
   render() {
@@ -354,9 +296,10 @@ class SensorOverview extends Component {
           {t('sensor')} {this.state.thingName}
         </h1>
         { this.props.expert &&
-        <p>
+        <a>
           {t('description')} {this.state.thingDescription}
-        </p>
+          <div className="network">&nbsp;</div>
+        </a>
         } 
         <Help helpText={t('helpSensor')}/>
         <ShareField subject={t('shareTitle')} body={t('shareBody')} />
@@ -372,6 +315,7 @@ class SensorOverview extends Component {
             data={this.state.diagram.data.airPressure}
             eventKey={1}
             className='datacard'
+            isActice={false}
           />
           <DataCard
             show={this.state.show.airTemperature}
@@ -382,6 +326,7 @@ class SensorOverview extends Component {
             data={this.state.diagram.data.airTemperature}
             eventKey={2}
             className='datacard'
+            isActice={false}
           />
           <DataCard
             show={this.state.show.airHumidity}
@@ -392,6 +337,7 @@ class SensorOverview extends Component {
             data={this.state.diagram.data.airHumidity}
             eventKey={3}
             className='datacard'
+            isActice={false}
           />
           <DataCard
             show={this.state.show.particulateMatter}
@@ -402,6 +348,7 @@ class SensorOverview extends Component {
             data={this.state.diagram.data.particulateMatter}
             eventKey={4}
             className='datacard'
+            isActice={false}
           />
         </Accordion>
       </>

@@ -38,7 +38,9 @@ class PointOverview extends Component {
         <Help helpText={t('helpPoint')} />
         <ShareField subject={t('shareTitle')} body={t('shareBody')}/>
         <div className="network">&nbsp;</div>
-        <p>{t('valueHere')} {Number(this.props.value).toFixed(2)} {this.props.airQualityData.getUnitOfMeasurement()}</p>
+        {t('valueHere')} {Number(this.props.value).toFixed(2)} {this.props.airQualityData.getUnitOfMeasurement()}
+        <div className="network">&nbsp;</div>
+        {t('estimatedValue')}
       </>
     );
   }
