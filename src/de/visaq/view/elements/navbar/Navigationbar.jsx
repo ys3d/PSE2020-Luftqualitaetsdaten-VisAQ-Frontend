@@ -9,7 +9,8 @@ import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 import AirQualityData from '../airquality/AirQualityData';
 import * as data from '../../../../../resources/AirQualityData.json';
-import './Navigationbar.css'
+import './Navigationbar.css';
+import Help from '../../Help';
 
 
 /**
@@ -111,6 +112,7 @@ class Navigationbar extends React.Component {
                                     </Form.Group>
                                 </NavDropdown>
                                 <Nav className='ml-auto'>
+                                    <Help helpText={t('navbarHelp')} />
                                     <Nav.Link className='nav-link-lng' id='nav-link-lng' onClick={() => { i18next.changeLanguage('en') }}>
                                         en
                                     </Nav.Link>

@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import './Help.css';
-import Tooltip from 'react-bootstrap/Tooltip';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Overlay from 'react-bootstrap/Overlay'
-import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 
 import Button from 'react-bootstrap/Button'
@@ -19,9 +15,8 @@ class Help extends Component {
 
     render() {
         const { t } = this.props;
-
         return (
-            <OverlayTrigger trigger="click" placement="auto" overlay={this.helpToolTip(t('help'))}>
+            <OverlayTrigger trigger="click" placement="auto-start" overlay={this.helpToolTip(t('help'))} >
                 <Button variant="light">{t('help')}</Button>
             </OverlayTrigger>
         );
@@ -29,7 +24,7 @@ class Help extends Component {
 
     helpToolTip(title) {
         return (
-            <Popover id="popover-contained">
+            <Popover id="help-popover">
                 <PopoverTitle as="h3">{title}</PopoverTitle>
                 <PopoverContent>
                     {this.props.helpText}

@@ -14,6 +14,6 @@
     "valueHere": "The current interpolated value here is ",
     "shareTitle": "Look here!",
     "shareBody": "Hello there! Look at the air-quality-data!",
-    "helpSensor": "In this View, you can see detailed Information on the sensor you selected. To se detailed information on a parameter click on the parameters below.",
+    "helpSensor": "In this view, you can see detailed information on the sensor you selected. To se detailed information on a parameter click on the parameters below.",
     "helpPoint": "This view shows interpolated data for a selected point. Only the currently on the map selected property is shown here"
 }
