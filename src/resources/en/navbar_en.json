@@ -4,7 +4,7 @@
     "humidity": "Humidity",
     "particulateMatter": "Particulate Matter",
     "temperature": "Temperature",
-    "airPressure": "Air Pressure",
+    "airPressure": "Atmospheric Pressure",
     "reasonsPM": "Reasons for air pollution",
     "diy": "DIY instructions",
     "historical": "Historical data",
