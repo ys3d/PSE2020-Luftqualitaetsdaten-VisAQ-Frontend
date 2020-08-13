@@ -23,12 +23,16 @@ export default class TimeQuery extends React.Component {
   };
  
   render() {
+      console.log(i18next.language)
     return (
       <DatePicker
         selected={this.state.startDate}
         onChange={this.handleChange}
+        shouldCloseOnSelect={false}
+        minDate={'2016-12-17T03:24:00'}
+        maxDate={new Date()}
         showTimeSelect
-        locale={i18next.language}
+        locale={de}
         dateFormat="d.MM.yyyy     h:mm"
       />
     );
