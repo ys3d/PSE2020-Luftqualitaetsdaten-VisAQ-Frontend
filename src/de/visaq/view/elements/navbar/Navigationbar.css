@@ -70,6 +70,21 @@
   color: var(--main-page-color);
 }
 
+#help {
+  color: var(--text-gray);
+}
+
+#help:focus {  
+  color: var(--main-page-color)!important; 
+}
+
+#help:hover { 
+  color: var(--main-page-color);
+}
+
+#help:active { 
+  color: var(--main-page-color)!important; 
+}
 .form-check {
   padding-left: 2.3em;
   color: var(--text-gray);
