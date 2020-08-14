@@ -12,6 +12,7 @@ import * as airQualityData from '../../../../../../resources/AirQualityData.json
 import Observation from '../../../../model/Observation';
 import './OverviewContainer.css'
 import Help from '../../../Help';
+import { Nav } from 'react-bootstrap';
 
 /**
  * Displays all the Information on a Specifik Sensor or Location
@@ -295,13 +296,19 @@ class SensorOverview extends Component {
         <h1>
           {t('sensor')} {this.state.thingName}
         </h1>
-        { this.props.expert &&
-        <a>
-          {t('description')} {this.state.thingDescription}
-          <div className="network">&nbsp;</div>
-        </a>
-        } 
-        <Help helpText={t('helpSensor')}/>
+        {this.props.expert &&
+          <a>
+            {t('description')} {this.state.thingDescription}
+            <div className="network">&nbsp;</div>
+          </a>
+        }
+        <Nav.Link
+          className='nav-link-lng'
+          id='help'
+          draggable="false"
+        >
+          <Help helpText={t('helpSensor')} />
+        </Nav.Link>
         <ShareField subject={t('shareTitle')} body={t('shareBody')} />
         <div className="network">&nbsp;</div>
 

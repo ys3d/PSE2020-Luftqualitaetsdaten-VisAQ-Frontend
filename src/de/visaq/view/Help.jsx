@@ -1,36 +1,62 @@
-import React, { Component } from 'react';
+import React, { Component, event } from 'react';
+import { Button, Modal, ModalTitle, Popover, Tooltip, Nav, NavItem, Row, Col, FormGroup, FieldGroup, Checkbox } from 'react-bootstrap';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { withTranslation } from 'react-i18next';
-
-import Button from 'react-bootstrap/Button'
-import PopoverContent from 'react-bootstrap/PopoverContent'
-import PopoverTitle from 'react-bootstrap/PopoverTitle'
-import Popover from 'react-bootstrap/Popover'
+import './elements/navbar/Popup.css';
 
 class Help extends Component {
     constructor(props) {
         super(props);
-        this.helpToolTip = this.helpToolTip.bind(this);
+        this.render.bind(this);
+        this.state = {
+            showModal: false
+        }
+    }
+
+    MODAL_TYPE_HELP = 2;
+
+    /**
+     * Closes the popup.
+     */
+    close() {
+        this.setState({ showModal: false });
+    }
+
+    /**
+     * Opens the popup.
+     * 
+     * @param {Object} modalType    The modal type
+     */
+    open(modalType) {
+        this.setState({
+            showModal: true,
+            modalType: modalType
+        });
+    }
+
+    handleSelect(eventKey) {
+        event.preventDefault();
+        alert(`selected ${eventKey}`);
     }
 
     render() {
         const { t } = this.props;
         return (
-            <OverlayTrigger trigger="click" placement="auto-start" overlay={this.helpToolTip(t('help'))} >
-                <Button variant="light">{t('help')}</Button>
-            </OverlayTrigger>
-        );
-    }
-
-    helpToolTip(title) {
-        return (
-            <Popover id="help-popover">
-                <PopoverTitle as="h3">{title}</PopoverTitle>
-                <PopoverContent>
-                    {this.props.helpText}
-                </PopoverContent>
-            </Popover>
-        );
+            <div>
+                <span onClick={this.open.bind(this, this.MODAL_TYPE_HELP)}>{t('help')}</span>
+                <Modal size="lg" show={this.state.showModal} onHide={this.close.bind(this)}>
+                    <ModalTitle center className='title'>
+                        {t('help')}
+                    </ModalTitle>
+                    <Modal.Body className='text'>
+                        {this.props.helpText}
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={this.close.bind(this)} className='button'>{t('close')}</Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
+        )
     }
 }
 

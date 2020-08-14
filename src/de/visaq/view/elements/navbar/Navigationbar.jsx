@@ -249,7 +249,13 @@ class Navigationbar extends React.Component {
                                     </Form.Group>
                                 </NavDropdown>
                                 <Nav className='ml-auto'>
-                                    <Help helpText={t('navbarHelp')} />
+                                    <Nav.Link
+                                        className='nav-link-lng'
+                                        id='help'
+                                        draggable="false"
+                                    >
+                                        <Help helpText={t('navbarHelp')}/>
+                                    </Nav.Link>
                                     <Nav.Link 
                                         className='nav-link-lng' 
                                         id='nav-link-lng' 
