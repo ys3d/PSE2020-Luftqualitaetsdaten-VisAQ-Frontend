@@ -12,7 +12,7 @@
 
 body {
   height: 0vw;
-  width: 100vw!important;
+  width: 100vw;
   padding: 0px;
   border: none;
   background-color:rgb(241, 241, 241) 
@@ -28,14 +28,14 @@ body {
 
 .app {
   height: 100vw;
-  width: 100vw;
+  width: 106vw;
   border: none;
   margin: 0px
 }
 
 .row {
   height: 30vw;
-  width: 100vw;
+  width: 96%;
   padding: 0px;
   border: none;
 }
