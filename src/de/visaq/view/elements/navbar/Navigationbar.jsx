@@ -11,9 +11,10 @@ import AirQualityData from '../airquality/AirQualityData';
 import TimeQuery from '../map/TimeQuery';
 import * as data from '../../../../../resources/AirQualityData.json';
 import './Navigationbar.css';
+import moment from 'moment';
 
 let ov = [true, false];
-
+let timeCache;
 /**
  * Class containing the Navigationbar
  */
@@ -31,7 +32,9 @@ class Navigationbar extends React.Component {
             airQualityData: new AirQualityData(data.particulateMatter),
             activeAirQ : 0,
             activeLanguage: document.cookie.split(';').some((item) => item.trim().startsWith('Language=en')) ? 0 : 1,
-            overlays : ov
+            overlays : ov,
+            historicalMode: false,
+            time : Date.now()
         }
     }
 
@@ -74,8 +77,8 @@ class Navigationbar extends React.Component {
 
     /**
        * Toggles the active state of the air quality buttons
-       * @param {*} position position of the button
-       * @param {*} lng choosen air quality
+       * @param {Number} position position of the button
+       * @param {String} lng choosen air quality
        */
     toggle(position, airQ){
         if (this.state.active === position) {
@@ -88,7 +91,7 @@ class Navigationbar extends React.Component {
     
       /**
        * Activates the button at the given position
-       * @param {*} position Position of the button 
+       * @param {Number} position Position of the button 
        */
       activateAirQuality(position) {
         if (this.state.activeAirQ === position) {
@@ -99,7 +102,7 @@ class Navigationbar extends React.Component {
 
       /**
        * Activates the button at the given position
-       * @param {*} position Position of the button 
+       * @param {Number} position Position of the button 
        */
       activateLanguage(position) {
         if (this.state.activeLanguage === position) {
@@ -110,8 +113,8 @@ class Navigationbar extends React.Component {
 
       /**
        * Toggles the active state of the language buttons
-       * @param {*} position position of the button
-       * @param {*} lng choosen language
+       * @param {Number} position position of the button
+       * @param {String} lng choosen language
        */
       toggleLanguage(position, lng){
         if (this.state.activeLanguage === position) {
@@ -122,10 +125,25 @@ class Navigationbar extends React.Component {
         i18next.changeLanguage(lng)
       }
 
+    toggleHistoricalMode()  {
+        if (!this.state.historicalMode) {
+            timeCache = this.state.time;
+            this.setState({historicalMode : true});
+        } else {
+            this.setState({time : timeCache, historicalMode : false});
+        }
+    }
+      
+    setTime(time)   {
+        this.setState({time : time});
+    }
+
+
     /**
      * Returns the Navbar
      */
     render() {
+        console.log(this.state.historicalMode);
         const { t } = this.props;
         return (
             <React.Fragment>
@@ -249,8 +267,21 @@ class Navigationbar extends React.Component {
                                         />
                                     </Form.Group>
                                     <NavDropdown.Divider />
-                                    <p>{t('time-query')}</p>
-                                    <TimeQuery/>
+                                    <p>{t('historical-mode')}</p>
+                                    <Form.Group controlId='form-switch' alignRight>
+                                        <Form.Check  
+                                            type='checkbox' 
+                                            id='historical-mode' 
+                                            label={t('historical-view')} 
+                                            draggable="false"
+                                            onClick={() => this.toggleHistoricalMode()} 
+                                        />
+                                    </Form.Group>
+                                    <TimeQuery 
+                                        timeHandler={(e) => this.setTime(e)}
+                                        time={this.state.time}
+                                        historicalMode={this.state.historicalMode}     
+                                        />
                                 </NavDropdown>
                                 <Nav className='ml-auto'>
                                     <Nav.Link 
@@ -280,6 +311,8 @@ class Navigationbar extends React.Component {
                         openHandler={(e) => this.props.openHandler(e)} 
                         iopenHandler={(e, a) => this.props.iopenHandler(e, a)}
                         overlays={this.state.overlays}
+                        historicalMode={this.state.historicalMode}
+                        time={this.state.time}
                     />
                 </Router>
             </React.Fragment>

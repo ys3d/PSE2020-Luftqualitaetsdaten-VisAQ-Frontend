@@ -22,6 +22,9 @@
 	"consequences": "The consequences of air pollution are diverse. The environment is encumbered with consequences like climate change. Human beings are mainly encumbered with respiratory disease.",
 	"sensorOverviewExpert": "Detailed Sensorinformations",
 	"mapOverlay": "Map Overlays",
-	"Sensors": "Sensors"
-	"time-query" : "Select time"
+	"Interpolation": "Interpolation",
+	"Sensors": "Sensors",
+	"time-query" : "Select time",
+	"historical-mode" : "Historical-Mode",
+	"historical-view" : "Historical view"
 }

@@ -1,0 +1,18 @@
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list {
+    padding-left: unset;
+    padding-right: unset;
+    width: 100px;
+    overflow-y: visible;
+}
+
+.react-datepicker__input-container {
+    width:100%;
+}
+
+.react-datepicker-wrapper {
+    width:100%;
+}
+
+.react-datepicker {
+    width: 350px;
+}
