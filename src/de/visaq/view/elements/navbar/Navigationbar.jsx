@@ -11,7 +11,7 @@ import AirQualityData from '../airquality/AirQualityData';
 import TimeQuery from '../map/TimeQuery';
 import * as data from '../../../../../resources/AirQualityData.json';
 import './Navigationbar.css';
-import moment from 'moment';
+
 
 let ov = [true, false];
 let timeCache;
@@ -125,6 +125,9 @@ class Navigationbar extends React.Component {
         i18next.changeLanguage(lng)
       }
 
+    /**
+     * Activates and deactivates the historicalMode
+     */
     toggleHistoricalMode()  {
         if (!this.state.historicalMode) {
             timeCache = this.state.time;
@@ -133,7 +136,12 @@ class Navigationbar extends React.Component {
             this.setState({time : timeCache, historicalMode : false});
         }
     }
-      
+    
+    /**
+     * Sets the time.
+     * 
+     * @param {String} time     The selected time
+     */
     setTime(time)   {
         this.setState({time : time});
     }
@@ -143,7 +151,6 @@ class Navigationbar extends React.Component {
      * Returns the Navbar
      */
     render() {
-        console.log(this.state.historicalMode);
         const { t } = this.props;
         return (
             <React.Fragment>

@@ -4,18 +4,14 @@ import L from 'leaflet';
 import "./MapView.css";
 import OverlayBuilder from './overlayfactory/OverlayBuilder';
 import Legend from './elements/map/Legend';
-import TimeQuery from './elements/map/TimeQuery';
 import request from "../controller/Request";
 import Thing from "../model/Thing";
 import Observation from "../model/Observation";
 import PointDatum from '../model/PointDatum';
 import { ReactLeafletSearch } from 'react-leaflet-search';
-import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 
 
-let cellsCache = {};
-let pointDataCellsCache = {};
 /**
  * Class that contains the MapView.
  */
@@ -89,7 +85,6 @@ class MapView extends Component {
             && this.props.time === prevProps.time) {
             return;
         }
-        console.log(this.props.time);
         this.requestInBoundCells();
     }
 
@@ -113,6 +108,7 @@ class MapView extends Component {
      * The return value is an array of Things and an array of Observations. 
      * These data is stored in cells.
      * 
+     * @param {String} time             The selected time 
      * @param {Object} airQualityData   The current Air Quality Data
      * @param {Number} lat              The degree of longitude
      * @param {Number} lng              The degree of latitude
@@ -147,6 +143,7 @@ class MapView extends Component {
      * Sends a request to the Backend. 
      * The return value is an array of pointDatum.
      * 
+     * @param {String} time             The selected time 
      * @param {Object} airQualityData   The current Air Quality Data
      * @param {Number} lat              The degree of longitude
      * @param {Number} lng              The degree of latitude 
