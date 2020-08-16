@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import Accordion from 'react-bootstrap/Accordion'
 import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
-import request from '../../../../controller/Request'
-import Thing from '../../../../model/Thing'
-import DataCard from './DataCard'
-import ShareField from './ShareField'
-import Datastream from '../../../../model/Datastream'
+import request from '../../../../controller/Request';
+import Thing from '../../../../model/Thing';
+import DataCard from './DataCard';
+import ShareField from './ShareField';
+import Datastream from '../../../../model/Datastream';
 import ObservedProperty from '../../../../model/ObservedProperty';
 import * as airQualityData from '../../../../../../resources/AirQualityData.json'
 import Observation from '../../../../model/Observation';
 import './OverviewContainer.css'
+import Help from '../../../Help';
+import { Nav } from 'react-bootstrap';
 
 /**
  * Displays all the Information on a Specifik Sensor or Location
@@ -294,12 +296,19 @@ class SensorOverview extends Component {
         <h1>
           {t('sensor')} {this.state.thingName}
         </h1>
-        { this.props.expert &&
-        <a>
-          {t('description')} {this.state.thingDescription}
-          <div className="network">&nbsp;</div>
-        </a>
-        } 
+        {this.props.expert &&
+          <a>
+            {t('description')} {this.state.thingDescription}
+            <div className="network">&nbsp;</div>
+          </a>
+        }
+        <Nav.Link
+          className='nav-link-lng'
+          id='help'
+          draggable="false"
+        >
+          <Help helpText={t('helpSensor')} />
+        </Nav.Link>
         <ShareField subject={t('shareTitle')} body={t('shareBody')} />
         <div className="network">&nbsp;</div>
 

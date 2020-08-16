@@ -5,6 +5,8 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 import navbar_de from '../../../resources/de/navbar_de.json';
 import navbar_en from '../../../resources/en/navbar_en.json';
+import help_en from '../../../resources/en/help_en.json';
+import help_de from '../../../resources/de/help_de.json';
 import sensorOverview_de from '../../../resources/de/sensorOverview_de.json';
 import sensorOverview_en from '../../../resources/en/sensorOverview_en.json';
 import cookie_de from '../../../resources/de/cookie_de.json';
@@ -14,7 +16,6 @@ import popup_causes_en from '../../../resources/en/popup_causes_en.json';
 import popup_reasons_de from '../../../resources/de/pupup_reasons_de.json';
 import popup_reasons_en from '../../../resources/en/popup_reasons_en.json';
 
-
 /**
  * The resources used to get the translations
  */
@@ -22,6 +23,7 @@ const resources = {
         en: {
         common: navbar_en,
         overview: sensorOverview_en,
+        help: help_en,
         cookies: cookie_en,
         causes: popup_causes_en,
         reasons: popup_reasons_en,
@@ -29,6 +31,7 @@ const resources = {
          de: {
         common: navbar_de,
         overview: sensorOverview_de,
+        help: help_de,
         cookies: cookie_de,
         causes: popup_causes_de,
         reasons: popup_reasons_de,

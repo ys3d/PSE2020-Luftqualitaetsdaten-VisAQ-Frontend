@@ -10,8 +10,8 @@ import { withTranslation } from 'react-i18next';
 import AirQualityData from '../airquality/AirQualityData';
 import * as data from '../../../../../resources/AirQualityData.json';
 import './Navigationbar.css';
+import Help from '../../Help';
 import {Row, Col } from "react-bootstrap";
-
 import Overview from '../map/overview/OverviewContainer';
 
 let ov = [true, false];
@@ -253,9 +253,16 @@ class Navigationbar extends React.Component {
                                 <Nav className='ml-auto'>
                                     <Nav.Link
                                         className='nav-link-lng'
-                                        id='nav-link-lng'
-                                        style={{ color: this.activateLanguage(0) }}
-                                        onClick={() => { this.toggleLanguage(0, 'en') }}
+                                        id='help'
+                                        draggable="false"
+                                    >
+                                        <Help helpText={t('navbarHelp')}/>
+                                    </Nav.Link>
+                                    <Nav.Link 
+                                        className='nav-link-lng' 
+                                        id='nav-link-lng' 
+                                        style={{color: this.activateLanguage(0)}} 
+                                        onClick={() => {this.toggleLanguage(0, 'en')}} 
                                         draggable="false"
                                     >
                                         EN
