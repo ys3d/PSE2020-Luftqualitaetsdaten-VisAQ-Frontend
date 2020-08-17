@@ -22,17 +22,11 @@ function Overview(props) {
             return (
                 <>
                     <Col xl={4} lg={6} md={8} sm={8} xs={10} id="sensorOverviewContainer" scrollable={true}>
-                        <OverlayTrigger
-                            placement="left"
-                            delay={{ show: 250, hide: 400 }}
-                            overlay={closeToolTip}
-                        >
-                            <p>
-                                <a href="#" onClick={props.closeHandler} className='close'/>
-                                <br />
-                                <br />
-                            </p>
-                        </OverlayTrigger>
+                        <p>
+                            <a href="#" onClick={props.closeHandler} className='close' />
+                            <br />
+                            <br />
+                        </p>
                         <SensorOverview thingID={props.thingID} expert={props.showDetails} />
                     </Col>
                 </>
@@ -42,18 +36,12 @@ function Overview(props) {
             return (
                 <>
                     <Col xl={4} lg={6} md={8} sm={8} xs={10} id="pointOverviewContainer">
-                        <OverlayTrigger
-                            placement="left"
-                            delay={{ show: 250, hide: 400 }}
-                            overlay={closeToolTip}
-                        >
-                            <p>
-                                <a href="#" onClick={props.closeHandler} className='close'/>
-                                <br />
-                                <br />
-                            </p>
-                        </OverlayTrigger>
-                        <PointOverview value={props.pointValue} airQualityData={props.airQualityData}/>
+                        <p>
+                            <a href="#" onClick={props.closeHandler} className='close' />
+                            <br />
+                            <br />
+                        </p>
+                        <PointOverview value={props.pointValue} airQualityData={props.airQualityData} />
                     </Col>
                 </>
             );
@@ -61,18 +49,5 @@ function Overview(props) {
     }
 }
 render(<Overview />);
-
-/**
- * Shows the Tooltip for the close button.
- * 
- * @param {Object} props  The properties
- */
-function closeToolTip(props) {
-    return (
-        <Tooltip id="button-tooltip" {...props} className='tooltip'>
-            Hier klicken um die Detailansicht zu schließen
-        </Tooltip>
-    );
-}
 
 export default Overview;

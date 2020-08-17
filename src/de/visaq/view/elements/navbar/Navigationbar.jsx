@@ -11,7 +11,9 @@ import AirQualityData from '../airquality/AirQualityData';
 import TimeQuery from '../map/TimeQuery';
 import * as data from '../../../../../resources/AirQualityData.json';
 import './Navigationbar.css';
-
+import Help from '../../Help';
+import {Row, Col } from "react-bootstrap";
+import Overview from '../map/overview/OverviewContainer';
 
 let ov = [true, false];
 let timeCache;
@@ -291,6 +293,13 @@ class Navigationbar extends React.Component {
                                         />
                                 </NavDropdown>
                                 <Nav className='ml-auto'>
+                                    <Nav.Link
+                                        className='nav-link-lng'
+                                        id='help'
+                                        draggable="false"
+                                    >
+                                        <Help helpText={t('navbarHelp')}/>
+                                    </Nav.Link>
                                     <Nav.Link 
                                         className='nav-link-lng' 
                                         id='nav-link-lng' 
