@@ -84,13 +84,13 @@ class PopupReasons extends Component {
             <div className="network">&nbsp;</div>
 
             <div className="network">&nbsp;</div>
-            {t('procentualIndustry')}
+            {t('percentageIndustry')}
             <div className="network">&nbsp;</div>
-            {t('procentualCars')}
+            {t('percentageCars')}
             <div className="network">&nbsp;</div>
-            {t('procentualRubble')}
+            {t('percentageRubble')}
             <div className="network">&nbsp;</div>
-            {t('procentualOther')}
+            {t('percentageOther')}
             {isDesktop &&
               <PieChart
                 data={[
