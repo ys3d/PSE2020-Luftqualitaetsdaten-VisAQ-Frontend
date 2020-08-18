@@ -250,7 +250,7 @@ class MapView extends Component {
                 
                     <ReactLeafletSearchComponent
                         className="search-control"
-                        position="bottomleft"
+                        position="topleft"
                         provider="OpenStreetMap"
                         providerOptions={{ region: "de" }}
                         inputPlaceholder={t('search')}
