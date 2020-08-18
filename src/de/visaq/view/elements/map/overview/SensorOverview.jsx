@@ -303,7 +303,7 @@ class SensorOverview extends Component {
           </a>
         }
         <Nav.Link
-          className='nav-link-lng'
+          className='help'
           id='help'
           draggable="false"
         >

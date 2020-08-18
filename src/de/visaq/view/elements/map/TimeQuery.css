@@ -7,6 +7,7 @@
 
 .react-datepicker__input-container {
     width:100%;
+    margin-left: 1em;
 }
 
 .react-datepicker-wrapper {

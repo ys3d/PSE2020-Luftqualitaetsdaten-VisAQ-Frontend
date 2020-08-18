@@ -61,7 +61,7 @@ ul {
 
 .close {
   position: absolute;
-  right: 93%;
+  margin-left: -0.6em;
   top: 10px;
   width: 32px;
   height: 32px;
@@ -86,6 +86,15 @@ ul {
   }
   .close:after {
     transform: rotate(-45deg);
+  }
+
+  .help {
+    margin-left: -0.6em;
+    color: var(--text-gray);
+  }
+
+  .help:hover {
+    color: var(--hover-color);
   }
 
   #accordion {
