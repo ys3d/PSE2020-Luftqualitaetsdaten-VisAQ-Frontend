@@ -181,23 +181,23 @@ class Navigationbar extends React.Component {
                                     {t('mapOverlay')}
                                 </Dropdown>
                                 <NavDropdown variant="success" id="dropdown-basic">
+                                    <p>{t('mapOverlay')}</p>
                                     <Form.Group controlId='form-switch' alignRight>
-                                        <label>
-                                            <input type="checkbox"
+                                    <label id='checkbox'>
+                                        <input  type="checkbox"
                                                 checked={ov[0]}
                                                 onChange={this.activateSensors}
-                                                id='expert-mode'
-                                            />
-                                            {t('Sensors')}
-                                        </label>
-                                        <label>
-                                            <input type="checkbox"
-                                                checked={ov[1]}
-                                                onChange={this.activateInterpolation}
-                                                id='expert-mode'
-                                            />
-                                            {t('Interpolation')}
-                                        </label>
+                                                id='box'
+                                        />
+                                    <div className='overlay' id='overlay' inline>{t('Sensors')}</div>
+                                    </label>
+                                    <label id='checkbox'>
+                                    <input  type="checkbox"
+                                            checked={ov[1]}
+                                            onChange={this.activateInterpolation}
+                                    />
+                                    <div className='overlay' id='overlay' inline>{t('Interpolation')}</div>
+                                    </label>
                                     </Form.Group>
                                 </NavDropdown>
                                 <Dropdown inline id='link'>

@@ -1,77 +1,79 @@
-:root {
-  --white: white;
-  --hover-color: #2f8794;
-  --black: black;
-  --grey: #faf9f9;
-  --text-gray: #787878;
-  --transparent: transparent;
-  --align: center;
-}
+  :root {
+    --white: white;
+    --hover-color: #2f8794;
+    --black: black;
+    --grey: #faf9f9;
+    --text-gray: #787878;
+    --transparent: transparent;
+    --align: center;
+    --main-page-color: #44c2d4;
 
-body {
-	display: flex;
-	justify-content: var(--align);
-	align-items: var(--align);
-	height: 100vh;
-}
+  }
 
-ul {
-  text-align: var(--align);
-  white-space: nowrap;
-  list-style: none;
-}
+  body {
+    display: flex;
+    justify-content: var(--align);
+    align-items: var(--align);
+    height: 100vh;
+  }
 
-.arrow-container {
-  text-align: var(--align);
-  white-space: nowrap;
-  list-style: none;
-}
+  ul {
+    text-align: var(--align);
+    white-space: nowrap;
+    list-style: none;
+  }
 
-.arrow-down {
-  transition-delay: 0.25s;
-  display: block;
-  width: 15px;
-  height: 15px;
-  border-top: 2px solid var(--black);
-  border-right: 2px solid var(--black);
-  transform: rotate(135deg);
-  margin-top: -1.5em;
-}
+  .arrow-container {
+    text-align: var(--align);
+    white-space: nowrap;
+    list-style: none;
+  }
 
-.arrow-top {
-  transition-delay: 0.25s;
-  display: block;
-  width: 15px;
-  height: 15px;
-  border-top: 2px solid var(--black);
-  border-right: 2px solid var(--black);
-  transform: rotate(315deg);
-  margin-top: -1em;
-  margin-bottom: -0.5em;
-}
+  .arrow-down {
+    transition-delay: 0.25s;
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-top: 2px solid var(--black);
+    border-right: 2px solid var(--black);
+    transform: rotate(135deg);
+    margin-top: -1.5em;
+  }
 
-.arrow:hover {
-  border-top: 2px solid var(--hover-color);
-  border-right: 2px solid var(--hover-color);
-}
+  .arrow-top {
+    transition-delay: 0.25s;
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-top: 2px solid var(--black);
+    border-right: 2px solid var(--black);
+    transform: rotate(315deg);
+    margin-top: -1em;
+    margin-bottom: -0.5em;
+  }
 
-.open {
-  transform: rotate(-45deg);
-}
+  .arrow:hover {
+    border-top: 2px solid var(--hover-color);
+    border-right: 2px solid var(--hover-color);
+  }
 
-.close {
-  position: absolute;
-  right: 93%;
-  top: 10px;
-  width: 32px;
-  height: 32px;
-  opacity: 0.3;
-}
+  .open {
+    transform: rotate(-45deg);
+  }
 
-.close:hover {
-  opacity: 1;
-  color: var(--hover-color);    
-}
+  .close {
+    position: absolute;
+    right: 93%;
+    top: 10px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+  }
+
+  .close:hover {
+    opacity: 1;
+    color: var(--hover-color);    
+  }
 
   .close:before, .close:after {
     position: absolute;
@@ -100,10 +102,23 @@ ul {
     background-color: var(--grey)
   }
 
+  #help {
+    color: var(--text-gray);
+  }
+  
+  #help:focus {  
+    color: var(--main-page-color)!important; 
+  }
+  
+  #help:hover { 
+      color: var(--main-page-color);
+  }
+  
+  #help:active { 
+      color: var(--main-page-color)!important; 
+  }
 
   .card {
     background-color: var(--transparent);
     border: var(--transparent);
   }  
-
-
