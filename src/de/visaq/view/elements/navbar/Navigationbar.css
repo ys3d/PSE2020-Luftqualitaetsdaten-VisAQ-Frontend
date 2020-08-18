@@ -22,10 +22,16 @@
   right: 25%;
 }
 
-.header
-
 .dropdown:hover>.dropdown-menu {
   display: block;
+}
+
+#help {
+  color: var(--text-gray);
+}
+
+#help:hover {
+  color: var(--main-page-color);
 }
 
 #title {

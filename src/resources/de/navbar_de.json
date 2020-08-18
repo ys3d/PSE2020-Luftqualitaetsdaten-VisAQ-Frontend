@@ -21,7 +21,7 @@
     "accept": "Akzeptieren",
     "close": "Schließen",
     "decline": "Ablehnen",
-    "navbarHelp": "Um zwischen den Messparametern zu wechseln, klicken Sie auf den jeweiligen Parameter im Menü. Erweiterte Funktionen können unter dem Menüpunkt 'Erweiterte Funktionen' gefunden werden. Um zwischen verschiedenen Kartenoverlays zu wechseln, wählen sie das Menü 'Ansicht'. Um Details zu einem Sensor zu sehen, klicken Sie diesen auf der Karte an, er wird als bunter Kreis angezeigt. Um interpolierte Daten zu einem Punkt zu sehen, klicken Sie auf einen beliebigen Punkt auf der Karte, während das Interpolationsoverlay aktiv ist."
+    "navbarHelp": "Um zwischen den Messparametern zu wechseln, klicken Sie auf den jeweiligen Parameter im Menü. Erweiterte Funktionen können unter dem Menüpunkt 'Erweiterte Funktionen' gefunden werden. Um zwischen verschiedenen Kartenoverlays zu wechseln, wählen sie das Menü 'Ansicht'. Um Details zu einem Sensor zu sehen, klicken Sie diesen auf der Karte an, er wird als bunter Kreis angezeigt. Um interpolierte Daten zu einem Punkt zu sehen, klicken Sie auf einen beliebigen Punkt auf der Karte, während das Interpolationsoverlay aktiv ist.",
 	"Interpolation": "Interpolation",
 	"Sensors": "Sensoren",
 	"time-query": "Wähle einen Zeitpunkt",

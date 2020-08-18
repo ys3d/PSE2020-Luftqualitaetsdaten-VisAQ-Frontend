@@ -294,7 +294,7 @@ class Navigationbar extends React.Component {
                                 </NavDropdown>
                                 <Nav className='ml-auto'>
                                     <Nav.Link
-                                        className='nav-link-lng'
+                                        className='help'
                                         id='help'
                                         draggable="false"
                                     >
