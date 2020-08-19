@@ -33,7 +33,7 @@ function Overview(props) {
                                 <br />
                             </p>
                         </OverlayTrigger>
-                        <SensorOverview thingID={props.thingID} expert={props.showDetails} />
+                        <SensorOverview squareCenter={props.squareCenter} thingID={props.thingID} expert={props.showDetails} />
                     </Col>
                 </>
             );
@@ -53,7 +53,7 @@ function Overview(props) {
                                 <br />
                             </p>
                         </OverlayTrigger>
-                        <PointOverview value={props.pointValue} airQualityData={props.airQualityData}/>
+                        <PointOverview expert={props.showDetails} squareCenter={props.squareCenter} value={props.pointValue} airQualityData={props.airQualityData}/>
                     </Col>
                 </>
             );
@@ -64,7 +64,7 @@ render(<Overview />);
 
 /**
  * Shows the Tooltip for the close button.
- * 
+ *
  * @param {Object} props  The properties
  */
 function closeToolTip(props) {

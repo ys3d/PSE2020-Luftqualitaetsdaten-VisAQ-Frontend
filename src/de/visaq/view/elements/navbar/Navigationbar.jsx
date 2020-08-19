@@ -89,7 +89,7 @@ class Navigationbar extends React.Component {
 
     /**
      * Activates the button at the given position
-     * @param {*} position Position of the button 
+     * @param {*} position Position of the button
      */
     activateAirQuality(position) {
         if (this.state.activeAirQ === position) {
@@ -100,7 +100,7 @@ class Navigationbar extends React.Component {
 
     /**
      * Activates the button at the given position
-     * @param {*} position Position of the button 
+     * @param {*} position Position of the button
      */
     activateLanguage(position) {
         if (this.state.activeLanguage === position) {
@@ -277,8 +277,8 @@ class Navigationbar extends React.Component {
                         <Col id="map-content">
                             <MapView
                                 airQ={this.state.airQualityData}
-                                openHandler={(e) => this.props.openHandler(e)}
-                                iopenHandler={(e, a) => this.props.iopenHandler(e, a)}
+                                openHandler={(squareCenter, thingId) => this.props.openHandler(squareCenter, thingId)}
+                                iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.props.iOpenHandler(squareCenter, interpolatedValue, airQualityData)}
                                 overlays={this.state.overlays}
                             />
                         </Col>
@@ -290,6 +290,7 @@ class Navigationbar extends React.Component {
                             showDetails={this.props.showDetails}
                             id='map'
                             className='map'
+                            squareCenter={this.props.squareCenter}
                             pointValue={this.props.pointValue}
                             airQualityData={this.props.airQualityData}
                         />

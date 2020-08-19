@@ -84,7 +84,7 @@ class MapView extends Component {
             return;
         }
         this.requestInBoundCells();
-        this.requestInterpolation(this.state.bounds); 
+        this.requestInterpolation(this.state.bounds);
     }
 
     /**
@@ -104,9 +104,9 @@ class MapView extends Component {
 
     /**
      * Sends a request to the Backend.
-     * The return value is an array of Things and an array of Observations. 
+     * The return value is an array of Things and an array of Observations.
      * These data is stored in cells.
-     * 
+     *
      * @param {Object} airQualityData   The current Air Quality Data
      * @param {Number} lat              The degree of longitude
      * @param {Number} lng              The degree of latitude
@@ -136,23 +136,23 @@ class MapView extends Component {
         });
         this.state.cells[`${airQualityData.name}|${lat}|${lng}`] = null;
     }
-    
+
     /**
-     * Sends a request to the Backend. 
+     * Sends a request to the Backend.
      * The return value is an array of pointDatum.
-     * 
+     *
      * @param {Object} airQualityData   The current Air Quality Data
      * @param {Number} lat              The degree of longitude
-     * @param {Number} lng              The degree of latitude 
-     * 
+     * @param {Number} lng              The degree of latitude
+     *
      */
     requestInterpolation(airQualityData, lat, lng) {
 
-        if (this.state.pointDataCells.hasOwnProperty(`${airQualityData.name}|${lat}|${lng}`) 
+        if (this.state.pointDataCells.hasOwnProperty(`${airQualityData.name}|${lat}|${lng}`)
         || this.state.pointDataCells[`${airQualityData.name}|${lat}|${lng}`] !== undefined) {
             return;
         }
-        request("/api/interpolation/nearestNeighbor", true, {
+        request("/api/interpolation/default", true, {
             "y1": lat,
             "x1": lng,
             "y2": lat + this.gridSize,
@@ -165,9 +165,9 @@ class MapView extends Component {
             }, error => {
                 delete this.state.pointDataCells[`${airQualityData.name}|${lat}|${lng}`];
             });
-            this.state.pointDataCells[`${airQualityData.name}|${lat}|${lng}`] = null;     
+            this.state.pointDataCells[`${airQualityData.name}|${lat}|${lng}`] = null;
     }
-    
+
     /**
      * Transforms the map bounds into uniform cells and requests the data for these cells.
      */
@@ -195,7 +195,7 @@ class MapView extends Component {
 
     /**
      * Sets the state of bounds with the new map bounds and request an Interpolation.
-     * 
+     *
      * @param {Object} newBounds The new map bounds
      */
     onBoundsUpdate(newBounds) {
@@ -208,7 +208,7 @@ class MapView extends Component {
 
     /**
      * Gives new map bounds to the method onBoundsUpdata.
-     * 
+     *
      * @param {Object} event The map's move event
      */
     onMove(event) {
@@ -237,17 +237,17 @@ class MapView extends Component {
                         attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    <OverlayBuilder 
-                        mapState={this.state} 
-                        airQualityData={this.props.airQ} 
-                        gridSize={this.gridSize} 
-                        openHandler={(e) => this.props.openHandler(e)} 
-                        iopenHandler={(e, a) => this.props.iopenHandler(e, a)}
+                    <OverlayBuilder
+                        mapState={this.state}
+                        airQualityData={this.props.airQ}
+                        gridSize={this.gridSize}
+                        openHandler={(squareCenter, thingId) => this.props.openHandler(squareCenter, thingId)}
+                        iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.props.iOpenHandler(squareCenter, interpolatedValue, airQualityData)}
                         overlays={this.props.overlays}
                     />
                     <Legend airQ={this.props.airQ} className='legend' id='legend'
                     />
-                
+
                     <ReactLeafletSearchComponent
                         className="search-control"
                         position="topleft"

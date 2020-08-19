@@ -7,10 +7,10 @@ import InterpolationOverlayFactory from './InterpolationOverlayFactory';
  * The class organizes the map overlays.
  */
 export default class OverlayBuilder extends Component {
-    
+
     /**
      * Sole constructor of the class.
-     * 
+     *
      * @param {Object} props    The properties
      */
     constructor(props) {
@@ -54,7 +54,7 @@ export default class OverlayBuilder extends Component {
         }
 
         cellsData.forEach(function(cellData) {
-            if (cellData == null) {
+            if (cellData == null || cellData.things == null) {
                 return;
             }
 
@@ -67,7 +67,7 @@ export default class OverlayBuilder extends Component {
             if (cellPointData == null) {
                 return;
             }
-            
+
             prepPointData.push(cellPointData);
         });
 
@@ -88,9 +88,9 @@ export default class OverlayBuilder extends Component {
 
         return (
             <div>
-                <SensorOverlayFactory data = {data} airQ = {this.props.airQualityData} openHandler={(e) => this.props.openHandler(e)}
+                <SensorOverlayFactory data = {data} airQ = {this.props.airQualityData} openHandler={(squareCenter, id) => this.props.openHandler(squareCenter, id)}
                                         overlay={this.props.overlays[0]}/>
-                <InterpolationOverlayFactory airQ={this.props.airQualityData} pointData={prepPointData} iopenHandler={(e, a) => this.props.iopenHandler(e, a)}
+                <InterpolationOverlayFactory airQ={this.props.airQualityData} pointData={prepPointData} iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.props.iOpenHandler(squareCenter, interpolatedValue, airQualityData)}
                                                 overlay={this.props.overlays[1]}/>
             </div>
         );
