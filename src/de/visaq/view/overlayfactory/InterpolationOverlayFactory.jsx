@@ -176,7 +176,7 @@ function getGeoJson(input)   {
     /**
      * Needs to be square Number.
      */
-    const INTERPOLATED_NUM = 4;
+    const INTERPOLATED_NUM = 16;
 
     const intervalX = (squareData[1].json.location.x - squareData[0].json.location.x) / Math.sqrt(INTERPOLATED_NUM);
     const intervalY = (squareData[2].json.location.y - squareData[0].json.location.y) /Math.sqrt(INTERPOLATED_NUM)

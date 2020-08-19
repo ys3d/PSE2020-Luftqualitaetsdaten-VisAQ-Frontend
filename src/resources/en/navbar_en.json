@@ -27,5 +27,6 @@
     "navbarHelp": "To switch between the different observed properties click on one of them in the menu. More detailed functions can be selected in the 'More Functions' menu. To view detailed sensor information click on a sensor, a colored circle, on the map. To see interpolated data select the interpolation overlay and click on a point on the map.",
 	"time-query" : "Select time",
 	"historical-mode" : "Historical-Mode",
-	"historical-view" : "Historical View"
+    "historical-view" : "Historical View",
+    "start" : "Go"
 }

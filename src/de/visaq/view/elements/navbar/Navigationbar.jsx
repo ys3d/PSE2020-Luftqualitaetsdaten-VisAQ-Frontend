@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, NavDropdown, Form, Nav, Dropdown } from 'react-bootstrap';
+import { Button, Navbar, NavDropdown, Form, Nav, Dropdown } from 'react-bootstrap';
 import PopupReasons from './PopupReasons';
 import { BrowserRouter as Router } from "react-router-dom";
 import PopupCauses from './PopupCauses';
@@ -17,6 +17,7 @@ import Overview from '../map/overview/OverviewContainer';
 
 let ov = [true, false];
 let timeCache;
+let tempTime;
 /**
  * Class containing the Navigationbar
  */
@@ -140,12 +141,19 @@ class Navigationbar extends React.Component {
     }
     
     /**
-     * Sets the time.
+     * Saves the temporal the time.
      * 
      * @param {String} time     The selected time
      */
     setTime(time)   {
-        this.setState({time : time});
+        tempTime = time;
+    }
+
+    /**
+     * Sets the time.
+     */
+    startTimeQuery()    {
+        this.setState({time : tempTime});
     }
 
 
@@ -286,11 +294,21 @@ class Navigationbar extends React.Component {
                                             onClick={() => this.toggleHistoricalMode()} 
                                         />
                                     </Form.Group>
+                                    <Form inline>
+                                    <Button 
+                                        variant="outline-info"
+                                        size="sm"
+                                        disabled={!this.state.historicalMode}
+                                        onClick={() => {this.startTimeQuery()}}
+                                        >   
+                                        {t('start')} 
+                                    </Button>{' '}
                                     <TimeQuery 
                                         timeHandler={(e) => this.setTime(e)}
                                         time={this.state.time}
                                         historicalMode={this.state.historicalMode}     
-                                        />
+                                    />
+                                    </Form>
                                 </NavDropdown>
                                 <Nav className='ml-auto'>
                                     <Nav.Link

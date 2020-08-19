@@ -117,6 +117,8 @@ class MapView extends Component {
         if (this.state.cells.hasOwnProperty(`${time}|${airQualityData.name}|${lat}|${lng}`) || this.state.cells[`${time}|${airQualityData.name}|${lat}|${lng}`] !== undefined) {
             return;
         }
+        console.log("request");
+        console.log(time);
         request("/api/thing/all/square", true, {
             "y1": lat,
             "x1": lng,
@@ -154,6 +156,8 @@ class MapView extends Component {
         || this.state.pointDataCells[`${time}|${airQualityData.name}|${lat}|${lng}`] !== undefined) {
             return;
         }
+        console.log("requestIP");
+        console.log(time);
         request("/api/interpolation/nearestNeighbor", true, {
             "y1": lat,
             "x1": lng,

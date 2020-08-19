@@ -24,7 +24,7 @@ export default class TimeQuery extends React.Component {
     this.state = {
       date: new Date(this.props.time)
     };
-    startDate = this.state.date;
+    startDate = new Date(this.props.time);
     this.setMinMaxTime(this.state.date);
     registerLocale("en", enGB); 
     registerLocale("de", de);
@@ -39,7 +39,6 @@ export default class TimeQuery extends React.Component {
     if (prevProps.time === this.state.date) {
       return;
     }
-    this.setState({date : this.props.time});
   }
 
   /**
@@ -48,14 +47,14 @@ export default class TimeQuery extends React.Component {
    * @param {String} date   The selected date
    */
   handleChange = date => {
-    var d = Date.parse(date);
+    var d = Date.parse(this.state.date);
     this.props.timeHandler(d);
     this.setState({
       date: date
     });
     this.setMinMaxTime(date);
   }; 
-
+  
   /**
    * Set the minimum and maximum time of the timeselect.
    * 
