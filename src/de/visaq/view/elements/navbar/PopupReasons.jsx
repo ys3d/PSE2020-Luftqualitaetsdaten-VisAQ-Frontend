@@ -1,8 +1,8 @@
 import React, { Component, event } from 'react';
 import { Button, Modal, ModalTitle, Popover, Tooltip, Nav, NavItem, Row, Col, FormGroup, FieldGroup, Checkbox } from 'react-bootstrap';
-import {withTranslation} from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { PieChart } from 'react-minimal-pie-chart';
-import {Container} from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import './Popup.css';
 
 /**
@@ -18,9 +18,26 @@ class PopupReasons extends Component {
     super();
     this.render.bind(this);
     this.state = {
-      showModal: false
+      showModal: false,
+      width: window.innerWidth
     }
+    this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
   }
+
+  componentWillMount() {
+    window.addEventListener('resize', this.handleWindowSizeChange);
+  }
+  
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleWindowSizeChange);
+  }
+  
+  /**
+   * Handles stateChange on window-resizing
+   */
+  handleWindowSizeChange() {
+    this.setState({ width: window.innerWidth });
+  };
 
   /**
    * Closes the popup.
@@ -35,7 +52,7 @@ class PopupReasons extends Component {
    * @param {Object} modalType    The modal type
    */
   open(modalType) {
-    this.setState({ 
+    this.setState({
       showModal: true,
       modalType: modalType
     });
@@ -46,8 +63,11 @@ class PopupReasons extends Component {
     alert(`selected ${eventKey}`);
   }
 
-  render () {
+  render() {
     const { t } = this.props;
+
+    const isDesktop = this.state.width > 500;
+
     return (
       <div>
         <span onClick={this.open.bind(this, this.MODAL_TYPE_REASONS)}>{t('reasonsPM')}</span>
@@ -62,35 +82,38 @@ class PopupReasons extends Component {
             <div className="network">&nbsp;</div>
             {t('descriptionHumanmadeReasons')}
             <div className="network">&nbsp;</div>
-            <Container className='container'>
-              <Row>
-                <Col>
-                    <div className="network">&nbsp;</div>
-                    {t('procentualIndustry')}
-                    <div className="network">&nbsp;</div>
-                    {t('procentualCars')}
-                    <div className="network">&nbsp;</div>
-                    {t('procentualRubble')}
-                    <div className="network">&nbsp;</div>
-                    {t('procentualOther')}
-                </Col>
-                <Col>
-                    <PieChart
-                        data={[
-                        {title: 'sonstige Quellen', value: 1, color: '#4281a4'},
-                        {title: 'Verkehr', value: 33,color: '#48a9a6' },
-                        {title: 'Industrielle Quellen', value: 45, color: '#e4dfda'},
-                        {title: 'Schüttgut', value: 21, color: '#d4b483'}
-                        ]}
-                        className='piechart'
-                        />
-                </Col>
-              </Row>
-            </Container>
+
+            <div className="network">&nbsp;</div>
+            {t('percentageIndustry')}
+            <div className="network">&nbsp;</div>
+            {t('percentageCars')}
+            <div className="network">&nbsp;</div>
+            {t('percentageRubble')}
+            <div className="network">&nbsp;</div>
+            {t('percentageOther')}
+            {isDesktop &&
+              <PieChart
+                data={[
+                  { title: t('nameOther'), value: 1, color: '#4281a4' },
+                  { title: t('nameCars'), value: 33, color: '#48a9a6' },
+                  { title: t('nameIndustry'), value: 45, color: '#e4dfda' },
+                  { title: t('nameRubble'), value: 21, color: '#d4b483' }
+                ]}
+                label={({ dataEntry }) => dataEntry.title}
+                className='piechart'
+                labelStyle={{
+                  fontSize: '5px',
+                  fontFamily: 'sans-serif'
+                }}
+                radius={42}
+                labelPosition={112}
+              />
+            }
+
             {t('end')}
             <div className="network">&nbsp;</div>
             {t('furtherInformation')}
-            
+
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.close.bind(this)} className='button'>{t('close')}</Button>

@@ -73,6 +73,7 @@ ul {
   color: var(--hover-color);    
 }
 
+
   .close:before, .close:after {
     position: absolute;
     left: 15px;
@@ -109,10 +110,23 @@ ul {
     background-color: var(--grey)
   }
 
+  #help {
+    color: var(--text-gray);
+  }
+  
+  #help:focus {  
+    color: var(--main-page-color)!important; 
+  }
+  
+  #help:hover { 
+      color: var(--main-page-color);
+  }
+  
+  #help:active { 
+      color: var(--main-page-color)!important; 
+  }
 
   .card {
     background-color: var(--transparent);
     border: var(--transparent);
   }  
-
-

@@ -216,22 +216,23 @@ class Navigationbar extends React.Component {
                                     {t('mapOverlay')}
                                 </Dropdown>
                                 <NavDropdown variant="success" id="dropdown-basic">
+                                    <p>{t('mapOverlay')}</p>
                                     <Form.Group controlId='form-switch' alignRight>
-                                    <label>
+
+                                    <label id='checkbox'>
                                         <input  type="checkbox"
                                                 checked={ov[0]}
                                                 onChange={this.activateSensors}
-                                                id='expert-mode'
+                                                id='box'
                                         />
-                                    {t('Sensors')}
+                                    <div className='overlay' id='overlay' inline>{t('Sensors')}</div>
                                     </label>
-                                    <label>
+                                    <label id='checkbox'>
                                     <input  type="checkbox"
                                             checked={ov[1]}
                                             onChange={this.activateInterpolation}
-                                            id='expert-mode'
                                     />
-                                    {t('Interpolation')}
+                                    <div className='overlay' id='overlay' inline>{t('Interpolation')}</div>
                                     </label>
                                     </Form.Group>
                                 </NavDropdown>
