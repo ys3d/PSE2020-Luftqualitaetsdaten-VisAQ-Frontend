@@ -295,20 +295,25 @@ class Navigationbar extends React.Component {
                                             onClick={() => this.toggleHistoricalMode()} 
                                         />
                                     </Form.Group>
-                                    <Form inline>
-                                    <Button 
-                                        variant="outline-info"
-                                        size="sm"
-                                        disabled={!this.state.historicalMode}
-                                        onClick={() => {this.startTimeQuery()}}
-                                        >   
-                                        {t('start')} 
-                                    </Button>{' '}
+                                    <Form>
                                     <TimeQuery 
                                         timeHandler={(e) => this.setTime(e)}
                                         time={this.state.time}
-                                        historicalMode={this.state.historicalMode}     
+                                        historicalMode={this.state.historicalMode}   
+                                        className='query-historical'
+                                        id='query-historical'
+                                        inline
                                     />
+                                    <Button 
+                                        size="sm"
+                                        disabled={!this.state.historicalMode}
+                                        onClick={() => {this.startTimeQuery()}}
+                                        className='button-historical'
+                                        id='button-historical'
+                                        inline
+                                        >   
+                                        {t('start')} 
+                                    </Button>
                                     </Form>
                                 </NavDropdown>
                                 <Nav className='ml-auto'>
