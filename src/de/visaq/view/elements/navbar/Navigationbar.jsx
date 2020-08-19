@@ -16,7 +16,7 @@ import {Row, Col } from "react-bootstrap";
 import Overview from '../map/overview/OverviewContainer';
 
 let ov = [true, false];
-let timeCache;
+let startTime;
 let tempTime;
 /**
  * Class containing the Navigationbar
@@ -39,6 +39,8 @@ class Navigationbar extends React.Component {
             historicalMode: false,
             time : Date.now()
         }
+        startTime = this.state.time;
+        tempTime = this.state.time;
     }
 
     /**
@@ -133,10 +135,9 @@ class Navigationbar extends React.Component {
      */
     toggleHistoricalMode()  {
         if (!this.state.historicalMode) {
-            timeCache = this.state.time;
             this.setState({historicalMode : true});
         } else {
-            this.setState({time : timeCache, historicalMode : false});
+            this.setState({time : startTime, historicalMode : false});
         }
     }
     
