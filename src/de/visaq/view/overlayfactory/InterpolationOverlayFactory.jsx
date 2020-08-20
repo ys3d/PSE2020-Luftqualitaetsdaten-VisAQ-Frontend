@@ -21,7 +21,7 @@ export default class InterpolationOverlayFactory extends Component {
     constructor(props) {
         super(props);
         iOpenHandler = props.iOpenHandler;
-        airQualityData = props.airQ;
+        airQualityData = props.airQualityData;
     }
 
     /**
@@ -30,8 +30,8 @@ export default class InterpolationOverlayFactory extends Component {
      * @param {Object} prevProps     The properties
      */
     componentDidUpdate(prevProps) {
-        if (prevProps.airQ !== this.props.airQ) {
-            airQualityData = this.props.airQ;
+        if (prevProps.airQualityData !== this.props.airQualityData) {
+            airQualityData = this.props.airQualityData;
         }
     }
 
@@ -46,7 +46,7 @@ export default class InterpolationOverlayFactory extends Component {
             opacity: 0,
             dashArray: '3',
             fillOpacity: 0.3,
-            fillColor: Gradient(feature.properties.value, this.props.airQ)
+            fillColor: Gradient(feature.properties.value, this.props.airQualityData)
         });
     }
 

@@ -78,9 +78,9 @@ export default class OverlayBuilder extends Component {
 
         return (
             <div>
-                <SensorOverlayFactory data={data} airQ={this.props.airQualityData} openHandler={(squareCenter, id) => this.props.openHandler(squareCenter, id)}
+                <SensorOverlayFactory data={data} airQualityData={this.props.airQualityData} openHandler={(squareCenter, id) => this.props.openHandler(squareCenter, id)}
                     overlay={this.props.overlays[0]} />
-                <InterpolationOverlayFactory airQ={this.props.airQualityData} pointData={prepPointData} iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.props.iOpenHandler(squareCenter, interpolatedValue, airQualityData)}
+                <InterpolationOverlayFactory airQualityData={this.props.airQualityData} pointData={prepPointData} iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.props.iOpenHandler(squareCenter, interpolatedValue, airQualityData)}
                     overlay={this.props.overlays[1]} />
             </div>
         );

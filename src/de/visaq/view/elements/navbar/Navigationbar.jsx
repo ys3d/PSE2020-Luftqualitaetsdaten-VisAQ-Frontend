@@ -83,13 +83,13 @@ class Navigationbar extends React.Component {
        * @param {Number} position position of the button
        * @param {String} lng choosen air quality
        */
-    toggle(position, airQ) {
+    toggle(position, airQualityData) {
         if (this.state.active === position) {
             this.setState({ activeAirQ: null })
         } else {
             this.setState({ activeAirQ: position })
         }
-        this.setState(state => ({ airQualityData: new AirQualityData(airQ) }))
+        this.setState(state => ({ airQualityData: new AirQualityData(airQualityData) }))
     }
 
     /**
@@ -346,7 +346,7 @@ class Navigationbar extends React.Component {
                         </Navbar>
                     </div>
                     <MapView
-                        airQ={this.state.airQualityData}
+                        airQualityData={this.state.airQualityData}
                         openHandler={(squareCenter, thingId) => this.props.openHandler(squareCenter, thingId)}
                         iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.props.iOpenHandler(squareCenter, interpolatedValue, airQualityData)}
                         overlays={this.state.overlays}

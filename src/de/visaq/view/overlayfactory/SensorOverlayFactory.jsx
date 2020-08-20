@@ -22,7 +22,7 @@ const SensorOverlayFactory = (props) => {
             key={index}
             center={[datum[0].locations[0].location.y, datum[0].locations[0].location.x]}
             opacity='0'
-            fillColor={Gradient(datum[1].result, props.airQ)}
+            fillColor={Gradient(datum[1].result, props.airQualityData)}
             fillOpacity='0.8'
             radius={10}
             onClick={() => handler([datum[0].locations[0].location.x, datum[0].locations[0].location.y], datum[0].id)}
