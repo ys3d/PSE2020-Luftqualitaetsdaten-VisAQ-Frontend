@@ -117,26 +117,27 @@ class MapView extends Component {
         if (this.state.cells.hasOwnProperty(`${time}|${airQualityData.name}|${lat}|${lng}`) || this.state.cells[`${time}|${airQualityData.name}|${lat}|${lng}`] !== undefined) {
             return;
         }
-        request("/api/thing/all/square", true, {
-            "y1": lat,
-            "x1": lng,
-            "y2": lat + this.gridSize,
-            "x2": lng + this.gridSize
-        }, Thing).then(things => {
-            request("/api/observation/all/things/timeframed", true, {
-                "things": things,
-                "millis": time,
-                "range": "PT2H",
-                "observedProperty": airQualityData.observedProperty
-            }, Observation).then(observations => {
-                this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: { things: things, observations: observations } } });
+        this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: null } }, () => {
+            request("/api/thing/all/square", true, {
+                "y1": lat,
+                "x1": lng,
+                "y2": lat + this.gridSize,
+                "x2": lng + this.gridSize
+            }, Thing).then(things => {
+                request("/api/observation/all/things/timeframed", true, {
+                    "things": things,
+                    "millis": time,
+                    "range": "PT2H",
+                    "observedProperty": airQualityData.observedProperty
+                }, Observation).then(observations => {
+                    this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: { things: things, observations: observations } } });
+                }, error => {
+                    this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: undefined } });
+                });
             }, error => {
-                this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: undefined } });
+                delete this.state.cells[`${time}|${airQualityData.name}|${lat}|${lng}`];
             });
-        }, error => {
-            delete this.state.cells[`${time}|${airQualityData.name}|${lat}|${lng}`];
         });
-        this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: null } });
     }
 
     /**
@@ -154,20 +155,21 @@ class MapView extends Component {
             || this.state.pointDataCells[`${time}|${airQualityData.name}|${lat}|${lng}`] !== undefined) {
             return;
         }
-        request("/api/interpolation/default", true, {
-            "y1": lat,
-            "x1": lng,
-            "y2": lat + this.gridSize,
-            "x2": lng + this.gridSize,
-            "millis": time,
-            "range": "PT2H",
-            "observedProperty": this.props.airQ.observedProperty
-        }, PointDatum).then(pointDatum => {
-            this.setState({ pointDataCells: { ...this.state.pointDataCells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: { pointData: pointDatum } } });
-        }, error => {
-            delete this.state.pointDataCells[`${time}|${airQualityData.name}|${lat}|${lng}`];
+        this.setState({ pointDataCells: { ...this.state.pointDataCells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: null } }, () => {
+            request("/api/interpolation/default", true, {
+                "y1": lat,
+                "x1": lng,
+                "y2": lat + this.gridSize,
+                "x2": lng + this.gridSize,
+                "millis": time,
+                "range": "PT2H",
+                "observedProperty": this.props.airQ.observedProperty
+            }, PointDatum).then(pointDatum => {
+                this.setState({ pointDataCells: { ...this.state.pointDataCells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: { pointData: pointDatum } } });
+            }, error => {
+                delete this.state.pointDataCells[`${time}|${airQualityData.name}|${lat}|${lng}`];
+            });
         });
-        this.setState({ pointDataCells: { ...this.state.pointDataCells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: null } });
     }
 
     /**

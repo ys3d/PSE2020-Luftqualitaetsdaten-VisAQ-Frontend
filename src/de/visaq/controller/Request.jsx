@@ -11,8 +11,6 @@ const DEBUG = true;
  * @param {Object} model        The class container for the response
  */
 export default function request(url, relative, params, model) {
-    console.log(Date.now())
-
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

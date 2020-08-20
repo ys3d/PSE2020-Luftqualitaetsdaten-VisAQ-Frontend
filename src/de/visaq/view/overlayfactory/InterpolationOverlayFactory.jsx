@@ -118,7 +118,6 @@ function getGeoJson(input) {
         let rowNum;
 
         if (pointData === null || pointData === undefined || pointData.length === 0) {
-            console.log("pointData is missing");
             return;
         }
 

@@ -26,10 +26,7 @@ class CookieNotice extends Component {
         if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
             var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
             if (match) {
-                console.log(match[2]);
                 return match[2];
-            } else {
-                console.log('--something went wrong---');
             }
         } else {
             return 'de'
@@ -43,7 +40,6 @@ class CookieNotice extends Component {
     componentWillMount() {
         if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
             i18next.changeLanguage(this.getLanguage('Language'));
-            console.log(this.getLanguage('Language'));
         }
     }
 
