@@ -1,4 +1,4 @@
-const ENTRY_POINT = "http://api.visaq.de:8080";
+const ENTRY_POINT = "http://api2.visaq.de";
 const LOCAL_ENTRY_POINT = "http://localhost:8080";
 const DEBUG = true;
 

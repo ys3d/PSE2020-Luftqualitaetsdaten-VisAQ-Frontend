@@ -61,7 +61,7 @@ ul {
 
 .close {
   position: absolute;
-  right: 93%;
+  margin-left: -0.6em;
   top: 10px;
   width: 32px;
   height: 32px;
@@ -72,6 +72,7 @@ ul {
   opacity: 1;
   color: var(--hover-color);    
 }
+
 
   .close:before, .close:after {
     position: absolute;
@@ -88,6 +89,15 @@ ul {
     transform: rotate(-45deg);
   }
 
+  .help {
+    margin-left: -0.6em;
+    color: var(--text-gray);
+  }
+
+  .help:hover {
+    color: var(--hover-color);
+  }
+
   #accordion {
     background-color: var(--transparent);
   }
@@ -100,10 +110,23 @@ ul {
     background-color: var(--grey)
   }
 
+  #help {
+    color: var(--text-gray);
+  }
+  
+  #help:focus {  
+    color: var(--main-page-color)!important; 
+  }
+  
+  #help:hover { 
+      color: var(--main-page-color);
+  }
+  
+  #help:active { 
+      color: var(--main-page-color)!important; 
+  }
 
   .card {
     background-color: var(--transparent);
     border: var(--transparent);
   }  
-
-

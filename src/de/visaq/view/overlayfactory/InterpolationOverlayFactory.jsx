@@ -45,26 +45,11 @@ export default class InterpolationOverlayFactory extends Component {
             weight: 2,
             opacity: 0,
             dashArray: '3',
-            fillOpacity: this.getFillOpacity(feature.properties.value),
-            fillColor: Gradient(feature.properties.value, this.props.airQ)
+            fillOpacity: 0.3,
+            fillColor: Gradient(feature.properties.value, this.props.airQ)  
         });
     }
-
-    /**
-     * The method returns the opacity,
-     * values that are marked insignificant by the backend (having value -999) have an opacity of 0.
-     *
-     * @param {Number} value The interpolated value of the feature
-     */
-    getFillOpacity(value) {
-        if (value < -20) {
-            return 0.1;
-        } else {
-            return 0.3;
-        }
-    }
-
-
+     
     /**
      * Adds the GeoJSON data to a Feature Group
      */

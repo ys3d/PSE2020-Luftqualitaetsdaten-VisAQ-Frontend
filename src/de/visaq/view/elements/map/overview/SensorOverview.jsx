@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import Accordion from 'react-bootstrap/Accordion'
 import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
-import request from '../../../../controller/Request'
-import Thing from '../../../../model/Thing'
-import DataCard from './DataCard'
-import ShareField from './ShareField'
-import Datastream from '../../../../model/Datastream'
+import request from '../../../../controller/Request';
+import Thing from '../../../../model/Thing';
+import DataCard from './DataCard';
+import ShareField from './ShareField';
+import Datastream from '../../../../model/Datastream';
 import ObservedProperty from '../../../../model/ObservedProperty';
 import * as airQualityData from '../../../../../../resources/AirQualityData.json'
 import Observation from '../../../../model/Observation';
 import './OverviewContainer.css'
+import Help from '../../../Help';
+import { Nav } from 'react-bootstrap';
 
 /**
  * Displays all the Information on a Specifik Sensor or Location
@@ -289,21 +291,29 @@ class SensorOverview extends Component {
     render() {
         const { t } = this.props;
 
-        return (
-            <>
-                <h1>
-                    {t('sensor')} {this.state.thingName}
-                </h1>
-                {this.props.expert &&
-                    <a>
-                        {Number(this.props.squareCenter[1]).toFixed(4)}°N {Number(this.props.squareCenter[0]).toFixed(4)}°E
-                        <div className="network">&nbsp;</div>
-                        {t('description')} {this.state.thingDescription}
-                        <div className="network">&nbsp;</div>
-                    </a>
-                }
-                <ShareField subject={t('shareTitle')} body={t('shareBody')} />
-                <div className="network">&nbsp;</div>
+        </Nav.Link>
+    return (
+      <>
+        <h1>
+          {t('sensor')} {this.state.thingName}
+        </h1>
+        {this.props.expert &&
+          <a>
+            {Number(this.props.squareCenter[1]).toFixed(4)}°N {Number(this.props.squareCenter[0]).toFixed(4)}°E
+            <div className="network">&nbsp;</div>
+            {t('description')} {this.state.thingDescription}
+            <div className="network">&nbsp;</div>
+          </a>
+        }
+        <Nav.Link
+          className='help'
+          id='help'
+          draggable="false"
+        >
+          <Help helpText={t('helpSensor')} />
+        </Nav.Link>
+        <ShareField subject={t('shareTitle')} body={t('shareBody')} />
+        <div className="network">&nbsp;</div>
 
                 <Accordion className='accordion'>
                     <DataCard
