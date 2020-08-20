@@ -43,11 +43,11 @@ export default class OverlayBuilder extends Component {
                 for (var x = 0; x <= xCells; x++) {
                     var lat = (northCell - y) * this.props.gridSize;
                     var lng = (westCell + x) * this.props.gridSize;
-                    if (this.props.mapState.cells.hasOwnProperty(`${this.props.airQualityData.name}|${lat}|${lng}`) || this.props.mapState.cells[`${this.props.airQualityData.name}|${lat}|${lng}`] != undefined) {
-                        cellsData.push(this.props.mapState.cells[`${this.props.airQualityData.name}|${lat}|${lng}`]);
+                    if (this.props.mapState.cells.hasOwnProperty(`${this.props.time}|${this.props.airQualityData.name}|${lat}|${lng}`) || this.props.mapState.cells[`${this.props.time}|${this.props.airQualityData.name}|${lat}|${lng}`] !== undefined) {
+                        cellsData.push(this.props.mapState.cells[`${this.props.time}|${this.props.airQualityData.name}|${lat}|${lng}`]);
                     }
-                    if (this.props.mapState.pointDataCells.hasOwnProperty(`${this.props.airQualityData.name}|${lat}|${lng}`) || this.props.mapState.pointDataCells[`${this.props.airQualityData.name}|${lat}|${lng}`] != undefined) {
-                        cellsPointData.push(this.props.mapState.pointDataCells[`${this.props.airQualityData.name}|${lat}|${lng}`]);
+                    if (this.props.mapState.pointDataCells.hasOwnProperty(`${this.props.time}|${this.props.airQualityData.name}|${lat}|${lng}`) || this.props.mapState.pointDataCells[`${this.props.time}|${this.props.airQualityData.name}|${lat}|${lng}`] !== undefined) {
+                        cellsPointData.push(this.props.mapState.pointDataCells[`${this.props.time}|${this.props.airQualityData.name}|${lat}|${lng}`]);
                     }
                 }
             }

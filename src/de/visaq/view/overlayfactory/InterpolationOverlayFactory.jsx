@@ -45,26 +45,11 @@ export default class InterpolationOverlayFactory extends Component {
             weight: 2,
             opacity: 0,
             dashArray: '3',
-            fillOpacity: this.getFillOpacity(feature.properties.value),
+            fillOpacity: 0.3,
             fillColor: Gradient(feature.properties.value, this.props.airQ)  
         });
     }
-
-    /**
-     * The method returns the opacity, 
-     * values that are marked insignificant by the backend (having value -999) have an opacity of 0.
-     * 
-     * @param {Number} value The interpolated value of the feature
-     */
-    getFillOpacity(value) {
-        if (value < -20) {
-            return 0;
-        } else {
-            return 0.3;
-        }
-    }
-
-      
+     
     /**
      * Adds the GeoJSON data to a Feature Group
      */
@@ -180,10 +165,18 @@ function getGeoJson(input)   {
    * @param {Object[]} squareData     
    */
   function writeFeatures(squareData)   {
+    
+    if (squareData[0].json.datum < -100
+        || squareData[1].json.datum < -100
+        || squareData[2].json.datum < -100
+        || squareData[3].json.datum < -100)    {
+        return;   
+    }
+
     /**
      * Needs to be square Number.
      */
-    const INTERPOLATED_NUM = 4;
+    const INTERPOLATED_NUM = 16;
 
     const intervalX = (squareData[1].json.location.x - squareData[0].json.location.x) / Math.sqrt(INTERPOLATED_NUM);
     const intervalY = (squareData[2].json.location.y - squareData[0].json.location.y) /Math.sqrt(INTERPOLATED_NUM)

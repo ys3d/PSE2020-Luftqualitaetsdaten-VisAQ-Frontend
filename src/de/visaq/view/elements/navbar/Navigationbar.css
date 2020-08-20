@@ -27,6 +27,31 @@
   display: block;
 }
 
+.button-historical {
+position: relative;
+z-index: 2;
+margin-left: 15em;
+margin-top: -4.4em;
+background-color: var(--main-page-color);
+border: none;
+}
+
+.button-historical:hover {
+  background-color: var(--hover-color);
+}
+
+.button-historical:disabled {
+  background-color: var(--main-page-color);
+}
+
+#help {
+  color: var(--text-gray);
+}
+
+#help:hover {
+  color: var(--main-page-color);
+}
+
 #title {
   color: var(--main-page-color);
 }
@@ -106,4 +131,3 @@ p {
   padding-left: 1em;
   color: var(--main-page-color)
 }
-
