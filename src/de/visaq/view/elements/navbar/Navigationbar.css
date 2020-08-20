@@ -8,7 +8,7 @@
 
 .navbar {
   background-color: #f5f5f5!important;
-  z-index: 3000;
+  z-index: 1020;
 }
 .navbar-nav, .navbar-dark .nav-link {
   color: var(--black);

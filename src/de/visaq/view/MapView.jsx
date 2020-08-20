@@ -11,7 +11,8 @@ import PointDatum from '../model/PointDatum';
 import { ReactLeafletSearch } from 'react-leaflet-search';
 import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
-
+import {Button} from 'react-bootstrap';
+import {AiOutlineAim} from "react-icons/ai";
 /**
  * Class that contains the MapView.
  */
@@ -25,7 +26,6 @@ class MapView extends Component {
             lng: 10.89779,
             zoom: 13,
             bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
-            hasLoaded: false,
             pointDataCells : {},
             cells: {}
         };
@@ -37,26 +37,47 @@ class MapView extends Component {
      * Centers the map on the user's position if the Cookie was accepted.
      * Otherwise the map centers on Augsburg.
      */
-    setPosition() {
-        if(!this.state.hasLoaded) {
-            if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
-                navigator.geolocation.watchPosition((position) => {
-                    this.setState({
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude,
-                        hasLoaded: true,
-                    }, () => {
-                        this.onBoundsUpdate(this.state.bounds);
-                    });
-                }, (error) => {
-                    this.setState({ lat: 48.3705449, lng: 10.89779 }, () => {
-                        this.onBoundsUpdate(this.state.bounds);
-                    })
-                })
-            }
-        } else {
-            this.setState({hasLoaded: true});
+    setPosition(){ 
+        navigator.geolocation.getCurrentPosition((position) => {
+            this.setState({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+            }, () => {
+                this.onBoundsUpdate(this.state.bounds);
+                });
+        }, (error) => {
+            this.setState({ lat: 48.3705449, lng: 10.89779 },
+            () => {
+                this.onBoundsUpdate(this.state.bounds);
+            })
+        },
+        {
+            timeout: 1000,
+            maximumAge:1000,
+        })
+        const id = navigator.geolocation.watchPosition(position => {
+            this.setState({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+            }, () => {
+                this.onBoundsUpdate(this.state.bounds);
+                });
+        }, (error) => {
+            this.setState({ lat: 48.3705449, lng: 10.89779 },
+            () => {
+                this.onBoundsUpdate(this.state.bounds);
+            })
+        },
+        {
+            timeout: 1000,
+            maximumAge:1000,
         }
+        )
+        
+        //stop watching after 10 seconds
+        setTimeout(() => {
+          navigator.geolocation.clearWatch(id)
+        }, 10 * 1000)
     }
 
     /**
@@ -91,7 +112,6 @@ class MapView extends Component {
      * Activates the Event Listener.
      */
     componentDidMount() {
-        this.setPosition();
         window.addEventListener("resize", this.updateDimensions.bind(this));
     }
 
@@ -260,6 +280,12 @@ class MapView extends Component {
                         closeResultsOnClick={true}
                         openSearchOnLoad={true}
                     />
+                    <Button
+                        onClick={() => {this.setPosition()}}
+                        className='center-on-client'
+                    >
+                     <AiOutlineAim />
+                    </Button>
                 </Map>
             </div>
         );

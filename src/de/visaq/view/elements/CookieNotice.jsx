@@ -84,6 +84,7 @@ class CookieNotice extends Component {
             show={this.state.showModal} 
             onHide={this.close.bind(this)}  
             backdrop="static"
+            className='div'
           >
           <ModalTitle center className={'title'}>
            Cookies
