@@ -71,7 +71,7 @@ class SensorOverview extends Component {
      * @param {Object} prevProps  Contains the ThingId.
      */
     componentDidUpdate(prevProps) {
-        if (prevProps.thingID !== this.props.thingID) {
+        if (prevProps.thingId !== this.props.thingId) {
             this.update();
         }
     }
@@ -89,7 +89,7 @@ class SensorOverview extends Component {
             }
         })
         var thing = request("/api/thing/id", true, {
-            id: this.props.thingID
+            id: this.props.thingId
         }, Thing);
         thing.then(thing => {
             this.setState({

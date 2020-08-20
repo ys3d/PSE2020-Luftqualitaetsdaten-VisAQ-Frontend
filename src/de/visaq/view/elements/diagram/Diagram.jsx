@@ -29,7 +29,7 @@ const diagramConfig = {
 export default class Diagram extends React.Component {
     /**
      * Sole constructor of the class.
-     * 
+     *
      * @param {Object} props The Diagram properties
      */
     constructor(props) {
@@ -94,7 +94,7 @@ export default class Diagram extends React.Component {
         }
       }
 
-    readDataForSensor(absoluteAddress, sensorID) {
+    readDataForSensor(absoluteAddress, sensorId) {
 
     }
 

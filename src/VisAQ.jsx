@@ -22,7 +22,7 @@ class VisAQ extends Component {
         super(props);
         this.state = {
             showOverview: false,
-            thingID: "saqn:t:grimm-aerosol.com:EDM80NEPH:SN17017",
+            thingId: "saqn:t:grimm-aerosol.com:EDM80NEPH:SN17017",
             isSensor: false,
             overviewDetails: false,
             interpolatedValue: -1,
@@ -68,7 +68,7 @@ class VisAQ extends Component {
         this.setState({
             showOverview: true,
             center: center,
-            thingID: thingId,
+            thingId: thingId,
             isSensor: true
         });
     }
@@ -126,7 +126,7 @@ class VisAQ extends Component {
                                             iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.handleShowPointClick(squareCenter, interpolatedValue, airQualityData)}
                                             show={this.state.showOverview}
                                             closeHandler={this.handleCloseClick}
-                                            thingID={this.state.thingID}
+                                            thingId={this.state.thingId}
                                             isSensor={this.state.isSensor}
                                             showDetails={this.state.overviewDetails}
                                             squareCenter={this.state.center}
@@ -134,10 +134,10 @@ class VisAQ extends Component {
                                             airQualityData={this.state.airQualityDataPoint}
                                         />
                                     </Col>
-                                    <Overview 
+                                    <Overview
                                         show={this.state.showOverview}
                                         closeHandler={this.handleCloseClick}
-                                        thingID={this.state.thingID}
+                                        thingId={this.state.thingId}
                                         isSensor={this.state.isSensor}
                                         showDetails={this.state.overviewDetails}
                                         id='map'

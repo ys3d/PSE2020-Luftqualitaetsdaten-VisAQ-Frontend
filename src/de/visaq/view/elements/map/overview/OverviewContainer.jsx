@@ -27,7 +27,7 @@ function Overview(props) {
                             <br />
                             <br />
                         </p>
-                        <SensorOverview squareCenter={props.squareCenter} thingID={props.thingID} expert={props.showDetails} />
+                        <SensorOverview squareCenter={props.squareCenter} thingId={props.thingId} expert={props.showDetails} />
                     </Col>
                 </>
             );
