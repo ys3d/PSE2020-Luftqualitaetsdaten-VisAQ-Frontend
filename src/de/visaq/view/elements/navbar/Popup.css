@@ -19,8 +19,10 @@
     border: none;
 }
 
-.button:hover {
-    background-color: var(--hover-color);
+.button:hover, .button:active, .button::selection {
+    background-color: var(--hover-color)!important;
+    outline: none!important;
+    box-shadow: none!important;
 }
 
 .piechart {

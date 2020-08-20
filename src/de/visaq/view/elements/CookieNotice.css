@@ -16,6 +16,8 @@
 .button {
     background-color: var(--main-page-color);
     border: none;
+    outline: none!important;
+    box-shadow: none!important;
 }
 
 .moreInfo {
@@ -35,4 +37,12 @@
 .infoTitle{
     color: var(--main-page-color);
     margin-left: 1.2em
+}
+
+.div {
+    z-index: 10000;
+}
+
+.information {
+    z-index: 10001;
 }
