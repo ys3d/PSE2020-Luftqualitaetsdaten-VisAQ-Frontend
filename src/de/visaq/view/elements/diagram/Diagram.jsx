@@ -64,7 +64,7 @@ export default class Diagram extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.dataLabels != this.props.dataLabels || prevProps.data != this.props.data) {
+        if (prevProps.dataLabels !== this.props.dataLabels || prevProps.data !== this.props.data) {
             this.setState({
                 labels: this.props.dataLabels,
             datasets: [

@@ -13,7 +13,7 @@ const SensorOverlayFactory = (props) => {
         props.openHandler(center, id)
     };
 
-    if (!props.overlay)  {
+    if (!props.overlay) {
         return <Fragment></Fragment>
     }
 

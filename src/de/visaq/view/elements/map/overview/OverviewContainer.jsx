@@ -1,6 +1,4 @@
 import React from 'react';
-import Tooltip from 'react-bootstrap/Tooltip'
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import SensorOverview from './SensorOverview'
 import PointOverview from './PointOverview'
 import { Col } from "react-bootstrap";
@@ -23,7 +21,7 @@ function Overview(props) {
                 <>
                     <Col xl={4} lg={6} md={8} sm={8} xs={10} id="sensorOverviewContainer" scrollable={true}>
                         <p>
-                            <a href="#" onClick={props.closeHandler} className='close' />
+                            <a href="/#" onClick={props.closeHandler} className='close'> </a>
                             <br />
                             <br />
                         </p>
@@ -37,11 +35,11 @@ function Overview(props) {
                 <>
                     <Col xl={4} lg={6} md={8} sm={8} xs={10} id="pointOverviewContainer">
                         <p>
-                            <a href="#" onClick={props.closeHandler} className='close' />
+                            <a href="/#" onClick={props.closeHandler} className='close'> </a>
                             <br />
                             <br />
                         </p>
-                        <PointOverview squareCenter={props.squareCenter} value={props.pointValue} airQualityData={props.airQualityData} />
+                        <PointOverview squareCenter={props.squareCenter} value={props.pointValue} airQualityData={props.airQualityData} expert={props.showDetails} />
                     </Col>
                 </>
             );

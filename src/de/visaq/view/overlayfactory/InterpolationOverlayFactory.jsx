@@ -46,10 +46,10 @@ export default class InterpolationOverlayFactory extends Component {
             opacity: 0,
             dashArray: '3',
             fillOpacity: 0.3,
-            fillColor: Gradient(feature.properties.value, this.props.airQ)  
+            fillColor: Gradient(feature.properties.value, this.props.airQ)
         });
     }
-     
+
     /**
      * Adds the GeoJSON data to a Feature Group
      */
@@ -125,7 +125,7 @@ function getGeoJson(input) {
         /**
         * Get the length of the columns
         */
-        for (var i = 0; i < pointData.length; i++) {
+        for (let i = 0; i < pointData.length; i++) {
             if (pointData[0].location.y === pointData[i].location.y) {
                 colNum = i + 1;
             } else {
@@ -143,7 +143,7 @@ function getGeoJson(input) {
         let spacingX = Math.abs(pointData[1].location.x - pointData[0].location.x) / 2;
         let spacingY = Math.abs(pointData[colNum].location.y - pointData[0].location.y) / 2;
 
-        for (var i = 0; i < pointData.length; i++) {
+        for (let i = 0; i < pointData.length; i++) {
             let cur = pointData[i];
 
             var geojsonFeature = {

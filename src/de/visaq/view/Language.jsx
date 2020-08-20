@@ -20,15 +20,15 @@ import popup_reasons_en from '../../../resources/en/popup_reasons_en.json';
  * The resources used to get the translations
  */
 const resources = {
-        en: {
+    en: {
         common: navbar_en,
         overview: sensorOverview_en,
         help: help_en,
         cookies: cookie_en,
         causes: popup_causes_en,
         reasons: popup_reasons_en,
-        },
-         de: {
+    },
+    de: {
         common: navbar_de,
         overview: sensorOverview_de,
         help: help_de,
@@ -36,44 +36,44 @@ const resources = {
         causes: popup_causes_de,
         reasons: popup_reasons_de,
     }
-  };
+};
 
- 
+
 i18n
-.use(initReactI18next)
-.use(LanguageDetector)
-/**
- * Desicion on what happens when language is changed
- */
-.on('languageChanged', function(lng) {
-  if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
-    document.cookie= 'Language=' + lng;
-  }
-})
+    .use(initReactI18next)
+    .use(LanguageDetector)
+    /**
+     * Desicion on what happens when language is changed
+     */
+    .on('languageChanged', function (lng) {
+        if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
+            document.cookie = 'Language=' + lng;
+        }
+    })
 
-/**
- * Initialization of the Language settings
- */
-.init({
-    lng: document.cookie.split(';').some((item) => item.trim().startsWith('Language=en')) ? 'en' : 'de',
-    resources,
-    languages: ['de','en'],
-    fallbackLng: 'de',
-    debug: true,
-    load: 'current',
-    
-    interpolation: {
-      escapeValue: false,
-    },
-    
-});
+    /**
+     * Initialization of the Language settings
+     */
+    .init({
+        lng: document.cookie.split(';').some((item) => item.trim().startsWith('Language=en')) ? 'en' : 'de',
+        resources,
+        languages: ['de', 'en'],
+        fallbackLng: 'de',
+        debug: true,
+        load: 'current',
+
+        interpolation: {
+            escapeValue: false,
+        },
+
+    });
 
 /**
  * Method that changes the language
  */
 i18next
-  .changeLanguage('')
-  .then((t) => {
-    t('key'); // -> same as i18next.t
-  });
+    .changeLanguage('')
+    .then((t) => {
+        t('key'); // -> same as i18next.t
+    });
 export default i18n;

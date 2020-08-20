@@ -4,14 +4,6 @@ import Sensorthing from "./Sensorthing";
  * The class is a data container. It is the equivalent to the class Observation in the Backend.
  */
 export default class Observation extends Sensorthing {
-    /**
-     * Sole constructor of the class.
-     * 
-     * @param {Object} json     The Observation as JSON Object
-     */
-    constructor(json) {
-        super(json);
-    }
 
     /**
      * Returns the time of the phenomenon.

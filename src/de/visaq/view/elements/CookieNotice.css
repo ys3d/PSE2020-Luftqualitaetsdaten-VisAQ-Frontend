@@ -4,12 +4,12 @@
     --align: center;
 }
 
-.title{
+.title {
     color: var(--main-page-color);
     margin-left: 1.2em;
 }
 
-.text{
+.text {
     margin-left: 1em;
 }
 
@@ -23,7 +23,6 @@
     margin-left: -0.6em;
 }
 
-
 .moreInfo:hover {
     color: var(--hover-color);
 }
@@ -32,7 +31,7 @@
     background-color: var(--hover-color);
 }
 
-.infoTitle{
+.infoTitle {
     color: var(--main-page-color);
     margin-left: 1.2em
 }

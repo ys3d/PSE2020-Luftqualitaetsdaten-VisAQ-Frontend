@@ -26,6 +26,7 @@ class VisAQ extends Component {
             isSensor: false,
             overviewDetails: false,
             interpolatedValue: -1,
+            center: null,
             airQualityDataPoint: null
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
@@ -142,6 +143,7 @@ class VisAQ extends Component {
                                         showDetails={this.state.overviewDetails}
                                         id='map'
                                         className='map'
+                                        squareCenter={this.state.center}
                                         pointValue={this.state.interpolatedValue}
                                         airQualityData={this.state.airQualityDataPoint}
                                     />

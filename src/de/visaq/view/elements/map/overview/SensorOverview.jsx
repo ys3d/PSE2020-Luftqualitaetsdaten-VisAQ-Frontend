@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Accordion from 'react-bootstrap/Accordion'
-import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 import request from '../../../../controller/Request';
 import Thing from '../../../../model/Thing';
@@ -97,11 +96,11 @@ class SensorOverview extends Component {
                 thingDescription: thing.description
             });
             /* Humidity Datastream ####################################################################################### */
-            var datastreams = request("/api/datastream/thing/observedProperty", true, {
+            let humidityDatastream = request("/api/datastream/thing/observedProperty", true, {
                 "thing": thing,
                 "observedProperty": new ObservedProperty(airQualityData.humidity.observedProperty)
             }, Datastream);
-            datastreams.then(datastream => {
+            humidityDatastream.then(datastream => {
                 if (datastream != null) {
                     this.setState(({ show }) => ({
                         show: {
@@ -122,7 +121,7 @@ class SensorOverview extends Component {
                         }));
                         let adding_list_data = [];
                         let adding_list_label = [];
-                        newest.map((element, index) => {
+                        newest.forEach((element) => {
                             adding_list_data.unshift(element.result);
                             adding_list_label.unshift(formatDate(element.phenomenonTime));
                         });
@@ -143,11 +142,11 @@ class SensorOverview extends Component {
             });
 
             /* Temperature Datastream ####################################################################################### */
-            var datastreams = request("/api/datastream/thing/observedProperty", true, {
+            let temperatureDatastream = request("/api/datastream/thing/observedProperty", true, {
                 "thing": thing,
                 "observedProperty": new ObservedProperty(airQualityData.temperature.observedProperty)
             }, Datastream);
-            datastreams.then(datastream => {
+            temperatureDatastream.then(datastream => {
                 if (datastream != null) {
                     this.setState(({ show }) => ({
                         show: {
@@ -169,7 +168,7 @@ class SensorOverview extends Component {
 
                         let adding_list_data = [];
                         let adding_list_label = [];
-                        newest.map((element, index) => {
+                        newest.forEach((element) => {
                             adding_list_data.unshift(element.result);
                             adding_list_label.unshift(formatDate(element.phenomenonTime));
                         });
@@ -190,11 +189,11 @@ class SensorOverview extends Component {
             });
 
             /* Air Pressure Datastream ####################################################################################### */
-            var datastreams = request("/api/datastream/thing/observedProperty", true, {
+            let airPressureDatastream = request("/api/datastream/thing/observedProperty", true, {
                 "thing": thing,
                 "observedProperty": new ObservedProperty(airQualityData.airPressure.observedProperty)
             }, Datastream);
-            datastreams.then(datastream => {
+            airPressureDatastream.then(datastream => {
                 if (datastream != null) {
                     this.setState(({ show }) => ({
                         show: {
@@ -216,7 +215,7 @@ class SensorOverview extends Component {
 
                         let adding_list_data = [];
                         let adding_list_label = [];
-                        newest.map((element, index) => {
+                        newest.forEach((element) => {
                             adding_list_data.unshift(element.result);
                             adding_list_label.unshift(formatDate(element.phenomenonTime));
                         });
@@ -237,11 +236,11 @@ class SensorOverview extends Component {
             });
 
             /* Particulate Matter Datastream ####################################################################################### */
-            var datastreams = request("/api/datastream/thing/observedProperty", true, {
+            let particulateMatterDatastream = request("/api/datastream/thing/observedProperty", true, {
                 "thing": thing,
                 "observedProperty": new ObservedProperty(airQualityData.particulateMatter.observedProperty)
             }, Datastream);
-            datastreams.then(datastream => {
+            particulateMatterDatastream.then(datastream => {
                 if (datastream != null) {
                     this.setState(({ show }) => ({
                         show: {
@@ -263,7 +262,7 @@ class SensorOverview extends Component {
 
                         let adding_list_data = [];
                         let adding_list_label = [];
-                        newest.map((element, index) => {
+                        newest.forEach((element) => {
                             adding_list_data.unshift(element.result);
                             adding_list_label.unshift(formatDate(element.phenomenonTime));
                         });
@@ -291,29 +290,26 @@ class SensorOverview extends Component {
     render() {
         const { t } = this.props;
 
-        </Nav.Link>
-    return (
-      <>
-        <h1>
-          {t('sensor')} {this.state.thingName}
-        </h1>
-        {this.props.expert &&
-          <a>
-            {Number(this.props.squareCenter[1]).toFixed(4)}°N {Number(this.props.squareCenter[0]).toFixed(4)}°E
-            <div className="network">&nbsp;</div>
-            {t('description')} {this.state.thingDescription}
-            <div className="network">&nbsp;</div>
-          </a>
-        }
-        <Nav.Link
-          className='help'
-          id='help'
-          draggable="false"
-        >
-          <Help helpText={t('helpSensor')} />
-        </Nav.Link>
-        <ShareField subject={t('shareTitle')} body={t('shareBody')} />
-        <div className="network">&nbsp;</div>
+        return (
+            <>
+                <h1>
+                    {t('sensor')} {this.state.thingName}
+                </h1>
+                {this.props.expert &&
+                    <p>
+                        {Number(this.props.squareCenter[1]).toFixed(4)}°N {Number(this.props.squareCenter[0]).toFixed(4)}°E <br />
+                        {t('description')} {this.state.thingDescription}
+                    </p>
+                }
+                <Nav.Link
+                    className='help'
+                    id='help'
+                    draggable="false"
+                >
+                    <Help helpText={t('helpSensor')} />
+                </Nav.Link>
+                <ShareField subject={t('shareTitle')} body={t('shareBody')} />
+                <div className="network">&nbsp;</div>
 
                 <Accordion className='accordion'>
                     <DataCard

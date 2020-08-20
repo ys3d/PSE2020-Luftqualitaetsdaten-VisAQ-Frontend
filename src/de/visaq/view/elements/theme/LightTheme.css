@@ -1,22 +1,21 @@
 .light-theme {
     --primary-color: #007bff;
     --disabled-color: #6c757d;
- }
- .dark-theme {
+}
+
+.dark-theme {
     --primary-color: #000000;
     --disabled-color: #4a4a4b;
- }
+}
 
- :root {
-   /* Set the deafult values */
-   --selected-primary-color: var(--light-primary-color);
-   --selected-disabled-color: var(--light-disabled-color);
-   
-   /* Set the 'light' theme */
-   --light-primary-color: #007bff;
-   --light-disabled-color: #6c757d;
- 
-   /* Set the 'dark' theme */
-   --dark-primary-color: #000000;
-   --dark-disabled-color: #4a4a4b;
- }
+:root {
+    /* Set the deafult values */
+    --selected-primary-color: var(--light-primary-color);
+    --selected-disabled-color: var(--light-disabled-color);
+    /* Set the 'light' theme */
+    --light-primary-color: #007bff;
+    --light-disabled-color: #6c757d;
+    /* Set the 'dark' theme */
+    --dark-primary-color: #000000;
+    --dark-disabled-color: #4a4a4b;
+}
