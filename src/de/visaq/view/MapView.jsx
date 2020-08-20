@@ -38,23 +38,6 @@ class MapView extends Component {
      * Otherwise the map centers on Augsburg.
      */
     setPosition(){ 
-        navigator.geolocation.getCurrentPosition((position) => {
-            this.setState({
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
-            }, () => {
-                this.onBoundsUpdate(this.state.bounds);
-                });
-        }, (error) => {
-            this.setState({ lat: 48.3705449, lng: 10.89779 },
-            () => {
-                this.onBoundsUpdate(this.state.bounds);
-            })
-        },
-        {
-            timeout: 1000,
-            maximumAge:1000,
-        })
         const id = navigator.geolocation.watchPosition(position => {
             this.setState({
                 lat: position.coords.latitude,
@@ -63,16 +46,12 @@ class MapView extends Component {
                 this.onBoundsUpdate(this.state.bounds);
                 });
         }, (error) => {
-            this.setState({ lat: 48.3705449, lng: 10.89779 },
-            () => {
-                this.onBoundsUpdate(this.state.bounds);
-            })
-        },
-        {
-            timeout: 1000,
-            maximumAge:1000,
-        }
-        )
+            console.log('Could not zoom on position')
+         },
+         {
+             timeout: 1000,
+             maximumAge:10000,
+         })
         
         //stop watching after 10 seconds
         setTimeout(() => {
