@@ -1,6 +1,6 @@
 const ENTRY_POINT = "http://api2.visaq.de";
 const LOCAL_ENTRY_POINT = "http://localhost:8080";
-const DEBUG = true;
+const DEBUG = false;
 
 /**
  * Sends requests to the VisAQ Backend.
