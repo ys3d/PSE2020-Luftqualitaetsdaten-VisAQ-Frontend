@@ -241,24 +241,24 @@ class Navigationbar extends React.Component {
                                 </Dropdown>
                                 <NavDropdown variant="success" id="dropdown-basic">
                                     <NavDropdown.Item 
-                                        className='nav-link' 
-                                        id='nav-link' 
+                                        className='drop-link' 
+                                        id='drop-link' 
                                         href='https://www.smartaq.net/de/participate/' 
                                         draggable="false"
                                     >
                                         {t('diy')}
                                     </NavDropdown.Item>
                                     <NavDropdown.Item 
-                                        className='nav-link' 
-                                        id='nav-link' 
+                                        className='drop-link' 
+                                        id='drop-link' 
                                         href='https://www.smartaq.net/en/dashboard/#/home' 
                                         draggable="false"
                                     >
                                         SmartAQNet
                                     </NavDropdown.Item>
                                     <NavDropdown.Item 
-                                        className='nav-link' 
-                                        id='nav-link' 
+                                        className='drop-link' 
+                                        id='drop-link' 
                                         eventKey={2} 
                                         href='#' 
                                         draggable="false"
@@ -266,8 +266,8 @@ class Navigationbar extends React.Component {
                                         <PopupReasons />
                                     </NavDropdown.Item>
                                     <NavDropdown.Item 
-                                        className='nav-link' 
-                                        id='nav-link' 
+                                        className='drop-link' 
+                                        id='drop-link' 
                                         eventKey={1} 
                                         href="#" 
                                         draggable="false"
