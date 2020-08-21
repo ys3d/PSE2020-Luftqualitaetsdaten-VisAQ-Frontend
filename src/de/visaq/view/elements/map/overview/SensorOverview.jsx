@@ -296,7 +296,7 @@ class SensorOverview extends Component {
                     {t('sensor')} {this.state.thingName}
                 </h5>
                 {this.props.expert &&
-                    <p>
+                    <p className='expert'>
                         {Number(this.props.squareCenter[1]).toFixed(4)}°N {Number(this.props.squareCenter[0]).toFixed(4)}°E <br />
                         {t('description')} {this.state.thingDescription}
                     </p>

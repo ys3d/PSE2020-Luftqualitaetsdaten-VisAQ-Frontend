@@ -73,7 +73,8 @@ ul {
     color: var(--hover-color);
 }
 
-.close:before, .close:after {
+.close:before,
+.close:after {
     position: absolute;
     left: 15px;
     content: ' ';
@@ -130,4 +131,8 @@ ul {
 .card {
     background-color: var(--transparent);
     border: var(--transparent);
+}
+
+p.expert {
+    color: var(--text-gray);
 }
