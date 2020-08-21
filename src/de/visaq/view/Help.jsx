@@ -1,6 +1,5 @@
 import React, { Component, event } from 'react';
-import { Button, Modal, ModalTitle, Popover, Tooltip, Nav, NavItem, Row, Col, FormGroup, FieldGroup, Checkbox } from 'react-bootstrap';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import { Button, Modal, ModalTitle } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import './elements/navbar/Popup.css';
 
@@ -24,7 +23,7 @@ class Help extends Component {
 
     /**
      * Opens the popup.
-     * 
+     *
      * @param {Object} modalType    The modal type
      */
     open(modalType) {

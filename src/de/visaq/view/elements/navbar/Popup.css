@@ -4,10 +4,10 @@
     --align: center;
 }
 
-.title{
+.title {
     color: var(--main-page-color);
     margin-left: 1em;
-     margin-top: 1em;
+    margin-top: 1em;
 }
 
 .text {
@@ -30,6 +30,6 @@
     text-align: left;
 }
 
-.container{
+.container {
     height: 20em;
 }

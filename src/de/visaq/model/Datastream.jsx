@@ -5,14 +5,6 @@ import UnitOfMeasurement from "./UnitOfMeasurement";
  * The class is a data container. It is the equivalent to the class Datastream in the Backend.
  */
 export default class Datastream extends Sensorthing {
-    /**
-     * Sole constructor of the class.
-     * 
-     * @param {Object} json     The Datastream as JSON Object
-     */
-    constructor(json) {
-        super(json);
-    }
 
     /**
      * Returns the Datastream's description.

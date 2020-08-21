@@ -4,14 +4,6 @@ import Sensorthing from "./Sensorthing";
  * The class is a data container. It is the equivalent to the class FeatureOfInterest in the Backend.
  */
 export default class FeatureOfInterest extends Sensorthing {
-    /**
-     * Sole Constructor of the class.
-     * 
-     * @param {Object} json     The FeatureOfInterest as JSON Object      
-     */
-    constructor(json) {
-        super(json);
-    }
 
     /**
      * Returns the description.
