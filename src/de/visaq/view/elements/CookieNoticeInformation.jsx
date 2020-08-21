@@ -59,7 +59,7 @@ class CookieNoticeInformation extends Component {
                 <span onClick={this.open.bind(this)}>
                     {t('moreInfoCookies')}
                 </span>
-                <Modal size="lg" show={this.state.showModal} onHide={this.close.bind(this)}>
+                <Modal size="lg" show={this.state.showModal} onHide={this.close.bind(this)} className='information'>
                     <ModalTitle className={'infoTitle'}>
                         {t('moreInfoCookies')}
                     </ModalTitle>

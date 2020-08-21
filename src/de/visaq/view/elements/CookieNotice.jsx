@@ -67,7 +67,6 @@ class CookieNotice extends Component {
         document.cookie = 'Language=' + i18next.language + ';max-age=' + 60 * 60 * 24 * 365;
         this.setState({ showModal: false });
     }
-
     /**
      * Returns the cookieNotice
      */
@@ -80,6 +79,7 @@ class CookieNotice extends Component {
                     show={this.state.showModal}
                     onHide={this.close.bind(this)}
                     backdrop="static"
+                    className='div'
                 >
                     <ModalTitle center className={'title'}>
                         Cookies
