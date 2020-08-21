@@ -38,25 +38,21 @@ class MapView extends Component {
      * Otherwise the map centers on Augsburg.
      */
     setPosition(){ 
-        const id = navigator.geolocation.watchPosition(position => {
-            this.setState({
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
-            }, () => {
-                this.onBoundsUpdate(this.state.bounds);
-                });
-        }, (error) => {
-            console.log('Could not zoom on position')
-         },
-         {
-             timeout: 1000,
-             maximumAge:10000,
-         })
-        
-        //stop watching after 10 seconds
-        setTimeout(() => {
-          navigator.geolocation.clearWatch(id)
-        }, 10 * 1000)
+            navigator.geolocation.getCurrentPosition((position) => {
+                this.setState({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                }, () => {
+                    this.onBoundsUpdate(this.state.bounds);
+                    });
+            }, (error) => {
+               alert('Well wrong place pal');
+            },
+            {
+                enableHighAccuracy: true,
+                timeout: 20000,
+                maximumAge: 1000,
+            });
     }
 
     /**
@@ -260,7 +256,7 @@ class MapView extends Component {
                         openSearchOnLoad={true}
                     />
                     <Button
-                        onClick={() => {this.setPosition()}}
+                        onClick={() => this.setPosition()}
                         className='center-on-client'
                     >
                      <AiOutlineAim />
