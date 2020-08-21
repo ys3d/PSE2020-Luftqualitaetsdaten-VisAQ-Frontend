@@ -27,9 +27,9 @@ class PointOverview extends Component {
 
         return (
             <>
-                <h1>
+                <h5>
                     {t('location')}
-                </h1>
+                </h5>
                 {this.props.expert &&
                     <p>
                         {Number(this.props.squareCenter[1]).toFixed(4)}°N {Number(this.props.squareCenter[0]).toFixed(4)}°E

@@ -292,9 +292,9 @@ class SensorOverview extends Component {
 
         return (
             <>
-                <h1>
+                <h5>
                     {t('sensor')} {this.state.thingName}
-                </h1>
+                </h5>
                 {this.props.expert &&
                     <p>
                         {Number(this.props.squareCenter[1]).toFixed(4)}°N {Number(this.props.squareCenter[0]).toFixed(4)}°E <br />
