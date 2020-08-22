@@ -12,7 +12,7 @@ import TimeQuery from '../map/TimeQuery';
 import * as data from '../../../../../resources/AirQualityData.json';
 import './Navigationbar.css';
 import Help from '../../Help';
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import Overview from '../map/overview/OverviewContainer'
 
 let ov = [true, false];
