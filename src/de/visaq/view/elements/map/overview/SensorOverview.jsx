@@ -311,7 +311,7 @@ class SensorOverview extends Component {
                 <ShareField subject={t('shareTitle')} body={t('shareBody')} />
                 <div className="network">&nbsp;</div>
 
-                <Accordion className='accordion' scrollable={true}>
+                <Accordion className='accordion' >
                     <DataCard
                         show={this.state.show.airPressure}
                         cardTitle={t('airPressure')}
@@ -358,7 +358,6 @@ class SensorOverview extends Component {
                         scrollable={true}
                     />
                 </Accordion>
-                <p>test</p>
             </>
         );
     }
