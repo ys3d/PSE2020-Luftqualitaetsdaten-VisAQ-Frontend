@@ -26,7 +26,6 @@ test("Requests the Thing saqn:t:grimm-aerosol.com:EDM80NEPH:SN17017", () => {
         id: "saqn:t:grimm-aerosol.com:EDM80NEPH:SN17017"
     }, Thing).then(thing => {
         expect(thing.id).toBe(aliveThing.id);
-        expect(thing.selfLink.url).toBe(aliveThing.selfLink.url);
         expect(thing.description).toBe(aliveThing.description);
         expect(thing.name).toBe(aliveThing.name);
         expect(thing.datastreamsLink.url).toBe(aliveThing.datastreamsLink.url);
