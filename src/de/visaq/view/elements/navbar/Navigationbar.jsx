@@ -12,6 +12,8 @@ import TimeQuery from '../map/TimeQuery';
 import * as data from '../../../../../resources/AirQualityData.json';
 import './Navigationbar.css';
 import Help from '../../Help';
+import { Row, Col } from "react-bootstrap";
+import Overview from '../map/overview/OverviewContainer'
 
 let ov = [true, false];
 let startTime;
@@ -238,7 +240,7 @@ class Navigationbar extends React.Component {
                                     {t('furtherFunc')}
                                 </Dropdown>
                                 <NavDropdown variant="success" id="dropdown-basic">
-                                <p>{t('furtherFunc')}</p>
+                                    <p>{t('furtherFunc')}</p>
                                     <NavDropdown.Item 
                                         className='drop-link' 
                                         id='drop-link' 
@@ -247,28 +249,28 @@ class Navigationbar extends React.Component {
                                     >
                                         {t('diy')}
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item 
-                                        className='drop-link' 
-                                        id='drop-link' 
-                                        href='https://www.smartaq.net/en/dashboard/#/home' 
+                                    <NavDropdown.Item
+                                        className='drop-link'
+                                        id='drop-link'
+                                        href='https://www.smartaq.net/en/dashboard/#/home'
                                         draggable="false"
                                     >
                                         SmartAQNet
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item 
-                                        className='drop-link' 
-                                        id='drop-link' 
-                                        eventKey={2} 
-                                        href='#' 
+                                    <NavDropdown.Item
+                                        className='drop-link'
+                                        id='drop-link'
+                                        eventKey={2}
+                                        href='#'
                                         draggable="false"
                                     >
                                         <PopupReasons />
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item 
-                                        className='drop-link' 
-                                        id='drop-link' 
-                                        eventKey={1} 
-                                        href="#" 
+                                    <NavDropdown.Item
+                                        className='drop-link'
+                                        id='drop-link'
+                                        eventKey={1}
+                                        href="#"
                                         draggable="false"
                                     >
                                         <PopupCauses />
@@ -346,16 +348,32 @@ class Navigationbar extends React.Component {
                             </Navbar.Collapse>
                         </Navbar>
                     </div>
-                    <MapView
-                        airQualityData={this.state.airQualityData}
-                        openHandler={(squareCenter, thingId) => this.props.openHandler(squareCenter, thingId)}
-                        iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.props.iOpenHandler(squareCenter, interpolatedValue, airQualityData)}
-                        overlays={this.state.overlays}
-                        historicalMode={this.state.historicalMode}
-                        time={this.state.time}
-                    />
+                    <Row className='row'>
+                        <Col id="map-content">
+                            <MapView
+                                airQualityData={this.state.airQualityData}
+                                openHandler={(squareCenter, thingId) => this.props.openHandler(squareCenter, thingId)}
+                                iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.props.iOpenHandler(squareCenter, interpolatedValue, airQualityData)}
+                                overlays={this.state.overlays}
+                                historicalMode={this.state.historicalMode}
+                                time={this.state.time}
+                            />
+                        </Col>
+                        <Overview
+                            show={this.props.show}
+                            closeHandler={this.props.closeHandler}
+                            thingId={this.props.thingId}
+                            isSensor={this.props.isSensor}
+                            showDetails={this.props.showDetails}
+                            id='map'
+                            className='map'
+                            squareCenter={this.props.squareCenter}
+                            pointValue={this.props.pointValue}
+                            airQualityData={this.props.airQualityData}
+                        />
+                    </Row>
                 </Router>
-            </React.Fragment>
+            </React.Fragment >
         )
     }
 }

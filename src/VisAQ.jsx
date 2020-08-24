@@ -3,10 +3,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Navigationbar from './de/visaq/view/elements/navbar/Navigationbar'
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import './de/visaq/view/elements/theme/LightTheme.css'
-
-import Overview from './de/visaq/view/elements/map/overview/OverviewContainer'
 
 /**
  * The main class of the Project.
@@ -120,34 +118,18 @@ class VisAQ extends Component {
                     <React.Fragment>
                         <Router>
                             <Container fluid>
-                                <Row className='row'>
-                                    <Col id="map-content">
-                                        <Navigationbar openHandler={(squareCenter, thingId) => this.handleShowSensorClick(squareCenter, thingId)}
-                                            overviewDetailHandler={() => this.toggleDetails()}
-                                            iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.handleShowPointClick(squareCenter, interpolatedValue, airQualityData)}
-                                            show={this.state.showOverview}
-                                            closeHandler={this.handleCloseClick}
-                                            thingId={this.state.thingId}
-                                            isSensor={this.state.isSensor}
-                                            showDetails={this.state.overviewDetails}
-                                            squareCenter={this.state.center}
-                                            pointValue={this.state.interpolatedValue}
-                                            airQualityData={this.state.airQualityDataPoint}
-                                        />
-                                    </Col>
-                                    <Overview
-                                        show={this.state.showOverview}
-                                        closeHandler={this.handleCloseClick}
-                                        thingId={this.state.thingId}
-                                        isSensor={this.state.isSensor}
-                                        showDetails={this.state.overviewDetails}
-                                        id='map'
-                                        className='map'
-                                        squareCenter={this.state.center}
-                                        pointValue={this.state.interpolatedValue}
-                                        airQualityData={this.state.airQualityDataPoint}
-                                    />
-                                </Row>
+                                <Navigationbar openHandler={(squareCenter, thingId) => this.handleShowSensorClick(squareCenter, thingId)}
+                                    overviewDetailHandler={() => this.toggleDetails()}
+                                    iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.handleShowPointClick(squareCenter, interpolatedValue, airQualityData)}
+                                    show={this.state.showOverview}
+                                    closeHandler={this.handleCloseClick}
+                                    thingId={this.state.thingId}
+                                    isSensor={this.state.isSensor}
+                                    showDetails={this.state.overviewDetails}
+                                    squareCenter={this.state.center}
+                                    pointValue={this.state.interpolatedValue}
+                                    airQualityData={this.state.airQualityDataPoint}
+                                />
                             </Container>
                         </Router>
                     </React.Fragment>
