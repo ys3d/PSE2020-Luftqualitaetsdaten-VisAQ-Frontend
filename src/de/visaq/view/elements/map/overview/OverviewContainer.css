@@ -105,11 +105,15 @@ ul {
 }
 
 #sensorOverviewContainer {
-    background-color: var(--grey)
+    background-color: var(--grey);
+    overflow-y: scroll;
+    height: 90vh;
 }
 
 #pointOverviewContainer {
-    background-color: var(--grey)
+    background-color: var(--grey);
+    overflow-y: scroll;
+    height: 90vh;
 }
 
 #help {

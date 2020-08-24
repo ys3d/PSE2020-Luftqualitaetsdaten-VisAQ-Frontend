@@ -19,7 +19,7 @@ function Overview(props) {
         if (props.isSensor) {
             return (
                 <>
-                    <Col xl={4} lg={6} md={8} sm={8} xs={10} id="sensorOverviewContainer" scrollable={true}>
+                    <Col xl={4} lg={6} md={8} sm={8} xs={10} id="sensorOverviewContainer">
                         <p>
                             <a href="/#" onClick={props.closeHandler} className='close'> </a>
                             <br />

@@ -355,7 +355,6 @@ class SensorOverview extends Component {
                         eventKey={4}
                         className='datacard'
                         isActice={false}
-                        scrollable={true}
                     />
                 </Accordion>
             </>
