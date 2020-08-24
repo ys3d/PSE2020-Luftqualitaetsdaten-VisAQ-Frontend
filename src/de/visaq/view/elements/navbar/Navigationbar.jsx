@@ -240,10 +240,11 @@ class Navigationbar extends React.Component {
                                     {t('furtherFunc')}
                                 </Dropdown>
                                 <NavDropdown variant="success" id="dropdown-basic">
-                                    <NavDropdown.Item
-                                        className='drop-link'
-                                        id='drop-link'
-                                        href='https://www.smartaq.net/de/participate/'
+                                    <p>{t('furtherFunc')}</p>
+                                    <NavDropdown.Item 
+                                        className='drop-link' 
+                                        id='drop-link' 
+                                        href='https://www.smartaq.net/de/participate/' 
                                         draggable="false"
                                     >
                                         {t('diy')}

@@ -33,3 +33,9 @@
 .container {
     height: 20em;
 }
+
+.help-button {
+    margin-top: -0.2em;
+    width: 1.5em;
+    height: 1.5em;
+}
