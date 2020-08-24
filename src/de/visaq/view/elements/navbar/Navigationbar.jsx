@@ -238,6 +238,7 @@ class Navigationbar extends React.Component {
                                     {t('furtherFunc')}
                                 </Dropdown>
                                 <NavDropdown variant="success" id="dropdown-basic">
+                                <p>{t('furtherFunc')}</p>
                                     <NavDropdown.Item 
                                         className='drop-link' 
                                         id='drop-link' 

@@ -25,8 +25,10 @@
     margin-left: -0.6em;
 }
 
-.moreInfo:hover {
-    color: var(--hover-color);
+.moreInfo:hover, .moreInfo:active, .moreInfo::selection {
+    color: var(--hover-color)!important;
+    outline: none!important;
+    box-shadow: none!important;
 }
 
 .button:hover {
