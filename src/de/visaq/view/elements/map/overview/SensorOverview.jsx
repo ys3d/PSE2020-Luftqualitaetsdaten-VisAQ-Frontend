@@ -7,14 +7,14 @@ import DataCard from './DataCard';
 import ShareField from './ShareField';
 import Datastream from '../../../../model/Datastream';
 import ObservedProperty from '../../../../model/ObservedProperty';
-import * as airQualityDataJson from '../../../../../../resources/AirQualityData.json'
+import * as airQualityDataJson from '../../../../../../resources/AirQualityData.json';
 import Observation from '../../../../model/Observation';
-import './OverviewContainer.css'
+import './OverviewContainer.css';
 import Help from '../../../Help';
 import { Nav } from 'react-bootstrap';
 
 /**
- * Displays all the information on a specific sensor or location
+ * Displays all the information about a specific sensor or location
  */
 class SensorOverview extends Component {
     constructor(props) {
