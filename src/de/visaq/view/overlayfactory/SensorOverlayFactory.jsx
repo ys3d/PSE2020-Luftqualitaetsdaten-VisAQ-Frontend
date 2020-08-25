@@ -9,8 +9,8 @@ import Gradient from '../elements/theme/Gradient';
  */
 const SensorOverlayFactory = (props) => {
     const data = props.data;
-    function handler(center, id) {
-        props.openHandler(center, id)
+    function handler(center, id, airQualityData) {
+        props.openHandler(center, id, airQualityData)
     };
 
     if (!props.overlay) {
@@ -25,7 +25,7 @@ const SensorOverlayFactory = (props) => {
             fillColor={Gradient(datum[1].result, props.airQualityData)}
             fillOpacity='0.8'
             radius={10}
-            onClick={() => handler([datum[0].locations[0].location.x, datum[0].locations[0].location.y], datum[0].id)}
+            onClick={() => handler([datum[0].locations[0].location.x, datum[0].locations[0].location.y], datum[0].id, props.airQualityData)}
         >
         </CircleMarker>
     ));
