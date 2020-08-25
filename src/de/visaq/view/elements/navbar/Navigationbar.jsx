@@ -241,10 +241,10 @@ class Navigationbar extends React.Component {
                                 </Dropdown>
                                 <NavDropdown variant="success" id="dropdown-basic">
                                     <p>{t('furtherFunc')}</p>
-                                    <NavDropdown.Item 
-                                        className='drop-link' 
-                                        id='drop-link' 
-                                        href='https://www.smartaq.net/de/participate/' 
+                                    <NavDropdown.Item
+                                        className='drop-link'
+                                        id='drop-link'
+                                        href='https://www.smartaq.net/de/participate/'
                                         draggable="false"
                                     >
                                         {t('diy')}
@@ -352,7 +352,7 @@ class Navigationbar extends React.Component {
                         <Col id="map-content">
                             <MapView
                                 airQualityData={this.state.airQualityData}
-                                openHandler={(squareCenter, thingId) => this.props.openHandler(squareCenter, thingId)}
+                                openHandler={(squareCenter, thingId, airQualityData) => this.props.openHandler(squareCenter, thingId, airQualityData)}
                                 iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.props.iOpenHandler(squareCenter, interpolatedValue, airQualityData)}
                                 overlays={this.state.overlays}
                                 historicalMode={this.state.historicalMode}
@@ -369,7 +369,7 @@ class Navigationbar extends React.Component {
                             className='map'
                             squareCenter={this.props.squareCenter}
                             pointValue={this.props.pointValue}
-                            airQualityData={this.props.airQualityData}
+                            airQualityData={this.state.airQualityData}
                         />
                     </Row>
                 </Router>

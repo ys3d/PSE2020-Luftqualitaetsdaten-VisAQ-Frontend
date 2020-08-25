@@ -39,8 +39,8 @@ class DataCard extends Component {
         if (this.props.show) {
             return (
                 <Card>
-                    <Card.Header >
-                        <Accordion.Toggle as={Card.Header} eventKey={this.props.eventKey} className='card'>
+                    <Card.Header>
+                        <Accordion.Toggle as={Card.Header} eventKey={"" + this.props.eventKey} className='card'>
                             <ul>
                                 {this.props.cardTitle}
                                 <div className='arrow-container'>
@@ -50,7 +50,7 @@ class DataCard extends Component {
                             </ul>
                         </Accordion.Toggle>
                     </Card.Header>
-                    <Accordion.Collapse eventKey={this.props.eventKey}>
+                    <Accordion.Collapse eventKey={"" + this.props.eventKey}>
                         <Card.Body >
                             {t('currently')}: {this.props.currentValue} {this.props.dataUnit}
                             <Diagram

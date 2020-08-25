@@ -7,14 +7,14 @@ import DataCard from './DataCard';
 import ShareField from './ShareField';
 import Datastream from '../../../../model/Datastream';
 import ObservedProperty from '../../../../model/ObservedProperty';
-import * as airQualityData from '../../../../../../resources/AirQualityData.json'
+import * as airQualityDataJson from '../../../../../../resources/AirQualityData.json'
 import Observation from '../../../../model/Observation';
 import './OverviewContainer.css'
 import Help from '../../../Help';
 import { Nav } from 'react-bootstrap';
 
 /**
- * Displays all the Information on a Specifik Sensor or Location
+ * Displays all the information on a specific sensor or location
  */
 class SensorOverview extends Component {
     constructor(props) {
@@ -35,10 +35,10 @@ class SensorOverview extends Component {
                 particulateMatter: ""
             },
             unit: {
-                airHumidity: airQualityData.humidity.unitOfMeasurement,
-                airPressure: airQualityData.airPressure.unitOfMeasurement,
-                airTemperature: airQualityData.temperature.unitOfMeasurement,
-                particulateMatter: airQualityData.particulateMatter.unitOfMeasurement
+                airHumidity: airQualityDataJson.humidity.unitOfMeasurement,
+                airPressure: airQualityDataJson.airPressure.unitOfMeasurement,
+                airTemperature: airQualityDataJson.temperature.unitOfMeasurement,
+                particulateMatter: airQualityDataJson.particulateMatter.unitOfMeasurement
             },
             diagram: {
                 label: {
@@ -98,7 +98,7 @@ class SensorOverview extends Component {
             /* Humidity Datastream ####################################################################################### */
             let humidityDatastream = request("/api/datastream/thing/observedProperty", true, {
                 "thing": thing,
-                "observedProperty": new ObservedProperty(airQualityData.humidity.observedProperty)
+                "observedProperty": new ObservedProperty(airQualityDataJson.humidity.observedProperty)
             }, Datastream);
             humidityDatastream.then(datastream => {
                 if (datastream != null) {
@@ -119,21 +119,21 @@ class SensorOverview extends Component {
                                 airHumidity: newest[0].result,
                             },
                         }));
-                        let adding_list_data = [];
-                        let adding_list_label = [];
+                        let addingListData = [];
+                        let addingListLabel = [];
                         newest.forEach((element) => {
-                            adding_list_data.unshift(element.result);
-                            adding_list_label.unshift(formatDate(element.phenomenonTime));
+                            addingListData.unshift(element.result);
+                            addingListLabel.unshift(formatDate(element.phenomenonTime));
                         });
                         this.setState(({ diagram }) => ({
                             diagram: {
                                 data: {
                                     ...diagram.data,
-                                    airHumidity: adding_list_data
+                                    airHumidity: addingListData
                                 },
                                 label: {
                                     ...diagram.label,
-                                    airHumidity: adding_list_label
+                                    airHumidity: addingListLabel
                                 }
                             },
                         }));
@@ -144,7 +144,7 @@ class SensorOverview extends Component {
             /* Temperature Datastream ####################################################################################### */
             let temperatureDatastream = request("/api/datastream/thing/observedProperty", true, {
                 "thing": thing,
-                "observedProperty": new ObservedProperty(airQualityData.temperature.observedProperty)
+                "observedProperty": new ObservedProperty(airQualityDataJson.temperature.observedProperty)
             }, Datastream);
             temperatureDatastream.then(datastream => {
                 if (datastream != null) {
@@ -166,21 +166,21 @@ class SensorOverview extends Component {
                             },
                         }));
 
-                        let adding_list_data = [];
-                        let adding_list_label = [];
+                        let addingListData = [];
+                        let addingListLabel = [];
                         newest.forEach((element) => {
-                            adding_list_data.unshift(element.result);
-                            adding_list_label.unshift(formatDate(element.phenomenonTime));
+                            addingListData.unshift(element.result);
+                            addingListLabel.unshift(formatDate(element.phenomenonTime));
                         });
                         this.setState(({ diagram }) => ({
                             diagram: {
                                 data: {
                                     ...diagram.data,
-                                    airTemperature: adding_list_data
+                                    airTemperature: addingListData
                                 },
                                 label: {
                                     ...diagram.label,
-                                    airTemperature: adding_list_label
+                                    airTemperature: addingListLabel
                                 }
                             },
                         }));
@@ -191,7 +191,7 @@ class SensorOverview extends Component {
             /* Air Pressure Datastream ####################################################################################### */
             let airPressureDatastream = request("/api/datastream/thing/observedProperty", true, {
                 "thing": thing,
-                "observedProperty": new ObservedProperty(airQualityData.airPressure.observedProperty)
+                "observedProperty": new ObservedProperty(airQualityDataJson.airPressure.observedProperty)
             }, Datastream);
             airPressureDatastream.then(datastream => {
                 if (datastream != null) {
@@ -213,21 +213,21 @@ class SensorOverview extends Component {
                             },
                         }));
 
-                        let adding_list_data = [];
-                        let adding_list_label = [];
+                        let addingListData = [];
+                        let addingListLabel = [];
                         newest.forEach((element) => {
-                            adding_list_data.unshift(element.result);
-                            adding_list_label.unshift(formatDate(element.phenomenonTime));
+                            addingListData.unshift(element.result);
+                            addingListLabel.unshift(formatDate(element.phenomenonTime));
                         });
                         this.setState(({ diagram }) => ({
                             diagram: {
                                 data: {
                                     ...diagram.data,
-                                    airPressure: adding_list_data
+                                    airPressure: addingListData
                                 },
                                 label: {
                                     ...diagram.label,
-                                    airPressure: adding_list_label
+                                    airPressure: addingListLabel
                                 }
                             },
                         }));
@@ -238,7 +238,7 @@ class SensorOverview extends Component {
             /* Particulate Matter Datastream ####################################################################################### */
             let particulateMatterDatastream = request("/api/datastream/thing/observedProperty", true, {
                 "thing": thing,
-                "observedProperty": new ObservedProperty(airQualityData.particulateMatter.observedProperty)
+                "observedProperty": new ObservedProperty(airQualityDataJson.particulateMatter.observedProperty)
             }, Datastream);
             particulateMatterDatastream.then(datastream => {
                 if (datastream != null) {
@@ -260,21 +260,21 @@ class SensorOverview extends Component {
                             },
                         }));
 
-                        let adding_list_data = [];
-                        let adding_list_label = [];
+                        let addingListData = [];
+                        let addingListLabel = [];
                         newest.forEach((element) => {
-                            adding_list_data.unshift(element.result);
-                            adding_list_label.unshift(formatDate(element.phenomenonTime));
+                            addingListData.unshift(element.result);
+                            addingListLabel.unshift(formatDate(element.phenomenonTime));
                         });
                         this.setState(({ diagram }) => ({
                             diagram: {
                                 data: {
                                     ...diagram.data,
-                                    particulateMatter: adding_list_data
+                                    particulateMatter: addingListData
                                 },
                                 label: {
                                     ...diagram.label,
-                                    particulateMatter: adding_list_label
+                                    particulateMatter: addingListLabel
                                 }
                             },
                         }));
@@ -289,6 +289,23 @@ class SensorOverview extends Component {
      */
     render() {
         const { t } = this.props;
+
+        switch(this.props.airQualityData.name) {
+            case airQualityDataJson.airPressure.name:
+                this.defaultKey = 0;
+                break;
+            case airQualityDataJson.temperature.name:
+                this.defaultKey = 1;
+                break;
+            case airQualityDataJson.humidity.name:
+                this.defaultKey = 2;
+                break;
+            case airQualityDataJson.particulateMatter.name:
+                this.defaultKey = 3;
+                break;
+            default:
+                this.defaultKey = 0;
+        }
 
         return (
             <>
@@ -311,7 +328,7 @@ class SensorOverview extends Component {
                 <ShareField subject={t('shareTitle')} body={t('shareBody')} />
                 <div className="network">&nbsp;</div>
 
-                <Accordion className='accordion' >
+                <Accordion className='accordion' defaultActiveKey={"" + (this.defaultKey || 0)}>
                     <DataCard
                         show={this.state.show.airPressure}
                         cardTitle={t('airPressure')}
@@ -319,7 +336,7 @@ class SensorOverview extends Component {
                         dataUnit={this.state.unit.airPressure}
                         dataLabels={this.state.diagram.label.airPressure}
                         data={this.state.diagram.data.airPressure}
-                        eventKey={1}
+                        eventKey={0}
                         className='datacard'
                         isActice={false}
                     />
@@ -330,7 +347,7 @@ class SensorOverview extends Component {
                         dataUnit={this.state.unit.airTemperature}
                         dataLabels={this.state.diagram.label.airTemperature}
                         data={this.state.diagram.data.airTemperature}
-                        eventKey={2}
+                        eventKey={1}
                         className='datacard'
                         isActice={false}
                     />
@@ -341,7 +358,7 @@ class SensorOverview extends Component {
                         dataUnit={this.state.unit.airHumidity}
                         dataLabels={this.state.diagram.label.airHumidity}
                         data={this.state.diagram.data.airHumidity}
-                        eventKey={3}
+                        eventKey={2}
                         className='datacard'
                         isActice={false}
                     />
@@ -352,7 +369,7 @@ class SensorOverview extends Component {
                         dataUnit={this.state.unit.particulateMatter}
                         dataLabels={this.state.diagram.label.particulateMatter}
                         data={this.state.diagram.data.particulateMatter}
-                        eventKey={4}
+                        eventKey={3}
                         className='datacard'
                         isActice={false}
                     />

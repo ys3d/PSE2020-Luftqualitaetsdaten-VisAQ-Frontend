@@ -63,12 +63,13 @@ class VisAQ extends Component {
      * @param {Object} center   Center of the clicked square
      * @param {Object} thingId  The thing id
      */
-    handleShowSensorClick(center, thingId) {
+    handleShowSensorClick(center, thingId, airQualityData) {
         this.setState({
             showOverview: true,
             center: center,
             thingId: thingId,
-            isSensor: true
+            isSensor: true,
+            airQualityDataPoint: airQualityData
         });
     }
 
@@ -118,7 +119,7 @@ class VisAQ extends Component {
                     <React.Fragment>
                         <Router>
                             <Container fluid>
-                                <Navigationbar openHandler={(squareCenter, thingId) => this.handleShowSensorClick(squareCenter, thingId)}
+                                <Navigationbar openHandler={(squareCenter, thingId, airQualityData) => this.handleShowSensorClick(squareCenter, thingId, airQualityData)}
                                     overviewDetailHandler={() => this.toggleDetails()}
                                     iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.handleShowPointClick(squareCenter, interpolatedValue, airQualityData)}
                                     show={this.state.showOverview}

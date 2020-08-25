@@ -249,7 +249,7 @@ class MapView extends Component {
                         airQualityData={this.props.airQualityData}
                         time={this.props.time}
                         gridSize={this.gridSize}
-                        openHandler={(squareCenter, thingId) => this.props.openHandler(squareCenter, thingId)}
+                        openHandler={(squareCenter, thingId, airQualityData) => this.props.openHandler(squareCenter, thingId, airQualityData)}
                         iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.props.iOpenHandler(squareCenter, interpolatedValue, airQualityData)}
                         overlays={this.props.overlays}
                     />
