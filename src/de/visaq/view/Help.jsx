@@ -1,8 +1,8 @@
 import React, { Component, event } from 'react';
-import { Button, Modal, ModalTitle, Popover, Tooltip, Nav, NavItem, Row, Col, FormGroup, FieldGroup, Checkbox } from 'react-bootstrap';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import { Button, Modal, ModalTitle } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import './elements/navbar/Popup.css';
+import { MdHelpOutline } from 'react-icons/md'
 
 class Help extends Component {
     constructor(props) {
@@ -24,7 +24,7 @@ class Help extends Component {
 
     /**
      * Opens the popup.
-     * 
+     *
      * @param {Object} modalType    The modal type
      */
     open(modalType) {
@@ -43,7 +43,7 @@ class Help extends Component {
         const { t } = this.props;
         return (
             <div>
-                <span onClick={this.open.bind(this, this.MODAL_TYPE_HELP)}>{t('help')}</span>
+                <span onClick={this.open.bind(this, this.MODAL_TYPE_HELP)}><MdHelpOutline className='help-button'/></span>
                 <Modal size="lg" show={this.state.showModal} onHide={this.close.bind(this)}>
                     <ModalTitle center className='title'>
                         {t('help')}

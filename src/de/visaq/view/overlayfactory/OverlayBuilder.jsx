@@ -1,40 +1,30 @@
 import React, { Component } from 'react';
 import SensorOverlayFactory from './SensorOverlayFactory';
-import {LayersControl, LayerGroup} from 'react-leaflet';
 import InterpolationOverlayFactory from './InterpolationOverlayFactory';
 
 /**
  * The class organizes the map overlays.
  */
 export default class OverlayBuilder extends Component {
-    
-    /**
-     * Sole constructor of the class.
-     * 
-     * @param {Object} props    The properties
-     */
-    constructor(props) {
-        super(props);
-    }
 
     /**
      * Renders the map overlays using LayersControl
      */
     render() {
         var southWest = this.props.mapState.bounds.getSouthWest();
-        var southCell = Math.floor(southWest.lat/this.props.gridSize);
-        var westCell = Math.floor(southWest.lng/this.props.gridSize);
+        var southCell = Math.floor(southWest.lat / this.props.gridSize);
+        var westCell = Math.floor(southWest.lng / this.props.gridSize);
 
         var northEast = this.props.mapState.bounds.getNorthEast();
-        var northCell = Math.floor(northEast.lat/this.props.gridSize);
-        var eastCell = Math.floor(northEast.lng/this.props.gridSize);
+        var northCell = Math.floor(northEast.lat / this.props.gridSize);
+        var eastCell = Math.floor(northEast.lng / this.props.gridSize);
 
         var xCells = eastCell - westCell;
         var yCells = northCell - southCell;
 
         var cellsData = [];
         var assocData = {};
-        var cellsPointData =[];
+        var cellsPointData = [];
         var prepPointData = [];
 
 
@@ -43,37 +33,37 @@ export default class OverlayBuilder extends Component {
                 for (var x = 0; x <= xCells; x++) {
                     var lat = (northCell - y) * this.props.gridSize;
                     var lng = (westCell + x) * this.props.gridSize;
-                    if (this.props.mapState.cells.hasOwnProperty(`${this.props.airQualityData.name}|${lat}|${lng}`) || this.props.mapState.cells[`${this.props.airQualityData.name}|${lat}|${lng}`] != undefined) {
-                        cellsData.push(this.props.mapState.cells[`${this.props.airQualityData.name}|${lat}|${lng}`]);
+                    if (this.props.mapState.cells.hasOwnProperty(`${this.props.time}|${this.props.airQualityData.name}|${lat}|${lng}`) || this.props.mapState.cells[`${this.props.time}|${this.props.airQualityData.name}|${lat}|${lng}`] !== undefined) {
+                        cellsData.push(this.props.mapState.cells[`${this.props.time}|${this.props.airQualityData.name}|${lat}|${lng}`]);
                     }
-                    if (this.props.mapState.pointDataCells.hasOwnProperty(`${this.props.airQualityData.name}|${lat}|${lng}`) || this.props.mapState.pointDataCells[`${this.props.airQualityData.name}|${lat}|${lng}`] != undefined) {
-                        cellsPointData.push(this.props.mapState.pointDataCells[`${this.props.airQualityData.name}|${lat}|${lng}`]);
+                    if (this.props.mapState.pointDataCells.hasOwnProperty(`${this.props.time}|${this.props.airQualityData.name}|${lat}|${lng}`) || this.props.mapState.pointDataCells[`${this.props.time}|${this.props.airQualityData.name}|${lat}|${lng}`] !== undefined) {
+                        cellsPointData.push(this.props.mapState.pointDataCells[`${this.props.time}|${this.props.airQualityData.name}|${lat}|${lng}`]);
                     }
                 }
             }
         }
 
-        cellsData.forEach(function(cellData) {
-            if (cellData == null) {
+        cellsData.forEach(function (cellData) {
+            if (cellData == null || cellData.things == null) {
                 return;
             }
 
-            cellData.things.forEach(function(thing, index) {
+            cellData.things.forEach(function (thing, index) {
                 assocData[thing.id] = [thing, cellData.observations[index]];
             })
         });
 
-        cellsPointData.forEach(function(cellPointData) {
+        cellsPointData.forEach(function (cellPointData) {
             if (cellPointData == null) {
                 return;
             }
-            
+
             prepPointData.push(cellPointData);
         });
 
         var data = [];
 
-        Object.keys(assocData).forEach(function(key) {
+        Object.keys(assocData).forEach(function (key) {
             var thing = assocData[key][0];
             var observation = assocData[key][1];
 
@@ -88,10 +78,10 @@ export default class OverlayBuilder extends Component {
 
         return (
             <div>
-                <SensorOverlayFactory data = {data} airQ = {this.props.airQualityData} openHandler={(e) => this.props.openHandler(e)}
-                                        overlay={this.props.overlays[0]}/>
-                <InterpolationOverlayFactory airQ={this.props.airQualityData} pointData={prepPointData} iopenHandler={(e, a) => this.props.iopenHandler(e, a)}
-                                                overlay={this.props.overlays[1]}/>
+                <SensorOverlayFactory data={data} airQualityData={this.props.airQualityData} openHandler={(squareCenter, id, airQualityData) => this.props.openHandler(squareCenter, id, airQualityData)}
+                    overlay={this.props.overlays[0]} />
+                <InterpolationOverlayFactory airQualityData={this.props.airQualityData} pointData={prepPointData} iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.props.iOpenHandler(squareCenter, interpolatedValue, airQualityData)}
+                    overlay={this.props.overlays[1]} />
             </div>
         );
     }

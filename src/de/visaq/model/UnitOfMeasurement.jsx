@@ -4,8 +4,8 @@
 export default class UnitOfMeasurement {
     /**
      * Sole constructor of the class.
-     * 
-     * @param {Object} json     The UnitofMeasurement as JSON Object. 
+     *
+     * @param {Object} json     The UnitofMeasurement as JSON Object.
      */
     constructor(json) {
         this.json = json;

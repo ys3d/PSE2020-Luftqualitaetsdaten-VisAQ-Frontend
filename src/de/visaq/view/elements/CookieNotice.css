@@ -4,18 +4,20 @@
     --align: center;
 }
 
-.title{
+.title {
     color: var(--main-page-color);
     margin-left: 1.2em;
 }
 
-.text{
+.text {
     margin-left: 1em;
 }
 
 .button {
     background-color: var(--main-page-color);
     border: none;
+    outline: none!important;
+    box-shadow: none!important;
 }
 
 .moreInfo {
@@ -23,16 +25,17 @@
     margin-left: -0.6em;
 }
 
-
-.moreInfo:hover {
-    color: var(--hover-color);
+.moreInfo:hover, .moreInfo:active, .moreInfo::selection {
+    color: var(--hover-color)!important;
+    outline: none!important;
+    box-shadow: none!important;
 }
 
 .button:hover {
     background-color: var(--hover-color);
 }
 
-.infoTitle{
+.infoTitle {
     color: var(--main-page-color);
     margin-left: 1.2em
 }

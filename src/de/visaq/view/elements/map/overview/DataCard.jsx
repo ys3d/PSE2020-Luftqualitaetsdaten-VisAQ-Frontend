@@ -1,6 +1,6 @@
-import React, { Component, toggleClass, event } from 'react';
+import React, { Component, event } from 'react';
 import Card from 'react-bootstrap/Card'
-import {Accordion, useAccordionToggle} from 'react-bootstrap'
+import { Accordion } from 'react-bootstrap'
 import Diagram from '../../diagram/Diagram'
 import { withTranslation } from 'react-i18next';
 import './OverviewContainer.css'
@@ -12,7 +12,7 @@ import './OverviewContainer.css'
 class DataCard extends Component {
     /**
      * Sole constructor of the class.
-     * 
+     *
      * @param {Object} props    The properties
      */
     constructor(props) {
@@ -22,14 +22,14 @@ class DataCard extends Component {
         };
     }
 
-    toggleClass = (e) =>{
-            this.setState({isActive: !this.state.isActive})
+    toggleClass = (e) => {
+        this.setState({ isActive: !this.state.isActive })
     }
 
     handleSelect(eventKey) {
         event.preventDefault();
         this.toggleClass();
-      }
+    }
 
     /**
      * Renders the Datacard.
@@ -39,10 +39,10 @@ class DataCard extends Component {
         if (this.props.show) {
             return (
                 <Card>
-                    <Card.Header >
-                        <Accordion.Toggle as={Card.Header} eventKey={this.props.eventKey} className='card'>
+                    <Card.Header>
+                        <Accordion.Toggle as={Card.Header} eventKey={"" + this.props.eventKey} className='card'>
                             <ul>
-                            {this.props.cardTitle}
+                                {this.props.cardTitle}
                                 <div className='arrow-container'>
                                     <span className={(this.state.isActive) ? 'arrow-top' : 'arrow-down'}>
                                     </span>
@@ -50,7 +50,7 @@ class DataCard extends Component {
                             </ul>
                         </Accordion.Toggle>
                     </Card.Header>
-                    <Accordion.Collapse eventKey={this.props.eventKey}>
+                    <Accordion.Collapse eventKey={"" + this.props.eventKey}>
                         <Card.Body >
                             {t('currently')}: {this.props.currentValue} {this.props.dataUnit}
                             <Diagram

@@ -4,16 +4,16 @@ import Gradient from '../elements/theme/Gradient';
 
 /**
  * Builds an Overlay of Circle Markers that represent the sensor data.
- * 
+ *
  * @param {Object} props    The class properties
  */
 const SensorOverlayFactory = (props) => {
     const data = props.data;
-    function handler(id) {
-        props.openHandler(id)
+    function handler(center, id, airQualityData) {
+        props.openHandler(center, id, airQualityData)
     };
 
-    if (!props.overlay)  {
+    if (!props.overlay) {
         return <Fragment></Fragment>
     }
 
@@ -22,10 +22,10 @@ const SensorOverlayFactory = (props) => {
             key={index}
             center={[datum[0].locations[0].location.y, datum[0].locations[0].location.x]}
             opacity='0'
-            fillColor={Gradient(datum[1].result, props.airQ)}
+            fillColor={Gradient(datum[1].result, props.airQualityData)}
             fillOpacity='0.8'
             radius={10}
-            onClick={() => handler(datum[0].id)}
+            onClick={() => handler([datum[0].locations[0].location.x, datum[0].locations[0].location.y], datum[0].id, props.airQualityData)}
         >
         </CircleMarker>
     ));
@@ -34,4 +34,3 @@ const SensorOverlayFactory = (props) => {
 }
 
 export default SensorOverlayFactory;
-

@@ -2,22 +2,22 @@ import { withLeaflet, MapControl } from "react-leaflet";
 import Gradient from '../theme/Gradient';
 import L from "leaflet";
 import './Legend.css';
-  
+
 var legend;
 
 /**
- * The class Legend contains the Legend for the map. 
+ * The class Legend contains the Legend for the map.
  * Its color scheme fits the Layers of the map.
  */
 class Legend extends MapControl {
- 
+
   /**
    * Sole constructor of the class Legend.
    */
   constructor(props)  {
     super(props);
-    this.state = {  
-      airQualityData : props.airQ};
+    this.state = {
+      airQualityData : props.airQualityData};
     this.createLeafletElement();
   }
   /**
@@ -26,14 +26,14 @@ class Legend extends MapControl {
   createLeafletElement(){}
 
   /**
-   * Decides whether the component should update. 
+   * Decides whether the component should update.
    * Returns true if the state of AirQualityData changed in the parent component, false otherwise.
-   * 
+   *
    * @param {Object} nextprops The properties
    * @param {Object} nextState The new state
    */
   shouldComponentUpdate(nextprops, nextState) {
-    if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextprops.airQ)){
+    if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(nextprops.airQualityData)){
       return true;
     } else {
        return false;
@@ -42,15 +42,15 @@ class Legend extends MapControl {
 
   /**
    * Updates the Legend's state.
-   * 
-   * @param {Object} airQ The new AirQuality Data.
+   *
+   * @param {Object} airQualityData The new AirQuality Data.
    */
-  componentDidUpdate(airQ) {
-    if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(airQ.airq)) {
-      this.setState({airQualityData : airQ.airQ});
+  componentDidUpdate(airQualityData) {
+    if(JSON.stringify(this.state.airQualityData) !== JSON.stringify(airQualityData.airq)) {
+      this.setState({airQualityData : airQualityData.airQualityData});
       this.removeLegend();
       this.createLegend();
-    }      
+    }
   }
 
   /**
@@ -102,13 +102,13 @@ class Legend extends MapControl {
     const { map } = this.props.leaflet;
     legend.addTo(map);
   }
-  
+
   /**
    * Removes the legend.
    */
   removeLegend()  {
     const {map} = this.props.leaflet;
-    map.removeControl(legend); 
+    map.removeControl(legend);
   }
 }
 

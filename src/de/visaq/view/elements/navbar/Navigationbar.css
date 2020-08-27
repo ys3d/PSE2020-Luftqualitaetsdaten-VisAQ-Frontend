@@ -1,109 +1,163 @@
 :root {
-  --main-page-color: #44c2d4;
-  --white: #ede7e3;
-  --hover-color: #2f8794;
-  --black: black;
-  --text-gray: #787878
+    --main-page-color: #44c2d4;
+    --white: #ede7e3;
+    --hover-color: #2f8794;
+    --black: black;
+    --text-gray: #787878;
+    --gray-background: #f3f3f3a9;
 }
 
 .navbar {
-  background-color: #f5f5f5!important;
-  z-index: 1020;
+    background-color: #f5f5f5!important;
+    z-index: 1020;
 }
-.navbar-nav, .navbar-dark .nav-link {
-  color: var(--black);
+
+.navbar-nav,
+.navbar-dark .nav-link {
+    color: var(--black);
 }
+
 .navbar-brand {
-  font-size: 1.4em;
-  color: var(--main-page-color);
+    font-size: 1.4em;
+    color: var(--main-page-color);
 }
+
 .form-center {
-  position: absolute !important;
-  left: 25%;
-  right: 25%;
+    position: absolute !important;
+    left: 25%;
+    right: 25%;
 }
 
 .dropdown:hover>.dropdown-menu {
-  display: block;
+    display: block;
 }
 
-#title {
-  color: var(--main-page-color);
+.button-historical {
+    position: relative;
+    z-index: 2;
+    margin-left: 15em;
+    margin-top: -4.2em;
+    background-color: var(--main-page-color);
+    border: none;
 }
 
-#nav-link {
-  color: var(--text-gray);
+.button-historical:hover,
+.button-historical::selection,
+.button-historical:active {
+    background-color: var(--hover-color)!important;
+    outline: none!important;
+    box-shadow: none!important;
 }
 
-#nav-link:focus {  
-  color: var(--main-page-color)!important; 
-}
-
-#nav-link:hover { 
-  color: var(--main-page-color);
-}
-
-#nav-link:active { 
-  color: var(--main-page-color)!important; 
-}
-
-#nav-link-lng:hover {
-  color: var(--main-page-color);
-}
-
-#nav-link-lng::selection {
-  color: var(--main-page-color)!important;
-}
-
-#nav-link-lng:focus {
-  color: var(--main-page-color)!important;
-}
-
-#link {
-  color: var(--text-gray);
-}
-
-#dropdown-basic {
-  color: var(--text-gray);
-}
-
-#dropdown-basic:hover {
-  color: var(--main-page-color);
+.button-historical:disabled {
+    background-color: var(--main-page-color);
 }
 
 #help {
-  color: var(--text-gray);
+    color: var(--text-gray);
 }
 
-#help:focus {  
-  color: var(--main-page-color)!important; 
+#help:hover {
+    color: var(--main-page-color);
 }
 
-#help:hover { 
-  color: var(--main-page-color);
+#title {
+    color: var(--main-page-color);
 }
 
-#help:active { 
-  color: var(--main-page-color)!important; 
+#nav-link,
+#drop-link {
+    color: var(--text-gray);
 }
+
+#drop-link:focus,
+#drop-link:hover,
+#drop-link:active,
+#drop-link::selection {
+    color: var(--main-page-color)!important;
+    outline: none!important;
+    box-shadow: none!important;
+    background-color: var(--gray-background)!important;
+}
+
+#nav-link:focus,
+#nav-link:hover,
+#nav-link:active {
+    color: var(--main-page-color)!important;
+    outline: none!important;
+    box-shadow: none!important;
+}
+
+#nav-link-lng:hover {
+    color: var(--main-page-color);
+}
+
+#nav-link-lng::selection {
+    color: var(--main-page-color)!important;
+    outline: none!important;
+    box-shadow: none!important;
+}
+
+#nav-link-lng:focus {
+    color: var(--main-page-color)!important;
+}
+
+#link {
+    color: var(--text-gray);
+}
+
+#dropdown-basic {
+    color: var(--text-gray);
+}
+
+#dropdown-basic:hover,
+#dropdown-basic::selection {
+    color: var(--main-page-color);
+    outline: none!important;
+    box-shadow: none!important;
+}
+
+#help {
+    color: var(--text-gray);
+}
+
+#help:focus {
+    color: var(--main-page-color)!important;
+}
+
+#help:hover {
+    color: var(--main-page-color);
+}
+
+#help:active {
+    color: var(--main-page-color)!important;
+}
+
 .form-check {
-  padding-left: 2.3em;
-  color: var(--text-gray);
+    padding-left: 2.3em;
+    color: var(--text-gray);
 }
 
 #checkbox {
-  padding-left: 0.8em;
-  color: var(--text-gray);
-  overflow: hidden;
+    padding-left: 0.8em;
+    color: var(--text-gray);
+    overflow: hidden;
 }
 
 #overlay {
-  margin-left: 1.4em;
-  margin-top: -1.5em;
+    margin-left: 1.4em;
+    margin-top: -1.5em;
 }
 
 p {
-  padding-left: 1em;
-  color: var(--main-page-color)
+    padding-left: 1em;
+    color: var(--main-page-color)
 }
 
+.map-content {
+    border: none;
+}
+
+.map {
+    border: none;
+}

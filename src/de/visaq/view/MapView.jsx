@@ -1,5 +1,5 @@
 import React, { createRef, Component } from 'react';
-import { Map, TileLayer, withLeaflet} from 'react-leaflet';
+import { Map, TileLayer, withLeaflet } from 'react-leaflet';
 import L from 'leaflet';
 import "./MapView.css";
 import OverlayBuilder from './overlayfactory/OverlayBuilder';
@@ -9,10 +9,9 @@ import Thing from "../model/Thing";
 import Observation from "../model/Observation";
 import PointDatum from '../model/PointDatum';
 import { ReactLeafletSearch } from 'react-leaflet-search';
-import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
-import {Button} from 'react-bootstrap';
-import {AiOutlineAim} from "react-icons/ai";
+
+
 /**
  * Class that contains the MapView.
  */
@@ -24,6 +23,7 @@ class MapView extends Component {
         this.state = {
             lat: 48.3705449,
             lng: 10.89779,
+            time: this.props.time,
             zoom: 13,
             bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
             pointDataCells : {},
@@ -61,7 +61,7 @@ class MapView extends Component {
     updateDimensions() {
         const height = window.innerWidth >= 992 ? window.innerHeight : 400;
         this.setState({ height: height });
-      }
+    }
 
     /**
      * Starts the proccesses setPosition and updateDimensions when the component is mounted.
@@ -73,14 +73,14 @@ class MapView extends Component {
     /**
      * Changes the airQualityData state of the component.
      *
-     * @param {Object} airQ The AirQualityData
+     * @param {Object} airQualityData The AirQualityData
      */
     componentDidUpdate(prevProps) {
-        if (this.props.airQ === prevProps.airQ) {
+        if (this.props.airQualityData === prevProps.airQualityData
+            && this.props.time === prevProps.time) {
             return;
         }
         this.requestInBoundCells();
-        this.requestInterpolation(this.state.bounds); 
     }
 
     /**
@@ -99,81 +99,88 @@ class MapView extends Component {
 
     /**
      * Sends a request to the Backend.
-     * The return value is an array of Things and an array of Observations. 
+     * The return value is an array of Things and an array of Observations.
      * These data is stored in cells.
-     * 
+     *
+     * @param {String} time             The selected time
      * @param {Object} airQualityData   The current Air Quality Data
      * @param {Number} lat              The degree of longitude
      * @param {Number} lng              The degree of latitude
      */
-    requestCell(airQualityData, lat, lng) {
-        if (this.state.cells.hasOwnProperty(`${airQualityData.name}|${lat}|${lng}`) || this.state.cells[`${airQualityData.name}|${lat}|${lng}`] !== undefined) {
+    requestCell(time, airQualityData, lat, lng) {
+        if (this.state.cells.hasOwnProperty(`${time}|${airQualityData.name}|${lat}|${lng}`) || this.state.cells[`${time}|${airQualityData.name}|${lat}|${lng}`] !== undefined) {
             return;
         }
-        request("/api/thing/all/square", true, {
-            "y1": lat,
-            "x1": lng,
-            "y2": lat + this.gridSize,
-            "x2": lng + this.gridSize
-        }, Thing).then(things => {
-            request("/api/observation/all/things/timeframed", true, {
-                "things": things,
-                "millis": Date.now(),
-                "range": "PT12H",
-                "observedProperty": airQualityData.observedProperty
-            }, Observation).then(observations => {
-                this.setState({ cells: { ...this.state.cells, [`${airQualityData.name}|${lat}|${lng}`]: { things: things, observations: observations } } });
+        this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: null } }, () => {
+            request("/api/thing/all/square", true, {
+                "y1": lat,
+                "x1": lng,
+                "y2": lat + this.gridSize,
+                "x2": lng + this.gridSize
+            }, Thing).then(things => {
+                request("/api/observation/all/things/timeframed", true, {
+                    "things": things,
+                    "millis": time,
+                    "range": "PT2H",
+                    "observedProperty": airQualityData.observedProperty,
+                    "average": this.props.airQualityData.average,
+                    "variance": this.props.airQualityData.variance
+                }, Observation).then(observations => {
+                    this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: { things: things, observations: observations } } });
+                }, error => {
+                    this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: undefined } });
+                });
             }, error => {
-                this.setState({ cells: { ...this.state.cells, [`${airQualityData.name}|${lat}|${lng}`]: undefined } });
+                delete this.state.cells[`${time}|${airQualityData.name}|${lat}|${lng}`];
             });
-        }, error => {
-            delete this.state.cells[`${airQualityData.name}|${lat}|${lng}`];
         });
-        this.state.cells[`${airQualityData.name}|${lat}|${lng}`] = null;
     }
-    
+
     /**
-     * Sends a request to the Backend. 
+     * Sends a request to the Backend.
      * The return value is an array of pointDatum.
-     * 
+     *
+     * @param {String} time             The selected time
      * @param {Object} airQualityData   The current Air Quality Data
      * @param {Number} lat              The degree of longitude
-     * @param {Number} lng              The degree of latitude 
-     * 
+     * @param {Number} lng              The degree of latitude
+     *
      */
-    requestInterpolation(airQualityData, lat, lng) {
-
-        if (this.state.pointDataCells.hasOwnProperty(`${airQualityData.name}|${lat}|${lng}`) 
-        || this.state.pointDataCells[`${airQualityData.name}|${lat}|${lng}`] !== undefined) {
+    requestInterpolation(time, airQualityData, lat, lng) {
+        if (this.state.pointDataCells.hasOwnProperty(`${time}|${airQualityData.name}|${lat}|${lng}`)
+            || this.state.pointDataCells[`${time}|${airQualityData.name}|${lat}|${lng}`] !== undefined) {
             return;
         }
-        request("/api/interpolation/nearestNeighbor", true, {
-            "y1": lat,
-            "x1": lng,
-            "y2": lat + this.gridSize,
-            "x2": lng + this.gridSize,
-            "millis": Date.now(),
-            "range": "PT12H",
-            "observedProperty": this.props.airQ.observedProperty
-        }, PointDatum).then(pointDatum => {
-            this.setState({ pointDataCells: { ...this.state.pointDataCells, [`${airQualityData.name}|${lat}|${lng}`]: { pointData: pointDatum} } });
+        this.setState({ pointDataCells: { ...this.state.pointDataCells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: null } }, () => {
+            request("/api/interpolation/default", true, {
+                "y1": lat,
+                "x1": lng,
+                "y2": lat + this.gridSize,
+                "x2": lng + this.gridSize,
+                "millis": time,
+                "range": "PT2H",
+                "observedProperty": this.props.airQualityData.observedProperty,
+                "average": this.props.airQualityData.average,
+                "variance": this.props.airQualityData.variance
+            }, PointDatum).then(pointDatum => {
+                this.setState({ pointDataCells: { ...this.state.pointDataCells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: { pointData: pointDatum } } });
             }, error => {
-                delete this.state.pointDataCells[`${airQualityData.name}|${lat}|${lng}`];
+                delete this.state.pointDataCells[`${time}|${airQualityData.name}|${lat}|${lng}`];
             });
-            this.state.pointDataCells[`${airQualityData.name}|${lat}|${lng}`] = null;     
+        });
     }
-    
+
     /**
      * Transforms the map bounds into uniform cells and requests the data for these cells.
      */
     requestInBoundCells() {
         var southWest = this.state.bounds.getSouthWest();
-        var southCell = Math.floor(southWest.lat/this.gridSize);
-        var westCell = Math.floor(southWest.lng/this.gridSize);
+        var southCell = Math.floor(southWest.lat / this.gridSize);
+        var westCell = Math.floor(southWest.lng / this.gridSize);
 
         var northEast = this.state.bounds.getNorthEast();
-        var northCell = Math.floor(northEast.lat/this.gridSize);
-        var eastCell = Math.floor(northEast.lng/this.gridSize);
+        var northCell = Math.floor(northEast.lat / this.gridSize);
+        var eastCell = Math.floor(northEast.lng / this.gridSize);
 
         var xCells = eastCell - westCell;
         var yCells = northCell - southCell;
@@ -181,8 +188,8 @@ class MapView extends Component {
         if (yCells < 5 && xCells < 5) {
             for (var y = 0; y <= yCells; y++) {
                 for (var x = 0; x <= xCells; x++) {
-                    this.requestCell(this.props.airQ, (southCell + y) * this.gridSize, (westCell + x) * this.gridSize);
-                    this.requestInterpolation(this.props.airQ, (southCell + y) * this.gridSize, (westCell + x) * this.gridSize)
+                    this.requestCell(this.props.time, this.props.airQualityData, (southCell + y) * this.gridSize, (westCell + x) * this.gridSize);
+                    this.requestInterpolation(this.props.time, this.props.airQualityData, (southCell + y) * this.gridSize, (westCell + x) * this.gridSize)
                 }
             }
         }
@@ -190,20 +197,19 @@ class MapView extends Component {
 
     /**
      * Sets the state of bounds with the new map bounds and request an Interpolation.
-     * 
+     *
      * @param {Object} newBounds The new map bounds
      */
     onBoundsUpdate(newBounds) {
         this.setState({ bounds: newBounds }, () => {
             this.requestInBoundCells();
-            this.requestInterpolation(newBounds);
         });
     }
 
 
     /**
      * Gives new map bounds to the method onBoundsUpdata.
-     * 
+     *
      * @param {Object} event The map's move event
      */
     onMove(event) {
@@ -232,17 +238,18 @@ class MapView extends Component {
                         attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    <OverlayBuilder 
-                        mapState={this.state} 
-                        airQualityData={this.props.airQ} 
-                        gridSize={this.gridSize} 
-                        openHandler={(e) => this.props.openHandler(e)} 
-                        iopenHandler={(e, a) => this.props.iopenHandler(e, a)}
+                    <OverlayBuilder
+                        mapState={this.state}
+                        airQualityData={this.props.airQualityData}
+                        time={this.props.time}
+                        gridSize={this.gridSize}
+                        openHandler={(squareCenter, thingId, airQualityData) => this.props.openHandler(squareCenter, thingId, airQualityData)}
+                        iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.props.iOpenHandler(squareCenter, interpolatedValue, airQualityData)}
                         overlays={this.props.overlays}
                     />
-                    <Legend airQ={this.props.airQ} className='legend' id='legend'
+                    <Legend airQualityData={this.props.airQualityData} className='legend' id='legend'
                     />
-                
+
                     <ReactLeafletSearchComponent
                         className="search-control"
                         position="topleft"

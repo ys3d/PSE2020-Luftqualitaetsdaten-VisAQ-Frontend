@@ -4,10 +4,10 @@
     --align: center;
 }
 
-.title{
+.title {
     color: var(--main-page-color);
     margin-left: 1em;
-     margin-top: 1em;
+    margin-top: 1em;
 }
 
 .text {
@@ -19,8 +19,10 @@
     border: none;
 }
 
-.button:hover {
-    background-color: var(--hover-color);
+.button:hover, .button:active, .button::selection {
+    background-color: var(--hover-color)!important;
+    outline: none!important;
+    box-shadow: none!important;
 }
 
 .piechart {
@@ -28,6 +30,12 @@
     text-align: left;
 }
 
-.container{
+.container {
     height: 20em;
+}
+
+.help-button {
+    margin-top: -0.2em;
+    width: 1.5em;
+    height: 1.5em;
 }

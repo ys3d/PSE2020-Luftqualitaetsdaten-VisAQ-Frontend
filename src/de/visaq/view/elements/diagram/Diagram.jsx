@@ -29,7 +29,7 @@ const diagramConfig = {
 export default class Diagram extends React.Component {
     /**
      * Sole constructor of the class.
-     * 
+     *
      * @param {Object} props The Diagram properties
      */
     constructor(props) {
@@ -64,7 +64,7 @@ export default class Diagram extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.dataLabels != this.props.dataLabels || prevProps.data != this.props.data) {
+        if (prevProps.dataLabels !== this.props.dataLabels || prevProps.data !== this.props.data) {
             this.setState({
                 labels: this.props.dataLabels,
             datasets: [
@@ -94,7 +94,7 @@ export default class Diagram extends React.Component {
         }
       }
 
-    readDataForSensor(absoluteAddress, sensorID) {
+    readDataForSensor(absoluteAddress, sensorId) {
 
     }
 

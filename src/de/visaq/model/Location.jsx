@@ -4,14 +4,6 @@ import Sensorthing from "./Sensorthing";
  * The class is a data container. It is the equivalent to the class Location in the Backend.
  */
 export default class Location extends Sensorthing {
-    /**
-     * Sole constructor of the class.
-     * 
-     * @param {Object} json     The Location as JSON Object 
-     */
-    constructor(json) {
-        super(json);
-    }
 
     /**
      * Returns the description.
