@@ -39,19 +39,19 @@ class MapView extends Component {
      */
     setPosition(){ 
             navigator.geolocation.getCurrentPosition((position) => {
+                console.log(position);
                 this.setState({
                     lat: position.coords.latitude,
                     lng: position.coords.longitude,
-                }, () => {
-                    this.onBoundsUpdate(this.state.bounds);
-                    });
+                });
+            this.onBoundsUpdate(this.state.bounds);
             }, (error) => {
                alert('Well wrong place pal');
             },
             {
-                enableHighAccuracy: true,
-                timeout: 20000,
-                maximumAge: 1000,
+                enableHighAccuracy: false,
+                timeout: 20,
+                maximumAge: Infinity,
             });
     }
 
