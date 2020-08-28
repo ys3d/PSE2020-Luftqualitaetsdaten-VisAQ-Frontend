@@ -10,14 +10,9 @@
 }
 
 .react-datepicker__input-container {
-    width: 60%;
-    margin-left: 1em;
+    width: 100%;
     position: relative;
     z-index: 0;
-}
-
-.react-datepicker-wrapper {
-    width: 100%;
 }
 
 .react-datepicker {
@@ -28,8 +23,11 @@
     color: #000;
     border: 0px;
     border-radius: 0;
-    display: inline-block;
     position: relative;
+}
+
+.react-datepicker-wrapper {
+    width: 60%;
 }
 
 .react-datepicker__time-container {

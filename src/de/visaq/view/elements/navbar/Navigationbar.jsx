@@ -216,31 +216,29 @@ class Navigationbar extends React.Component {
                                     {t('mapOverlay')}
                                 </Dropdown>
                                 <NavDropdown variant="success" id="dropdown-basic">
-                                    <p>{t('mapOverlay')}</p>
+                                    <p class='dropdown-header'>{t('mapOverlay')}</p>
                                     <Form.Group controlId='form-switch' alignRight>
-
-                                        <label id='checkbox'>
-                                            <input type="checkbox"
-                                                checked={ov[0]}
-                                                onChange={this.activateSensors}
-                                                id='box'
-                                            />
-                                            <div className='overlay' id='overlay' inline>{t('Sensors')}</div>
-                                        </label>
-                                        <label id='checkbox'>
-                                            <input type="checkbox"
-                                                checked={ov[1]}
-                                                onChange={this.activateInterpolation}
-                                            />
-                                            <div className='overlay' id='overlay' inline>{t('Interpolation')}</div>
-                                        </label>
+                                        <Form.Check
+                                            type='checkbox'
+                                            id='sensor-overlay'
+                                            label={t('Sensors')}
+                                            onClick={() => this.activateSensors}
+                                            draggable="false"
+                                        />
+                                        <Form.Check
+                                            type='checkbox'
+                                            id='interpolation-overlay'
+                                            label={t('Interpolation')}
+                                            onClick={() => this.activateInterpolation}
+                                            draggable="false"
+                                        />
                                     </Form.Group>
                                 </NavDropdown>
                                 <Dropdown inline id='link'>
                                     {t('furtherFunc')}
                                 </Dropdown>
                                 <NavDropdown variant="success" id="dropdown-basic">
-                                <p>{t('expert-Mode')}</p>
+                                    <p class='dropdown-header'>{t('expert-Mode')}</p>
                                     <Form.Group controlId='form-switch' alignRight>
                                         <Form.Check
                                             type='checkbox'
@@ -251,7 +249,7 @@ class Navigationbar extends React.Component {
                                         />
                                     </Form.Group>
                                     <NavDropdown.Divider />
-                                    <p>{t('historical-mode')}</p>
+                                    <p class='dropdown-header'>{t('historical-mode')}</p>
                                     <Form.Group controlId='form-switch' alignRight>
                                         <Form.Check
                                             type='checkbox'
@@ -261,7 +259,7 @@ class Navigationbar extends React.Component {
                                             onClick={() => this.toggleHistoricalMode()}
                                         />
                                     </Form.Group>
-                                    <Form>
+                                    <Form inline id='form-timequery'>
                                         <TimeQuery
                                             timeHandler={(e) => this.setTime(e)}
                                             time={this.state.time}
@@ -282,7 +280,7 @@ class Navigationbar extends React.Component {
                                         </Button>
                                     </Form>
                                     <NavDropdown.Divider />
-                                    <p>{t('information')}</p>
+                                    <p class='dropdown-header'>{t('information')}</p>
                                     <NavDropdown.Item
                                         className='drop-link'
                                         id='drop-link'
@@ -302,7 +300,7 @@ class Navigationbar extends React.Component {
                                         <PopupCauses />
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                    <p>{t('seeAlso')}</p>
+                                    <p class='dropdown-header'>{t('seeAlso')}</p>
                                     <NavDropdown.Item
                                         className='drop-link'
                                         id='drop-link'
