@@ -333,7 +333,7 @@ class Navigationbar extends React.Component {
                                         onClick={() => { this.toggleLanguage(0, 'en') }}
                                         draggable="false"
                                     >
-                                        EN
+                                        English
                                     </Nav.Link>
                                     <Nav.Link
                                         className='nav-link-lng'
@@ -342,7 +342,7 @@ class Navigationbar extends React.Component {
                                         onClick={() => { this.toggleLanguage(1, 'de') }}
                                         draggable="false"
                                     >
-                                        DE
+                                        Deutsch
                                     </Nav.Link>
                                 </Nav>
                             </Navbar.Collapse>
