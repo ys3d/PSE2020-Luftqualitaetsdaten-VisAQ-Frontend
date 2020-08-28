@@ -5,7 +5,7 @@
     "particulateMatter": "Feinstaub",
     "temperature": "Temperatur",
     "airPressure": "Luftdruck",
-    "diy": "DIY-Anleitung",
+    "participate": "Mitmachen",
     "historical": "Historische Werte",
     "smartAQNet": "SmartAQNet",
     "furtherFunc": "Weitere Funktionen",
@@ -27,5 +27,7 @@
 	"time-query": "Wähle einen Zeitpunkt",
 	"historical-mode" : "Historischer-Modus",
     "historical-view" : "Historische Ansicht",
-    "start" : "Los"
+    "start" : "Los",
+    "information" : "Informationen",
+    "seeAlso" : "Siehe auch"
 }

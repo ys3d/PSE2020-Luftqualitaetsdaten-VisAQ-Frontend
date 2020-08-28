@@ -43,7 +43,7 @@ class Help extends Component {
         const { t } = this.props;
         return (
             <div>
-                <span onClick={this.open.bind(this, this.MODAL_TYPE_HELP)}><MdHelpOutline className='help-button'/></span>
+                {t('help')} <span onClick={this.open.bind(this, this.MODAL_TYPE_HELP)}><MdHelpOutline className='help-button'/></span>
                 <Modal size="lg" show={this.state.showModal} onHide={this.close.bind(this)}>
                     <ModalTitle center className='title'>
                         {t('help')}

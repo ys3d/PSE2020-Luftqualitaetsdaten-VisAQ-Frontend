@@ -240,43 +240,7 @@ class Navigationbar extends React.Component {
                                     {t('furtherFunc')}
                                 </Dropdown>
                                 <NavDropdown variant="success" id="dropdown-basic">
-                                    <p>{t('furtherFunc')}</p>
-                                    <NavDropdown.Item
-                                        className='drop-link'
-                                        id='drop-link'
-                                        href='https://www.smartaq.net/de/participate/'
-                                        draggable="false"
-                                    >
-                                        {t('diy')}
-                                    </NavDropdown.Item>
-                                    <NavDropdown.Item
-                                        className='drop-link'
-                                        id='drop-link'
-                                        href='https://www.smartaq.net/en/dashboard/#/home'
-                                        draggable="false"
-                                    >
-                                        SmartAQNet
-                                    </NavDropdown.Item>
-                                    <NavDropdown.Item
-                                        className='drop-link'
-                                        id='drop-link'
-                                        eventKey={2}
-                                        href='#'
-                                        draggable="false"
-                                    >
-                                        <PopupReasons />
-                                    </NavDropdown.Item>
-                                    <NavDropdown.Item
-                                        className='drop-link'
-                                        id='drop-link'
-                                        eventKey={1}
-                                        href="#"
-                                        draggable="false"
-                                    >
-                                        <PopupCauses />
-                                    </NavDropdown.Item>
-                                    <NavDropdown.Divider />
-                                    <p>{t('expert-Mode')}</p>
+                                <p>{t('expert-Mode')}</p>
                                     <Form.Group controlId='form-switch' alignRight>
                                         <Form.Check
                                             type='checkbox'
@@ -317,6 +281,44 @@ class Navigationbar extends React.Component {
                                             {t('start')}
                                         </Button>
                                     </Form>
+                                    <NavDropdown.Divider />
+                                    <p>{t('information')}</p>
+                                    <NavDropdown.Item
+                                        className='drop-link'
+                                        id='drop-link'
+                                        eventKey={2}
+                                        href='#'
+                                        draggable="false"
+                                    >
+                                        <PopupReasons />
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item
+                                        className='drop-link'
+                                        id='drop-link'
+                                        eventKey={1}
+                                        href="#"
+                                        draggable="false"
+                                    >
+                                        <PopupCauses />
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <p>{t('seeAlso')}</p>
+                                    <NavDropdown.Item
+                                        className='drop-link'
+                                        id='drop-link'
+                                        href='https://www.smartaq.net/de/participate/'
+                                        draggable="false"
+                                    >
+                                        {t('participate')}
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item
+                                        className='drop-link'
+                                        id='drop-link'
+                                        href='https://www.smartaq.net/en/dashboard/#/home'
+                                        draggable="false"
+                                    >
+                                        SmartAQNet
+                                    </NavDropdown.Item>
                                 </NavDropdown>
                                 <Nav className='ml-auto'>
                                     <Nav.Link

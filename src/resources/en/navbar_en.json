@@ -6,7 +6,7 @@
     "temperature": "Air Temperature",
     "airPressure": "Atmospheric pressure",
     "reasonsPM": "Reasons for air pollution",
-    "diy": "DIY instructions",
+    "participate": "Participate",
     "historical": "Historical data",
     "consequencesPM": "Consequences of air pollution",
     "smartAQNet": "SmartAQNet",
@@ -28,5 +28,7 @@
 	"time-query" : "Select time",
 	"historical-mode" : "Historical-Mode",
     "historical-view" : "Historical View",
-    "start" : "Go"
+    "start" : "Go",
+    "information" : "Information",
+    "seeAlso" : "See also"
 }
