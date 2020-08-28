@@ -94,13 +94,15 @@ class MapView extends Component {
     componentDidMount() {
         this.setPosition();
         window.addEventListener("resize", this.updateDimensions.bind(this));
+        window.addEventListener('load', this.requestInBoundCells.bind(this));
     }
 
     /**
      * Removes the Event Listener.
      */
     componentWillUnmount() {
-        window.removeEventListener("resize", this.updateDimensions.bind(this))
+        window.removeEventListener("resize", this.updateDimensions.bind(this));
+        window.removeEventListener('load', this.requestInBoundCells.bind(this));
     }
 
     /**
