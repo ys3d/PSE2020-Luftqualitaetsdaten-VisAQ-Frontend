@@ -13,9 +13,9 @@ import * as data from '../../../../../resources/AirQualityData.json';
 import './Navigationbar.css';
 import Help from '../../Help';
 import { Row, Col } from "react-bootstrap";
-import Overview from '../map/overview/OverviewContainer'
+import Overview from '../map/overview/OverviewContainer';
+import OverlayEnum from '../../overlayfactory/OverlayEnum';
 
-let ov = [true, false];
 let startTime;
 let tempTime;
 /**
@@ -33,9 +33,9 @@ class Navigationbar extends React.Component {
         this.state = {
             isOpen: false,
             airQualityData: new AirQualityData(data.particulateMatter),
-            activeAirQ: 0,
+            activeAirQualityData: 0,
             activeLanguage: document.cookie.split(';').some((item) => item.trim().startsWith('Language=en')) ? 0 : 1,
-            overlays: ov,
+            overlays: OverlayEnum.sensor,
             historicalMode: false,
             time: Date.now()
         }
@@ -61,22 +61,14 @@ class Navigationbar extends React.Component {
      * Activates the Sensor Overlay.
      */
     activateSensors = () => {
-        ov[0] = !ov[0];
-        if (ov[0]) {
-            ov[1] = false;
-        }
-        this.setState({ overlays: ov });
+        this.setState({ overlays: OverlayEnum.sensor });
     }
 
     /**
      * Activates the Interpolation Overlay.
      */
     activateInterpolation = () => {
-        ov[1] = !ov[1];
-        if (ov[1]) {
-            ov[0] = false;
-        }
-        this.setState({ overlays: ov });
+        this.setState({ overlays: OverlayEnum.interpolation });
     }
 
 
@@ -87,9 +79,9 @@ class Navigationbar extends React.Component {
        */
     toggle(position, airQualityData) {
         if (this.state.active === position) {
-            this.setState({ activeAirQ: null })
+            this.setState({ activeAirQualityData: null })
         } else {
-            this.setState({ activeAirQ: position })
+            this.setState({ activeAirQualityData: position })
         }
         this.setState(state => ({ airQualityData: new AirQualityData(airQualityData) }))
     }
@@ -99,7 +91,7 @@ class Navigationbar extends React.Component {
      * @param {Number} position Position of the button
      */
     activateAirQuality(position) {
-        if (this.state.activeAirQ === position) {
+        if (this.state.activeAirQualityData === position) {
             return "#44c2d4";
         }
         return "";
@@ -219,17 +211,19 @@ class Navigationbar extends React.Component {
                                     <p class='dropdown-header'>{t('mapOverlay')}</p>
                                     <Form.Group controlId='form-switch' alignRight>
                                         <Form.Check
-                                            type='checkbox'
+                                            type='radio'
                                             id='sensor-overlay'
+                                            checked={OverlayEnum.sensor === this.state.overlays}
                                             label={t('Sensors')}
-                                            onClick={() => this.activateSensors}
+                                            onClick={() => this.activateSensors()}
                                             draggable="false"
                                         />
                                         <Form.Check
-                                            type='checkbox'
+                                            type='radio'
                                             id='interpolation-overlay'
+                                            checked={OverlayEnum.interpolation === this.state.overlays}
                                             label={t('Interpolation')}
-                                            onClick={() => this.activateInterpolation}
+                                            onClick={() => this.activateInterpolation()}
                                             draggable="false"
                                         />
                                     </Form.Group>
@@ -241,7 +235,7 @@ class Navigationbar extends React.Component {
                                     <p class='dropdown-header'>{t('expert-Mode')}</p>
                                     <Form.Group controlId='form-switch' alignRight>
                                         <Form.Check
-                                            type='checkbox'
+                                            type='switch'
                                             id='expert-mode'
                                             label={t('sensorOverviewExpert')}
                                             onClick={() => this.props.overviewDetailHandler()}
@@ -252,7 +246,7 @@ class Navigationbar extends React.Component {
                                     <p class='dropdown-header'>{t('historical-mode')}</p>
                                     <Form.Group controlId='form-switch' alignRight>
                                         <Form.Check
-                                            type='checkbox'
+                                            type='switch'
                                             id='historical-mode'
                                             label={t('historical-view')}
                                             draggable="false"
@@ -271,7 +265,7 @@ class Navigationbar extends React.Component {
                                         <Button
                                             size="sm"
                                             disabled={!this.state.historicalMode}
-                                            onClick={() => { this.startTimeQuery() }}
+                                            onClick={() => this.startTimeQuery()}
                                             className='button-historical'
                                             id='button-historical'
                                             inline

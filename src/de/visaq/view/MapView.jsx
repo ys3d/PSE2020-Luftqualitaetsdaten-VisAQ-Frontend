@@ -11,7 +11,6 @@ import PointDatum from '../model/PointDatum';
 import { ReactLeafletSearch } from 'react-leaflet-search';
 import { withTranslation } from 'react-i18next';
 
-
 /**
  * Class that contains the MapView.
  */

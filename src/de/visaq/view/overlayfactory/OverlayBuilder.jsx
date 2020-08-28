@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SensorOverlayFactory from './SensorOverlayFactory';
 import InterpolationOverlayFactory from './InterpolationOverlayFactory';
+import OverlayEnum from "./OverlayEnum";
 
 /**
  * The class organizes the map overlays.
@@ -79,9 +80,9 @@ export default class OverlayBuilder extends Component {
         return (
             <div>
                 <SensorOverlayFactory data={data} airQualityData={this.props.airQualityData} openHandler={(squareCenter, id, airQualityData) => this.props.openHandler(squareCenter, id, airQualityData)}
-                    overlay={this.props.overlays[0]} />
+                    overlay={OverlayEnum.sensor === this.props.overlays} />
                 <InterpolationOverlayFactory airQualityData={this.props.airQualityData} pointData={prepPointData} iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.props.iOpenHandler(squareCenter, interpolatedValue, airQualityData)}
-                    overlay={this.props.overlays[1]} />
+                    overlay={OverlayEnum.interpolation === this.props.overlays} />
             </div>
         );
     }
