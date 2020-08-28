@@ -102,6 +102,13 @@ p.dropdown-header {
     background-color: var(--gray-background)!important;
 }
 
+a:not([role="button"]):focus,
+a:not([role="button"]):hover,
+a:not([role="button"]):active,
+a:not([role="button"])::selection {
+    text-decoration: underline;
+}
+
 #nav-link:focus,
 #nav-link:hover,
 #nav-link:active {
