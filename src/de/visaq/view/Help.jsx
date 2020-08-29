@@ -2,7 +2,7 @@ import React, { Component, event } from 'react';
 import { Button, Modal, ModalTitle } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import './elements/navbar/Popup.css';
-import { MdHelpOutline } from 'react-icons/md'
+import { MdHelpOutline } from 'react-icons/md';
 
 class Help extends Component {
     constructor(props) {

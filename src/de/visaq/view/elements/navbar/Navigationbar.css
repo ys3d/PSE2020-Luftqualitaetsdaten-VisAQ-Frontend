@@ -20,6 +20,10 @@ p.dropdown-header {
     margin-bottom: 0;
 }
 
+.navbar-main .nav-link {
+    padding: 0.5rem;
+}
+
 .navbar-nav,
 .navbar-dark .nav-link {
     color: var(--black);

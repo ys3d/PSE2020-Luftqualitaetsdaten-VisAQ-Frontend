@@ -30,5 +30,6 @@
     "historical-view" : "Historical view",
     "start" : "Go",
     "information" : "Information",
-    "seeAlso" : "See also"
+    "seeAlso" : "See also",
+    "popover-map-overlay" : "Adds informative objects or coloring to the map depending on the selected overlay. Only one overlay can be selected at a time."
 }

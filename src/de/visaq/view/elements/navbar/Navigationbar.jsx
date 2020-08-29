@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Navbar, NavDropdown, Form, Nav, Dropdown } from 'react-bootstrap';
+import { Button, Navbar, NavDropdown, Form, Nav } from 'react-bootstrap';
 import PopupReasons from './PopupReasons';
 import { BrowserRouter as Router } from "react-router-dom";
 import PopupCauses from './PopupCauses';
@@ -12,6 +12,7 @@ import TimeQuery from '../map/TimeQuery';
 import * as data from '../../../../../resources/AirQualityData.json';
 import './Navigationbar.css';
 import Help from '../../Help';
+import HelpPopover from '../../HelpPopover';
 import { Row, Col } from "react-bootstrap";
 import Overview from '../map/overview/OverviewContainer';
 import OverlayEnum from '../../overlayfactory/OverlayEnum';
@@ -158,7 +159,7 @@ class Navigationbar extends React.Component {
         return (
             <React.Fragment>
                 <Router>
-                    <div>
+                    <div class="navbar-main">
                         <CookieNotice />
                         <Navbar expand='lg' bg='light' className='navbar' id='navbar'>
                             <Navbar.Brand href=''>
@@ -204,11 +205,8 @@ class Navigationbar extends React.Component {
                                         {t('airPressure')}
                                     </Nav.Link>
                                 </Nav>
-                                <Dropdown inline id='link'>
-                                    {t('mapOverlay')}
-                                </Dropdown>
-                                <NavDropdown variant="success" id="dropdown-basic">
-                                    <p class='dropdown-header'>{t('mapOverlay')}</p>
+                                <NavDropdown title={t('mapOverlay')} variant="success" id="dropdown-basic">
+                                    <p class='dropdown-header'>{t('mapOverlay')} <HelpPopover placement="right" title={t('mapOverlay')} content={t('popover-map-overlay')} /></p>
                                     <Form.Group controlId='form-switch' alignRight>
                                         <Form.Check
                                             type='radio'
@@ -228,11 +226,8 @@ class Navigationbar extends React.Component {
                                         />
                                     </Form.Group>
                                 </NavDropdown>
-                                <Dropdown inline id='link'>
-                                    {t('furtherFunc')}
-                                </Dropdown>
-                                <NavDropdown variant="success" id="dropdown-basic">
-                                    <p class='dropdown-header'>{t('expert-Mode')}</p>
+                                <NavDropdown title={t('furtherFunc')} variant="success" id="dropdown-basic">
+                                    <p class='dropdown-header'>{t('expert-Mode')} <HelpPopover placement="right" title={t('expert-Mode')} content={t('popover-expert-mode')} /></p>
                                     <Form.Group controlId='form-switch' alignRight>
                                         <Form.Check
                                             type='switch'
@@ -243,7 +238,7 @@ class Navigationbar extends React.Component {
                                         />
                                     </Form.Group>
                                     <NavDropdown.Divider />
-                                    <p class='dropdown-header'>{t('historical-mode')}</p>
+                                    <p class='dropdown-header'>{t('historical-mode')} <HelpPopover placement="right" title={t('historical-mode')} content={t('popover-historical-mode')} /></p>
                                     <Form.Group controlId='form-switch' alignRight>
                                         <Form.Check
                                             type='switch'
