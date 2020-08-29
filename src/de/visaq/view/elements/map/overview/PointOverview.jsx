@@ -3,6 +3,7 @@ import { withTranslation } from 'react-i18next';
 import ShareField from './ShareField'
 import Help from '../../../Help';
 import { Nav } from 'react-bootstrap';
+import AirQualityData from '../../airquality/AirQualityData';
 
 /**
  * Displays all the information on a specific sensor or location
@@ -44,7 +45,7 @@ class PointOverview extends Component {
                 </Nav.Link>
                 <ShareField subject={t('shareTitle')} body={t('shareBody')} />
                 <div className="network">&nbsp;</div>
-                {t('valueHere')} {Number(this.props.value).toFixed(2)} {this.props.airQualityData.getUnitOfMeasurement()}
+                {t('valueHere')} {Number(this.props.value).toFixed(2)} {AirQualityData.getInstance().getUnitOfMeasurement()}
                 <div className="network">&nbsp;</div>
                 {t('estimatedValue')}
             </>

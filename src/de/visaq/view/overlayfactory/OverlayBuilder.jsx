@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SensorOverlayFactory from './SensorOverlayFactory';
 import InterpolationOverlayFactory from './InterpolationOverlayFactory';
 import OverlayEnum from "./OverlayEnum";
+import AirQualityData from '../elements/airquality/AirQualityData';
 
 /**
  * The class organizes the map overlays.
@@ -28,17 +29,18 @@ export default class OverlayBuilder extends Component {
         var cellsPointData = [];
         var prepPointData = [];
 
+        let airQualityData = AirQualityData.getInstance();
 
         if (yCells < 30 && xCells < 30) {
             for (var y = 0; y <= yCells; y++) {
                 for (var x = 0; x <= xCells; x++) {
                     var lat = (northCell - y) * this.props.gridSize;
                     var lng = (westCell + x) * this.props.gridSize;
-                    if (this.props.mapState.cells.hasOwnProperty(`${this.props.time}|${this.props.airQualityData.name}|${lat}|${lng}`) || this.props.mapState.cells[`${this.props.time}|${this.props.airQualityData.name}|${lat}|${lng}`] !== undefined) {
-                        cellsData.push(this.props.mapState.cells[`${this.props.time}|${this.props.airQualityData.name}|${lat}|${lng}`]);
+                    if (this.props.mapState.cells.hasOwnProperty(`${this.props.time}|${airQualityData.name}|${lat}|${lng}`) || this.props.mapState.cells[`${this.props.time}|${airQualityData.name}|${lat}|${lng}`] !== undefined) {
+                        cellsData.push(this.props.mapState.cells[`${this.props.time}|${airQualityData.name}|${lat}|${lng}`]);
                     }
-                    if (this.props.mapState.pointDataCells.hasOwnProperty(`${this.props.time}|${this.props.airQualityData.name}|${lat}|${lng}`) || this.props.mapState.pointDataCells[`${this.props.time}|${this.props.airQualityData.name}|${lat}|${lng}`] !== undefined) {
-                        cellsPointData.push(this.props.mapState.pointDataCells[`${this.props.time}|${this.props.airQualityData.name}|${lat}|${lng}`]);
+                    if (this.props.mapState.pointDataCells.hasOwnProperty(`${this.props.time}|${airQualityData.name}|${lat}|${lng}`) || this.props.mapState.pointDataCells[`${this.props.time}|${airQualityData.name}|${lat}|${lng}`] !== undefined) {
+                        cellsPointData.push(this.props.mapState.pointDataCells[`${this.props.time}|${airQualityData.name}|${lat}|${lng}`]);
                     }
                 }
             }
@@ -79,9 +81,9 @@ export default class OverlayBuilder extends Component {
 
         return (
             <div>
-                <SensorOverlayFactory data={data} airQualityData={this.props.airQualityData} openHandler={(squareCenter, id, airQualityData) => this.props.openHandler(squareCenter, id, airQualityData)}
+                <SensorOverlayFactory data={data} openHandler={(squareCenter, thingId) => this.props.openHandler(squareCenter, thingId)}
                     overlay={OverlayEnum.sensor === this.props.overlays} />
-                <InterpolationOverlayFactory airQualityData={this.props.airQualityData} pointData={prepPointData} iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.props.iOpenHandler(squareCenter, interpolatedValue, airQualityData)}
+                <InterpolationOverlayFactory pointData={prepPointData} iOpenHandler={(squareCenter, interpolatedValue) => this.props.iOpenHandler(squareCenter, interpolatedValue)}
                     overlay={OverlayEnum.interpolation === this.props.overlays} />
             </div>
         );

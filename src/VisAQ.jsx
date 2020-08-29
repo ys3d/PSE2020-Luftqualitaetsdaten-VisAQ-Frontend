@@ -63,13 +63,12 @@ class VisAQ extends Component {
      * @param {Object} center   Center of the clicked square
      * @param {Object} thingId  The thing id
      */
-    handleShowSensorClick(center, thingId, airQualityData) {
+    handleShowSensorClick(center, thingId) {
         this.setState({
             showOverview: true,
             center: center,
             thingId: thingId,
-            isSensor: true,
-            airQualityDataPoint: airQualityData
+            isSensor: true
         });
     }
 
@@ -79,13 +78,12 @@ class VisAQ extends Component {
      * @param {Object} center               Center of the clicked square
      * @param {Object} interpolatedValue    The interpolated value of the clicked square
      */
-    handleShowPointClick(center, interpolatedValue, airQualityData) {
+    handleShowPointClick(center, interpolatedValue) {
         this.setState({
             showOverview: true,
             center: center,
             interpolatedValue: interpolatedValue,
-            isSensor: false,
-            airQualityDataPoint: airQualityData
+            isSensor: false
         });
     }
 
@@ -119,9 +117,9 @@ class VisAQ extends Component {
                     <React.Fragment>
                         <Router>
                             <Container fluid>
-                                <Navigationbar openHandler={(squareCenter, thingId, airQualityData) => this.handleShowSensorClick(squareCenter, thingId, airQualityData)}
+                                <Navigationbar openHandler={(squareCenter, thingId) => this.handleShowSensorClick(squareCenter, thingId)}
                                     overviewDetailHandler={() => this.toggleDetails()}
-                                    iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.handleShowPointClick(squareCenter, interpolatedValue, airQualityData)}
+                                    iOpenHandler={(squareCenter, interpolatedValue) => this.handleShowPointClick(squareCenter, interpolatedValue)}
                                     show={this.state.showOverview}
                                     closeHandler={this.handleCloseClick}
                                     thingId={this.state.thingId}
@@ -129,7 +127,6 @@ class VisAQ extends Component {
                                     showDetails={this.state.overviewDetails}
                                     squareCenter={this.state.center}
                                     pointValue={this.state.interpolatedValue}
-                                    airQualityData={this.state.airQualityDataPoint}
                                 />
                             </Container>
                         </Router>

@@ -14,7 +14,7 @@ import './Navigationbar.css';
 import Help from '../../Help';
 import HelpPopover from '../../HelpPopover';
 import { Row, Col } from "react-bootstrap";
-import Overview from '../map/overview/OverviewContainer';
+import Overview from '../map/overview/Overview';
 import OverlayEnum from '../../overlayfactory/OverlayEnum';
 
 let startTime;
@@ -33,7 +33,7 @@ class Navigationbar extends React.Component {
         super(props)
         this.state = {
             isOpen: false,
-            airQualityData: new AirQualityData(data.particulateMatter),
+            airQualityData: AirQualityData.getInstance(),
             activeAirQualityData: 0,
             activeLanguage: document.cookie.split(';').some((item) => item.trim().startsWith('Language=en')) ? 0 : 1,
             overlays: OverlayEnum.sensor,
@@ -84,7 +84,8 @@ class Navigationbar extends React.Component {
         } else {
             this.setState({ activeAirQualityData: position })
         }
-        this.setState(state => ({ airQualityData: new AirQualityData(airQualityData) }))
+        AirQualityData.setInstance(new AirQualityData(airQualityData));
+        this.setState(() => ({ airQualityData: AirQualityData.getInstance() }))
     }
 
     /**
@@ -172,7 +173,7 @@ class Navigationbar extends React.Component {
                                         className='nav-link'
                                         id='nav-link'
                                         style={{ color: this.activateAirQuality(0) }}
-                                        onClick={() => { this.toggle(0, new AirQualityData(data.particulateMatter)) }}
+                                        onClick={() => { this.toggle(0, data.particulateMatter) }}
                                         draggable="false"
                                     >
                                         {t('particulateMatter')}
@@ -181,7 +182,7 @@ class Navigationbar extends React.Component {
                                         className='nav-link'
                                         id='nav-link'
                                         style={{ color: this.activateAirQuality(1) }}
-                                        onClick={() => { this.toggle(1, new AirQualityData(data.humidity)) }}
+                                        onClick={() => { this.toggle(1, data.humidity) }}
                                         draggable="false"
                                     >
                                         {t('humidity')}
@@ -190,7 +191,7 @@ class Navigationbar extends React.Component {
                                         className='nav-link'
                                         id='nav-link'
                                         style={{ color: this.activateAirQuality(2) }}
-                                        onClick={() => { this.toggle(2, new AirQualityData(data.temperature)) }}
+                                        onClick={() => { this.toggle(2, data.temperature) }}
                                         draggable="false"
                                     >
                                         {t('temperature')}
@@ -199,7 +200,7 @@ class Navigationbar extends React.Component {
                                         className='nav-link'
                                         id='nav-link'
                                         style={{ color: this.activateAirQuality(3) }}
-                                        onClick={() => { this.toggle(3, new AirQualityData(data.airPressure)) }}
+                                        onClick={() => { this.toggle(3, data.airPressure) }}
                                         draggable="false"
                                     >
                                         {t('airPressure')}
@@ -340,9 +341,8 @@ class Navigationbar extends React.Component {
                     <Row className='row'>
                         <Col id="map-content">
                             <MapView
-                                airQualityData={this.state.airQualityData}
-                                openHandler={(squareCenter, thingId, airQualityData) => this.props.openHandler(squareCenter, thingId, airQualityData)}
-                                iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.props.iOpenHandler(squareCenter, interpolatedValue, airQualityData)}
+                                openHandler={(squareCenter, thingId) => this.props.openHandler(squareCenter, thingId)}
+                                iOpenHandler={(squareCenter, interpolatedValue) => this.props.iOpenHandler(squareCenter, interpolatedValue)}
                                 overlays={this.state.overlays}
                                 historicalMode={this.state.historicalMode}
                                 time={this.state.time}
@@ -358,7 +358,6 @@ class Navigationbar extends React.Component {
                             className='map'
                             squareCenter={this.props.squareCenter}
                             pointValue={this.props.pointValue}
-                            airQualityData={this.state.airQualityData}
                         />
                     </Row>
                 </Router>

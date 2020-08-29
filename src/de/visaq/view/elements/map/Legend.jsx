@@ -3,6 +3,7 @@ import Gradient from '../theme/Gradient';
 import L from "leaflet";
 import './Legend.css';
 import { withTranslation } from 'react-i18next';
+import AirQualityData from "../airquality/AirQualityData";
 
 var legend;
 
@@ -18,7 +19,6 @@ class Legend extends MapControl {
     constructor(props) {
         super(props);
         this.state = {
-            airQualityData: props.airQualityData,
             language: null
         };
         this.createLeafletElement();
@@ -29,27 +29,9 @@ class Legend extends MapControl {
     createLeafletElement() { }
 
     /**
-     * Decides whether the component should update.
-     * Returns true if the state of AirQualityData changed in the parent component, false otherwise.
-     *
-     * @param {Object} nextProps The properties
-     * @param {Object} nextState The new state
-     */
-    shouldComponentUpdate(nextProps, nextState) {
-        if (this.state.airQualityData.name !== nextProps.airQualityData.name || this.state.language !== nextProps.i18n.language) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Updates the Legend's state.
-     *
-     * @param {Object} airQualityData The new AirQuality Data.
      */
-    componentDidUpdate(airQualityData) {
-        this.setState({ airQualityData: airQualityData.airQualityData, language: this.props.i18n.language });
+    componentDidUpdate() {
         this.removeLegend();
         this.createLegend();
     }
@@ -65,6 +47,8 @@ class Legend extends MapControl {
      * Creates the content of the Legend component.
      */
     createLegend() {
+        let airQualityData = AirQualityData.getInstance();
+
         legend = L.control({ position: "bottomleft" });
         /**
          * Creates the Legend content.
@@ -73,9 +57,9 @@ class Legend extends MapControl {
             const { t } = this.props;
             const div = L.DomUtil.create("div", "info legend");
             const num = 10;
-            const min = this.state.airQualityData.getAverage() - this.state.airQualityData.getVariance();
+            const min = airQualityData.getAverage() - airQualityData.getVariance();
             const grades = [];
-            const distance = (this.state.airQualityData.getVariance() * 2) / num;
+            const distance = (airQualityData.getVariance() * 2) / num;
 
             for (var i = 0; i < num; i++) {
                 grades[i] = min + i * distance;
@@ -89,13 +73,13 @@ class Legend extends MapControl {
 
                 labels.push(
                     '<i style="background:' +
-                    Gradient(pos, this.state.airQualityData) +
+                    Gradient(pos, airQualityData) +
                     '"></i> ' +
                     ((i === 0) ? "<" : "") +
                     ((i === (grades.length - 1)) ? ">" : "") +
                     pos +
                     " " +
-                    this.state.airQualityData.getUnitOfMeasurement()
+                    airQualityData.getUnitOfMeasurement()
                 );
             }
 

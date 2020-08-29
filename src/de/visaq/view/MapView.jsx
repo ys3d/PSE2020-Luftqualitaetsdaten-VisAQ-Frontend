@@ -10,6 +10,7 @@ import Observation from "../model/Observation";
 import PointDatum from '../model/PointDatum';
 import { ReactLeafletSearch } from 'react-leaflet-search';
 import { withTranslation } from 'react-i18next';
+import AirQualityData from './elements/airquality/AirQualityData';
 
 /**
  * Class that contains the MapView.
@@ -68,15 +69,9 @@ class MapView extends Component {
     }
 
     /**
-     * Changes the airQualityData state of the component.
-     *
-     * @param {Object} airQualityData The AirQualityData
+     * Requests all in bound cells.
      */
     componentDidUpdate(prevProps) {
-        if (this.props.airQualityData === prevProps.airQualityData
-            && this.props.time === prevProps.time) {
-            return;
-        }
         this.requestInBoundCells();
     }
 
@@ -111,6 +106,7 @@ class MapView extends Component {
         if (this.state.cells.hasOwnProperty(`${time}|${airQualityData.name}|${lat}|${lng}`) || this.state.cells[`${time}|${airQualityData.name}|${lat}|${lng}`] !== undefined) {
             return;
         }
+
         this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: null } }, () => {
             request("/api/thing/all/square", true, {
                 "y1": lat,
@@ -123,11 +119,11 @@ class MapView extends Component {
                     "millis": time,
                     "range": "PT2H",
                     "observedProperty": airQualityData.observedProperty,
-                    "average": this.props.airQualityData.average,
-                    "variance": this.props.airQualityData.variance
+                    "average": airQualityData.average,
+                    "variance": airQualityData.variance
                 }, Observation).then(observations => {
                     this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: { things: things, observations: observations } } });
-                }, error => {
+                }, () => {
                     this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: undefined } });
                 });
             }, error => {
@@ -159,9 +155,9 @@ class MapView extends Component {
                 "x2": lng + this.gridSize,
                 "millis": time,
                 "range": "PT2H",
-                "observedProperty": this.props.airQualityData.observedProperty,
-                "average": this.props.airQualityData.average,
-                "variance": this.props.airQualityData.variance
+                "observedProperty": airQualityData.observedProperty,
+                "average": airQualityData.average,
+                "variance": airQualityData.variance
             }, PointDatum).then(pointDatum => {
                 this.setState({ pointDataCells: { ...this.state.pointDataCells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: { pointData: pointDatum } } });
             }, error => {
@@ -185,11 +181,13 @@ class MapView extends Component {
         var xCells = eastCell - westCell;
         var yCells = northCell - southCell;
 
+        let airQualityData = AirQualityData.getInstance();
+
         if (yCells < 5 && xCells < 5) {
             for (var y = 0; y <= yCells; y++) {
                 for (var x = 0; x <= xCells; x++) {
-                    this.requestCell(this.props.time, this.props.airQualityData, (southCell + y) * this.gridSize, (westCell + x) * this.gridSize);
-                    this.requestInterpolation(this.props.time, this.props.airQualityData, (southCell + y) * this.gridSize, (westCell + x) * this.gridSize)
+                    this.requestCell(this.props.time, airQualityData, (southCell + y) * this.gridSize, (westCell + x) * this.gridSize);
+                    this.requestInterpolation(this.props.time, airQualityData, (southCell + y) * this.gridSize, (westCell + x) * this.gridSize)
                 }
             }
         }
@@ -221,7 +219,8 @@ class MapView extends Component {
      */
     render() {
         const { t } = this.props;
-        const ReactLeafletSearchComponent = withLeaflet(ReactLeafletSearch)
+        const ReactLeafletSearchComponent = withLeaflet(ReactLeafletSearch);
+
         return (
             <div className="map-container" style={{ height: this.state.height }}>
                 <Map
@@ -240,14 +239,13 @@ class MapView extends Component {
                     />
                     <OverlayBuilder
                         mapState={this.state}
-                        airQualityData={this.props.airQualityData}
                         time={this.props.time}
                         gridSize={this.gridSize}
-                        openHandler={(squareCenter, thingId, airQualityData) => this.props.openHandler(squareCenter, thingId, airQualityData)}
-                        iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.props.iOpenHandler(squareCenter, interpolatedValue, airQualityData)}
+                        openHandler={(squareCenter, thingId) => this.props.openHandler(squareCenter, thingId)}
+                        iOpenHandler={(squareCenter, interpolatedValue) => this.props.iOpenHandler(squareCenter, interpolatedValue)}
                         overlays={this.props.overlays}
                     />
-                    <Legend airQualityData={this.props.airQualityData} className='legend' id='legend'
+                    <Legend className='legend' id='legend'
                     />
 
                     <ReactLeafletSearchComponent
