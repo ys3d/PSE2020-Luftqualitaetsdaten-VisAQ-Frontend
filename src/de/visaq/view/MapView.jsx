@@ -27,10 +27,10 @@ class MapView extends Component {
             bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
             hasLoaded: false,
             pointDataCells: {},
-            cells: {}
+            cells: {},
+            height: window.innerWidth >= 992 ? window.innerHeight : 400
         };
         this.gridSize = 0.15;
-        this.requestInBoundCells();
     }
 
     /**
@@ -65,13 +65,6 @@ class MapView extends Component {
     updateDimensions() {
         const height = window.innerWidth >= 992 ? window.innerHeight : 400;
         this.setState({ height: height });
-    }
-
-    /**
-     * Starts the proccesses setPosition and updateDimensions when the component is mounted.
-     */
-    componentWillMount() {
-        this.updateDimensions();
     }
 
     /**

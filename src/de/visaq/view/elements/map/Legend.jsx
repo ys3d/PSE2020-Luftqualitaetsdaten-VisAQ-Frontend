@@ -99,7 +99,7 @@ class Legend extends MapControl {
                 );
             }
 
-            div.innerHTML = `<p class='legend-header'>${t('legend-header')}</p>` + labels.join("<br>");
+            div.innerHTML = `<p class='legendHeader'>${t('legendHeader')}</p>` + labels.join("<br>");
             return div;
         };
 

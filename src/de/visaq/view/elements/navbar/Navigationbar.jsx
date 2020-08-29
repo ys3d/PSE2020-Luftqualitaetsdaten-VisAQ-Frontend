@@ -159,7 +159,7 @@ class Navigationbar extends React.Component {
         return (
             <React.Fragment>
                 <Router>
-                    <div class="navbar-main">
+                    <div className="navbar-main">
                         <CookieNotice />
                         <Navbar expand='lg' bg='light' className='navbar' id='navbar'>
                             <Navbar.Brand href=''>
@@ -206,13 +206,13 @@ class Navigationbar extends React.Component {
                                     </Nav.Link>
                                 </Nav>
                                 <NavDropdown title={t('mapOverlay')} variant="success" id="dropdown-basic">
-                                    <p class='dropdown-header'>{t('mapOverlay')} <HelpPopover placement="right" title={t('mapOverlay')} content={t('popover-map-overlay')} /></p>
+                                    <p className='dropdown-header'>{t('mapOverlay')} <HelpPopover placement="right" title={t('mapOverlay')} content={t('popoverMapOverlay')} /></p>
                                     <Form.Group controlId='form-switch' alignRight>
                                         <Form.Check
                                             type='radio'
                                             id='sensor-overlay'
                                             checked={OverlayEnum.sensor === this.state.overlays}
-                                            label={t('Sensors')}
+                                            label={t('sensors')}
                                             onClick={() => this.activateSensors()}
                                             draggable="false"
                                         />
@@ -220,14 +220,14 @@ class Navigationbar extends React.Component {
                                             type='radio'
                                             id='interpolation-overlay'
                                             checked={OverlayEnum.interpolation === this.state.overlays}
-                                            label={t('Interpolation')}
+                                            label={t('interpolation')}
                                             onClick={() => this.activateInterpolation()}
                                             draggable="false"
                                         />
                                     </Form.Group>
                                 </NavDropdown>
-                                <NavDropdown title={t('furtherFunc')} variant="success" id="dropdown-basic">
-                                    <p class='dropdown-header'>{t('expert-Mode')} <HelpPopover placement="right" title={t('expert-Mode')} content={t('popover-expert-mode')} /></p>
+                                <NavDropdown title={t('furtherFunctions')} variant="success" id="dropdown-basic">
+                                    <p className='dropdown-header'>{t('expertMode')} <HelpPopover placement="right" title={t('expertMode')} content={t('popoverExpertMode')} /></p>
                                     <Form.Group controlId='form-switch' alignRight>
                                         <Form.Check
                                             type='switch'
@@ -238,12 +238,12 @@ class Navigationbar extends React.Component {
                                         />
                                     </Form.Group>
                                     <NavDropdown.Divider />
-                                    <p class='dropdown-header'>{t('historical-mode')} <HelpPopover placement="right" title={t('historical-mode')} content={t('popover-historical-mode')} /></p>
+                                    <p className='dropdown-header'>{t('historicalMode')} <HelpPopover placement="right" title={t('historicalMode')} content={t('popoverHistoricalMode')} /></p>
                                     <Form.Group controlId='form-switch' alignRight>
                                         <Form.Check
                                             type='switch'
                                             id='historical-mode'
-                                            label={t('historical-view')}
+                                            label={t('historicalView')}
                                             draggable="false"
                                             onClick={() => this.toggleHistoricalMode()}
                                         />
@@ -269,7 +269,7 @@ class Navigationbar extends React.Component {
                                         </Button>
                                     </Form>
                                     <NavDropdown.Divider />
-                                    <p class='dropdown-header'>{t('information')}</p>
+                                    <p className='dropdown-header'>{t('information')}</p>
                                     <NavDropdown.Item
                                         className='drop-link'
                                         id='drop-link'
@@ -289,7 +289,7 @@ class Navigationbar extends React.Component {
                                         <PopupCauses />
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                    <p class='dropdown-header'>{t('seeAlso')}</p>
+                                    <p className='dropdown-header'>{t('seeAlso')}</p>
                                     <NavDropdown.Item
                                         className='drop-link'
                                         id='drop-link'

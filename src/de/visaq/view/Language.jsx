@@ -51,7 +51,7 @@ i18n
      */
     .on('languageChanged', function (lng) {
         if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
-            document.cookie = 'Language=' + lng;
+            document.cookie = 'Language=' + lng + ';max-age=' + 60 * 60 * 24 * 365 + ";SameSite=Lax";
         }
     })
 
@@ -76,8 +76,5 @@ i18n
  * Method that changes the language
  */
 i18next
-    .changeLanguage('')
-    .then((t) => {
-        t('key'); // -> same as i18next.t
-    });
+    .changeLanguage('');
 export default i18n;

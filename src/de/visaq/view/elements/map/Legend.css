@@ -37,7 +37,7 @@ body {
     opacity: 0.7;
 }
 
-p.legend-header {
+p.legendHeader {
     font-size: 1rem;
     padding: 0 0 0.4em 0;
     color: var(--main-page-color);

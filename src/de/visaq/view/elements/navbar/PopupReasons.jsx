@@ -23,7 +23,7 @@ class PopupReasons extends Component {
         this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         window.addEventListener('resize', this.handleWindowSizeChange);
     }
 

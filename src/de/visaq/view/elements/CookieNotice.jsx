@@ -15,6 +15,10 @@ class CookieNotice extends Component {
         this.state = {
             showModal: document.cookie.split(';').some((item) => item.trim().startsWith('Language=')) ? false : true,
         };
+
+        if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
+            i18next.changeLanguage(this.getLanguage('Language'));
+        }
     }
 
     /**
@@ -30,16 +34,6 @@ class CookieNotice extends Component {
             }
         } else {
             return 'de'
-        }
-    }
-
-    /**
-     * Run when loading the site. Loads the saved language
-     */
-
-    componentWillMount() {
-        if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
-            i18next.changeLanguage(this.getLanguage('Language'));
         }
     }
 
@@ -64,7 +58,7 @@ class CookieNotice extends Component {
      * Saves the language in the cookie
      */
     setCookie = () => {
-        document.cookie = 'Language=' + i18next.language + ';max-age=' + 60 * 60 * 24 * 365;
+        document.cookie = 'Language=' + i18next.language + ';max-age=' + 60 * 60 * 24 * 365 + ";SameSite=Lax";
         this.setState({ showModal: false });
     }
     /**
