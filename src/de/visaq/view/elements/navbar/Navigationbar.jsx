@@ -207,14 +207,14 @@ class Navigationbar extends React.Component {
                                     </Nav.Link>
                                 </Nav>
                                 <NavDropdown title={t('mapOverlay')} variant="success" id="dropdown-basic">
-                                    <p className='dropdown-header'>{t('mapOverlay')} <HelpPopover placement="right" title={t('mapOverlay')} content={t('popoverMapOverlay')} /></p>
-                                    <Form.Group controlId='form-switch' alignRight>
+                                    <p className='dropdown-header'>{t('mapOverlay')} <HelpPopover placement="auto" title={t('mapOverlay')} content={t('popoverMapOverlay')} /></p>
+                                    <Form.Group controlId='form-switch'>
                                         <Form.Check
                                             type='radio'
                                             id='sensor-overlay'
                                             checked={OverlayEnum.sensor === this.state.overlays}
                                             label={t('sensors')}
-                                            onClick={() => this.activateSensors()}
+                                            onChange={() => this.activateSensors()}
                                             draggable="false"
                                         />
                                         <Form.Check
@@ -222,14 +222,14 @@ class Navigationbar extends React.Component {
                                             id='interpolation-overlay'
                                             checked={OverlayEnum.interpolation === this.state.overlays}
                                             label={t('interpolation')}
-                                            onClick={() => this.activateInterpolation()}
+                                            onChange={() => this.activateInterpolation()}
                                             draggable="false"
                                         />
                                     </Form.Group>
                                 </NavDropdown>
                                 <NavDropdown title={t('furtherFunctions')} variant="success" id="dropdown-basic">
-                                    <p className='dropdown-header'>{t('expertMode')} <HelpPopover placement="right" title={t('expertMode')} content={t('popoverExpertMode')} /></p>
-                                    <Form.Group controlId='form-switch' alignRight>
+                                    <p className='dropdown-header'>{t('expertMode')} <HelpPopover placement="auto" title={t('expertMode')} content={t('popoverExpertMode')} /></p>
+                                    <Form.Group controlId='form-switch'>
                                         <Form.Check
                                             type='switch'
                                             id='expert-mode'
@@ -239,7 +239,7 @@ class Navigationbar extends React.Component {
                                         />
                                     </Form.Group>
                                     <NavDropdown.Divider />
-                                    <p className='dropdown-header'>{t('historicalMode')} <HelpPopover placement="right" title={t('historicalMode')} content={t('popoverHistoricalMode')} /></p>
+                                    <p className='dropdown-header'>{t('historicalMode')} <HelpPopover placement="auto" title={t('historicalMode')} content={t('popoverHistoricalMode')} /></p>
                                     <Form.Group controlId='form-switch' alignRight>
                                         <Form.Check
                                             type='switch'
@@ -256,7 +256,6 @@ class Navigationbar extends React.Component {
                                             historicalMode={this.state.historicalMode}
                                             className='query-historical'
                                             id='query-historical'
-                                            inline
                                         />
                                         <Button
                                             size="sm"
@@ -264,7 +263,6 @@ class Navigationbar extends React.Component {
                                             onClick={() => this.startTimeQuery()}
                                             className='button-historical'
                                             id='button-historical'
-                                            inline
                                         >
                                             {t('start')}
                                         </Button>
