@@ -110,7 +110,7 @@ class VisAQ extends Component {
      */
     render() {
         document.body.style.overflow = "hidden"
-        document.body.classList.add('dark-theme');
+
         return (
             <div id='app' className="app">
                 <Suspense fallback='loading'>

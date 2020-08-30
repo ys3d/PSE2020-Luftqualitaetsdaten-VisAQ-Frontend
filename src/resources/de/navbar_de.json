@@ -32,5 +32,9 @@
     "seeAlso" : "Siehe auch",
     "popoverMapOverlay" : "Fügt abhängig von der ausgewählten Ansicht informative Objekte oder Einfärbungen auf der Karte ein. Es kann immer nur eine Ansicht gleichzeitig gewählt werden.",
     "popoverExpertMode" : "Der Expertenmodus bietet zusätzliche Daten (z.B. in der Detailansicht zu einem Sensor), die speziell für Experten von Interesse sein könnten.",
-    "popoverHistoricalMode" : "Der historische Modus erlaubt es Ihnen in die Vergangenheit zu blicken. Suchen Sie sich ein Datum und eine Uhrzeit aus und drücken Sie 'Los', um die Daten aus diesem Zeitraum einzusehen."
+    "popoverHistoricalMode" : "Der historische Modus erlaubt es Ihnen in die Vergangenheit zu blicken. Suchen Sie sich ein Datum und eine Uhrzeit aus und drücken Sie 'Los', um die Daten aus diesem Zeitraum einzusehen.",
+    "colorThemes" : "Farbschema",
+    "popoverColorThemes" : "Farbschemen wirken sich auf die auf der Website verwendeten Farben aus.",
+    "lightTheme" : "Helles Farbschema",
+    "darkTheme" : "Dunkles Farbschema"
 }

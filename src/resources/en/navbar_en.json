@@ -33,5 +33,9 @@
     "seeAlso" : "See also",
     "popoverMapOverlay" : "Adds informative objects or coloring to the map depending on the selected overlay. Only one overlay can be selected at a time.",
     "popoverExpertMode" : "The expert mode offers additional data (for example in the sensor overview) that might be of interest for experts.",
-    "popoverHistoricalMode" : "The historical mode allows you to look back in time. Choose a date and time and press 'Go' to look at the data collected at the time."
+    "popoverHistoricalMode" : "The historical mode allows you to look back in time. Choose a date and time and press 'Go' to look at the data collected at the time.",
+    "colorThemes" : "Color theme",
+    "popoverColorThemes" : "Color themes affect the colors used on the website.",
+    "lightTheme" : "Light theme",
+    "darkTheme" : "Dark theme"
 }

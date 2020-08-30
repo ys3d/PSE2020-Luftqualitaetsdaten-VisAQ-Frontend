@@ -16,6 +16,7 @@ import HelpPopover from '../../HelpPopover';
 import { Row, Col } from "react-bootstrap";
 import Overview from '../map/overview/Overview';
 import OverlayEnum from '../../overlayfactory/OverlayEnum';
+import ThemeEnum from '../../overlayfactory/ThemeEnum';
 
 let startTime;
 let tempTime;
@@ -37,11 +38,16 @@ class Navigationbar extends React.Component {
             activeAirQualityData: 0,
             activeLanguage: document.cookie.split(';').some((item) => item.trim().startsWith('Language=en')) ? 0 : 1,
             overlays: OverlayEnum.sensor,
+            theme: ThemeEnum.light,
             historicalMode: false,
             time: Date.now()
         }
         startTime = this.state.time;
         tempTime = this.state.time;
+    }
+
+    componentDidMount() {
+        this.activateTheme(this.state.theme);
     }
 
     /**
@@ -72,6 +78,11 @@ class Navigationbar extends React.Component {
         this.setState({ overlays: OverlayEnum.interpolation });
     }
 
+    activateTheme(newTheme) {
+        this.setState({ theme: newTheme }, () => {
+            document.body.className = newTheme;
+        });
+    }
 
     /**
        * Toggles the active state of the air quality buttons
@@ -307,6 +318,27 @@ class Navigationbar extends React.Component {
                                     </NavDropdown.Item>
                                 </NavDropdown>
                                 <Nav className='ml-auto'>
+                                    <NavDropdown title={t('colorThemes')} variant="success" id="dropdown-basic">
+                                        <p className='dropdown-header'>{t('colorThemes')} <HelpPopover placement="auto" title={t('colorThemes')} content={t('popoverColorThemes')} /></p>
+                                        <Form.Group controlId='form-switch'>
+                                            <Form.Check
+                                                type='radio'
+                                                id='light-theme'
+                                                checked={ThemeEnum.light === this.state.theme}
+                                                label={t('lightTheme')}
+                                                onChange={() => this.activateTheme(ThemeEnum.light)}
+                                                draggable="false"
+                                            />
+                                            <Form.Check
+                                                type='radio'
+                                                id='dark-theme'
+                                                checked={ThemeEnum.dark === this.state.theme}
+                                                label={t('darkTheme')}
+                                                onChange={() => this.activateTheme(ThemeEnum.dark)}
+                                                draggable="false"
+                                            />
+                                        </Form.Group>
+                                    </NavDropdown>
                                     <Nav.Link
                                         className='help'
                                         id='help'

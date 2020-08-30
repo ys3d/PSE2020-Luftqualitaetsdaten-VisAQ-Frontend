@@ -1,6 +1,7 @@
 .navbar {
     background-color: var(--primary-background-color);
     z-index: 1020;
+    color: var(--secondary-text-color);
 }
 
 p.dropdown-header {
@@ -42,6 +43,7 @@ p.dropdown-header {
 }
 
 .form-check {
+    margin-right: 1.5rem;
     padding-left: 1.5rem;
     color: var(--secondary-text-color);
 }
@@ -100,6 +102,7 @@ p.dropdown-header {
 .dropdown-menu {
     background-color: var(--tertiary-background-color);
     color: var(--secondary-text-color);
+    white-space: nowrap;
 }
 
 a:not([role="button"]):focus,
@@ -115,6 +118,10 @@ a:not([role="button"])::selection {
     color: var(--main-page-color)!important;
     outline: none!important;
     box-shadow: none!important;
+}
+
+#nav-link-lng {
+    color: var(--secondary-text-color);
 }
 
 #nav-link-lng:hover {
