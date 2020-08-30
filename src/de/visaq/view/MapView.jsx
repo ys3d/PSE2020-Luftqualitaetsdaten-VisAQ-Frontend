@@ -10,7 +10,8 @@ import Observation from "../model/Observation";
 import PointDatum from '../model/PointDatum';
 import { ReactLeafletSearch } from 'react-leaflet-search';
 import { withTranslation } from 'react-i18next';
-
+import {Button} from 'react-bootstrap';
+import {AiOutlineAim} from "react-icons/ai";
 
 /**
  * Class that contains the MapView.
@@ -39,15 +40,12 @@ class MapView extends Component {
      */
     setPosition(){ 
             navigator.geolocation.getCurrentPosition((position) => {
-                console.log(position);
                 this.setState({
                     lat: position.coords.latitude,
                     lng: position.coords.longitude,
                 });
             this.onBoundsUpdate(this.state.bounds);
-            }, (error) => {
-               alert('Well wrong place pal');
-            },
+            }, (error) => {},
             {
                 enableHighAccuracy: false,
                 timeout: 20,
@@ -201,7 +199,7 @@ class MapView extends Component {
      * @param {Object} newBounds The new map bounds
      */
     onBoundsUpdate(newBounds) {
-        this.setState({ bounds: newBounds }, () => {
+        this.setState({ bounds: newBounds, lat: newBounds.getCenter().lat, lng: newBounds.getCenter().lng, zoom: undefined }, () => {
             this.requestInBoundCells();
         });
     }
