@@ -222,16 +222,15 @@ class MapView extends Component {
         const ReactLeafletSearchComponent = withLeaflet(ReactLeafletSearch);
 
         return (
-            <div className="map-container" style={{ height: this.state.height }}>
+            <div className="map-container">
                 <Map
                     center={[this.state.lat, this.state.lng]}
                     zoom={this.state.zoom}
-                    style={{ width: '100%', height: '100vh' }}
+                    style={{ width: '100%', height: '100%' }}
                     boundsOptions={{ padding: [50, 50] }}
                     ref={this.mapRef}
                     onMoveEnd={this.onMove.bind(this)}
                     zoomControl={false}
-
                 >
                     <TileLayer
                         attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

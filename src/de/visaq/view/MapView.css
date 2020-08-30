@@ -2,6 +2,10 @@
     bottom: 60px;
 }
 
+#map-content, .map-container {
+    height: 100%;
+}
+
 .search-control-wrap {
     /*
         This does not belong here
