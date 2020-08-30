@@ -49,7 +49,7 @@
     cursor: default;
     border-radius: 3px;
     display: flex;
-    z-index: 8;
+    z-index: var(--searchbar-z-index);
     margin-bottom: -2.2em;
     box-shadow: 0 0 15px var(--box-shadow) !important;
 }
@@ -61,7 +61,6 @@
 .custom-searchbar .search-control-input {
     position: relative;
     background-color: var(--primary-background-color);
-    z-index: 50;
     outline: 0;
     padding: 0;
     margin-left: 0.4em;
@@ -119,7 +118,6 @@
     right: 0;
     color: inherit;
     cursor: pointer;
-    z-index: 51;
     position: absolute;
 }
 
@@ -162,7 +160,6 @@
     padding: 0px 0 0 0;
     margin: 30px 0 0 0;
     overflow-y: auto;
-    z-index: 51;
 }
 
 .search-control-info-wrapper-close {

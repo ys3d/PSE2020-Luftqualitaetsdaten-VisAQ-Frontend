@@ -1,5 +1,5 @@
 import React, { createRef, Component } from 'react';
-import { Map, TileLayer, withLeaflet } from 'react-leaflet';
+import { Map, TileLayer } from 'react-leaflet';
 import L from 'leaflet';
 import "./MapView.css";
 import OverlayBuilder from './overlayfactory/OverlayBuilder';
@@ -8,9 +8,9 @@ import request from "../controller/Request";
 import Thing from "../model/Thing";
 import Observation from "../model/Observation";
 import PointDatum from '../model/PointDatum';
-import { ReactLeafletSearch } from 'react-leaflet-search';
 import { withTranslation } from 'react-i18next';
 import AirQualityData from './elements/airquality/AirQualityData';
+import Searchbar from './elements/map/Searchbar';
 
 /**
  * Class that contains the MapView.
@@ -28,8 +28,7 @@ class MapView extends Component {
             bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
             hasLoaded: false,
             pointDataCells: {},
-            cells: {},
-            height: window.innerWidth >= 992 ? window.innerHeight : 400
+            cells: {}
         };
         this.gridSize = 0.15;
     }
@@ -61,14 +60,6 @@ class MapView extends Component {
     }
 
     /**
-     * Sets the height according to the window height.
-     */
-    updateDimensions() {
-        const height = window.innerWidth >= 992 ? window.innerHeight : 400;
-        this.setState({ height: height });
-    }
-
-    /**
      * Requests all in bound cells.
      */
     componentDidUpdate(prevProps) {
@@ -80,7 +71,6 @@ class MapView extends Component {
      */
     componentDidMount() {
         this.setPosition();
-        window.addEventListener("resize", this.updateDimensions.bind(this));
         window.addEventListener('load', this.requestInBoundCells.bind(this));
     }
 
@@ -88,7 +78,6 @@ class MapView extends Component {
      * Removes the Event Listener.
      */
     componentWillUnmount() {
-        window.removeEventListener("resize", this.updateDimensions.bind(this));
         window.removeEventListener('load', this.requestInBoundCells.bind(this));
     }
 
@@ -218,11 +207,9 @@ class MapView extends Component {
      * Renders the map and all of its children.
      */
     render() {
-        const { t } = this.props;
-        const ReactLeafletSearchComponent = withLeaflet(ReactLeafletSearch);
-
+        console.log("render");
         return (
-            <div className="map-container">
+            <div className="map-container" key="map-container">
                 <Map
                     center={[this.state.lat, this.state.lng]}
                     zoom={this.state.zoom}
@@ -231,11 +218,13 @@ class MapView extends Component {
                     ref={this.mapRef}
                     onMoveEnd={this.onMove.bind(this)}
                     zoomControl={false}
+                    key="custom-leaflet-map"
                 >
                     <TileLayer
                         attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
+
                     <OverlayBuilder
                         mapState={this.state}
                         time={this.props.time}
@@ -244,27 +233,16 @@ class MapView extends Component {
                         iOpenHandler={(squareCenter, interpolatedValue) => this.props.iOpenHandler(squareCenter, interpolatedValue)}
                         overlays={this.props.overlays}
                     />
-                    <Legend className='legend' id='legend'
-                    />
 
-                    <ReactLeafletSearchComponent
-                        className="custom-searchbar search-control"
-                        position="topleft"
-                        provider="OpenStreetMap"
-                        providerOptions={{ region: "de" }}
-                        inputPlaceholder={t('search')}
-                        zoom={12}
-                        showMarker={false}
-                        showPopUp={false}
-                        closeResultsOnClick={true}
-                        openSearchOnLoad={true}
-                    />
+                    <Legend className='legend' id='legend' />
+
+                    <Searchbar />
                 </Map>
             </div>
         );
     }
 }
 
-const dynamicMapView = withTranslation('common')(MapView)
+const dynamicMapView = withTranslation('common')(MapView);
 
-export default dynamicMapView
+export default dynamicMapView;
