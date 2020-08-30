@@ -17,6 +17,7 @@ import { Row, Col } from "react-bootstrap";
 import Overview from '../map/overview/Overview';
 import OverlayEnum from '../../overlayfactory/OverlayEnum';
 import ThemeEnum from '../../overlayfactory/ThemeEnum';
+import Theme from '../theme/Theme';
 
 let startTime;
 let tempTime;
@@ -36,9 +37,9 @@ class Navigationbar extends React.Component {
             isOpen: false,
             airQualityData: AirQualityData.getInstance(),
             activeAirQualityData: 0,
-            activeLanguage: document.cookie.split(';').some((item) => item.trim().startsWith('Language=en')) ? 0 : 1,
+            activeLanguage: i18next.language === 'en' ? 0 : 1,
             overlays: OverlayEnum.sensor,
-            theme: ThemeEnum.light,
+            theme: Theme.getTheme(),
             historicalMode: false,
             time: Date.now()
         }
@@ -80,7 +81,7 @@ class Navigationbar extends React.Component {
 
     activateTheme(newTheme) {
         this.setState({ theme: newTheme }, () => {
-            document.body.className = newTheme;
+            Theme.setTheme(newTheme);
         });
     }
 

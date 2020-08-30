@@ -11,6 +11,7 @@ import PointDatum from '../model/PointDatum';
 import { withTranslation } from 'react-i18next';
 import AirQualityData from './elements/airquality/AirQualityData';
 import Searchbar from './elements/map/Searchbar';
+import i18n from './Language';
 
 /**
  * Class that contains the MapView.
@@ -39,7 +40,7 @@ class MapView extends Component {
      */
     setPosition() {
         if (!this.state.hasLoaded) {
-            if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
+            if (i18n.language) {
                 navigator.geolocation.watchPosition((position) => {
                     this.setState({
                         lat: position.coords.latitude,
@@ -207,7 +208,6 @@ class MapView extends Component {
      * Renders the map and all of its children.
      */
     render() {
-        console.log("render");
         return (
             <div className="map-container" key="map-container">
                 <Map

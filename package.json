@@ -14,6 +14,7 @@
     "i18next": "^19.5.4",
     "i18next-browser-languagedetector": "^5.0.1",
     "jquery": "*",
+    "js-cookie": "^2.2.1",
     "leaflet": "^1.6.0",
     "next": "7.0.0",
     "next-i18next": "^4.5.0",

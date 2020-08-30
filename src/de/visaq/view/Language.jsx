@@ -17,6 +17,7 @@ import popup_reasons_de from '../../../resources/de/pupup_reasons_de.json';
 import popup_reasons_en from '../../../resources/en/popup_reasons_en.json';
 import legend_de from '../../../resources/de/legend_de.json';
 import legend_en from '../../../resources/en/legend_en.json';
+import Cookies from 'js-cookie';
 
 /**
  * The resources used to get the translations
@@ -50,8 +51,8 @@ i18n
      * Desicion on what happens when language is changed
      */
     .on('languageChanged', function (lng) {
-        if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
-            document.cookie = 'Language=' + lng + ';max-age=' + 60 * 60 * 24 * 365 + ";SameSite=Lax";
+        if (Cookies.get("visaq_allowcookies") === "true") {
+            Cookies.set('visaq_language', lng, { expires: 365, sameSite: 'lax' });
         }
     })
 
@@ -59,7 +60,7 @@ i18n
      * Initialization of the Language settings
      */
     .init({
-        lng: document.cookie.split(';').some((item) => item.trim().startsWith('Language=en')) ? 'en' : 'de',
+        lng: Cookies.get('visaq_language'),
         resources,
         languages: ['de', 'en'],
         fallbackLng: 'de',
