@@ -33,7 +33,7 @@
     --tertiary-background-color: rgb(42, 42, 42);
     --quarternary-background-color: rgb(55, 55, 55);
     --box-shadow: rgb(0, 0, 0);
-    --border: rgb(0, 0, 0);
+    --border: rgb(255, 255, 255);
     /* Diagram needs to be here, because we can't access it via JS otherwhise */
     --diagram-background-color: rgba(75, 192, 192, 0.4);
     --diagram-border-color: rgba(75, 192, 192, 1);
