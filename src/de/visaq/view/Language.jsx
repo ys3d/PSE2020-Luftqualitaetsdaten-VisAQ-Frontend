@@ -15,6 +15,8 @@ import popup_causes_de from '../../../resources/de/popup_causes_de.json';
 import popup_causes_en from '../../../resources/en/popup_causes_en.json';
 import popup_reasons_de from '../../../resources/de/pupup_reasons_de.json';
 import popup_reasons_en from '../../../resources/en/popup_reasons_en.json';
+import historical_de from '../../../resources/de/historical_de.json';
+import historical_en from '../../../resources/en/historical_en.json';
 
 /**
  * The resources used to get the translations
@@ -27,6 +29,7 @@ const resources = {
         cookies: cookie_en,
         causes: popup_causes_en,
         reasons: popup_reasons_en,
+        historical: historical_en,
     },
     de: {
         common: navbar_de,
@@ -35,6 +38,7 @@ const resources = {
         cookies: cookie_de,
         causes: popup_causes_de,
         reasons: popup_reasons_de,
+        historical: historical_de,
     }
 };
 

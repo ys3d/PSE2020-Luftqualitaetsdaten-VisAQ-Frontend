@@ -2,7 +2,6 @@
     "sensor": "Sensor:",
     "description": "Description:",
     "currently": "Current",
-    "historicalDevelopment": "Historical development",
     "in": "in",
     "airPressure": "Atmospheric pressure",
     "airTemperature": "Air temperature",

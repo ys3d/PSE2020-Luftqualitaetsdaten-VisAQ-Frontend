@@ -54,7 +54,6 @@ class DataCard extends Component {
                         <Card.Body >
                             {t('currently')}: {this.props.currentValue} {this.props.dataUnit}
                             <Diagram
-                                title={t('historicalDevelopment')}
                                 dataRowLabel={this.props.dataUnit}
                                 dataLabels={this.props.dataLabels}
                                 data={this.props.data}
