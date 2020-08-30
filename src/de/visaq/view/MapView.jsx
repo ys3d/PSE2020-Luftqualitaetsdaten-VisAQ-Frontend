@@ -45,9 +45,7 @@ class MapView extends Component {
                     lng: position.coords.longitude,
                 });
             this.onBoundsUpdate(this.state.bounds);
-            }, (error) => {
-                console.log("Lokalisation Error");
-            },
+            }, (error) => {},
             {
                 enableHighAccuracy: false,
                 timeout: 20,
