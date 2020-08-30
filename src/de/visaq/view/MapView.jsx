@@ -28,7 +28,8 @@ class MapView extends Component {
             bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
             hasLoaded: false,
             pointDataCells: {},
-            cells: {}
+            cells: {},
+            windowWidth: window.innerWidth
         };
         this.gridSize = 0.15;
         this.requestInBoundCells();
@@ -65,7 +66,10 @@ class MapView extends Component {
      */
     updateDimensions() {
         const height = window.innerWidth >= 992 ? window.innerHeight : 400;
-        this.setState({ height: height });
+        this.setState({
+            height: height,
+            windowWidth: window.innerWidth
+        });
     }
 
     /**
@@ -253,8 +257,13 @@ class MapView extends Component {
                         iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.props.iOpenHandler(squareCenter, interpolatedValue, airQualityData)}
                         overlays={this.props.overlays}
                     />
-                    <Legend airQualityData={this.props.airQualityData} className='legend' id='legend'
-                    />
+                    {(!this.props.isOverviewOpen || (this.state.windowWidth >= 576)) &&
+                        <Legend
+                            airQualityData={this.props.airQualityData}
+                            className='legend'
+                            id='legend'
+                        />
+                    }
 
                     <ReactLeafletSearchComponent
                         className="search-control"

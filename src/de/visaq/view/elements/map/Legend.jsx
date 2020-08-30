@@ -61,6 +61,13 @@ class Legend extends MapControl {
   }
 
   /**
+   * Removes the legend when the component is unmounted
+   */
+  componentWillUnmount() {
+    this.removeLegend();
+  }
+
+  /**
    * Creates the content of the Legend component.
    */
   createLegend()  {
