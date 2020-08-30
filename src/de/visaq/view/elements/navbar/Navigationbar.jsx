@@ -241,6 +241,7 @@ class Navigationbar extends React.Component {
                                 </Dropdown>
                                 <NavDropdown variant="success" id="dropdown-basic">
                                     <p>{t('furtherFunc')}</p>
+                                    <div id={(window.innerHeight <= 750)?'furtherFunctionContainer':''}>
                                     <NavDropdown.Item
                                         className='drop-link'
                                         id='drop-link'
@@ -317,6 +318,7 @@ class Navigationbar extends React.Component {
                                             {t('start')}
                                         </Button>
                                     </Form>
+                                    </div>
                                 </NavDropdown>
                                 <Nav className='ml-auto'>
                                     <Nav.Link

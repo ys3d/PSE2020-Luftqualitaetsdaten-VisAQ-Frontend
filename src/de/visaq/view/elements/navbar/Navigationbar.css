@@ -110,6 +110,11 @@
     color: var(--text-gray);
 }
 
+#furtherFunctionContainer {
+    overflow-y: scroll;
+    height: 30vh;
+}
+
 #dropdown-basic:hover,
 #dropdown-basic::selection {
     color: var(--main-page-color);
