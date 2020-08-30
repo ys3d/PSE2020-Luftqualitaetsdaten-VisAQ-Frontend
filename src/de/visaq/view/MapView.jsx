@@ -49,7 +49,7 @@ class MapView extends Component {
                     }, () => {
                         this.onBoundsUpdate(this.state.bounds);
                     });
-                }, (error) => {
+                }, () => {
                     this.setState({ lat: 48.3705449, lng: 10.89779 }, () => {
                         this.onBoundsUpdate(this.state.bounds);
                     })
@@ -104,19 +104,24 @@ class MapView extends Component {
                 "y2": lat + this.gridSize,
                 "x2": lng + this.gridSize
             }, Thing).then(things => {
-                request("/api/observation/all/things/timeframed", true, {
-                    "things": things,
-                    "millis": time,
-                    "range": "PT2H",
-                    "observedProperty": airQualityData.observedProperty,
-                    "average": airQualityData.average,
-                    "variance": airQualityData.variance
-                }, Observation).then(observations => {
-                    this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: { things: things, observations: observations } } });
-                }, () => {
-                    this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: undefined } });
-                });
-            }, error => {
+                if (things === null) {
+                    this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: { things: things, observations: null } } });
+                }
+                else {
+                    request("/api/observation/all/things/timeframed", true, {
+                        "things": things,
+                        "millis": time,
+                        "range": "PT2H",
+                        "observedProperty": airQualityData.observedProperty,
+                        "average": airQualityData.average,
+                        "variance": airQualityData.variance
+                    }, Observation).then(observations => {
+                        this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: { things: things, observations: observations } } });
+                    }, () => {
+                        this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: undefined } });
+                    });
+                }
+            }, () => {
                 delete this.state.cells[`${time}|${airQualityData.name}|${lat}|${lng}`];
             });
         });
