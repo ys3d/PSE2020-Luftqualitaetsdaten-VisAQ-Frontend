@@ -4,6 +4,7 @@ import ShareField from './ShareField'
 import Help from '../../../Help';
 import { Nav } from 'react-bootstrap';
 import AirQualityData from '../../airquality/AirQualityData';
+import './Overview.css';
 
 /**
  * Displays all the information on a specific sensor or location

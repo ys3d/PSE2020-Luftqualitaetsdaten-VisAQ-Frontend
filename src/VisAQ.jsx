@@ -1,10 +1,9 @@
 import React, { Component, Suspense } from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import './VisAQ.css';
 import Navigationbar from './de/visaq/view/elements/navbar/Navigationbar'
 import { Container } from "react-bootstrap";
-import './de/visaq/view/elements/theme/LightTheme.css'
 
 /**
  * The main class of the Project.
@@ -111,6 +110,7 @@ class VisAQ extends Component {
      */
     render() {
         document.body.style.overflow = "hidden"
+        document.body.classList.add('dark-theme');
         return (
             <div id='app' className="app">
                 <Suspense fallback='loading'>

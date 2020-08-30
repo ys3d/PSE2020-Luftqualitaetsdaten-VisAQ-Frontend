@@ -162,7 +162,7 @@ class Navigationbar extends React.Component {
                 <Router>
                     <div className="navbar-main">
                         <CookieNotice />
-                        <Navbar expand='lg' bg='light' className='navbar' id='navbar'>
+                        <Navbar expand='lg' className='navbar' id='navbar'>
                             <Navbar.Brand href=''>
                                 <strong id='title'>VisAQ</strong>
                             </Navbar.Brand>

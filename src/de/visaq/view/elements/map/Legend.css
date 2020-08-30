@@ -1,32 +1,16 @@
-:root {
-    --main-page-color: #44c2d4;
-    --white: white;
-    --grey: #555;
-    --light-grey: #777;
-    --black: rgba(0, 0, 0, 0.2);
-}
-
 body {
     margin: 0px;
-}
-
-.info {
-    padding: 12px 8px;
-    font: 14px/px Arial, Helvetica, sans-serif;
-    background: var(--white);
-    box-shadow: 0 0 15px var(--black);
-    border-radius: 5px;
-}
-
-.info h4 {
-    margin: 0 0 5px;
-    color: var(--light-grey);
 }
 
 .legend {
     text-align: left;
     line-height: 25px;
-    color: var(--gray);
+    color: var(--secondary-text-color);
+    padding: 12px 8px;
+    font: 14px/px Arial, Helvetica, sans-serif;
+    background: var(--primary-background-color);
+    box-shadow: 0 0 15px var(--box-shadow);
+    border-radius: 5px;
 }
 
 .legend i {

@@ -249,7 +249,7 @@ class MapView extends Component {
                     />
 
                     <ReactLeafletSearchComponent
-                        className="search-control"
+                        className="custom-searchbar search-control"
                         position="topleft"
                         provider="OpenStreetMap"
                         providerOptions={{ region: "de" }}
