@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Navbar, NavDropdown, Form, Nav, Dropdown } from 'react-bootstrap';
+import { Button, Navbar, NavDropdown, Form, Nav } from 'react-bootstrap';
 import PopupReasons from './PopupReasons';
 import { BrowserRouter as Router } from "react-router-dom";
 import PopupCauses from './PopupCauses';
@@ -12,10 +12,13 @@ import TimeQuery from '../map/TimeQuery';
 import * as data from '../../../../../resources/AirQualityData.json';
 import './Navigationbar.css';
 import Help from '../../Help';
+import HelpPopover from '../../HelpPopover';
 import { Row, Col } from "react-bootstrap";
-import Overview from '../map/overview/OverviewContainer'
+import Overview from '../map/overview/Overview';
+import OverlayEnum from '../../overlayfactory/OverlayEnum';
+import ThemeEnum from '../theme/ThemeEnum';
+import Theme from '../theme/Theme';
 
-let ov = [true, false];
 let startTime;
 let tempTime;
 /**
@@ -32,15 +35,20 @@ class Navigationbar extends React.Component {
         super(props)
         this.state = {
             isOpen: false,
-            airQualityData: new AirQualityData(data.particulateMatter),
-            activeAirQ: 0,
-            activeLanguage: document.cookie.split(';').some((item) => item.trim().startsWith('Language=en')) ? 0 : 1,
-            overlays: ov,
+            airQualityData: AirQualityData.getInstance(),
+            activeAirQualityData: 0,
+            activeLanguage: i18next.language === 'en' ? 0 : 1,
+            overlays: OverlayEnum.sensor,
+            theme: Theme.getTheme(),
             historicalMode: false,
             time: Date.now()
         }
         startTime = this.state.time;
         tempTime = this.state.time;
+    }
+
+    componentDidMount() {
+        this.activateTheme(this.state.theme);
     }
 
     /**
@@ -61,24 +69,21 @@ class Navigationbar extends React.Component {
      * Activates the Sensor Overlay.
      */
     activateSensors = () => {
-        ov[0] = !ov[0];
-        if (ov[0]) {
-            ov[1] = false;
-        }
-        this.setState({ overlays: ov });
+        this.setState({ overlays: OverlayEnum.sensor });
     }
 
     /**
      * Activates the Interpolation Overlay.
      */
     activateInterpolation = () => {
-        ov[1] = !ov[1];
-        if (ov[1]) {
-            ov[0] = false;
-        }
-        this.setState({ overlays: ov });
+        this.setState({ overlays: OverlayEnum.interpolation });
     }
 
+    activateTheme(newTheme) {
+        this.setState({ theme: newTheme }, () => {
+            Theme.setTheme(newTheme);
+        });
+    }
 
     /**
        * Toggles the active state of the air quality buttons
@@ -87,11 +92,12 @@ class Navigationbar extends React.Component {
        */
     toggle(position, airQualityData) {
         if (this.state.active === position) {
-            this.setState({ activeAirQ: null })
+            this.setState({ activeAirQualityData: null })
         } else {
-            this.setState({ activeAirQ: position })
+            this.setState({ activeAirQualityData: position })
         }
-        this.setState(state => ({ airQualityData: new AirQualityData(airQualityData) }))
+        AirQualityData.setInstance(new AirQualityData(airQualityData));
+        this.setState(() => ({ airQualityData: AirQualityData.getInstance() }))
     }
 
     /**
@@ -99,7 +105,7 @@ class Navigationbar extends React.Component {
      * @param {Number} position Position of the button
      */
     activateAirQuality(position) {
-        if (this.state.activeAirQ === position) {
+        if (this.state.activeAirQualityData === position) {
             return "#44c2d4";
         }
         return "";
@@ -166,9 +172,9 @@ class Navigationbar extends React.Component {
         return (
             <React.Fragment>
                 <Router>
-                    <div>
+                    <div className="navbar-main">
                         <CookieNotice />
-                        <Navbar expand='lg' bg='light' className='navbar' id='navbar'>
+                        <Navbar expand='lg' className='navbar' id='navbar'>
                             <Navbar.Brand href=''>
                                 <strong id='title'>VisAQ</strong>
                             </Navbar.Brand>
@@ -179,7 +185,7 @@ class Navigationbar extends React.Component {
                                         className='nav-link'
                                         id='nav-link'
                                         style={{ color: this.activateAirQuality(0) }}
-                                        onClick={() => { this.toggle(0, new AirQualityData(data.particulateMatter)) }}
+                                        onClick={() => { this.toggle(0, data.particulateMatter) }}
                                         draggable="false"
                                     >
                                         {t('particulateMatter')}
@@ -188,7 +194,7 @@ class Navigationbar extends React.Component {
                                         className='nav-link'
                                         id='nav-link'
                                         style={{ color: this.activateAirQuality(1) }}
-                                        onClick={() => { this.toggle(1, new AirQualityData(data.humidity)) }}
+                                        onClick={() => { this.toggle(1, data.humidity) }}
                                         draggable="false"
                                     >
                                         {t('humidity')}
@@ -197,7 +203,7 @@ class Navigationbar extends React.Component {
                                         className='nav-link'
                                         id='nav-link'
                                         style={{ color: this.activateAirQuality(2) }}
-                                        onClick={() => { this.toggle(2, new AirQualityData(data.temperature)) }}
+                                        onClick={() => { this.toggle(2, data.temperature) }}
                                         draggable="false"
                                     >
                                         {t('temperature')}
@@ -206,57 +212,75 @@ class Navigationbar extends React.Component {
                                         className='nav-link'
                                         id='nav-link'
                                         style={{ color: this.activateAirQuality(3) }}
-                                        onClick={() => { this.toggle(3, new AirQualityData(data.airPressure)) }}
+                                        onClick={() => { this.toggle(3, data.airPressure) }}
                                         draggable="false"
                                     >
                                         {t('airPressure')}
                                     </Nav.Link>
                                 </Nav>
-                                <Dropdown inline id='link'>
-                                    {t('mapOverlay')}
-                                </Dropdown>
-                                <NavDropdown variant="success" id="dropdown-basic">
-                                    <p>{t('mapOverlay')}</p>
-                                    <Form.Group controlId='form-switch' alignRight>
-
-                                        <label id='checkbox'>
-                                            <input type="checkbox"
-                                                checked={ov[0]}
-                                                onChange={this.activateSensors}
-                                                id='box'
-                                            />
-                                            <div className='overlay' id='overlay' inline>{t('Sensors')}</div>
-                                        </label>
-                                        <label id='checkbox'>
-                                            <input type="checkbox"
-                                                checked={ov[1]}
-                                                onChange={this.activateInterpolation}
-                                            />
-                                            <div className='overlay' id='overlay' inline>{t('Interpolation')}</div>
-                                        </label>
+                                <NavDropdown title={t('mapOverlay')} variant="success" id="dropdown-basic">
+                                    <p className='dropdown-header'>{t('mapOverlay')} <HelpPopover placement="auto" title={t('mapOverlay')} content={t('popoverMapOverlay')} /></p>
+                                    <Form.Group controlId='form-switch'>
+                                        <Form.Check
+                                            type='radio'
+                                            id='sensor-overlay'
+                                            checked={OverlayEnum.sensor === this.state.overlays}
+                                            label={t('sensors')}
+                                            onChange={() => this.activateSensors()}
+                                            draggable="false"
+                                        />
+                                        <Form.Check
+                                            type='radio'
+                                            id='interpolation-overlay'
+                                            checked={OverlayEnum.interpolation === this.state.overlays}
+                                            label={t('interpolation')}
+                                            onChange={() => this.activateInterpolation()}
+                                            draggable="false"
+                                        />
                                     </Form.Group>
                                 </NavDropdown>
-                                <Dropdown inline id='link'>
-                                    {t('furtherFunc')}
-                                </Dropdown>
-                                <NavDropdown variant="success" id="dropdown-basic">
-                                    <p>{t('furtherFunc')}</p>
-                                    <NavDropdown.Item
-                                        className='drop-link'
-                                        id='drop-link'
-                                        href='https://www.smartaq.net/de/participate/'
-                                        draggable="false"
-                                    >
-                                        {t('diy')}
-                                    </NavDropdown.Item>
-                                    <NavDropdown.Item
-                                        className='drop-link'
-                                        id='drop-link'
-                                        href='https://www.smartaq.net/en/dashboard/#/home'
-                                        draggable="false"
-                                    >
-                                        SmartAQNet
-                                    </NavDropdown.Item>
+                                <NavDropdown title={t('furtherFunctions')} variant="success" id="dropdown-basic">
+                                    <p className='dropdown-header'>{t('expertMode')} <HelpPopover placement="auto" title={t('expertMode')} content={t('popoverExpertMode')} /></p>
+                                    <Form.Group controlId='form-switch'>
+                                        <Form.Check
+                                            type='switch'
+                                            id='expert-mode'
+                                            label={t('sensorOverviewExpert')}
+                                            onClick={() => this.props.overviewDetailHandler()}
+                                            draggable="false"
+                                        />
+                                    </Form.Group>
+                                    <NavDropdown.Divider />
+                                    <p className='dropdown-header'>{t('historicalMode')} <HelpPopover placement="auto" title={t('historicalMode')} content={t('popoverHistoricalMode')} /></p>
+                                    <Form.Group controlId='form-switch' alignRight>
+                                        <Form.Check
+                                            type='switch'
+                                            id='historical-mode'
+                                            label={t('historicalView')}
+                                            draggable="false"
+                                            onClick={() => this.toggleHistoricalMode()}
+                                        />
+                                    </Form.Group>
+                                    <Form inline id='form-timequery'>
+                                        <TimeQuery
+                                            timeHandler={(e) => this.setTime(e)}
+                                            time={this.state.time}
+                                            historicalMode={this.state.historicalMode}
+                                            className='query-historical'
+                                            id='query-historical'
+                                        />
+                                        <Button
+                                            size="sm"
+                                            disabled={!this.state.historicalMode}
+                                            onClick={() => this.startTimeQuery()}
+                                            className='button-historical'
+                                            id='button-historical'
+                                        >
+                                            {t('start')}
+                                        </Button>
+                                    </Form>
+                                    <NavDropdown.Divider />
+                                    <p className='dropdown-header'>{t('information')}</p>
                                     <NavDropdown.Item
                                         className='drop-link'
                                         id='drop-link'
@@ -276,49 +300,46 @@ class Navigationbar extends React.Component {
                                         <PopupCauses />
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                    <p>{t('expert-Mode')}</p>
-                                    <Form.Group controlId='form-switch' alignRight>
-                                        <Form.Check
-                                            type='checkbox'
-                                            id='expert-mode'
-                                            label={t('sensorOverviewExpert')}
-                                            onClick={() => this.props.overviewDetailHandler()}
-                                            draggable="false"
-                                        />
-                                    </Form.Group>
-                                    <NavDropdown.Divider />
-                                    <p>{t('historical-mode')}</p>
-                                    <Form.Group controlId='form-switch' alignRight>
-                                        <Form.Check
-                                            type='checkbox'
-                                            id='historical-mode'
-                                            label={t('historical-view')}
-                                            draggable="false"
-                                            onClick={() => this.toggleHistoricalMode()}
-                                        />
-                                    </Form.Group>
-                                    <Form>
-                                        <TimeQuery
-                                            timeHandler={(e) => this.setTime(e)}
-                                            time={this.state.time}
-                                            historicalMode={this.state.historicalMode}
-                                            className='query-historical'
-                                            id='query-historical'
-                                            inline
-                                        />
-                                        <Button
-                                            size="sm"
-                                            disabled={!this.state.historicalMode}
-                                            onClick={() => { this.startTimeQuery() }}
-                                            className='button-historical'
-                                            id='button-historical'
-                                            inline
-                                        >
-                                            {t('start')}
-                                        </Button>
-                                    </Form>
+                                    <p className='dropdown-header'>{t('seeAlso')}</p>
+                                    <NavDropdown.Item
+                                        className='drop-link'
+                                        id='drop-link'
+                                        href='https://www.smartaq.net/de/participate/'
+                                        draggable="false"
+                                    >
+                                        {t('participate')}
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item
+                                        className='drop-link'
+                                        id='drop-link'
+                                        href='https://www.smartaq.net/en/dashboard/#/home'
+                                        draggable="false"
+                                    >
+                                        SmartAQNet
+                                    </NavDropdown.Item>
                                 </NavDropdown>
                                 <Nav className='ml-auto'>
+                                    <NavDropdown title={t('colorThemes')} variant="success" id="dropdown-basic">
+                                        <p className='dropdown-header'>{t('colorThemes')} <HelpPopover placement="auto" title={t('colorThemes')} content={t('popoverColorThemes')} /></p>
+                                        <Form.Group controlId='form-switch'>
+                                            <Form.Check
+                                                type='radio'
+                                                id='light-theme'
+                                                checked={ThemeEnum.light === this.state.theme}
+                                                label={t('lightTheme')}
+                                                onChange={() => this.activateTheme(ThemeEnum.light)}
+                                                draggable="false"
+                                            />
+                                            <Form.Check
+                                                type='radio'
+                                                id='dark-theme'
+                                                checked={ThemeEnum.dark === this.state.theme}
+                                                label={t('darkTheme')}
+                                                onChange={() => this.activateTheme(ThemeEnum.dark)}
+                                                draggable="false"
+                                            />
+                                        </Form.Group>
+                                    </NavDropdown>
                                     <Nav.Link
                                         className='help'
                                         id='help'
@@ -333,7 +354,7 @@ class Navigationbar extends React.Component {
                                         onClick={() => { this.toggleLanguage(0, 'en') }}
                                         draggable="false"
                                     >
-                                        EN
+                                        English
                                     </Nav.Link>
                                     <Nav.Link
                                         className='nav-link-lng'
@@ -342,7 +363,7 @@ class Navigationbar extends React.Component {
                                         onClick={() => { this.toggleLanguage(1, 'de') }}
                                         draggable="false"
                                     >
-                                        DE
+                                        Deutsch
                                     </Nav.Link>
                                 </Nav>
                             </Navbar.Collapse>
@@ -351,9 +372,8 @@ class Navigationbar extends React.Component {
                     <Row className='row'>
                         <Col id="map-content">
                             <MapView
-                                airQualityData={this.state.airQualityData}
-                                openHandler={(squareCenter, thingId, airQualityData) => this.props.openHandler(squareCenter, thingId, airQualityData)}
-                                iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.props.iOpenHandler(squareCenter, interpolatedValue, airQualityData)}
+                                openHandler={(squareCenter, thingId) => this.props.openHandler(squareCenter, thingId)}
+                                iOpenHandler={(squareCenter, interpolatedValue) => this.props.iOpenHandler(squareCenter, interpolatedValue)}
                                 overlays={this.state.overlays}
                                 historicalMode={this.state.historicalMode}
                                 time={this.state.time}
@@ -369,7 +389,6 @@ class Navigationbar extends React.Component {
                             className='map'
                             squareCenter={this.props.squareCenter}
                             pointValue={this.props.pointValue}
-                            airQualityData={this.state.airQualityData}
                         />
                     </Row>
                 </Router>

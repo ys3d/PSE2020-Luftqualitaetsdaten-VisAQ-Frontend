@@ -1,18 +1,9 @@
-:root {
-    --white: white;
-    --hover-color: #2f8794;
-    --black: black;
-    --grey: #faf9f9;
-    --text-gray: #787878;
+#sensorOverviewContainer {
     --transparent: transparent;
     --align: center;
-}
-
-body {
-    display: flex;
-    justify-content: var(--align);
-    align-items: var(--align);
-    height: 100vh;
+    background-color: var(--tertiary-background-color);
+    overflow-y: scroll;
+    color: var(--primary-text-color);
 }
 
 ul {
@@ -32,8 +23,8 @@ ul {
     display: block;
     width: 15px;
     height: 15px;
-    border-top: 2px solid var(--black);
-    border-right: 2px solid var(--black);
+    border-top: 2px solid var(--border);
+    border-right: 2px solid var(--border);
     transform: rotate(135deg);
     margin-top: -1.5em;
 }
@@ -43,8 +34,8 @@ ul {
     display: block;
     width: 15px;
     height: 15px;
-    border-top: 2px solid var(--black);
-    border-right: 2px solid var(--black);
+    border-top: 2px solid var(--border);
+    border-right: 2px solid var(--border);
     transform: rotate(315deg);
     margin-top: -1em;
     margin-bottom: -0.5em;
@@ -80,7 +71,7 @@ ul {
     content: ' ';
     height: 33px;
     width: 2px;
-    background-color: var(--black);
+    background-color: var(--border);
 }
 
 .close:before {
@@ -92,8 +83,7 @@ ul {
 }
 
 .help {
-    margin-left: -0.6em;
-    color: var(--text-gray);
+    color: var(--secondary-text-color);
 }
 
 .help:hover {
@@ -104,12 +94,6 @@ ul {
     background-color: var(--transparent);
 }
 
-#sensorOverviewContainer {
-    background-color: var(--grey);
-    overflow-y: scroll;
-    height: 90vh;
-}
-
 #pointOverviewContainer {
     background-color: var(--grey);
     overflow-y: scroll;
@@ -117,7 +101,7 @@ ul {
 }
 
 #help {
-    color: var(--text-gray);
+    color: var(--secondary-text-color);
 }
 
 #help:focus {
@@ -138,5 +122,13 @@ ul {
 }
 
 p.expert {
-    color: var(--text-gray);
+    color: var(--secondary-text-color);
+}
+
+#sensorOverviewContainer .card > .card-header {
+    background-color: var(--quarternary-background-color);
+}
+
+#sensorOverviewContainer .accordion {
+    background-color: var(--tertiary-background-color);
 }

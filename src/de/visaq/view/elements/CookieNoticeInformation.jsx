@@ -57,28 +57,28 @@ class CookieNoticeInformation extends Component {
         return (
             <div>
                 <span onClick={this.open.bind(this)}>
-                    {t('moreInfoCookies')}
+                    {t('moreInfo')}
                 </span>
                 <Modal size="lg" show={this.state.showModal} onHide={this.close.bind(this)} className='information'>
                     <ModalTitle className={'infoTitle'}>
-                        {t('moreInfoCookies')}
+                        {t('moreInfo')}
                     </ModalTitle>
                     <Modal.Body className={'text'}>
-                        <strong>{t('cookie1')}</strong>
+                        <strong>{t('whatAreCookiesTitle')}</strong>
                         <div className="network">&nbsp;</div>
-                        {t('cookie2')}
+                        {t('whatAreCookiesText')}
                         <div className="network">&nbsp;</div>
-                        <strong>{t('cookie3')}</strong>
+                        <strong>{t('whyDoWeUseCookiesTitle')}</strong>
                         <div className="network">&nbsp;</div>
-                        {t('cookie4')}
+                        {t('whyDoWeUseCookiesText')}
                         <div className="network">&nbsp;</div>
-                        <strong>{t('cookie5')}</strong> <br />
-                        <strong>{t('cookie6')}</strong>
+                        <strong>{t('whichKindOfCookiesTitle')}</strong> <br />
+                        <strong>{t('necessaryCookies')}</strong>
                         <div className="network">&nbsp;</div>
-                        {t('cookie7')}
+                        {t('necessaryCookiesList')}
                         <div className="network">&nbsp;</div>
-                        {t('cookie8')} <br />
-                        {t('cookie9')} <br />
+                        {t('locationCookie')} <br />
+                        {t('languageCookie')} <br />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.close.bind(this)} className={'button'}>

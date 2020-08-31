@@ -1,0 +1,13 @@
+.help-popover .popover-header {
+    background-color: var(--quarternary-background-color);
+    color: var(--primary-text-color);
+}
+
+.help-popover .popover-body {
+    background-color: var(--tertiary-background-color);
+    color: var(--primary-text-color);
+}
+
+.help-popover {
+    background: rgba(0, 0, 0, 0);
+}
