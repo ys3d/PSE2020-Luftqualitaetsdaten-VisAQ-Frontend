@@ -31,7 +31,8 @@ class MapView extends Component {
             bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
             hasLoaded: false,
             pointDataCells: {},
-            cells: {}
+            cells: {},
+            windowWidth: window.innerWidth
         };
         this.gridSize = 0.15;
     }
@@ -60,6 +61,22 @@ class MapView extends Component {
         } else {
             this.setState({ hasLoaded: true });
         }
+    }
+
+    /**
+     * Sets the height according to the window height.
+     */
+    updateDimensions() {
+        this.setState({
+            windowWidth: window.innerWidth
+        });
+    }
+
+    /**
+     * Starts the proccesses setPosition and updateDimensions when the component is mounted.
+     */
+    componentWillMount() {
+        this.updateDimensions();
     }
 
     /**
@@ -249,8 +266,13 @@ class MapView extends Component {
                         iOpenHandler={(squareCenter, interpolatedValue) => this.props.iOpenHandler(squareCenter, interpolatedValue)}
                         overlays={this.props.overlays}
                     />
-
-                    <Legend className='legend' id='legend' />
+                    
+                    {(!this.props.isOverviewOpen || (this.state.windowWidth >= 576)) &&
+                        <Legend
+                            className='legend'
+                            id='legend'
+                        />
+                    }
 
                     <Searchbar />
                 </Map>

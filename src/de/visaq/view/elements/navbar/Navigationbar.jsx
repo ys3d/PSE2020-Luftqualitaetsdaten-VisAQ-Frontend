@@ -377,6 +377,7 @@ class Navigationbar extends React.Component {
                                 overlays={this.state.overlays}
                                 historicalMode={this.state.historicalMode}
                                 time={this.state.time}
+                                isOverviewOpen={this.props.show}
                             />
                         </Col>
                         <Overview
