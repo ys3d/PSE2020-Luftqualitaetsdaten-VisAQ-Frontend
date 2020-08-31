@@ -11,7 +11,6 @@ import PointDatum from '../model/PointDatum';
 import { withTranslation } from 'react-i18next';
 import AirQualityData from './elements/airquality/AirQualityData';
 import Searchbar from './elements/map/Searchbar';
-import i18n from './Language';
 import ThemeEnum from '../view/elements/theme/ThemeEnum';
 import Theme from '../view/elements/theme/Theme';
 
@@ -29,7 +28,6 @@ class MapView extends Component {
             time: this.props.time,
             zoom: 13,
             bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
-            hasLoaded: false,
             pointDataCells: {},
             cells: {},
             windowWidth: window.innerWidth
@@ -41,26 +39,18 @@ class MapView extends Component {
      * Centers the map on the user's position if the Cookie was accepted.
      * Otherwise the map centers on Augsburg.
      */
-    setPosition() {
-        if (!this.state.hasLoaded) {
-            if (i18n.language) {
-                navigator.geolocation.watchPosition((position) => {
-                    this.setState({
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude,
-                        hasLoaded: true,
-                    }, () => {
-                        this.onBoundsUpdate(this.state.bounds);
-                    });
-                }, () => {
-                    this.setState({ lat: 48.3705449, lng: 10.89779 }, () => {
-                        this.onBoundsUpdate(this.state.bounds);
-                    })
-                })
-            }
-        } else {
-            this.setState({ hasLoaded: true });
-        }
+    setPosition(){ 
+        navigator.geolocation.getCurrentPosition((position) => {
+            this.setState({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+            });
+        this.onBoundsUpdate(this.state.bounds);
+        }, () => {}, {
+            enableHighAccuracy: false,
+            timeout: 2000,
+            maximumAge: Infinity,
+        });
     }
 
     /**
@@ -73,16 +63,9 @@ class MapView extends Component {
     }
 
     /**
-     * Starts the proccesses setPosition and updateDimensions when the component is mounted.
-     */
-    componentWillMount() {
-        this.updateDimensions();
-    }
-
-    /**
      * Requests all in bound cells.
      */
-    componentDidUpdate(prevProps) {
+    componentDidUpdate() {
         this.requestInBoundCells();
     }
 
@@ -90,8 +73,9 @@ class MapView extends Component {
      * Activates the Event Listener.
      */
     componentDidMount() {
-        this.setPosition();
+        window.addEventListener("resize", this.updateDimensions.bind(this));
         window.addEventListener('load', this.requestInBoundCells.bind(this));
+        this.updateDimensions();
     }
 
     /**
@@ -213,7 +197,7 @@ class MapView extends Component {
      * @param {Object} newBounds The new map bounds
      */
     onBoundsUpdate(newBounds) {
-        this.setState({ bounds: newBounds }, () => {
+        this.setState({ bounds: newBounds, lat: newBounds.getCenter().lat, lng: newBounds.getCenter().lng, zoom: undefined }, () => {
             this.requestInBoundCells();
         });
     }

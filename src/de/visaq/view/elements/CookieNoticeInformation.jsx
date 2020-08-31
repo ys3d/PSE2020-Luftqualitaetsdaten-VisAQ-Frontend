@@ -77,7 +77,6 @@ class CookieNoticeInformation extends Component {
                         <div className="network">&nbsp;</div>
                         {t('necessaryCookiesList')}
                         <div className="network">&nbsp;</div>
-                        {t('locationCookie')} <br />
                         {t('languageCookie')} <br />
                     </Modal.Body>
                     <Modal.Footer>

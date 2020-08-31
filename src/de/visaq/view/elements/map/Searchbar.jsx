@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search';
 import { withTranslation } from 'react-i18next';
+import { Button } from 'react-bootstrap';
+import { AiOutlineAim } from 'react-icons/ai';
 
 /**
  * Class that contains the Searchbar.
@@ -38,19 +40,27 @@ class Searchbar extends Component {
         const ReactLeafletSearchComponent = withLeaflet(ReactLeafletSearch);
 
         return (
-            <ReactLeafletSearchComponent
-                className="custom-searchbar search-control"
-                position="topleft"
-                provider="OpenStreetMap"
-                providerOptions={{ region: "de" }}
-                inputPlaceholder={t('search')}
-                zoom={12}
-                showMarker={false}
-                showPopUp={false}
-                closeResultsOnClick={true}
-                openSearchOnLoad={true}
-                key="custom-leaflet-searchbar"
-            />
+            <>
+                <ReactLeafletSearchComponent
+                    className="custom-searchbar search-control"
+                    position="topleft"
+                    provider="OpenStreetMap"
+                    providerOptions={{ region: "de" }}
+                    inputPlaceholder={t('search')}
+                    zoom={12}
+                    showMarker={false}
+                    showPopUp={false}
+                    closeResultsOnClick={true}
+                    openSearchOnLoad={true}
+                    key="custom-leaflet-searchbar"
+                />
+                <Button
+                    onClick={() => this.setPosition()}
+                    className='center-on-client'
+                >
+                    <AiOutlineAim />
+                </Button>
+            </>
         )
     }
 }

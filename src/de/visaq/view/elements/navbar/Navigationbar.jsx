@@ -240,83 +240,85 @@ class Navigationbar extends React.Component {
                                     </Form.Group>
                                 </NavDropdown>
                                 <NavDropdown title={t('furtherFunctions')} variant="success" id="dropdown-basic">
-                                    <p className='dropdown-header'>{t('expertMode')} <HelpPopover placement="auto" title={t('expertMode')} content={t('popoverExpertMode')} /></p>
-                                    <Form.Group controlId='form-switch'>
-                                        <Form.Check
-                                            type='switch'
-                                            id='expert-mode'
-                                            label={t('sensorOverviewExpert')}
-                                            onClick={() => this.props.overviewDetailHandler()}
+                                    <div id={(window.innerHeight <= 750) ? 'furtherFunctionContainer' : ''}>
+                                        <p className='dropdown-header'>{t('expertMode')} <HelpPopover placement="auto" title={t('expertMode')} content={t('popoverExpertMode')} /></p>
+                                        <Form.Group controlId='form-switch'>
+                                            <Form.Check
+                                                type='switch'
+                                                id='expert-mode'
+                                                label={t('sensorOverviewExpert')}
+                                                onClick={() => this.props.overviewDetailHandler()}
+                                                draggable="false"
+                                            />
+                                        </Form.Group>
+                                        <NavDropdown.Divider />
+                                        <p className='dropdown-header'>{t('historicalMode')} <HelpPopover placement="auto" title={t('historicalMode')} content={t('popoverHistoricalMode')} /></p>
+                                        <Form.Group controlId='form-switch' alignRight>
+                                            <Form.Check
+                                                type='switch'
+                                                id='historical-mode'
+                                                label={t('historicalView')}
+                                                draggable="false"
+                                                onClick={() => this.toggleHistoricalMode()}
+                                            />
+                                        </Form.Group>
+                                        <Form inline id='form-timequery'>
+                                            <TimeQuery
+                                                timeHandler={(e) => this.setTime(e)}
+                                                time={this.state.time}
+                                                historicalMode={this.state.historicalMode}
+                                                className='query-historical'
+                                                id='query-historical'
+                                            />
+                                            <Button
+                                                size="sm"
+                                                disabled={!this.state.historicalMode}
+                                                onClick={() => this.startTimeQuery()}
+                                                className='button-historical'
+                                                id='button-historical'
+                                            >
+                                                {t('start')}
+                                            </Button>
+                                        </Form>
+                                        <NavDropdown.Divider />
+                                        <p className='dropdown-header'>{t('information')}</p>
+                                        <NavDropdown.Item
+                                            className='drop-link'
+                                            id='drop-link'
+                                            eventKey={2}
+                                            href='#'
                                             draggable="false"
-                                        />
-                                    </Form.Group>
-                                    <NavDropdown.Divider />
-                                    <p className='dropdown-header'>{t('historicalMode')} <HelpPopover placement="auto" title={t('historicalMode')} content={t('popoverHistoricalMode')} /></p>
-                                    <Form.Group controlId='form-switch' alignRight>
-                                        <Form.Check
-                                            type='switch'
-                                            id='historical-mode'
-                                            label={t('historicalView')}
-                                            draggable="false"
-                                            onClick={() => this.toggleHistoricalMode()}
-                                        />
-                                    </Form.Group>
-                                    <Form inline id='form-timequery'>
-                                        <TimeQuery
-                                            timeHandler={(e) => this.setTime(e)}
-                                            time={this.state.time}
-                                            historicalMode={this.state.historicalMode}
-                                            className='query-historical'
-                                            id='query-historical'
-                                        />
-                                        <Button
-                                            size="sm"
-                                            disabled={!this.state.historicalMode}
-                                            onClick={() => this.startTimeQuery()}
-                                            className='button-historical'
-                                            id='button-historical'
                                         >
-                                            {t('start')}
-                                        </Button>
-                                    </Form>
-                                    <NavDropdown.Divider />
-                                    <p className='dropdown-header'>{t('information')}</p>
-                                    <NavDropdown.Item
-                                        className='drop-link'
-                                        id='drop-link'
-                                        eventKey={2}
-                                        href='#'
-                                        draggable="false"
-                                    >
-                                        <PopupReasons />
+                                            <PopupReasons />
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item
+                                            className='drop-link'
+                                            id='drop-link'
+                                            eventKey={1}
+                                            href="#"
+                                            draggable="false"
+                                        >
+                                            <PopupCauses />
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                        <p className='dropdown-header'>{t('seeAlso')}</p>
+                                        <NavDropdown.Item
+                                            className='drop-link'
+                                            id='drop-link'
+                                            href='https://www.smartaq.net/de/participate/'
+                                            draggable="false"
+                                        >
+                                            {t('participate')}
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item
+                                            className='drop-link'
+                                            id='drop-link'
+                                            href='https://www.smartaq.net/en/dashboard/#/home'
+                                            draggable="false"
+                                        >
+                                            SmartAQNet
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item
-                                        className='drop-link'
-                                        id='drop-link'
-                                        eventKey={1}
-                                        href="#"
-                                        draggable="false"
-                                    >
-                                        <PopupCauses />
-                                    </NavDropdown.Item>
-                                    <NavDropdown.Divider />
-                                    <p className='dropdown-header'>{t('seeAlso')}</p>
-                                    <NavDropdown.Item
-                                        className='drop-link'
-                                        id='drop-link'
-                                        href='https://www.smartaq.net/de/participate/'
-                                        draggable="false"
-                                    >
-                                        {t('participate')}
-                                    </NavDropdown.Item>
-                                    <NavDropdown.Item
-                                        className='drop-link'
-                                        id='drop-link'
-                                        href='https://www.smartaq.net/en/dashboard/#/home'
-                                        draggable="false"
-                                    >
-                                        SmartAQNet
-                                    </NavDropdown.Item>
+                                    </div>
                                 </NavDropdown>
                                 <Nav className='ml-auto'>
                                     <NavDropdown title={t('colorThemes')} variant="success" id="dropdown-basic">

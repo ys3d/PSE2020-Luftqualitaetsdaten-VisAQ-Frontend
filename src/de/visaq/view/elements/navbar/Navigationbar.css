@@ -146,6 +146,11 @@ a:not([role="button"])::selection {
     color: var(--secondary-text-color);
 }
 
+#furtherFunctionContainer {
+    overflow-y: scroll;
+    height: 30vh;
+}
+
 #dropdown-basic:hover,
 #dropdown-basic::selection {
     color: var(--main-page-color);
