@@ -252,7 +252,7 @@ class Navigationbar extends React.Component {
                                         </Form.Group>
                                         <NavDropdown.Divider />
                                         <p className='dropdown-header'>{t('historicalMode')} <HelpPopover placement="auto" title={t('historicalMode')} content={t('popoverHistoricalMode')} /></p>
-                                        <Form.Group controlId='form-switch' alignRight>
+                                        <Form.Group controlId='form-switch'>
                                             <Form.Check
                                                 type='switch'
                                                 id='historical-mode'
