@@ -16,7 +16,7 @@ import HelpPopover from '../../HelpPopover';
 import { Row, Col } from "react-bootstrap";
 import Overview from '../map/overview/Overview';
 import OverlayEnum from '../../overlayfactory/OverlayEnum';
-import ThemeEnum from '../../overlayfactory/ThemeEnum';
+import ThemeEnum from '../theme/ThemeEnum';
 import Theme from '../theme/Theme';
 
 let startTime;

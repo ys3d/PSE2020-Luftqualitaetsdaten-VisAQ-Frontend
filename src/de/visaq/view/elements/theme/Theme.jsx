@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import ThemeEnum from "../../overlayfactory/ThemeEnum";
+import ThemeEnum from "./ThemeEnum";
 import Cookies from 'js-cookie';
 
 /**
