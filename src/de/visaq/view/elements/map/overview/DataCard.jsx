@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card'
 import { Accordion } from 'react-bootstrap'
 import Diagram from '../../diagram/Diagram'
 import { withTranslation } from 'react-i18next';
-import './OverviewContainer.css'
+import './Overview.css'
 
 
 /**

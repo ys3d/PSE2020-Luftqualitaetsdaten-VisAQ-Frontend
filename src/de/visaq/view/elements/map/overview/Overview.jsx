@@ -3,7 +3,7 @@ import SensorOverview from './SensorOverview'
 import PointOverview from './PointOverview'
 import { Col } from "react-bootstrap";
 import { render } from '@testing-library/react';
-import './OverviewContainer.css'
+import './Overview.css'
 
 /**
  * Container for The SensorOverview
@@ -25,7 +25,7 @@ function Overview(props) {
                             <br />
                             <br />
                         </p>
-                        <SensorOverview squareCenter={props.squareCenter} thingId={props.thingId} airQualityData={props.airQualityData} expert={props.showDetails} />
+                        <SensorOverview squareCenter={props.squareCenter} thingId={props.thingId} expert={props.showDetails} />
                     </Col>
                 </>
             );
@@ -39,7 +39,7 @@ function Overview(props) {
                             <br />
                             <br />
                         </p>
-                        <PointOverview squareCenter={props.squareCenter} value={props.pointValue} airQualityData={props.airQualityData} expert={props.showDetails} />
+                        <PointOverview squareCenter={props.squareCenter} value={props.pointValue} expert={props.showDetails} />
                     </Col>
                 </>
             );

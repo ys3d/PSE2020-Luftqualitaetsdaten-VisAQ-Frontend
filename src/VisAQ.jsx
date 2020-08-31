@@ -1,10 +1,9 @@
 import React, { Component, Suspense } from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import './VisAQ.css';
 import Navigationbar from './de/visaq/view/elements/navbar/Navigationbar'
 import { Container } from "react-bootstrap";
-import './de/visaq/view/elements/theme/LightTheme.css'
 
 /**
  * The main class of the Project.
@@ -63,13 +62,12 @@ class VisAQ extends Component {
      * @param {Object} center   Center of the clicked square
      * @param {Object} thingId  The thing id
      */
-    handleShowSensorClick(center, thingId, airQualityData) {
+    handleShowSensorClick(center, thingId) {
         this.setState({
             showOverview: true,
             center: center,
             thingId: thingId,
-            isSensor: true,
-            airQualityDataPoint: airQualityData
+            isSensor: true
         });
     }
 
@@ -79,13 +77,12 @@ class VisAQ extends Component {
      * @param {Object} center               Center of the clicked square
      * @param {Object} interpolatedValue    The interpolated value of the clicked square
      */
-    handleShowPointClick(center, interpolatedValue, airQualityData) {
+    handleShowPointClick(center, interpolatedValue) {
         this.setState({
             showOverview: true,
             center: center,
             interpolatedValue: interpolatedValue,
-            isSensor: false,
-            airQualityDataPoint: airQualityData
+            isSensor: false
         });
     }
 
@@ -113,15 +110,16 @@ class VisAQ extends Component {
      */
     render() {
         document.body.style.overflow = "hidden"
+
         return (
             <div id='app' className="app">
                 <Suspense fallback='loading'>
                     <React.Fragment>
                         <Router>
                             <Container fluid>
-                                <Navigationbar openHandler={(squareCenter, thingId, airQualityData) => this.handleShowSensorClick(squareCenter, thingId, airQualityData)}
+                                <Navigationbar openHandler={(squareCenter, thingId) => this.handleShowSensorClick(squareCenter, thingId)}
                                     overviewDetailHandler={() => this.toggleDetails()}
-                                    iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.handleShowPointClick(squareCenter, interpolatedValue, airQualityData)}
+                                    iOpenHandler={(squareCenter, interpolatedValue) => this.handleShowPointClick(squareCenter, interpolatedValue)}
                                     show={this.state.showOverview}
                                     closeHandler={this.handleCloseClick}
                                     thingId={this.state.thingId}
@@ -129,7 +127,6 @@ class VisAQ extends Component {
                                     showDetails={this.state.overviewDetails}
                                     squareCenter={this.state.center}
                                     pointValue={this.state.interpolatedValue}
-                                    airQualityData={this.state.airQualityDataPoint}
                                 />
                             </Container>
                         </Router>
