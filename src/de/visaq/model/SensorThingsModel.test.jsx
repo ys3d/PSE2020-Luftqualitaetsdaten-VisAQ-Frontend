@@ -57,7 +57,7 @@ test("Datastream Parse", () => {
     expect(datastream.thingLink.url).toBe("https://api.smartaq.net/v1.0/Datastreams('saqn%3Ads%3A9c44b0f')/Thing");
     expect(datastream.observedPropertyLink.url).toBe("https://api.smartaq.net/v1.0/Datastreams('saqn%3Ads%3A9c44b0f')/ObservedProperty");
     expect(datastream.properties.test).toBe("ok");
-    expect(new Datastream(datastream.toJSON)).not.toBe();
+    expect(new Datastream(datastream.toJSON())).not.toBe(undefined);
 });
 
 test("FeatureOfinterest Parse", () => {
@@ -83,7 +83,7 @@ test("FeatureOfinterest Parse", () => {
     expect(foi.name).toBe('na');
     expect(foi.observationsLink.url).toBe('https://api.smartaq.net/v1.0/FeaturesOfInterest(\'00111d4a-6a54-11ea-9010-b38c006c8fab\')/Observations');
     expect(foi.features.type).toBe('Point');
-    expect(new FeatureOfInterest(foi.toJSON)).not.toBe(null);
+    expect(new FeatureOfInterest(foi.toJSON())).not.toBe(undefined);
 });
 
 test("HistoricalLocation Parse", () => {
@@ -107,7 +107,7 @@ test("HistoricalLocation Parse", () => {
     expect(hl.time).toBe('2019-07-02T15:23:53.749Z');
     expect(hl.thingLink.url).toBe("https://api.smartaq.net/v1.0/HistoricalLocations('66c68826-9cdd-11e9-a024-ffbd2647ca86')/Thing");
     expect(hl.locationsLink.url).toBe("https://api.smartaq.net/v1.0/HistoricalLocations('66c68826-9cdd-11e9-a024-ffbd2647ca86')/Locations");
-    expect(new HistoricalLocation(hl.toJSON)).not.toBe(null);
+    expect(new HistoricalLocation(hl.toJSON())).not.toBe(undefined);
 });
 
 test("Location Parse", () => {
@@ -139,7 +139,7 @@ test("Location Parse", () => {
     expect(lc.location.y).toBe(49.01262);
     expect(lc.historicalLocationsLink.url).toBe("https://api.smartaq.net/v1.0/Locations('geo%3A49.012615%2C8.415800%2Cnan')/HistoricalLocations");
     expect(lc.thingsLink.url).toBe("https://api.smartaq.net/v1.0/Locations('geo%3A49.012615%2C8.415800%2Cnan')/Things");
-    expect(new Location(lc.toJSON)).not.toBe(null);
+    expect(new Location(lc.toJSON())).not.toBe(undefined);
 });
 
 test("Observation Parse", () => {
@@ -167,7 +167,7 @@ test("Observation Parse", () => {
     expect(ob.resultTime).toBe("2020-08-31T11:46:52Z");
     expect(ob.datastreamLink.url).toBe("https://api.smartaq.net/v1.0/Observations('saqn%3Ao%3Awa062248d4941ca66fcd89a5c78b72b1a3e7ab192')/Datastream");
     expect(ob.featureOfInterestLink.url).toBe("https://api.smartaq.net/v1.0/Observations('saqn%3Ao%3Awa062248d4941ca66fcd89a5c78b72b1a3e7ab192')/FeatureOfInterest");
-    expect(new Observation(ob.toJSON)).not.toBe(null);
+    expect(new Observation(ob.toJSON())).not.toBe(undefined);
 });
 
 test("ObservedProperty Parse", () => {
@@ -192,7 +192,7 @@ test("ObservedProperty Parse", () => {
     expect(op.definition).toBe("http://cfconventions.org/Data/cf-standard-names/63/build/cf-standard-name-table.html#relative_humidity");
     expect(op.datastreamsLink.url).toBe("https://api.smartaq.net/v1.0/ObservedProperties('saqn%3Aop%3Ahur')/Datastreams");
     expect(op.properties.test).toBe("ok");
-    expect(new ObservedProperty(op.toJSON)).not.toBe(null);
+    expect(new ObservedProperty(op.toJSON())).not.toBe(undefined);
 });
 
 test("Sensor Parse", () => {
@@ -217,7 +217,7 @@ test("Sensor Parse", () => {
     expect(se.description).toBe("A sensor measuring PM10 using Beta ray absorption");
     expect(se.datastreamsLink.url).toBe("https://api.smartaq.net/v1.0/Sensors('saqn%3As%3A9682e37')/Datastreams");
     expect(se.properties.test).toBe("ok");
-    expect(new Sensor(se.toJSON)).not.toBe(null);
+    expect(new Sensor(se.toJSON())).not.toBe(undefined);
 });
 
 test("Thing Parse", () => {
@@ -288,7 +288,7 @@ test("Thing Parse", () => {
     expect(th.locations).not.toBe(undefined);
     expect(th.locations[0].id).toBe("0273e8fa-7f09-11ea-b47b-8b6e851879ee");
     expect(th2.locations).toBe(undefined);
-    expect(new Thing(th.toJSON)).not.toBe(null);
+    expect(new Thing(th.toJSON())).not.toBe(undefined);
 });
 
 test("UnitOfMeasurement Parse", () => {
@@ -303,7 +303,6 @@ test("UnitOfMeasurement Parse", () => {
     expect(um.name).toBe("microgram per cubic meter");
     expect(um.symbol).toBe("ug/m^3");
     expect(um.definition).toBe("http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#KilogramPerCubicMeter");
-    expect(new UnitOfMeasurement(um.toJSON)).not.toBe(null);
 });
 
 test("Sensorthing Parse", () => {
@@ -316,7 +315,6 @@ test("Sensorthing Parse", () => {
 
     expect(st.id).toBe("saqn:t:62d4572");
     expect(st.selfUrl).toBe("https://api.smartaq.net/v1.0/Things('saqn%3At%3A62d4572')");
-    expect(new Sensorthing(st.toJSON)).not.toBe(null);
 });
 
 test("PointDatum Parse", () => {
