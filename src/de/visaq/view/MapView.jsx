@@ -258,7 +258,7 @@ class MapView extends Component {
                         />
                     }
 
-                    <Searchbar />
+                    <Searchbar setPosition={() => this.setPosition()} />
                 </Map>
             </div>
         );
