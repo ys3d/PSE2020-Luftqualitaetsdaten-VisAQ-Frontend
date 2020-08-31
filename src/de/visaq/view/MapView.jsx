@@ -22,9 +22,8 @@ class MapView extends Component {
     constructor(props) {
         super(props);
         this.mapRef = createRef();
+        this.augsburg = [ 48.3705449, 10.89779 ];
         this.state = {
-            lat: 48.3705449,
-            lng: 10.89779,
             time: this.props.time,
             zoom: 13,
             bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
@@ -35,17 +34,10 @@ class MapView extends Component {
         this.gridSize = 0.15;
     }
 
-    /**
-     * Centers the map on the user's position if the Cookie was accepted.
-     * Otherwise the map centers on Augsburg.
-     */
-    setPosition() { 
+    setPosition() {
         navigator.geolocation.getCurrentPosition((position) => {
-            this.setState({
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
-            });
-        this.onBoundsUpdate(this.state.bounds);
+            this.mapRef.current.leafletElement.setView([position.coords.latitude, position.coords.longitude], 13);
+            this.onBoundsUpdate(this.state.bounds);
         }, () => {}, {
             enableHighAccuracy: false,
             timeout: 2000,
@@ -197,7 +189,7 @@ class MapView extends Component {
      * @param {Object} newBounds The new map bounds
      */
     onBoundsUpdate(newBounds) {
-        this.setState({ bounds: newBounds, lat: newBounds.getCenter().lat, lng: newBounds.getCenter().lng, zoom: undefined }, () => {
+        this.setState({ bounds: newBounds }, () => {
             this.requestInBoundCells();
         });
     }
@@ -219,7 +211,7 @@ class MapView extends Component {
         return (
             <div className="map-container" key="map-container">
                 <Map
-                    center={[this.state.lat, this.state.lng]}
+                    center={this.augsburg}
                     zoom={this.state.zoom}
                     style={{ width: '100%', height: '100%' }}
                     boundsOptions={{ padding: [50, 50] }}

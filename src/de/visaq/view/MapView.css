@@ -271,10 +271,10 @@
 .center-on-client:focus,
 .center-on-client:active,
 .center-on-client::selection {
-    outline: none!important;
-    box-shadow: none!important;
-    color: var(--secondary-text-color)!important;
-    background-color: var(--primary-background-color)!important;
+    outline: none !important;
+    box-shadow: 0 0 15px var(--box-shadow) !important;
+    color: var(--secondary-text-color) !important;
+    background-color: var(--primary-background-color) !important;
 }
 
 div#map-content {
