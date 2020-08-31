@@ -38,12 +38,11 @@ p.dropdown-header {
 }
 
 .form-group {
-    margin: 0;
+    margin: 0 1.5rem 0 0;
     padding-left: 1.5rem;
 }
 
 .form-check {
-    margin-right: 1.5rem;
     padding-left: 1.5rem;
     color: var(--secondary-text-color);
 }
@@ -148,7 +147,7 @@ a:not([role="button"])::selection {
 
 #furtherFunctionContainer {
     overflow-y: scroll;
-    height: 30vh;
+    height: 50vh;
 }
 
 #dropdown-basic:hover,

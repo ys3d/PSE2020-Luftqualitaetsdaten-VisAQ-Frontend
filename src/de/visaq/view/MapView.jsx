@@ -234,7 +234,7 @@ class MapView extends Component {
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
                     }
-                    
+
                     {(Theme.getInstance().theme === ThemeEnum.dark) &&
                         <TileLayer
                             attribution= '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
@@ -250,7 +250,7 @@ class MapView extends Component {
                         iOpenHandler={(squareCenter, interpolatedValue) => this.props.iOpenHandler(squareCenter, interpolatedValue)}
                         overlays={this.props.overlays}
                     />
-                    
+
                     {(!this.props.isOverviewOpen || (this.state.windowWidth >= 576)) &&
                         <Legend
                             className='legend'
