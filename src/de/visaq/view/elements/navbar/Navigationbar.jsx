@@ -80,9 +80,8 @@ class Navigationbar extends React.Component {
     }
 
     activateTheme(newTheme) {
-        this.setState({ theme: newTheme }, () => {
-            Theme.setTheme(newTheme);
-        });
+        Theme.setTheme(newTheme);
+        this.setState({ theme: newTheme });
     }
 
     /**
