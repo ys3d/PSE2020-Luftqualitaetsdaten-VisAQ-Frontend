@@ -9,9 +9,10 @@ import Datastream from '../../../../model/Datastream';
 import ObservedProperty from '../../../../model/ObservedProperty';
 import * as airQualityDataJson from '../../../../../../resources/AirQualityData.json';
 import Observation from '../../../../model/Observation';
-import './OverviewContainer.css';
+import './Overview.css';
 import Help from '../../../Help';
 import { Nav } from 'react-bootstrap';
+import AirQualityData from '../../airquality/AirQualityData';
 
 /**
  * Displays all the information about a specific sensor or location
@@ -289,8 +290,9 @@ class SensorOverview extends Component {
      */
     render() {
         const { t } = this.props;
+        let airQualityData = AirQualityData.getInstance();
 
-        switch(this.props.airQualityData.name) {
+        switch(airQualityData.name) {
             case airQualityDataJson.airPressure.name:
                 this.defaultKey = 0;
                 break;

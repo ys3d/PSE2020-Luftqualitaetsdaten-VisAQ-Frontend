@@ -2,7 +2,7 @@ import React, { Component, event } from 'react';
 import { Button, Modal, ModalTitle } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import './elements/navbar/Popup.css';
-import { MdHelpOutline } from 'react-icons/md'
+import { MdHelpOutline } from 'react-icons/md';
 
 class Help extends Component {
     constructor(props) {
@@ -43,7 +43,7 @@ class Help extends Component {
         const { t } = this.props;
         return (
             <div>
-                <span onClick={this.open.bind(this, this.MODAL_TYPE_HELP)}><MdHelpOutline className='help-button'/></span>
+                <span onClick={this.open.bind(this, this.MODAL_TYPE_HELP)}>{t('help')} <MdHelpOutline className='help-button'/></span>
                 <Modal size="lg" show={this.state.showModal} onHide={this.close.bind(this)}>
                     <ModalTitle center className='title'>
                         {t('help')}

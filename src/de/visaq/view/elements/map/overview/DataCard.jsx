@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card'
 import { Accordion } from 'react-bootstrap'
 import Diagram from '../../diagram/Diagram'
 import { withTranslation } from 'react-i18next';
-import './OverviewContainer.css'
+import './Overview.css'
 
 
 /**
@@ -54,7 +54,6 @@ class DataCard extends Component {
                         <Card.Body >
                             {t('currently')}: {this.props.currentValue} {this.props.dataUnit}
                             <Diagram
-                                title={t('historicalDevelopment')}
                                 dataRowLabel={this.props.dataUnit}
                                 dataLabels={this.props.dataLabels}
                                 data={this.props.data}

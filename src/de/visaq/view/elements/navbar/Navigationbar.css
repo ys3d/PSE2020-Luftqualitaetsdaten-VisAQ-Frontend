@@ -1,20 +1,24 @@
-:root {
-    --main-page-color: #44c2d4;
-    --white: #ede7e3;
-    --hover-color: #2f8794;
-    --black: black;
-    --text-gray: #787878;
-    --gray-background: #f3f3f3a9;
+.navbar {
+    background-color: var(--primary-background-color);
+    z-index: 1020;
+    color: var(--secondary-text-color);
 }
 
-.navbar {
-    background-color: #f5f5f5!important;
-    z-index: 1020;
+p.dropdown-header {
+    font-size: 1.03rem;
+    padding: 0 0 0.2em 1em;
+    color: var(--main-page-color);
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.navbar-main .nav-link {
+    padding: 0.5rem;
 }
 
 .navbar-nav,
 .navbar-dark .nav-link {
-    color: var(--black);
+    color: var(--primary-text-color);
 }
 
 .navbar-brand {
@@ -28,6 +32,21 @@
     right: 25%;
 }
 
+.form-inline#form-timequery {
+    margin-top: 0.25rem;
+    padding-left: 1.5rem;
+}
+
+.form-group {
+    margin: 0 1.5rem 0 0;
+    padding-left: 1.5rem;
+}
+
+.form-check {
+    padding-left: 1.5rem;
+    color: var(--secondary-text-color);
+}
+
 .dropdown:hover>.dropdown-menu {
     display: block;
 }
@@ -35,8 +54,7 @@
 .button-historical {
     position: relative;
     z-index: 2;
-    margin-left: 15em;
-    margin-top: -4.2em;
+    margin-left: 10px;
     background-color: var(--main-page-color);
     border: none;
 }
@@ -54,7 +72,7 @@
 }
 
 #help {
-    color: var(--text-gray);
+    color: var(--secondary-text-color);
 }
 
 #help:hover {
@@ -67,7 +85,7 @@
 
 #nav-link,
 #drop-link {
-    color: var(--text-gray);
+    color: var(--secondary-text-color);
 }
 
 #drop-link:focus,
@@ -77,7 +95,20 @@
     color: var(--main-page-color)!important;
     outline: none!important;
     box-shadow: none!important;
-    background-color: var(--gray-background)!important;
+    background-color: var(--secondary-background-color)!important;
+}
+
+.dropdown-menu {
+    background-color: var(--tertiary-background-color);
+    color: var(--secondary-text-color);
+    white-space: nowrap;
+}
+
+a:not([role="button"]):focus,
+a:not([role="button"]):hover,
+a:not([role="button"]):active,
+a:not([role="button"])::selection {
+    text-decoration: underline;
 }
 
 #nav-link:focus,
@@ -86,6 +117,10 @@
     color: var(--main-page-color)!important;
     outline: none!important;
     box-shadow: none!important;
+}
+
+#nav-link-lng {
+    color: var(--secondary-text-color);
 }
 
 #nav-link-lng:hover {
@@ -103,11 +138,16 @@
 }
 
 #link {
-    color: var(--text-gray);
+    color: var(--secondary-text-color);
 }
 
 #dropdown-basic {
-    color: var(--text-gray);
+    color: var(--secondary-text-color);
+}
+
+#furtherFunctionContainer {
+    overflow-y: scroll;
+    height: 50vh;
 }
 
 #dropdown-basic:hover,
@@ -118,7 +158,7 @@
 }
 
 #help {
-    color: var(--text-gray);
+    color: var(--secondary-text-color);
 }
 
 #help:focus {
@@ -133,14 +173,9 @@
     color: var(--main-page-color)!important;
 }
 
-.form-check {
-    padding-left: 2.3em;
-    color: var(--text-gray);
-}
-
 #checkbox {
     padding-left: 0.8em;
-    color: var(--text-gray);
+    color: var(--secondary-text-color);
     overflow: hidden;
 }
 

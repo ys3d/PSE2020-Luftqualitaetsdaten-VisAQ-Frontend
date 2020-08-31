@@ -4,6 +4,7 @@ import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 import CookieNoticeInformation from './CookieNoticeInformation'
 import './CookieNotice.css'
+import Cookies from 'js-cookie';
 
 /**
  * Class that creates the cookies and shows the cookie notice
@@ -13,34 +14,10 @@ class CookieNotice extends Component {
         super();
         this.render.bind(this);
         this.state = {
-            showModal: document.cookie.split(';').some((item) => item.trim().startsWith('Language=')) ? false : true,
+            showModal: Cookies.get("visaq_allowcookies") === undefined,
         };
-    }
 
-    /**
-     * Gets the safed language out of the cookie
-     *
-     * @param {String} name   The name
-     */
-    getLanguage = (name) => {
-        if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
-            var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-            if (match) {
-                return match[2];
-            }
-        } else {
-            return 'de'
-        }
-    }
-
-    /**
-     * Run when loading the site. Loads the saved language
-     */
-
-    componentWillMount() {
-        if (document.cookie.split(';').some((item) => item.trim().startsWith('Language='))) {
-            i18next.changeLanguage(this.getLanguage('Language'));
-        }
+        i18next.changeLanguage(Cookies.get('visaq_language') || 'de');
     }
 
     /**
@@ -63,9 +40,10 @@ class CookieNotice extends Component {
     /**
      * Saves the language in the cookie
      */
-    setCookie = () => {
-        document.cookie = 'Language=' + i18next.language + ';max-age=' + 60 * 60 * 24 * 365;
-        this.setState({ showModal: false });
+    setCookie(allow) {
+        this.setState({ showModal: false }, () => {
+            Cookies.set("visaq_allowcookies", allow, { expires: 365, sameSite: 'lax' });
+        });
     }
     /**
      * Returns the cookieNotice
@@ -83,7 +61,7 @@ class CookieNotice extends Component {
                 >
                     <ModalTitle center className={'title'}>
                         Cookies
-          </ModalTitle>
+                </ModalTitle>
                     <Modal.Body className={'text'}>
                         {t('cookieNotice')}
                         <div className="network">&nbsp;</div>
@@ -92,10 +70,10 @@ class CookieNotice extends Component {
                         </Button>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={this.close.bind(this)} className={'button'}>
+                        <Button onClick={this.setCookie.bind(this, false)} className={'button'}>
                             {t('decline')}
                         </Button>
-                        <Button onClick={this.setCookie} className={'button'}>
+                        <Button onClick={this.setCookie.bind(this, true)} className={'button'}>
                             {t('accept')}
                         </Button>
                     </Modal.Footer>

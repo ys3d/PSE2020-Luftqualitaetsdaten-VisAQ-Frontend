@@ -74,7 +74,9 @@ export default class TimeQuery extends React.Component {
     * @param {Object} date The selected Date
     */
     setMinMaxTime = (date) => {
-        if (date.getDay() === startDate.getDay()) {
+        if ((date.getFullYear() === startDate.getFullYear())
+            && (date.getMonth() === startDate.getMonth())
+            && (date.getUTCDate() === startDate.getUTCDate())) {
             minTime = setHours(setMinutes(startDate, 0), 0);
             maxTime = setMinutes(startDate, 0);
         } else {
