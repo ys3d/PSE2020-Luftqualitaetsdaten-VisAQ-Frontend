@@ -215,8 +215,6 @@ class MapView extends Component {
      * Renders the map and all of its children.
      */
     render() {
-        console.log(Theme.getInstance().theme)
-        console.log((Theme.getInstance() === ThemeEnum.dark))
         return (
             <div className="map-container" key="map-container">
                 <Map
@@ -229,18 +227,18 @@ class MapView extends Component {
                     zoomControl={false}
                     key="custom-leaflet-map"
                 >
-                     {(Theme.getInstance().theme === ThemeEnum.light) &&
-                   <TileLayer
-                        attribution= '&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
+                    {(Theme.getInstance().theme === ThemeEnum.light) &&
+                        <TileLayer
+                            attribution= '&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
                     }
                     
                     {(Theme.getInstance().theme === ThemeEnum.dark) &&
-                   <TileLayer
-                        attribution= '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-                        url='http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png'
-                    />
+                        <TileLayer
+                            attribution= '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+                            url='http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png'
+                        />
                     }
 
                     <OverlayBuilder
@@ -264,11 +262,3 @@ class MapView extends Component {
 const dynamicMapView = withTranslation('common')(MapView);
 
 export default dynamicMapView;
-//'&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-//"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-/*
-<TileLayer
-                        attribution= '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        url='https://{s}.tile.jawg.io/jawg-dark/{z}/{x}/{y}{r}.png?access-token={Ey9N6dlDhDrpUDVfVom6q0ctRgykChRI5NLrzK4rS8dxOMZuhQf6zwPlvrEgU7Wp}'
-                    />
-*/
