@@ -64,20 +64,20 @@ class CookieNoticeInformation extends Component {
                         {t('moreInfoCookies')}
                     </ModalTitle>
                     <Modal.Body className={'text'}>
-                        <strong>{t('cookie1')}</strong>
+                        <strong>{t('cookieQuestionWhat')}</strong>
                         <div className="network">&nbsp;</div>
-                        {t('cookie2')}
+                        {t('cookieDescription')}
                         <div className="network">&nbsp;</div>
-                        <strong>{t('cookie3')}</strong>
+                        <strong>{t('cookieQuestionWhy')}</strong>
                         <div className="network">&nbsp;</div>
-                        {t('cookie4')}
+                        {t('cookieUsage')}
                         <div className="network">&nbsp;</div>
-                        <strong>{t('cookie5')}</strong> <br />
-                        <strong>{t('cookie6')}</strong>
+                        <strong>{t('cookieQuestionWhich')}</strong> <br />
+                        <strong>{t('cookieQuestionNeccessary')}</strong>
                         <div className="network">&nbsp;</div>
-                        {t('cookie7')}
+                        {t('cookieNeccessary')}
                         <div className="network">&nbsp;</div>
-                        {t('cookie8')} <br />
+                        {t('cookieLanguage')} <br />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.close.bind(this)} className={'button'}>

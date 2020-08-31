@@ -10,8 +10,8 @@ import Observation from "../model/Observation";
 import PointDatum from '../model/PointDatum';
 import { ReactLeafletSearch } from 'react-leaflet-search';
 import { withTranslation } from 'react-i18next';
-import {Button} from 'react-bootstrap';
-import {AiOutlineAim} from "react-icons/ai";
+import { Button } from 'react-bootstrap';
+import { AiOutlineAim } from 'react-icons/ai';
 
 /**
  * Class that contains the MapView.
@@ -39,18 +39,17 @@ class MapView extends Component {
      * Otherwise the map centers on Augsburg.
      */
     setPosition(){ 
-            navigator.geolocation.getCurrentPosition((position) => {
-                this.setState({
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude,
-                });
-            this.onBoundsUpdate(this.state.bounds);
-            }, (error) => {},
-            {
-                enableHighAccuracy: false,
-                timeout: 20,
-                maximumAge: Infinity,
+        navigator.geolocation.getCurrentPosition((position) => {
+            this.setState({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
             });
+        this.onBoundsUpdate(this.state.bounds);
+        }, (error) => {}, {
+            enableHighAccuracy: false,
+            timeout: 2000,
+            maximumAge: Infinity,
+        });
     }
 
     /**
@@ -264,7 +263,7 @@ class MapView extends Component {
                         onClick={() => this.setPosition()}
                         className='center-on-client'
                     >
-                     <AiOutlineAim />
+                        <AiOutlineAim />
                     </Button>
                 </Map>
             </div>
