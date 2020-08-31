@@ -55,7 +55,7 @@ class Searchbar extends Component {
                     key="custom-leaflet-searchbar"
                 />
                 <Button
-                    onClick={() => this.setPosition()}
+                    onClick={() => this.props.setPosition()}
                     className='center-on-client'
                 >
                     <AiOutlineAim />
