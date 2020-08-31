@@ -39,7 +39,7 @@ class MapView extends Component {
      * Centers the map on the user's position if the Cookie was accepted.
      * Otherwise the map centers on Augsburg.
      */
-    setPosition(){ 
+    setPosition() { 
         navigator.geolocation.getCurrentPosition((position) => {
             this.setState({
                 lat: position.coords.latitude,
