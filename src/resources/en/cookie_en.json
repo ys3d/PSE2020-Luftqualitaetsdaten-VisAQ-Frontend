@@ -1,15 +1,15 @@
 {
-	"moreInfoCookies":"More information about our cookies",
-	"cookieNotice": "This website uses cookies - more information can be found under „More information about our cookies“. Click on „I agree“ to accept cookies and visit our website directly. If you do not want cookies to be activated on this website, press „I decline“",
-	"cookieQuestionWhat":"What are Cookies?",
-	"cookieDescription":"Cookies und ähnliche Technologien sind sehr kleine Textdokumente oder Codeteile, die oft einen eindeutigen Identifikationscode enthalten. Wenn Sie eine Website besuchen oder eine mobile Anwendung verwenden, bittet ein Computer Ihren Computer oder Ihr mobiles Gerät um die Erlaubnis, diese Datei auf Ihrem Computer oder mobilen Gerät zu speichern und Zugang zu Informationen zu erhalten. Informationen, die durch Cookies und ähnliche Technologien gesammelt werden, können das Datum und die Uhrzeit des Besuchs sowie die Art und Weise, wie Sie eine bestimmte Website oder mobile Anwendung nutzen, beinhalten.",
-	"cookieQuestionWhy":"Why do we use cookies?",
-	"cookieUsage":"On this website we use cookies to guarante you a better user experience. For this we save your last used language as well as load your current location",
-	"cookieQuestionWhich":"What kind of cookies do we use?",
-	"cookieQuestionNeccessary":"Needed cookies:",
-	"cookieNeccessary":"These cookies are needed in order for the website to work. The following actions can be handled by using cookies.",
-	"cookieLanguage":"- Saving the language that you used last on this website",
-	"accept": "I agree",
-	"close": "Close",
-	"decline": "I decline"
+    "moreInfo": "More information about our cookies",
+    "cookieNotice": "This website uses cookies - more information can be found under „More information about our cookies“. Click on „I agree“ to accept cookies and visit our website directly. If you do not want cookies to be activated on this website, press „I decline“",
+    "whatAreCookiesTitle": "What are Cookies?",
+    "whatAreCookiesText": "Cookies are small text files, which often contain an unique identifier. When using a website, your browser will typically ask your computer or mobile phone for permission to save the file on it. The information contained by a cookie often contains the time and date of your last visit as well as other information regarding how you want to use the website.",
+    "whyDoWeUseCookiesTitle": "Why do we use cookies?",
+    "whyDoWeUseCookiesText": "On this website we use cookies to guarante you a better user experience. For this we save your last used language as well as load your current location",
+    "whichKindOfCookiesTitle": "What kind of cookies do we use?",
+    "necessaryCookies": "Needed cookies:",
+    "necessaryCookiesList": "These cookies are needed in order for the website to work. The following actions can be handled by using cookies.",
+    "languageCookie": "- Saving the language that you used last on this website",
+    "accept": "I agree",
+    "close": "Close",
+    "decline": "I decline"
 }

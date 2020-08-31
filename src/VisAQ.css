@@ -1,0 +1,89 @@
+:root {
+    --legend-z-index: 1000;
+    --searchbar-z-index: 1001;
+}
+
+.light-theme {
+    --main-page-color: #44c2d4;
+    --primary-background-color: rgb(245, 245, 245);
+    --hover-color: #2f8794;
+    --primary-text-color: rgb(33, 37, 41);
+    --secondary-text-color: #787878;
+    --secondary-background-color: #f5f5f5;
+    --tertiary-background-color: #f9f9f9;
+    --quarternary-background-color: #f1f1f1;
+    --box-shadow: rgb(0, 0, 0);
+    --border: rgb(0, 0, 0);
+    /* Diagram needs to be here, because we can't access it via JS otherwhise */
+    --diagram-background-color: rgba(75, 192, 192, 0.4);
+    --diagram-border-color: rgba(75, 192, 192, 1);
+    --diagram-point-border-color: rgba(75, 192, 192, 1);
+    --diagram-point-background-color: white;
+    --diagram-point-hover-background-color: rgba(75, 192, 192, 1);
+    --diagram-point-hover-border-color: rgba(220, 220, 220, 1);
+}
+
+.dark-theme {
+    --main-page-color: #44c2d4;
+    --primary-background-color: rgb(37, 37, 37);
+    --hover-color: #2f8794;
+    --primary-text-color: rgb(231, 231, 231);
+    --secondary-text-color: rgb(199, 199, 199);
+    --secondary-background-color: rgb(45, 45, 45);
+    --tertiary-background-color: rgb(42, 42, 42);
+    --quarternary-background-color: rgb(55, 55, 55);
+    --box-shadow: rgb(0, 0, 0);
+    --border: rgb(255, 255, 255);
+    /* Diagram needs to be here, because we can't access it via JS otherwhise */
+    --diagram-background-color: rgba(75, 192, 192, 0.4);
+    --diagram-border-color: rgba(75, 192, 192, 1);
+    --diagram-point-border-color: rgba(75, 192, 192, 1);
+    --diagram-point-background-color: white;
+    --diagram-point-hover-background-color: rgba(75, 192, 192, 1);
+    --diagram-point-hover-border-color: rgba(220, 220, 220, 1);
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    border: none;
+}
+
+body {
+    border: none;
+    background-color: var(--primary-background-color);
+}
+
+#app, #app .container-fluid {
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-background-color);
+}
+
+.map-content {
+    border: none;
+}
+
+.map {
+    border: none;
+}
+
+.app {
+    height: 100vw;
+    width: 100vw;
+    border: none;
+    margin: 0px
+}
+
+.row {
+    height: 100%;
+    width: 100vw;
+    padding: 0;
+    border: none;
+}

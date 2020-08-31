@@ -57,27 +57,27 @@ class CookieNoticeInformation extends Component {
         return (
             <div>
                 <span onClick={this.open.bind(this)}>
-                    {t('moreInfoCookies')}
+                    {t('moreInfo')}
                 </span>
                 <Modal size="lg" show={this.state.showModal} onHide={this.close.bind(this)} className='information'>
                     <ModalTitle className={'infoTitle'}>
-                        {t('moreInfoCookies')}
+                        {t('moreInfo')}
                     </ModalTitle>
                     <Modal.Body className={'text'}>
-                        <strong>{t('cookieQuestionWhat')}</strong>
+                        <strong>{t('whatAreCookiesTitle')}</strong>
                         <div className="network">&nbsp;</div>
-                        {t('cookieDescription')}
+                        {t('whatAreCookiesText')}
                         <div className="network">&nbsp;</div>
-                        <strong>{t('cookieQuestionWhy')}</strong>
+                        <strong>{t('whyDoWeUseCookiesTitle')}</strong>
                         <div className="network">&nbsp;</div>
-                        {t('cookieUsage')}
+                        {t('whyDoWeUseCookiesText')}
                         <div className="network">&nbsp;</div>
-                        <strong>{t('cookieQuestionWhich')}</strong> <br />
-                        <strong>{t('cookieQuestionNeccessary')}</strong>
+                        <strong>{t('whichKindOfCookiesTitle')}</strong> <br />
+                        <strong>{t('necessaryCookies')}</strong>
                         <div className="network">&nbsp;</div>
-                        {t('cookieNeccessary')}
+                        {t('necessaryCookiesList')}
                         <div className="network">&nbsp;</div>
-                        {t('cookieLanguage')} <br />
+                        {t('languageCookie')} <br />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.close.bind(this)} className={'button'}>

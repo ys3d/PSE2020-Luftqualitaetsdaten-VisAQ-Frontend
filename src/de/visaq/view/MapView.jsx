@@ -1,5 +1,5 @@
 import React, { createRef, Component } from 'react';
-import { Map, TileLayer, withLeaflet } from 'react-leaflet';
+import { Map, TileLayer } from 'react-leaflet';
 import L from 'leaflet';
 import "./MapView.css";
 import OverlayBuilder from './overlayfactory/OverlayBuilder';
@@ -8,10 +8,11 @@ import request from "../controller/Request";
 import Thing from "../model/Thing";
 import Observation from "../model/Observation";
 import PointDatum from '../model/PointDatum';
-import { ReactLeafletSearch } from 'react-leaflet-search';
 import { withTranslation } from 'react-i18next';
-import { Button } from 'react-bootstrap';
-import { AiOutlineAim } from 'react-icons/ai';
+import AirQualityData from './elements/airquality/AirQualityData';
+import Searchbar from './elements/map/Searchbar';
+import ThemeEnum from '../view/elements/theme/ThemeEnum';
+import Theme from '../view/elements/theme/Theme';
 
 /**
  * Class that contains the MapView.
@@ -27,11 +28,11 @@ class MapView extends Component {
             time: this.props.time,
             zoom: 13,
             bounds: L.latLngBounds(L.latLng(48.29, 10.9), L.latLng(48.31, 10.8)),
-            pointDataCells : {},
-            cells: {}
+            pointDataCells: {},
+            cells: {},
+            windowWidth: window.innerWidth
         };
         this.gridSize = 0.15;
-        this.requestInBoundCells();
     }
 
     /**
@@ -45,7 +46,7 @@ class MapView extends Component {
                 lng: position.coords.longitude,
             });
         this.onBoundsUpdate(this.state.bounds);
-        }, (error) => {}, {
+        }, () => {}, {
             enableHighAccuracy: false,
             timeout: 2000,
             maximumAge: Infinity,
@@ -56,27 +57,15 @@ class MapView extends Component {
      * Sets the height according to the window height.
      */
     updateDimensions() {
-        const height = window.innerWidth >= 992 ? window.innerHeight : 400;
-        this.setState({ height: height });
+        this.setState({
+            windowWidth: window.innerWidth
+        });
     }
 
     /**
-     * Starts the proccesses setPosition and updateDimensions when the component is mounted.
+     * Requests all in bound cells.
      */
-    componentWillMount() {
-        this.updateDimensions();
-    }
-
-    /**
-     * Changes the airQualityData state of the component.
-     *
-     * @param {Object} airQualityData The AirQualityData
-     */
-    componentDidUpdate(prevProps) {
-        if (this.props.airQualityData === prevProps.airQualityData
-            && this.props.time === prevProps.time) {
-            return;
-        }
+    componentDidUpdate() {
         this.requestInBoundCells();
     }
 
@@ -85,13 +74,15 @@ class MapView extends Component {
      */
     componentDidMount() {
         window.addEventListener("resize", this.updateDimensions.bind(this));
+        window.addEventListener('load', this.requestInBoundCells.bind(this));
+        this.updateDimensions();
     }
 
     /**
      * Removes the Event Listener.
      */
     componentWillUnmount() {
-        window.removeEventListener("resize", this.updateDimensions.bind(this))
+        window.removeEventListener('load', this.requestInBoundCells.bind(this));
     }
 
     /**
@@ -108,6 +99,7 @@ class MapView extends Component {
         if (this.state.cells.hasOwnProperty(`${time}|${airQualityData.name}|${lat}|${lng}`) || this.state.cells[`${time}|${airQualityData.name}|${lat}|${lng}`] !== undefined) {
             return;
         }
+
         this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: null } }, () => {
             request("/api/thing/all/square", true, {
                 "y1": lat,
@@ -115,19 +107,24 @@ class MapView extends Component {
                 "y2": lat + this.gridSize,
                 "x2": lng + this.gridSize
             }, Thing).then(things => {
-                request("/api/observation/all/things/timeframed", true, {
-                    "things": things,
-                    "millis": time,
-                    "range": "PT2H",
-                    "observedProperty": airQualityData.observedProperty,
-                    "average": this.props.airQualityData.average,
-                    "variance": this.props.airQualityData.variance
-                }, Observation).then(observations => {
-                    this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: { things: things, observations: observations } } });
-                }, error => {
-                    this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: undefined } });
-                });
-            }, error => {
+                if (things === null) {
+                    this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: { things: things, observations: null } } });
+                }
+                else {
+                    request("/api/observation/all/things/timeframed", true, {
+                        "things": things,
+                        "millis": time,
+                        "range": "PT2H",
+                        "observedProperty": airQualityData.observedProperty,
+                        "average": airQualityData.average,
+                        "variance": airQualityData.variance
+                    }, Observation).then(observations => {
+                        this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: { things: things, observations: observations } } });
+                    }, () => {
+                        this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: undefined } });
+                    });
+                }
+            }, () => {
                 delete this.state.cells[`${time}|${airQualityData.name}|${lat}|${lng}`];
             });
         });
@@ -156,9 +153,9 @@ class MapView extends Component {
                 "x2": lng + this.gridSize,
                 "millis": time,
                 "range": "PT2H",
-                "observedProperty": this.props.airQualityData.observedProperty,
-                "average": this.props.airQualityData.average,
-                "variance": this.props.airQualityData.variance
+                "observedProperty": airQualityData.observedProperty,
+                "average": airQualityData.average,
+                "variance": airQualityData.variance
             }, PointDatum).then(pointDatum => {
                 this.setState({ pointDataCells: { ...this.state.pointDataCells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: { pointData: pointDatum } } });
             }, error => {
@@ -182,11 +179,13 @@ class MapView extends Component {
         var xCells = eastCell - westCell;
         var yCells = northCell - southCell;
 
+        let airQualityData = AirQualityData.getInstance();
+
         if (yCells < 5 && xCells < 5) {
             for (var y = 0; y <= yCells; y++) {
                 for (var x = 0; x <= xCells; x++) {
-                    this.requestCell(this.props.time, this.props.airQualityData, (southCell + y) * this.gridSize, (westCell + x) * this.gridSize);
-                    this.requestInterpolation(this.props.time, this.props.airQualityData, (southCell + y) * this.gridSize, (westCell + x) * this.gridSize)
+                    this.requestCell(this.props.time, airQualityData, (southCell + y) * this.gridSize, (westCell + x) * this.gridSize);
+                    this.requestInterpolation(this.props.time, airQualityData, (southCell + y) * this.gridSize, (westCell + x) * this.gridSize)
                 }
             }
         }
@@ -217,60 +216,55 @@ class MapView extends Component {
      * Renders the map and all of its children.
      */
     render() {
-        const { t } = this.props;
-        const ReactLeafletSearchComponent = withLeaflet(ReactLeafletSearch)
         return (
-            <div className="map-container" style={{ height: this.state.height }}>
+            <div className="map-container" key="map-container">
                 <Map
                     center={[this.state.lat, this.state.lng]}
                     zoom={this.state.zoom}
-                    style={{ width: '100%', height: '100vh' }}
+                    style={{ width: '100%', height: '100%' }}
                     boundsOptions={{ padding: [50, 50] }}
                     ref={this.mapRef}
                     onMoveEnd={this.onMove.bind(this)}
                     zoomControl={false}
-
+                    key="custom-leaflet-map"
                 >
-                    <TileLayer
-                        attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
+                    {(Theme.getInstance().theme === ThemeEnum.light) &&
+                        <TileLayer
+                            attribution= '&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                    }
+                    
+                    {(Theme.getInstance().theme === ThemeEnum.dark) &&
+                        <TileLayer
+                            attribution= '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+                            url='http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png'
+                        />
+                    }
+
                     <OverlayBuilder
                         mapState={this.state}
-                        airQualityData={this.props.airQualityData}
                         time={this.props.time}
                         gridSize={this.gridSize}
-                        openHandler={(squareCenter, thingId, airQualityData) => this.props.openHandler(squareCenter, thingId, airQualityData)}
-                        iOpenHandler={(squareCenter, interpolatedValue, airQualityData) => this.props.iOpenHandler(squareCenter, interpolatedValue, airQualityData)}
+                        openHandler={(squareCenter, thingId) => this.props.openHandler(squareCenter, thingId)}
+                        iOpenHandler={(squareCenter, interpolatedValue) => this.props.iOpenHandler(squareCenter, interpolatedValue)}
                         overlays={this.props.overlays}
                     />
-                    <Legend airQualityData={this.props.airQualityData} className='legend' id='legend'
-                    />
+                    
+                    {(!this.props.isOverviewOpen || (this.state.windowWidth >= 576)) &&
+                        <Legend
+                            className='legend'
+                            id='legend'
+                        />
+                    }
 
-                    <ReactLeafletSearchComponent
-                        className="search-control"
-                        position="topleft"
-                        provider="OpenStreetMap"
-                        providerOptions={{ region: "de" }}
-                        inputPlaceholder={t('search')}
-                        zoom={12}
-                        showMarker={false}
-                        showPopUp={false}
-                        closeResultsOnClick={true}
-                        openSearchOnLoad={true}
-                    />
-                    <Button
-                        onClick={() => this.setPosition()}
-                        className='center-on-client'
-                    >
-                        <AiOutlineAim />
-                    </Button>
+                    <Searchbar />
                 </Map>
             </div>
         );
     }
 }
 
-const dynamicMapView = withTranslation('common')(MapView)
+const dynamicMapView = withTranslation('common')(MapView);
 
-export default dynamicMapView
+export default dynamicMapView;
