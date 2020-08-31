@@ -12,6 +12,8 @@ import { withTranslation } from 'react-i18next';
 import AirQualityData from './elements/airquality/AirQualityData';
 import Searchbar from './elements/map/Searchbar';
 import i18n from './Language';
+import ThemeEnum from '../view/elements/theme/ThemeEnum';
+import Theme from '../view/elements/theme/Theme';
 
 /**
  * Class that contains the MapView.
@@ -225,10 +227,19 @@ class MapView extends Component {
                     zoomControl={false}
                     key="custom-leaflet-map"
                 >
-                    <TileLayer
-                        attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
+                    {(Theme.getInstance().theme === ThemeEnum.light) &&
+                        <TileLayer
+                            attribution= '&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                    }
+                    
+                    {(Theme.getInstance().theme === ThemeEnum.dark) &&
+                        <TileLayer
+                            attribution= '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+                            url='http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png'
+                        />
+                    }
 
                     <OverlayBuilder
                         mapState={this.state}
