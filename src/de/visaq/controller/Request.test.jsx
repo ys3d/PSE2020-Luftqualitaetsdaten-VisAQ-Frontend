@@ -92,7 +92,7 @@ test("Requests absolut", () => {
     }
     `));
 
-    return request("http://api2.visaq.de/api/thing/id", false, {
+    return request("https://api2.visaq.de/api/thing/id", false, {
         id: "saqn:t:grimm-aerosol.com:EDM80NEPH:SN17017"
     }, Thing).then(thing => {
         expect(thing.id).toBe(aliveThing.id);
