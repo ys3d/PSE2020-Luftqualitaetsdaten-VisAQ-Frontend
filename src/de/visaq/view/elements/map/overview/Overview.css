@@ -98,6 +98,7 @@ ul {
     background-color: var(--grey);
     overflow-y: scroll;
     height: 90vh;
+    color: var(--primary-text-color);
 }
 
 #help {
@@ -125,7 +126,7 @@ p.expert {
     color: var(--secondary-text-color);
 }
 
-#sensorOverviewContainer .card > .card-header {
+#sensorOverviewContainer .card>.card-header {
     background-color: var(--quarternary-background-color);
 }
 
