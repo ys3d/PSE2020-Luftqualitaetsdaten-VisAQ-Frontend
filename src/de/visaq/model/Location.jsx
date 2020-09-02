@@ -51,6 +51,7 @@ export default class Location extends Sensorthing {
             name: this.name,
             historicalLocationsLink: this.historicalLocationsLink,
             thingsLink: this.thingsLink,
+            location: this.location,
             "@type": "Location"
         };
     }
