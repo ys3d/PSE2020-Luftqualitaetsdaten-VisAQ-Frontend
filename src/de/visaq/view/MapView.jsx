@@ -13,6 +13,7 @@ import AirQualityData from './elements/airquality/AirQualityData';
 import Searchbar from './elements/map/Searchbar';
 import ThemeEnum from '../view/elements/theme/ThemeEnum';
 import Theme from '../view/elements/theme/Theme';
+import Cookies from 'js-cookie';
 
 /**
  * Class that contains the MapView.
@@ -22,7 +23,7 @@ class MapView extends Component {
     constructor(props) {
         super(props);
         this.mapRef = createRef();
-        this.augsburg = [ 48.3705449, 10.89779 ];
+        this.startLocation = (this.formatLocation(Cookies.get('visaq_location')) || [ 48.3705449, 10.89779 ]);
         this.state = {
             time: this.props.time,
             zoom: 13,
@@ -46,6 +47,20 @@ class MapView extends Component {
     }
 
     /**
+     * Converts the String from the Cookies into a location.
+     * 
+     * @param {String} location The location
+     */
+    formatLocation(location)    {
+        if (location !== undefined) {
+            var stringLatLng = location.split('/');
+            return [parseFloat(stringLatLng[0]), parseFloat(stringLatLng[1])]
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Sets the height according to the window height.
      */
     updateDimensions() {
@@ -59,6 +74,11 @@ class MapView extends Component {
      */
     componentDidUpdate() {
         this.requestInBoundCells();
+        if (Cookies.get("visaq_allowcookies") === "true") {
+            Cookies.set('visaq_location', 
+                this.mapRef.current.leafletElement.getCenter().lat + "/" + this.mapRef.current.leafletElement.getCenter().lng ,
+                { expires: 365, sameSite: 'lax' });
+        }        
     }
 
     /**
@@ -211,7 +231,7 @@ class MapView extends Component {
         return (
             <div className="map-container" key="map-container">
                 <Map
-                    center={this.augsburg}
+                    center={this.startLocation}
                     zoom={this.state.zoom}
                     style={{ width: '100%', height: '100%' }}
                     boundsOptions={{ padding: [50, 50] }}
