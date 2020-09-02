@@ -19,7 +19,7 @@ function Overview(props) {
         if (props.isSensor) {
             return (
                 <>
-                    <Col xl={4} lg={6} md={8} sm={8} xs={10} id="sensorOverviewContainer">
+                    <Col xl={4} lg={6} md={8} sm={8} xs={10} id="sensorOverviewContainer" className="overview-container">
                         <p>
                             <a href="/#" onClick={props.closeHandler} className='close'> </a>
                             <br />
@@ -33,7 +33,7 @@ function Overview(props) {
         else {
             return (
                 <>
-                    <Col xl={4} lg={6} md={8} sm={8} xs={10} id="pointOverviewContainer">
+                    <Col xl={4} lg={6} md={8} sm={8} xs={10} id="pointOverviewContainer" className="overview-container">
                         <p>
                             <a href="/#" onClick={props.closeHandler} className='close'> </a>
                             <br />
