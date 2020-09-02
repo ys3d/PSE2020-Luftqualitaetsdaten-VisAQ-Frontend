@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from 'react';
 import DatePicker, { registerLocale } from "react-datepicker";
 import {enGB, de} from "date-fns/locale";
 import i18next from 'i18next';
@@ -13,10 +13,10 @@ let maxTime;
 /**
  * The class contains a calendar.
  */
-export default class TimeQuery extends React.Component {
+export default class TimeQuery extends Component {
   /**
    * Sole constructor of the class
-   * 
+   *
    * @param {Object} props  The class properies
    */
     constructor(props)    {
@@ -26,13 +26,13 @@ export default class TimeQuery extends React.Component {
         };
         startDate = setMinutes(new Date(this.props.time), 0)
         this.setMinMaxTime(this.state.date);
-        registerLocale("en", enGB); 
+        registerLocale("en", enGB);
         registerLocale("de", de);
     }
 
     /**
     * Sets the calendar again to its starting configuration.
-    * 
+    *
     * @param {Object} prevProps  The previous properties
     */
     componentDidUpdate(prevProps)  {
@@ -47,7 +47,7 @@ export default class TimeQuery extends React.Component {
 
     /**
     * Passes the date to its parent class and sets a new state.
-    * 
+    *
     * @param {String} date   The selected date
     */
     handleChange = date => {
@@ -70,7 +70,7 @@ export default class TimeQuery extends React.Component {
 
     /**
     * Set the minimum and maximum time of the timeselect.
-    * 
+    *
     * @param {Object} date The selected Date
     */
     setMinMaxTime = (date) => {
@@ -84,7 +84,7 @@ export default class TimeQuery extends React.Component {
             maxTime = null;
         }
     }
-  
+
     /**
     * Renders the calendar.
     */

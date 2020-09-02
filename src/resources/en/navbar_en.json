@@ -34,8 +34,15 @@
     "popoverMapOverlay" : "Adds informative objects or coloring to the map depending on the selected overlay. Only one overlay can be selected at a time.",
     "popoverExpertMode" : "The expert mode offers additional data (for example in the sensor overview) that might be of interest for experts.",
     "popoverHistoricalMode" : "The historical mode allows you to look back in time. Choose a date and time and press 'Go' to look at the data collected at the time.",
-    "colorThemes" : "Color theme",
-    "popoverColorThemes" : "Color themes affect the colors used on the website.",
+    "colorTheme" : "Color theme",
+    "popoverColorTheme" : "Color themes affect the colors used on the website.",
     "lightTheme" : "Light theme",
-    "darkTheme" : "Dark theme"
+    "darkTheme" : "Dark theme",
+    "colorblindMode" : "Colorblind mode",
+    "popoverColorblindMode" : "Selecting a different mode can help if you are colorblind. It will affect various parts of our website especially the gradient used to display data.",
+    "colorblindModeNone" : "Deactivated",
+    "colorblindModeDeuteranomaly" : "Deuteranomaly / Deuteranopia",
+    "colorblindModeProtanomaly" : "Protanomaly / Protanopia",
+    "colorblindModeTritanomaly" : "Tritanomaly / Tritanopia",
+    "colorblindModeMonochromacy" : "Monochromacy"
 }

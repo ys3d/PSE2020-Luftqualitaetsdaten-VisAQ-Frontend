@@ -49,7 +49,7 @@ class Legend extends MapControl {
     componentWillUnmount() {
         this.removeLegend();
     }
-    
+
     /**
      * Creates the content of the Legend component.
      */
@@ -80,7 +80,7 @@ class Legend extends MapControl {
 
                 labels.push(
                     '<i style="background:' +
-                    Gradient(pos, airQualityData) +
+                    Gradient.interpolate(pos) +
                     '"></i> ' +
                     ((i === 0) ? "<" : "") +
                     ((i === (grades.length - 1)) ? ">" : "") +
