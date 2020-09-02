@@ -63,16 +63,16 @@ export default class Gradient {
      * @param {number[]} rgbColor   The rgb color
      */
     static rgbToHex(rgbColor) {
-        var präfix = '#';
+        var prefix = '#';
         var hex = [rgbColor[0].toString(16), rgbColor[1].toString(16), rgbColor[2].toString(16)];
         for (var i = 0; i < hex.length; i++) {
             if (rgbColor[i] < 16) {
-                präfix = präfix.concat('0', hex[i]);
+                prefix = prefix.concat('0', hex[i]);
             } else {
-                präfix = präfix.concat(hex[i]);
+                prefix = prefix.concat(hex[i]);
             }
         }
-        return präfix;
+        return prefix;
     }
 
     /**
