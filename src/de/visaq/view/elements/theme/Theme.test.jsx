@@ -1,22 +1,21 @@
-import ThemeEnum from "./ThemeEnum";
 import Theme from "./Theme";
 import Cookies from 'js-cookie';
 
-const cdarkTheme = new Theme({ theme: ThemeEnum.dark});
-const clightTheme = new Theme({ theme: ThemeEnum.light});
+const cdarkTheme = new Theme({ theme: Theme.Mode.dark});
+const clightTheme = new Theme({ theme: Theme.Mode.light});
 
 test("Test local-equals function", () => {
-    expect(equalsTheme(new Theme({ theme: ThemeEnum.light}), clightTheme)).toBeTruthy();
-    expect(equalsTheme(new Theme({ theme: ThemeEnum.light}), cdarkTheme)).toBeFalsy();
+    expect(equalsTheme(new Theme({ theme: Theme.Mode.light}), clightTheme)).toBeTruthy();
+    expect(equalsTheme(new Theme({ theme: Theme.Mode.light}), cdarkTheme)).toBeFalsy();
 });
 
 test("Standart init without cookie", () => {
     Theme.instance = null;
     expect(equalsTheme(clightTheme, Theme.getInstance())).toBeTruthy();
     //Usless because theme already set
-    Object.defineProperty(window.document, 'visaq_theme', {
+    Object.defineProperty(window.document, 'cookie', {
         writable: true,
-        value: 'dark-theme',
+        value: 'visaq_theme=dark-theme',
     });
     expect(equalsTheme(cdarkTheme, Theme.getInstance())).toBeFalsy();
 });
@@ -36,7 +35,7 @@ test("Construct without cookie", () => {
         value: 'visaq_allowcookies=false',
     });
     const cookieSetSpy = jest.spyOn(Cookies, 'set');
-    const tmpTheme = new Theme({ theme: ThemeEnum.light});
+    const tmpTheme = new Theme({ theme: Theme.Mode.light});
     expect(cookieSetSpy).not.toHaveBeenCalled();
 });
 
@@ -46,9 +45,9 @@ test("Construct with cookie", () => {
         value: 'visaq_allowcookies=true',
     });
     const cookieSetSpy = jest.spyOn(Cookies, 'set');
-    const tmpTheme = new Theme({ theme: ThemeEnum.light});
+    const tmpTheme = new Theme({ theme: Theme.Mode.light});
     expect(cookieSetSpy).toHaveBeenCalledTimes(1);
-    expect(cookieSetSpy).toHaveBeenCalledWith('visaq_theme', ThemeEnum.light, { expires: 365, sameSite: 'lax' });
+    expect(cookieSetSpy).toHaveBeenCalledWith('visaq_theme', Theme.Mode.light, { expires: 365, sameSite: 'lax' });
 });
 
 test("getTheme() test", () => {
@@ -56,10 +55,10 @@ test("getTheme() test", () => {
 });
 
 test("setTheme() test", () => {
-    Theme.setTheme(ThemeEnum.dark)
-    expect(Theme.instance.theme).toBe(ThemeEnum.dark);
-    Theme.setTheme(ThemeEnum.light)
-    expect(Theme.instance.theme).toBe(ThemeEnum.light);
+    Theme.setTheme(Theme.Mode.dark)
+    expect(Theme.instance.theme).toBe(Theme.Mode.dark);
+    Theme.setTheme(Theme.Mode.light)
+    expect(Theme.instance.theme).toBe(Theme.Mode.light);
 });
 
 function equalsTheme(th1, th2) {

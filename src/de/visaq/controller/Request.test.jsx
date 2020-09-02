@@ -57,14 +57,14 @@ test("Requests the Datastreams of the Thing saqn:t:grimm-aerosol.com:EDM80NEPH:S
     }
     `));
 
-    return request("/api/thing/all", true, {}, Thing).then(th => {
+    return Request.post("/api/thing/all", true, {}, Thing).then(th => {
         expect(th).not.toBe(undefined)
         expect(Array.isArray(th)).toBe(true);
     });
 });
 
 test("Requests illegal id Datastream", () => {
-    return request("/api/datastream/id", true, {
+    return Request.post("/api/datastream/id", true, {
         id: "illegal"
     }, Datastream).then(dt => {
         expect(dt).toBe(null);
@@ -92,7 +92,7 @@ test("Requests absolut", () => {
     }
     `));
 
-    return request("https://api2.visaq.de/api/thing/id", false, {
+    return Request.post("https://api2.visaq.de/api/thing/id", false, {
         id: "saqn:t:grimm-aerosol.com:EDM80NEPH:SN17017"
     }, Thing).then(thing => {
         expect(thing.id).toBe(aliveThing.id);
