@@ -98,10 +98,11 @@ p.dropdown-header {
     background-color: var(--secondary-background-color)!important;
 }
 
-.dropdown-menu {
+.app .dropdown-menu, .dropdown-menu.show {
     background-color: var(--tertiary-background-color);
     color: var(--secondary-text-color);
     white-space: nowrap;
+    position: absolute;
 }
 
 a:not([role="button"]):focus,
