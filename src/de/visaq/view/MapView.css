@@ -1,6 +1,11 @@
-#map-content,
+#map-content {
+    height: 100%;
+    overflow: visible;
+}
+
 .map-container {
     height: 100%;
+    width: 100vw;
 }
 
 .search-control-wrap {

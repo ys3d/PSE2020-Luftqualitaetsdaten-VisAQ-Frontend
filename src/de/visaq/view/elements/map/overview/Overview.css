@@ -133,3 +133,7 @@ p.expert {
 #sensorOverviewContainer .accordion {
     background-color: var(--tertiary-background-color);
 }
+
+#sensorOverviewContainer, #pointOverviewContainer {
+    z-index: var(--overview-z-index);
+}

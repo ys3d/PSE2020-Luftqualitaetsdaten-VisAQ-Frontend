@@ -1,6 +1,7 @@
 :root {
     --legend-z-index: 1000;
     --searchbar-z-index: 1001;
+    --overview-z-index: 1002;
 }
 
 /*

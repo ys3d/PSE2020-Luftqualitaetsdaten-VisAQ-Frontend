@@ -437,7 +437,7 @@ class Navigationbar extends Component {
                             thingId={this.props.thingId}
                             isSensor={this.props.isSensor}
                             showDetails={this.props.showDetails}
-                            id='map'
+                            id='map-overview'
                             className='map'
                             squareCenter={this.props.squareCenter}
                             pointValue={this.props.pointValue}
