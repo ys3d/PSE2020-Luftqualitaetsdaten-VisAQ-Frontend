@@ -5,12 +5,12 @@ const particulateMatter = new AirQualityData(data.particulateMatter);
 const humidity = new AirQualityData(data.humidity);
 
 test("Standart init", () => {
-    expect(!equalsAirQualityData(humidity, AirQualityData.getInstance())).toBeTruthy();
+    AirQualityData.instance = null;
+    expect(equalsAirQualityData(humidity, AirQualityData.getInstance())).toBeFalsy();
     expect(equalsAirQualityData(particulateMatter, AirQualityData.getInstance())).toBeTruthy();
 });
 
 test("Set instance to humidity test", () => {
-    
     AirQualityData.setInstance(particulateMatter);
     expect(equalsAirQualityData(particulateMatter, AirQualityData.getInstance())).toBeTruthy();
     AirQualityData.setInstance(humidity);
@@ -19,7 +19,6 @@ test("Set instance to humidity test", () => {
 
 test("Getter test", () => {
     AirQualityData.setInstance(particulateMatter);
-
     const instance = AirQualityData.getInstance();
     expect(equalsAirQualityData(particulateMatter, instance)).toBeTruthy();
     expect(instance.getName()).toBe(particulateMatter.name);
