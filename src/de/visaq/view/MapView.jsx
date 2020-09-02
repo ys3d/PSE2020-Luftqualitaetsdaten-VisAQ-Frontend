@@ -1,6 +1,6 @@
 import React, { createRef, Component } from 'react';
 import { Map, TileLayer } from 'react-leaflet';
-import L  from 'leaflet';
+import L from 'leaflet';
 import "./MapView.css";
 import OverlayBuilder from './overlayfactory/OverlayBuilder';
 import Legend from './elements/map/Legend';
