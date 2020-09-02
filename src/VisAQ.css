@@ -1,6 +1,46 @@
 :root {
     --legend-z-index: 1000;
     --searchbar-z-index: 1001;
+    --overview-z-index: 1002;
+}
+
+/*
+    Colorblind mode always has the last say on how to style elements, which is why we use an identifier instead of a class (see themes)
+*/
+#colorblind-mode-deuteranomaly {
+    /*
+        Those values must be hex values so we can work with them easily programmatically
+    */
+    --gradient-fallback-min-color: #0000ff;
+    --gradient-fallback-max-color: #00000f;
+    /* Until here */
+}
+
+#colorblind-mode-protanomaly {
+    /*
+        Those values must be hex values so we can work with them easily programmatically
+    */
+    --gradient-fallback-min-color: #0000ff;
+    --gradient-fallback-max-color: #00000f;
+    /* Until here */
+}
+
+#colorblind-mode-tritanomaly {
+    /*
+        Those values must be hex values so we can work with them easily programmatically
+    */
+    --gradient-fallback-min-color: #ff0000;
+    --gradient-fallback-max-color: #0f0000;
+    /* Until here */
+}
+
+#colorblind-mode-monochromacy {
+    /*
+        Those values must be hex values so we can work with them easily programmatically
+    */
+    --gradient-fallback-min-color: #ffffff;
+    --gradient-fallback-max-color: #000000;
+    /* Until here */
 }
 
 .light-theme {
@@ -60,9 +100,17 @@ body {
     background-color: var(--primary-background-color);
 }
 
-#app, #app .container-fluid {
+#app {
     width: 100%;
     height: 100%;
+    background-color: var(--primary-background-color);
+}
+
+#app > .container-fluid {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     background-color: var(--primary-background-color);
 }
 
@@ -86,4 +134,15 @@ body {
     width: 100vw;
     padding: 0;
     border: none;
+}
+
+div#map-row {
+    flex: 1;
+    padding: 0;
+    border: none;
+    overflow: hidden;
+}
+
+.leaflet-bottom.leaflet-right {
+    z-index: 999;
 }

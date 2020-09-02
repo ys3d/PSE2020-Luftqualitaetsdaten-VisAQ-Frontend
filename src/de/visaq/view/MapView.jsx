@@ -4,15 +4,15 @@ import L from 'leaflet';
 import "./MapView.css";
 import OverlayBuilder from './overlayfactory/OverlayBuilder';
 import Legend from './elements/map/Legend';
-import request from "../controller/Request";
+import Request from "../controller/Request";
 import Thing from "../model/Thing";
 import Observation from "../model/Observation";
 import PointDatum from '../model/PointDatum';
 import { withTranslation } from 'react-i18next';
 import AirQualityData from './elements/airquality/AirQualityData';
 import Searchbar from './elements/map/Searchbar';
-import ThemeEnum from '../view/elements/theme/ThemeEnum';
 import Theme from '../view/elements/theme/Theme';
+import Cookies from 'js-cookie';
 
 /**
  * Class that contains the MapView.
@@ -22,7 +22,7 @@ class MapView extends Component {
     constructor(props) {
         super(props);
         this.mapRef = createRef();
-        this.augsburg = [ 48.3705449, 10.89779 ];
+        this.startLocation = (this.formatLocation(Cookies.get('visaq_location')) || [ 48.3705449, 10.89779 ]);
         this.state = {
             time: this.props.time,
             zoom: 13,
@@ -46,6 +46,20 @@ class MapView extends Component {
     }
 
     /**
+     * Converts the String from the Cookies into a location.
+     *
+     * @param {String} location The location
+     */
+    formatLocation(location)    {
+        if (location !== undefined) {
+            var stringLatLng = location.split('/');
+            return [parseFloat(stringLatLng[0]), parseFloat(stringLatLng[1])]
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Sets the height according to the window height.
      */
     updateDimensions() {
@@ -59,6 +73,11 @@ class MapView extends Component {
      */
     componentDidUpdate() {
         this.requestInBoundCells();
+        if (Cookies.get("visaq_allowcookies") === "true") {
+            Cookies.set('visaq_location',
+                this.mapRef.current.leafletElement.getCenter().lat + "/" + this.mapRef.current.leafletElement.getCenter().lng ,
+                { expires: 365, sameSite: 'lax' });
+        }
     }
 
     /**
@@ -93,7 +112,7 @@ class MapView extends Component {
         }
 
         this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: null } }, () => {
-            request("/api/thing/all/square", true, {
+            Request.post("/api/thing/all/square", true, {
                 "y1": lat,
                 "x1": lng,
                 "y2": lat + this.gridSize,
@@ -103,7 +122,7 @@ class MapView extends Component {
                     this.setState({ cells: { ...this.state.cells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: { things: things, observations: null } } });
                 }
                 else {
-                    request("/api/observation/all/things/timeframed", true, {
+                    Request.post("/api/observation/all/things/timeframed", true, {
                         "things": things,
                         "millis": time,
                         "range": "PT2H",
@@ -138,7 +157,7 @@ class MapView extends Component {
             return;
         }
         this.setState({ pointDataCells: { ...this.state.pointDataCells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: null } }, () => {
-            request("/api/interpolation/default", true, {
+            Request.post("/api/interpolation/default", true, {
                 "y1": lat,
                 "x1": lng,
                 "y2": lat + this.gridSize,
@@ -150,7 +169,7 @@ class MapView extends Component {
                 "variance": airQualityData.variance
             }, PointDatum).then(pointDatum => {
                 this.setState({ pointDataCells: { ...this.state.pointDataCells, [`${time}|${airQualityData.name}|${lat}|${lng}`]: { pointData: pointDatum } } });
-            }, error => {
+            }, () => {
                 delete this.state.pointDataCells[`${time}|${airQualityData.name}|${lat}|${lng}`];
             });
         });
@@ -211,7 +230,7 @@ class MapView extends Component {
         return (
             <div className="map-container" key="map-container">
                 <Map
-                    center={this.augsburg}
+                    center={this.startLocation}
                     zoom={this.state.zoom}
                     style={{ width: '100%', height: '100%' }}
                     boundsOptions={{ padding: [50, 50] }}
@@ -220,14 +239,14 @@ class MapView extends Component {
                     zoomControl={false}
                     key="custom-leaflet-map"
                 >
-                    {(Theme.getInstance().theme === ThemeEnum.light) &&
+                    {(Theme.getTheme() === Theme.Mode.light) &&
                         <TileLayer
                             attribution= '&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
                     }
 
-                    {(Theme.getInstance().theme === ThemeEnum.dark) &&
+                    {(Theme.getTheme() === Theme.Mode.dark) &&
                         <TileLayer
                             attribution= '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
                             url='https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png'

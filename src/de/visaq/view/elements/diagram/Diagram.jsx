@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
 import './Diagram.module.css';
 import '../navbar/Popup.css';
@@ -10,7 +10,7 @@ import { MdInsertChart } from 'react-icons/md';
 /**
  * Draws a diagram.
  */
-class Diagram extends React.Component {
+class Diagram extends Component {
     /**
      * Sole constructor of the class.
      *
@@ -51,7 +51,7 @@ class Diagram extends React.Component {
         this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         window.addEventListener('resize', this.handleWindowSizeChange);
     }
 

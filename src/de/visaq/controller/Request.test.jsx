@@ -1,4 +1,4 @@
-import request from "./Request";
+import Request from "./Request";
 import Thing from "../model/Thing";
 import Datastream from "../model/Datastream";
 import ObservedProperty from "../model/ObservedProperty";
@@ -24,7 +24,7 @@ test("Requests the Thing saqn:t:grimm-aerosol.com:EDM80NEPH:SN17017", () => {
     }
     `));
 
-    return request("/api/thing/id", true, {
+    return Request.post("/api/thing/id", true, {
         id: "saqn:t:grimm-aerosol.com:EDM80NEPH:SN17017"
     }, Thing).then(thing => {
         expect(thing.id).toBe(aliveThing.id);
