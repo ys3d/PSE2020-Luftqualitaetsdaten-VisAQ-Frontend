@@ -99,9 +99,17 @@ body {
     background-color: var(--primary-background-color);
 }
 
-#app, #app .container-fluid {
+#app {
     width: 100%;
     height: 100%;
+    background-color: var(--primary-background-color);
+}
+
+#app > .container-fluid {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     background-color: var(--primary-background-color);
 }
 
@@ -125,4 +133,14 @@ body {
     width: 100vw;
     padding: 0;
     border: none;
+}
+
+div#map-row {
+    flex: 1;
+    padding: 0;
+    border: none;
+}
+
+.leaflet-bottom.leaflet-right {
+    z-index: 999;
 }

@@ -420,7 +420,7 @@ class Navigationbar extends Component {
                             </Navbar.Collapse>
                         </Navbar>
                     </div>
-                    <Row className='row'>
+                    <Row id='map-row' className='row'>
                         <Col id="map-content">
                             <MapView
                                 openHandler={(squareCenter, thingId) => this.props.openHandler(squareCenter, thingId)}
