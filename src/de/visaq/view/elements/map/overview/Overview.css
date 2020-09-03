@@ -1,19 +1,11 @@
-#sensorOverviewContainer {
-    --transparent: transparent;
-    --align: center;
-    background-color: var(--tertiary-background-color);
-    overflow-y: scroll;
-    color: var(--primary-text-color);
-}
-
 ul {
-    text-align: var(--align);
+    text-align: center;
     white-space: nowrap;
     list-style: none;
 }
 
 .arrow-container {
-    text-align: var(--align);
+    text-align: center;
     white-space: nowrap;
     list-style: none;
 }
@@ -64,8 +56,7 @@ ul {
     color: var(--hover-color);
 }
 
-.close:before,
-.close:after {
+.close:before, .close:after {
     position: absolute;
     left: 15px;
     content: ' ';
@@ -91,14 +82,7 @@ ul {
 }
 
 #accordion {
-    background-color: var(--transparent);
-}
-
-#pointOverviewContainer {
-    background-color: var(--grey);
-    overflow-y: scroll;
-    height: 90vh;
-    color: var(--primary-text-color);
+    background-color: transparent;
 }
 
 #help {
@@ -118,8 +102,8 @@ ul {
 }
 
 .card {
-    background-color: var(--transparent);
-    border: var(--transparent);
+    background-color: transparent;
+    border: transparent;
 }
 
 p.expert {
@@ -132,4 +116,12 @@ p.expert {
 
 #sensorOverviewContainer .accordion {
     background-color: var(--tertiary-background-color);
+}
+
+.overview-container {
+    z-index: var(--overview-z-index);
+    height: 100%;
+    background-color: var(--tertiary-background-color);
+    overflow-y: scroll;
+    color: var(--primary-text-color);
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Accordion from 'react-bootstrap/Accordion'
 import { withTranslation } from 'react-i18next';
-import request from '../../../../controller/Request';
+import Request from '../../../../controller/Request';
 import Thing from '../../../../model/Thing';
 import DataCard from './DataCard';
 import ShareField from './ShareField';
@@ -13,6 +13,7 @@ import './Overview.css';
 import Help from '../../../Help';
 import { Nav } from 'react-bootstrap';
 import AirQualityData from '../../airquality/AirQualityData';
+import ColorblindMode from '../../theme/ColorblindMode';
 
 /**
  * Displays all the information about a specific sensor or location
@@ -63,6 +64,11 @@ class SensorOverview extends Component {
      */
     componentDidMount() {
         this.update();
+        ColorblindMode.attach(this);
+    }
+
+    componentWillUnmount() {
+        ColorblindMode.detach(this);
     }
 
     /**
@@ -88,7 +94,7 @@ class SensorOverview extends Component {
                 particulateMatter: false
             }
         })
-        var thing = request("/api/thing/id", true, {
+        var thing = Request.post("/api/thing/id", true, {
             id: this.props.thingId
         }, Thing);
         thing.then(thing => {
@@ -97,7 +103,7 @@ class SensorOverview extends Component {
                 thingDescription: thing.description
             });
             /* Humidity Datastream ####################################################################################### */
-            let humidityDatastream = request("/api/datastream/thing/observedProperty", true, {
+            let humidityDatastream = Request.post("/api/datastream/thing/observedProperty", true, {
                 "thing": thing,
                 "observedProperty": new ObservedProperty(airQualityDataJson.humidity.observedProperty)
             }, Datastream);
@@ -109,7 +115,7 @@ class SensorOverview extends Component {
                             airHumidity: true,
                         },
                     }));
-                    var newestObservations = request("/api/observation/all/newest", true, {
+                    var newestObservations = Request.post("/api/observation/all/newest", true, {
                         "datastreamId": datastream.id,
                         "topNumber": 20
                     }, Observation);
@@ -143,7 +149,7 @@ class SensorOverview extends Component {
             });
 
             /* Temperature Datastream ####################################################################################### */
-            let temperatureDatastream = request("/api/datastream/thing/observedProperty", true, {
+            let temperatureDatastream = Request.post("/api/datastream/thing/observedProperty", true, {
                 "thing": thing,
                 "observedProperty": new ObservedProperty(airQualityDataJson.temperature.observedProperty)
             }, Datastream);
@@ -155,7 +161,7 @@ class SensorOverview extends Component {
                             airTemperature: true,
                         }
                     }));
-                    var newestObservations = request("/api/observation/all/newest", true, {
+                    var newestObservations = Request.post("/api/observation/all/newest", true, {
                         "datastreamId": datastream.id,
                         "topNumber": 20
                     }, Observation);
@@ -190,7 +196,7 @@ class SensorOverview extends Component {
             });
 
             /* Air Pressure Datastream ####################################################################################### */
-            let airPressureDatastream = request("/api/datastream/thing/observedProperty", true, {
+            let airPressureDatastream = Request.post("/api/datastream/thing/observedProperty", true, {
                 "thing": thing,
                 "observedProperty": new ObservedProperty(airQualityDataJson.airPressure.observedProperty)
             }, Datastream);
@@ -202,7 +208,7 @@ class SensorOverview extends Component {
                             airPressure: true,
                         }
                     }));
-                    var newestObservations = request("/api/observation/all/newest", true, {
+                    var newestObservations = Request.post("/api/observation/all/newest", true, {
                         "datastreamId": datastream.id,
                         "topNumber": 20
                     }, Observation);
@@ -237,7 +243,7 @@ class SensorOverview extends Component {
             });
 
             /* Particulate Matter Datastream ####################################################################################### */
-            let particulateMatterDatastream = request("/api/datastream/thing/observedProperty", true, {
+            let particulateMatterDatastream = Request.post("/api/datastream/thing/observedProperty", true, {
                 "thing": thing,
                 "observedProperty": new ObservedProperty(airQualityDataJson.particulateMatter.observedProperty)
             }, Datastream);
@@ -249,7 +255,7 @@ class SensorOverview extends Component {
                             particulateMatter: true,
                         }
                     }));
-                    var newestObservations = request("/api/observation/all/newest", true, {
+                    var newestObservations = Request.post("/api/observation/all/newest", true, {
                         "datastreamId": datastream.id,
                         "topNumber": 20
                     }, Observation);

@@ -1,9 +1,0 @@
-{
-    "identifier" :
-    {
-        "airTemperature" : "saqn:op:ta",
-        "airPressure": "saqn:op:plev",
-        "humidity": "saqn:op:hur",
-        "particulateMatter": "saqn:op:mcpm10"
-    }
-}

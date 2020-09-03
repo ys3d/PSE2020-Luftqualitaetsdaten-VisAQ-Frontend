@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button, Navbar, NavDropdown, Form, Nav } from 'react-bootstrap';
 import PopupReasons from './PopupReasons';
 import { BrowserRouter as Router } from "react-router-dom";
@@ -16,15 +16,16 @@ import HelpPopover from '../../HelpPopover';
 import { Row, Col } from "react-bootstrap";
 import Overview from '../map/overview/Overview';
 import OverlayEnum from '../../overlayfactory/OverlayEnum';
-import ThemeEnum from '../theme/ThemeEnum';
 import Theme from '../theme/Theme';
+import ColorblindMode from '../theme/ColorblindMode';
+import Impressum from '../../Impressum';
 
 let startTime;
 let tempTime;
 /**
  * Class containing the Navigationbar
  */
-class Navigationbar extends React.Component {
+class Navigationbar extends Component {
 
     /**
      * Sole constructor of the class
@@ -40,6 +41,7 @@ class Navigationbar extends React.Component {
             activeLanguage: i18next.language === 'en' ? 0 : 1,
             overlays: OverlayEnum.sensor,
             theme: Theme.getTheme(),
+            colorblindMode: ColorblindMode.getMode(),
             historicalMode: false,
             time: Date.now()
         }
@@ -70,6 +72,7 @@ class Navigationbar extends React.Component {
      */
     activateSensors = () => {
         this.setState({ overlays: OverlayEnum.sensor });
+        this.props.closeHandler();
     }
 
     /**
@@ -77,11 +80,17 @@ class Navigationbar extends React.Component {
      */
     activateInterpolation = () => {
         this.setState({ overlays: OverlayEnum.interpolation });
+        this.props.closeHandler();
     }
 
     activateTheme(newTheme) {
         Theme.setTheme(newTheme);
         this.setState({ theme: newTheme });
+    }
+
+    activateColorblindMode(newMode) {
+        ColorblindMode.setMode(newMode);
+        this.setState({ colorblindMode: newMode });
     }
 
     /**
@@ -105,7 +114,7 @@ class Navigationbar extends React.Component {
      */
     activateAirQuality(position) {
         if (this.state.activeAirQualityData === position) {
-            return "#44c2d4";
+            return window.getComputedStyle(document.body).getPropertyValue("--main-page-color");
         }
         return "";
     }
@@ -116,7 +125,7 @@ class Navigationbar extends React.Component {
      */
     activateLanguage(position) {
         if (this.state.activeLanguage === position) {
-            return "#44c2d4";
+            return window.getComputedStyle(document.body).getPropertyValue("--main-page-color");
         }
         return "";
     }
@@ -316,27 +325,87 @@ class Navigationbar extends React.Component {
                                             draggable="false"
                                         >
                                             SmartAQNet
-                                    </NavDropdown.Item>
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item
+                                            className='drop-link'
+                                            id='drop-link'
+                                            href='https://github.com/users/ys3d/projects/1'
+                                            draggable="false"
+                                        >
+                                            Github Repository
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item
+                                            className='drop-link'
+                                            id='drop-link'
+                                            href='#'
+                                            draggable="false"
+                                        >
+                                            <Impressum />
+                                        </NavDropdown.Item>
                                     </div>
                                 </NavDropdown>
                                 <Nav className='ml-auto'>
-                                    <NavDropdown title={t('colorThemes')} variant="success" id="dropdown-basic">
-                                        <p className='dropdown-header'>{t('colorThemes')} <HelpPopover placement="auto" title={t('colorThemes')} content={t('popoverColorThemes')} /></p>
+                                    <NavDropdown title={t('colorTheme')} variant="success" id="dropdown-basic">
+                                        <p className='dropdown-header'>{t('colorTheme')} <HelpPopover placement="auto" title={t('colorTheme')} content={t('popoverColorTheme')} /></p>
                                         <Form.Group controlId='form-switch'>
                                             <Form.Check
                                                 type='radio'
                                                 id='light-theme'
-                                                checked={ThemeEnum.light === this.state.theme}
+                                                checked={Theme.Mode.light === this.state.theme}
                                                 label={t('lightTheme')}
-                                                onChange={() => this.activateTheme(ThemeEnum.light)}
+                                                onChange={() => this.activateTheme(Theme.Mode.light)}
                                                 draggable="false"
                                             />
                                             <Form.Check
                                                 type='radio'
                                                 id='dark-theme'
-                                                checked={ThemeEnum.dark === this.state.theme}
+                                                checked={Theme.Mode.dark === this.state.theme}
                                                 label={t('darkTheme')}
-                                                onChange={() => this.activateTheme(ThemeEnum.dark)}
+                                                onChange={() => this.activateTheme(Theme.Mode.dark)}
+                                                draggable="false"
+                                            />
+                                        </Form.Group>
+                                        <NavDropdown.Divider />
+                                        <p className='dropdown-header'>{t('colorblindMode')} <HelpPopover placement="auto" title={t('colorblindMode')} content={t('popoverColorblindMode')} /></p>
+                                        <Form.Group controlId='form-switch'>
+                                            <Form.Check
+                                                type='radio'
+                                                id={ColorblindMode.Mode.none}
+                                                checked={ColorblindMode.Mode.none === this.state.colorblindMode}
+                                                label={t('colorblindModeNone')}
+                                                onChange={() => this.activateColorblindMode(ColorblindMode.Mode.none)}
+                                                draggable="false"
+                                            />
+                                            <Form.Check
+                                                type='radio'
+                                                id={ColorblindMode.Mode.deuteranomaly}
+                                                checked={ColorblindMode.Mode.deuteranomaly === this.state.colorblindMode}
+                                                label={t('colorblindModeDeuteranomaly')}
+                                                onChange={() => this.activateColorblindMode(ColorblindMode.Mode.deuteranomaly)}
+                                                draggable="false"
+                                            />
+                                            <Form.Check
+                                                type='radio'
+                                                id={ColorblindMode.Mode.protanomaly}
+                                                checked={ColorblindMode.Mode.protanomaly === this.state.colorblindMode}
+                                                label={t('colorblindModeProtanomaly')}
+                                                onChange={() => this.activateColorblindMode(ColorblindMode.Mode.protanomaly)}
+                                                draggable="false"
+                                            />
+                                            <Form.Check
+                                                type='radio'
+                                                id={ColorblindMode.Mode.tritanomaly}
+                                                checked={ColorblindMode.Mode.tritanomaly === this.state.colorblindMode}
+                                                label={t('colorblindModeTritanomaly')}
+                                                onChange={() => this.activateColorblindMode(ColorblindMode.Mode.tritanomaly)}
+                                                draggable="false"
+                                            />
+                                            <Form.Check
+                                                type='radio'
+                                                id={ColorblindMode.Mode.monochromacy}
+                                                checked={ColorblindMode.Mode.monochromacy === this.state.colorblindMode}
+                                                label={t('colorblindModeMonochromacy')}
+                                                onChange={() => this.activateColorblindMode(ColorblindMode.Mode.monochromacy)}
                                                 draggable="false"
                                             />
                                         </Form.Group>
@@ -370,7 +439,7 @@ class Navigationbar extends React.Component {
                             </Navbar.Collapse>
                         </Navbar>
                     </div>
-                    <Row className='row'>
+                    <Row id='map-row' className='row'>
                         <Col id="map-content">
                             <MapView
                                 openHandler={(squareCenter, thingId) => this.props.openHandler(squareCenter, thingId)}
@@ -387,7 +456,7 @@ class Navigationbar extends React.Component {
                             thingId={this.props.thingId}
                             isSensor={this.props.isSensor}
                             showDetails={this.props.showDetails}
-                            id='map'
+                            id='map-overview'
                             className='map'
                             squareCenter={this.props.squareCenter}
                             pointValue={this.props.pointValue}

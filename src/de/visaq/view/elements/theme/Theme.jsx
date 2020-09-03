@@ -1,16 +1,16 @@
-import { Component } from 'react';
-import ThemeEnum from "./ThemeEnum";
 import Cookies from 'js-cookie';
 
 /**
  * The class Theme contains the Theme currently selected.
  */
-export default class Theme extends Component {
+export default class Theme {
+    static Mode = { "light": "light-theme", "dark": "dark-theme" };
+
     static instance = null;
 
     static getInstance() {
         if (Theme.instance == null) {
-            Theme.instance = new Theme({ theme: Cookies.get('visaq_theme') || ThemeEnum.light });
+            Theme.instance = new Theme({ theme: Cookies.get('visaq_theme') || Theme.Mode.light });
         }
         return Theme.instance;
     }
@@ -20,7 +20,7 @@ export default class Theme extends Component {
     }
 
     static setTheme(newTheme) {
-        Theme.instance = new Theme({ theme: newTheme} );
+        Theme.instance = new Theme({ theme: newTheme });
     }
 
     /**
@@ -29,8 +29,6 @@ export default class Theme extends Component {
      * @param {Object} newTheme The new theme
      */
     constructor(props) {
-        super(props)
-
         this.theme = props.theme;
         if (Cookies.get("visaq_allowcookies") === "true") {
             Cookies.set('visaq_theme', props.theme, { expires: 365, sameSite: 'lax' });

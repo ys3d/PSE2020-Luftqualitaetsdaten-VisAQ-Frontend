@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { GeoJSON } from 'react-leaflet';
 import L from 'leaflet';
 import Gradient from '../elements/theme/Gradient';
-import AirQualityData from '../elements/airquality/AirQualityData';
 
 /**
  * Creates an interpolated Overlay for them Map.
@@ -23,7 +22,7 @@ export default class InterpolationOverlayFactory extends Component {
             opacity: 0,
             dashArray: '3',
             fillOpacity: 0.3,
-            fillColor: Gradient(feature.properties.value, AirQualityData.getInstance())
+            fillColor: Gradient.interpolate(feature.properties.value)
         });
     }
 
