@@ -13,6 +13,11 @@
     */
     --gradient-fallback-min-color: #0000ff;
     --gradient-fallback-max-color: #00000f;
+    --main-page-color: #0000ff;
+    --hover-color: #2f2f85;
+    --diagram-border-color: #0000ff;
+    --diagram-point-border-color: #0000ff;
+    --diagram-point-hover-background-color: #0000ff;
     /* Until here */
 }
 
@@ -22,6 +27,11 @@
     */
     --gradient-fallback-min-color: #0000ff;
     --gradient-fallback-max-color: #00000f;
+    --main-page-color: #0000ff;
+    --hover-color: #2f2f85;
+    --diagram-border-color: #0000ff;
+    --diagram-point-border-color: #0000ff;
+    --diagram-point-hover-background-color: #0000ff;
     /* Until here */
 }
 
@@ -31,6 +41,11 @@
     */
     --gradient-fallback-min-color: #ff0000;
     --gradient-fallback-max-color: #0f0000;
+    --main-page-color: #ff0000;
+    --hover-color: #852f2f;
+    --diagram-border-color: #ff0000;
+    --diagram-point-border-color: #ff0000;
+    --diagram-point-hover-background-color: #ff0000;
     /* Until here */
 }
 
@@ -40,6 +55,11 @@
     */
     --gradient-fallback-min-color: #ffffff;
     --gradient-fallback-max-color: #000000;
+    --main-page-color: #000000;
+    --hover-color: #858585;
+    --diagram-border-color: #000000;
+    --diagram-point-border-color: #000000;
+    --diagram-point-hover-background-color: #000000;
     /* Until here */
 }
 

@@ -72,6 +72,7 @@ class Navigationbar extends Component {
      */
     activateSensors = () => {
         this.setState({ overlays: OverlayEnum.sensor });
+        this.props.closeHandler();
     }
 
     /**
@@ -79,6 +80,7 @@ class Navigationbar extends Component {
      */
     activateInterpolation = () => {
         this.setState({ overlays: OverlayEnum.interpolation });
+        this.props.closeHandler();
     }
 
     activateTheme(newTheme) {
@@ -112,7 +114,7 @@ class Navigationbar extends Component {
      */
     activateAirQuality(position) {
         if (this.state.activeAirQualityData === position) {
-            return "#44c2d4";
+            return window.getComputedStyle(document.body).getPropertyValue("--main-page-color");
         }
         return "";
     }
@@ -123,7 +125,7 @@ class Navigationbar extends Component {
      */
     activateLanguage(position) {
         if (this.state.activeLanguage === position) {
-            return "#44c2d4";
+            return window.getComputedStyle(document.body).getPropertyValue("--main-page-color");
         }
         return "";
     }

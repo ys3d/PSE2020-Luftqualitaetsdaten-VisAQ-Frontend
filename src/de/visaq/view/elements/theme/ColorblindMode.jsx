@@ -7,6 +7,7 @@ export default class ColorblindMode {
     static Mode = { "none": "colorblind-mode-none", "deuteranomaly": "colorblind-mode-deuteranomaly", "protanomaly": "colorblind-mode-protanomaly", "tritanomaly": "colorblind-mode-tritanomaly", "monochromacy": "colorblind-mode-monochromacy" };
 
     static instance = null;
+    static observers = [];
 
     static getInstance() {
         if (ColorblindMode.instance == null) {
@@ -21,6 +22,26 @@ export default class ColorblindMode {
 
     static setMode(newMode) {
         ColorblindMode.instance = new ColorblindMode({ mode: newMode });
+        ColorblindMode.notify();
+    }
+
+    static attach(observer) {
+        ColorblindMode.observers.push(observer);
+    }
+
+    static detach(observer) {
+        ColorblindMode.observers.filter((o) => {
+            if (o === observer) {
+                return false;
+            }
+            return true;
+        });
+    }
+
+    static notify() {
+        ColorblindMode.observers.forEach((observer) => {
+            observer.update();
+        })
     }
 
     /**
