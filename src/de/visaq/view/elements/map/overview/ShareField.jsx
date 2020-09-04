@@ -9,7 +9,7 @@ import {
     TelegramIcon,
     WhatsappIcon,
 } from "react-share";
-import * as data from '../../../../../../resources/shareConfig.json'
+import * as data from '../../../../../../resources/ShareConfig.json';
 
 /**
  * Shows the share buttons from social media sites.

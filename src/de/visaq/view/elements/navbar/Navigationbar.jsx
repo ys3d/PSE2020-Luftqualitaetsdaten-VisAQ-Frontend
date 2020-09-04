@@ -18,6 +18,7 @@ import Overview from '../map/overview/Overview';
 import OverlayEnum from '../../overlayfactory/OverlayEnum';
 import Theme from '../theme/Theme';
 import ColorblindMode from '../theme/ColorblindMode';
+import Impressum from '../../Impressum';
 
 let startTime;
 let tempTime;
@@ -71,6 +72,7 @@ class Navigationbar extends Component {
      */
     activateSensors = () => {
         this.setState({ overlays: OverlayEnum.sensor });
+        this.props.closeHandler();
     }
 
     /**
@@ -78,6 +80,7 @@ class Navigationbar extends Component {
      */
     activateInterpolation = () => {
         this.setState({ overlays: OverlayEnum.interpolation });
+        this.props.closeHandler();
     }
 
     activateTheme(newTheme) {
@@ -111,7 +114,7 @@ class Navigationbar extends Component {
      */
     activateAirQuality(position) {
         if (this.state.activeAirQualityData === position) {
-            return "#44c2d4";
+            return window.getComputedStyle(document.body).getPropertyValue("--main-page-color");
         }
         return "";
     }
@@ -122,7 +125,7 @@ class Navigationbar extends Component {
      */
     activateLanguage(position) {
         if (this.state.activeLanguage === position) {
-            return "#44c2d4";
+            return window.getComputedStyle(document.body).getPropertyValue("--main-page-color");
         }
         return "";
     }
@@ -322,7 +325,23 @@ class Navigationbar extends Component {
                                             draggable="false"
                                         >
                                             SmartAQNet
-                                    </NavDropdown.Item>
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item
+                                            className='drop-link'
+                                            id='drop-link'
+                                            href='https://github.com/users/ys3d/projects/1'
+                                            draggable="false"
+                                        >
+                                            Github Repository
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item
+                                            className='drop-link'
+                                            id='drop-link'
+                                            href='#'
+                                            draggable="false"
+                                        >
+                                            <Impressum />
+                                        </NavDropdown.Item>
                                     </div>
                                 </NavDropdown>
                                 <Nav className='ml-auto'>

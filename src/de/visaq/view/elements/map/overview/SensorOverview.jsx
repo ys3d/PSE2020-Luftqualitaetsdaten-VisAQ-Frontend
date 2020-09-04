@@ -13,6 +13,7 @@ import './Overview.css';
 import Help from '../../../Help';
 import { Nav } from 'react-bootstrap';
 import AirQualityData from '../../airquality/AirQualityData';
+import ColorblindMode from '../../theme/ColorblindMode';
 
 /**
  * Displays all the information about a specific sensor or location
@@ -63,6 +64,11 @@ class SensorOverview extends Component {
      */
     componentDidMount() {
         this.update();
+        ColorblindMode.attach(this);
+    }
+
+    componentWillUnmount() {
+        ColorblindMode.detach(this);
     }
 
     /**

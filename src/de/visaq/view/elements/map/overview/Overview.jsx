@@ -1,51 +1,46 @@
-import React from 'react';
+import React, { Component } from 'react';
 import SensorOverview from './SensorOverview'
 import PointOverview from './PointOverview'
 import { Col } from "react-bootstrap";
-import { render } from '@testing-library/react';
 import './Overview.css'
 
-/**
- * Container for The SensorOverview
- * @param {Object} props    The properties of Overview.
- */
-function Overview(props) {
-    if (!props.show) {
-        return (
-            <></>
-        )
-    }
-    else {
-        if (props.isSensor) {
-            return (
-                <>
-                    <Col xl={4} lg={6} md={8} sm={8} xs={10} id="sensorOverviewContainer" className="overview-container">
-                        <p>
-                            <a href="/#" onClick={props.closeHandler} className='close'> </a>
-                            <br />
-                            <br />
-                        </p>
-                        <SensorOverview squareCenter={props.squareCenter} thingId={props.thingId} expert={props.showDetails} />
-                    </Col>
-                </>
-            );
+export default class Overview extends Component {
+    render() {
+        let object;
+        if (!this.props.show) {
+            object = (<></>);
         }
         else {
-            return (
-                <>
-                    <Col xl={4} lg={6} md={8} sm={8} xs={10} id="pointOverviewContainer" className="overview-container">
-                        <p>
-                            <a href="/#" onClick={props.closeHandler} className='close'> </a>
-                            <br />
-                            <br />
-                        </p>
-                        <PointOverview squareCenter={props.squareCenter} value={props.pointValue} expert={props.showDetails} />
-                    </Col>
-                </>
-            );
+            if (this.props.isSensor) {
+                object = (
+                    <>
+                        <Col xl={4} lg={6} md={8} sm={8} xs={10} id="sensorOverviewContainer" className="overview-container">
+                            <p>
+                                <a href="/#" onClick={this.props.closeHandler} className='close'> </a>
+                                <br />
+                                <br />
+                            </p>
+                            <SensorOverview squareCenter={this.props.squareCenter} thingId={this.props.thingId} expert={this.props.showDetails} />
+                        </Col>
+                    </>
+                );
+            }
+            else {
+                object = (
+                    <>
+                        <Col xl={4} lg={6} md={8} sm={8} xs={10} id="pointOverviewContainer" className="overview-container">
+                            <p>
+                                <a href="/#" onClick={this.props.closeHandler} className='close'> </a>
+                                <br />
+                                <br />
+                            </p>
+                            <PointOverview squareCenter={this.props.squareCenter} value={this.props.pointValue} expert={this.props.showDetails} />
+                        </Col>
+                    </>
+                );
+            }
         }
+
+        return object;
     }
 }
-render(<Overview />);
-
-export default Overview;

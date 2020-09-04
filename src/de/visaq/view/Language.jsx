@@ -33,7 +33,7 @@ const resources = {
         causes: popup_causes_en,
         reasons: popup_reasons_en,
         historical: historical_en,
-        legend: legend_en,
+        legend: legend_en
     },
     de: {
         common: navbar_de,
@@ -43,7 +43,7 @@ const resources = {
         causes: popup_causes_de,
         reasons: popup_reasons_de,
         historical: historical_de,
-        legend: legend_de,
+        legend: legend_de
     }
 };
 

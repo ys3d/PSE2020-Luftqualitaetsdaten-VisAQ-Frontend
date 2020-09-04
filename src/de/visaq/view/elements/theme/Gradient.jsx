@@ -30,8 +30,8 @@ export default class Gradient {
             max = Gradient.rgbToHsl(Gradient.hexToRgb(airQualityData.getSecondaryColor()));
         }
         else {
-            min = Gradient.rgbToHsl(Gradient.hexToRgb(window.getComputedStyle(document.body).getPropertyValue("--gradient-fallback-min-color").trim()));
-            max = Gradient.rgbToHsl(Gradient.hexToRgb(window.getComputedStyle(document.body).getPropertyValue("--gradient-fallback-max-color").trim()));
+            min = Gradient.rgbToHsl(Gradient.parseComputedStyleColorToRgb(window.getComputedStyle(document.body).getPropertyValue("--gradient-fallback-min-color").trim()));
+            max = Gradient.rgbToHsl(Gradient.parseComputedStyleColorToRgb(window.getComputedStyle(document.body).getPropertyValue("--gradient-fallback-max-color").trim()));
         }
 
         var linearInterpolated = [];
@@ -42,6 +42,40 @@ export default class Gradient {
         }
 
         return Gradient.rgbToHex(Gradient.hslToRgb(linearInterpolated));
+    }
+
+    static parseComputedStyleColorToRgb(color) {
+        //Three character hex format
+        let match = color.match(/^#([0-9a-f]{3})$/i);
+        if (match) {
+            return [
+                parseInt(match[1].charAt(0), 16) * 0x11,
+                parseInt(match[1].charAt(1), 16) * 0x11,
+                parseInt(match[1].charAt(2), 16) * 0x11
+            ];
+        }
+
+        //Six character hex format
+        match = color.match(/^#([0-9a-f]{6})$/i);
+        if (match) {
+            return [
+                parseInt(match[1].substr(0, 2), 16),
+                parseInt(match[1].substr(2, 2), 16),
+                parseInt(match[1].substr(4, 2), 16)
+            ];
+        }
+
+        //RGB format
+        match = color.match(/^rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/i);
+        if (match) {
+            return [match[1], match[2], match[3]];
+        }
+
+        //RGBA format
+        match = color.match(/^rgba\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/i);
+        if (match) {
+            return [match[1], match[2], match[3]];
+        }
     }
 
     /**
@@ -63,16 +97,16 @@ export default class Gradient {
      * @param {number[]} rgbColor   The rgb color
      */
     static rgbToHex(rgbColor) {
-        var präfix = '#';
+        var prefix = '#';
         var hex = [rgbColor[0].toString(16), rgbColor[1].toString(16), rgbColor[2].toString(16)];
         for (var i = 0; i < hex.length; i++) {
             if (rgbColor[i] < 16) {
-                präfix = präfix.concat('0', hex[i]);
+                prefix = prefix.concat('0', hex[i]);
             } else {
-                präfix = präfix.concat(hex[i]);
+                prefix = prefix.concat(hex[i]);
             }
         }
-        return präfix;
+        return prefix;
     }
 
     /**

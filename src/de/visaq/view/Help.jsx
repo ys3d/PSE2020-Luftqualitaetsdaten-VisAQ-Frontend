@@ -34,9 +34,8 @@ class Help extends Component {
         });
     }
 
-    handleSelect(eventKey) {
+    handleSelect() {
         event.preventDefault();
-        alert(`selected ${eventKey}`);
     }
 
     render() {
