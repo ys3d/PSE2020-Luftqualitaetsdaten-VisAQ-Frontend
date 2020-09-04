@@ -12,7 +12,7 @@ test("Test local-equals function", () => {
 test("Standart init without cookie", () => {
     ColorblindMode.instance = null;
     expect(equalsMode(normal, ColorblindMode.getInstance())).toBeTruthy();
-    //Usless because theme already set
+    //Useless because theme already set
     Object.defineProperty(window.document, 'cookie', {
         writable: true,
         value: 'visaq_colorblindmode=colorblind-mode-deuteranomaly',
