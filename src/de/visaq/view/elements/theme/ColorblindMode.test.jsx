@@ -63,6 +63,6 @@ test("setMode() test", () => {
 
 function equalsMode(m1, m2) {
     let state = true;
-    state = state && (m1.mode == m2.mode);
+    state = state && (m1.mode === m2.mode);
     return state;
 }

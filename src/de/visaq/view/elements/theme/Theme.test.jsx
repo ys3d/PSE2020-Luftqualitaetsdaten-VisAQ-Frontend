@@ -63,6 +63,6 @@ test("setTheme() test", () => {
 
 function equalsTheme(th1, th2) {
     let state = true;
-    state = state && (th1.theme == th2.theme);
+    state = state && (th1.theme === th2.theme);
     return state;
 }

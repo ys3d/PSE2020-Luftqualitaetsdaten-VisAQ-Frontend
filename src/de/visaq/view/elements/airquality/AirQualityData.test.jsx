@@ -31,11 +31,11 @@ test("Getter test", () => {
 
 function equalsAirQualityData(aq1, aq2) {
     let state = true;
-    state = state && (aq1.name == aq2.name);
-    state = state && (aq1.primaryColor == aq2.primaryColor);
-    state = state && (aq1.secondaryColor == aq2.secondaryColor);
-    state = state && (aq1.average == aq2.average);
-    state = state && (aq1.variance == aq2.variance);
-    state = state && (aq1.unitOfMeasurement == aq2.unitOfMeasurement);
+    state = state && (aq1.name === aq2.name);
+    state = state && (aq1.primaryColor === aq2.primaryColor);
+    state = state && (aq1.secondaryColor === aq2.secondaryColor);
+    state = state && (aq1.average === aq2.average);
+    state = state && (aq1.variance === aq2.variance);
+    state = state && (aq1.unitOfMeasurement === aq2.unitOfMeasurement);
     return state;
 }
