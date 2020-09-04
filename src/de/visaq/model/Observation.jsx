@@ -51,6 +51,7 @@ export default class Observation extends Sensorthing {
             result: this.result,
             resultTime: this.resultTime,
             featureOfInterestLink: this.featureOfInterestLink,
+            datastreamLink: this.datastreamLink,
             "@type": "Observation"
         };
     }

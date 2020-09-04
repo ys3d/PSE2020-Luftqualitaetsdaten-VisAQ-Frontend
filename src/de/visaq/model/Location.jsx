@@ -36,8 +36,8 @@ export default class Location extends Sensorthing {
     /**
      * Returns the Thing Link.
      */
-    get thingLink() {
-        return this.json.thingLink;
+    get thingsLink() {
+        return this.json.thingsLink;
     }
 
     /**
@@ -50,7 +50,8 @@ export default class Location extends Sensorthing {
             description: this.description,
             name: this.name,
             historicalLocationsLink: this.historicalLocationsLink,
-            thingLink: this.thingLink,
+            thingsLink: this.thingsLink,
+            location: this.location,
             "@type": "Location"
         };
     }
