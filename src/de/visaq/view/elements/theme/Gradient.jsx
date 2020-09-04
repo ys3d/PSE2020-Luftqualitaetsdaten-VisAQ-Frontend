@@ -30,8 +30,8 @@ export default class Gradient {
             max = Gradient.rgbToHsl(Gradient.hexToRgb(airQualityData.getSecondaryColor()));
         }
         else {
-            min = Gradient.rgbToHsl(Gradient.parseComputedStyleColorToRgb(window.getComputedStyle(document.body).getPropertyValue("--gradient-fallback-min-color").trim()));
-            max = Gradient.rgbToHsl(Gradient.parseComputedStyleColorToRgb(window.getComputedStyle(document.body).getPropertyValue("--gradient-fallback-max-color").trim()));
+            min = Gradient.rgbToHsl(Gradient.parseComputedStyleColorToRgb(Gradient.browserColorConversion(window.getComputedStyle(document.body).getPropertyValue("--gradient-fallback-min-color").trim())));
+            max = Gradient.rgbToHsl(Gradient.parseComputedStyleColorToRgb(Gradient.browserColorConversion(window.getComputedStyle(document.body).getPropertyValue("--gradient-fallback-max-color").trim())));
         }
 
         var linearInterpolated = [];
@@ -75,6 +75,15 @@ export default class Gradient {
         match = color.match(/^rgba\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/i);
         if (match) {
             return [match[1], match[2], match[3]];
+        }
+    }
+
+    static browserColorConversion(color) {
+        let dummy = document.getElementById("app");
+
+        if (dummy) {
+            dummy.style.backgroundColor = color;
+            return window.getComputedStyle(dummy).backgroundColor;
         }
     }
 
