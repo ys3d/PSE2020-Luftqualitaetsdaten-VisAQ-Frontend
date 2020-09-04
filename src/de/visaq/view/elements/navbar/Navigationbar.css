@@ -187,7 +187,7 @@ a:not([role="button"])::selection {
 
 p {
     padding-left: 1em;
-    color: var(--main-page-color)
+    color: var(--primary-text-color);
 }
 
 .map-content {
