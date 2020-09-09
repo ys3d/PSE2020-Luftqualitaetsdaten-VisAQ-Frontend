@@ -102,7 +102,6 @@ p.dropdown-header {
     background-color: var(--tertiary-background-color);
     color: var(--secondary-text-color);
     white-space: nowrap;
-    position: absolute;
 }
 
 a:not([role="button"]):focus,
@@ -196,4 +195,12 @@ p {
 
 .map {
     border: none;
+}
+
+#app .navbar-toggler {
+    border-color: var(--border);
+}
+
+#app .navbar-toggler-icon {
+    background-image: var(--navbar-toggle-hamburger-url);
 }

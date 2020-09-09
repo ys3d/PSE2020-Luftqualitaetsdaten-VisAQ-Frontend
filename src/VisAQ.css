@@ -73,7 +73,9 @@
     --tertiary-background-color: #f9f9f9;
     --quarternary-background-color: #f1f1f1;
     --box-shadow: rgb(0, 0, 0);
-    --border: rgb(0, 0, 0);
+    --border: rgb(155, 155, 155);
+    --stroke-primary: rgb(0, 0, 0);
+    --stroke-secondary: rgb(100, 100, 100);
     /* Diagram needs to be here, because we can't access it via JS otherwhise */
     --diagram-background-color: rgba(75, 192, 192, 0.4);
     --diagram-border-color: rgba(75, 192, 192, 1);
@@ -81,6 +83,8 @@
     --diagram-point-background-color: white;
     --diagram-point-hover-background-color: rgba(75, 192, 192, 1);
     --diagram-point-hover-border-color: rgba(220, 220, 220, 1);
+    /* Urls do not support variable string interpolation due to legacy reasons, so this must sadly be declared in its entirety */
+    --navbar-toggle-hamburger-url: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.5%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 .dark-theme {
@@ -93,7 +97,9 @@
     --tertiary-background-color: rgb(42, 42, 42);
     --quarternary-background-color: rgb(55, 55, 55);
     --box-shadow: rgb(0, 0, 0);
-    --border: rgb(255, 255, 255);
+    --border: rgb(100, 100, 100);
+    --stroke-primary: rgb(255, 255, 255);
+    --stroke-secondary: rgb(155, 155, 155);
     /* Diagram needs to be here, because we can't access it via JS otherwhise */
     --diagram-background-color: rgba(75, 192, 192, 0.4);
     --diagram-border-color: rgba(75, 192, 192, 1);
@@ -101,6 +107,8 @@
     --diagram-point-background-color: white;
     --diagram-point-hover-background-color: rgba(75, 192, 192, 1);
     --diagram-point-hover-border-color: rgba(220, 220, 220, 1);
+    /* Urls do not support variable string interpolation due to legacy reasons, so this must sadly be declared in its entirety */
+    --navbar-toggle-hamburger-url: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 .App-header {
@@ -132,6 +140,8 @@ body {
     display: flex;
     flex-direction: column;
     background-color: var(--primary-background-color);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .map-content {

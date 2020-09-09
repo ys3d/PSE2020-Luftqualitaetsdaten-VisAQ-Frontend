@@ -15,8 +15,8 @@ ul {
     display: block;
     width: 15px;
     height: 15px;
-    border-top: 2px solid var(--border);
-    border-right: 2px solid var(--border);
+    border-top: 2px solid var(--stroke-primary);
+    border-right: 2px solid var(--stroke-primary);
     transform: rotate(135deg);
     margin-top: -1.5em;
 }
@@ -26,8 +26,8 @@ ul {
     display: block;
     width: 15px;
     height: 15px;
-    border-top: 2px solid var(--border);
-    border-right: 2px solid var(--border);
+    border-top: 2px solid var(--stroke-primary);
+    border-right: 2px solid var(--stroke-primary);
     transform: rotate(315deg);
     margin-top: -1em;
     margin-bottom: -0.5em;
@@ -51,18 +51,19 @@ ul {
     opacity: 0.3;
 }
 
-.close:hover {
+.close:hover:before, .close:hover:after {
     opacity: 1;
-    color: var(--hover-color);
+    background-color: var(--stroke-primary);
 }
 
 .close:before, .close:after {
+    opacity: 1;
     position: absolute;
     left: 15px;
     content: ' ';
     height: 33px;
     width: 2px;
-    background-color: var(--border);
+    background-color: var(--stroke-secondary);
 }
 
 .close:before {
@@ -122,6 +123,7 @@ p.expert {
     z-index: var(--overview-z-index);
     height: 100%;
     background-color: var(--tertiary-background-color);
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
     color: var(--primary-text-color);
 }

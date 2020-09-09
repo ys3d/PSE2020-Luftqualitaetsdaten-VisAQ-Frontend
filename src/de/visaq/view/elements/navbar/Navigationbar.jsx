@@ -226,29 +226,29 @@ class Navigationbar extends Component {
                                         {t('airPressure')}
                                     </Nav.Link>
                                 </Nav>
-                                <NavDropdown title={t('mapOverlay')} variant="success" id="dropdown-basic">
-                                    <p className='dropdown-header'>{t('mapOverlay')} <HelpPopover placement="auto" title={t('mapOverlay')} content={t('popoverMapOverlay')} /></p>
-                                    <Form.Group controlId='form-switch'>
-                                        <Form.Check
-                                            type='radio'
-                                            id='sensor-overlay'
-                                            checked={OverlayEnum.sensor === this.state.overlays}
-                                            label={t('sensors')}
-                                            onChange={() => this.activateSensors()}
-                                            draggable="false"
-                                        />
-                                        <Form.Check
-                                            type='radio'
-                                            id='interpolation-overlay'
-                                            checked={OverlayEnum.interpolation === this.state.overlays}
-                                            label={t('interpolation')}
-                                            onChange={() => this.activateInterpolation()}
-                                            draggable="false"
-                                        />
-                                    </Form.Group>
-                                </NavDropdown>
-                                <NavDropdown title={t('furtherFunctions')} variant="success" id="dropdown-basic">
-                                    <div id={(window.innerHeight <= 750) ? 'furtherFunctionContainer' : ''}>
+                                <Nav>
+                                    <NavDropdown title={t('mapOverlay')} variant="success" id="dropdown-basic">
+                                        <p className='dropdown-header'>{t('mapOverlay')} <HelpPopover placement="auto" title={t('mapOverlay')} content={t('popoverMapOverlay')} /></p>
+                                        <Form.Group controlId='form-switch'>
+                                            <Form.Check
+                                                type='radio'
+                                                id='sensor-overlay'
+                                                checked={OverlayEnum.sensor === this.state.overlays}
+                                                label={t('sensors')}
+                                                onChange={() => this.activateSensors()}
+                                                draggable="false"
+                                            />
+                                            <Form.Check
+                                                type='radio'
+                                                id='interpolation-overlay'
+                                                checked={OverlayEnum.interpolation === this.state.overlays}
+                                                label={t('interpolation')}
+                                                onChange={() => this.activateInterpolation()}
+                                                draggable="false"
+                                            />
+                                        </Form.Group>
+                                    </NavDropdown>
+                                    <NavDropdown title={t('furtherFunctions')} variant="success" id="dropdown-basic">
                                         <p className='dropdown-header'>{t('expertMode')} <HelpPopover placement="auto" title={t('expertMode')} content={t('popoverExpertMode')} /></p>
                                         <Form.Group controlId='form-switch'>
                                             <Form.Check
@@ -342,8 +342,8 @@ class Navigationbar extends Component {
                                         >
                                             <Impressum />
                                         </NavDropdown.Item>
-                                    </div>
-                                </NavDropdown>
+                                    </NavDropdown>
+                                </Nav>
                                 <Nav className='ml-auto'>
                                     <NavDropdown title={t('colorTheme')} variant="success" id="dropdown-basic">
                                         <p className='dropdown-header'>{t('colorTheme')} <HelpPopover placement="auto" title={t('colorTheme')} content={t('popoverColorTheme')} /></p>
