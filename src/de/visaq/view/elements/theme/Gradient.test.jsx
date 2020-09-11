@@ -47,9 +47,11 @@ test("interpolate() test", () => {
     expect(Gradient.interpolate(aq.getAverage() + aq.getVariance() + 1)).toBe(aq.getSecondaryColor());
     expect(Gradient.interpolate(aq.getAverage() + aq.getVariance() + 5))
         .toBe(Gradient.interpolate(aq.getAverage() + aq.getVariance() + 1));
+});
 
-    ColorblindMode.setMode(ColorblindMode.Mode.deuteranomaly);
-    //NaN because no document with computed style is available.
-    //Just tests if diffrent colers where used in colorblindmode.
-    expect(Gradient.interpolate(aq.getAverage())).toBe("#NaNNaNNaN");
+test("parseComputedStyleColorToRgb() test", () => {
+    expect(Gradient.parseComputedStyleColorToRgb("#FED")).toEqual([255, 238, 221]);
+    expect(Gradient.parseComputedStyleColorToRgb("#FFEEDD")).toEqual([255, 238, 221]);
+    expect(Gradient.parseComputedStyleColorToRgb("rgb(255, 238, 221)")).toEqual(["255", "238", "221"]);
+    expect(Gradient.parseComputedStyleColorToRgb("rgba(255, 238, 221, 0)")).toEqual(["255", "238", "221"]);
 });
