@@ -61,25 +61,8 @@ test("setMode() test", () => {
     expect(ColorblindMode.instance.mode).toBe(ColorblindMode.Mode.protanomaly);
 });
 
-test("update test", () => {
-    let t = new TestUpdate();
-    const tSpy = jest.spyOn(t, 'update');
-    ColorblindMode.attach(tSpy);
-    expect(tSpy).not.toHaveBeenCalled();
-    ColorblindMode.notify();
-    expect(tSpy).toHaveBeenCalledTimes(1);
-    expect(ColorblindMode.detach(tSpy)).toBeTruthy();
-    expect(ColorblindMode.detach(tSpy)).toBeFalsy();
-});
-
 function equalsMode(m1, m2) {
     let state = true;
     state = state && (m1.mode === m2.mode);
     return state;
-}
-
-class TestUpdate {
-    update() {
-
-    }
 }
