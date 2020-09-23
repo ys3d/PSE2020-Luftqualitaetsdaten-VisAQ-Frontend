@@ -4,12 +4,24 @@ import { ReactLeafletSearch } from 'react-leaflet-search';
 import { withTranslation } from 'react-i18next';
 import { Button } from 'react-bootstrap';
 import { AiOutlineAim } from 'react-icons/ai';
+import i18n from '../../Language';
 
 /**
  * Class that contains the Searchbar.
  */
 class Searchbar extends Component {
-    shouldComponentUpdate() {
+    constructor(props) {
+        super(props);
+        this.state = {
+            lastLanguage: props.i18n.language
+        };
+    }
+
+    shouldComponentUpdate(nextProps) {
+        if (nextProps.i18n.language !== this.state.lastLanguage) {
+            this.setState({ lastLanguage: nextProps.i18n.language });
+            return true;
+        }
         return false;
     }
 
